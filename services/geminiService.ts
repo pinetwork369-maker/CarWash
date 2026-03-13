@@ -18,11 +18,23 @@ Hãy trả lời bằng tiếng Việt, giọng điệu chuyên nghiệp, thân 
 Ưu tiên đưa ra các giải pháp an toàn nhất cho xe.
 `;
 
+export type AIProvider = 'gemini' | 'openai' | 'claude';
+
 /**
- * Get AI response with Google Maps grounding.
- * Using gemini-3-flash-preview for better text generation.
+ * Get AI response from various providers.
  */
-export const getAIResponse = async (userMessage: string, history: {role: 'user' | 'model', text: string}[]) => {
+export const getAIResponse = async (
+  userMessage: string, 
+  history: {role: 'user' | 'model', text: string}[],
+  provider: AIProvider = 'gemini'
+) => {
+  if (provider === 'openai') {
+    return getOpenAIResponse(userMessage, history);
+  } else if (provider === 'claude') {
+    return getClaudeResponse(userMessage, history);
+  }
+  
+  // Default to Gemini
   const apiKey = process.env.GEMINI_API_KEY || '';
   if (!apiKey) {
     return "Lỗi: Chưa cấu hình API Key cho hệ thống AI. Vui lòng liên hệ quản trị viên.";
@@ -80,6 +92,50 @@ export const getAIResponse = async (userMessage: string, history: {role: 'user' 
       return "Lỗi: Model AI không khả dụng hoặc API Key không hợp lệ. Vui lòng thử lại sau.";
     }
     return "Đã xảy ra lỗi khi kết nối với chuyên gia AI. Vui lòng thử lại sau.";
+  }
+};
+
+/**
+ * Get response from OpenAI via backend
+ */
+const getOpenAIResponse = async (userMessage: string, history: {role: 'user' | 'model', text: string}[]) => {
+  try {
+    const response = await fetch('/api/ai/openai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prompt: userMessage,
+        systemInstruction: SYSTEM_INSTRUCTION,
+        history // History handling can be added if needed, but for now simple prompt
+      }),
+    });
+    const data = await response.json();
+    return data.text || "Xin lỗi, tôi không thể xử lý yêu cầu này ngay bây giờ.";
+  } catch (error) {
+    console.error("OpenAI Frontend Error:", error);
+    return "Lỗi kết nối với OpenAI. Vui lòng thử lại sau.";
+  }
+};
+
+/**
+ * Get response from Claude via backend
+ */
+const getClaudeResponse = async (userMessage: string, history: {role: 'user' | 'model', text: string}[]) => {
+  try {
+    const response = await fetch('/api/ai/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prompt: userMessage,
+        systemInstruction: SYSTEM_INSTRUCTION,
+        history
+      }),
+    });
+    const data = await response.json();
+    return data.text || "Xin lỗi, tôi không thể xử lý yêu cầu này ngay bây giờ.";
+  } catch (error) {
+    console.error("Claude Frontend Error:", error);
+    return "Lỗi kết nối với Claude. Vui lòng thử lại sau.";
   }
 };
 

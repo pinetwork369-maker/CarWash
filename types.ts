@@ -12,6 +12,7 @@ export interface Service {
   price: string;
   icon: string;
   image: string;
+  category?: string;
   videoUrl?: string;
   subServices?: SubService[];
 }
@@ -32,6 +33,12 @@ export interface Review {
   serviceId?: string; // Liên kết với Service.id
 }
 
+export interface ServiceReview {
+  serviceName: string;
+  rating: number;
+  comment?: string;
+}
+
 export interface CustomerRecord {
   id: string;
   customerName: string;
@@ -39,9 +46,13 @@ export interface CustomerRecord {
   licensePlate: string;
   carModel: string;
   servicesDone: string[]; // Danh sách tên dịch vụ
+  serviceReviews?: ServiceReview[]; // Đánh giá chi tiết từng dịch vụ
   date: string;
   totalPrice: string;
+  discount?: number;
+  paymentStatus?: 'paid' | 'pending' | 'partially_paid';
   notes?: string;
+  rating?: number;
 }
 
 export interface PremiumSolution {
@@ -68,6 +79,32 @@ export interface AiVideoRecord {
   prompt: string;
   date: string;
   type: 'image' | 'video';
+}
+
+export interface Appointment {
+  id: string;
+  customerName: string;
+  phone: string;
+  email?: string;
+  carModel: string;
+  serviceId: string;
+  subServiceTitle?: string;
+  date: string;
+  time?: string;
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+  note?: string;
+  createdAt: string;
+}
+
+export interface DetailingPackage {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  duration: string;
+  features: string[];
+  isPopular?: boolean;
+  category?: string;
 }
 
 export interface SiteConfig {
@@ -111,6 +148,8 @@ export interface SiteConfig {
   instagramUrl?: string;
   zaloNumber?: string;
   promotions?: Promotion[];
+  appointments?: Appointment[];
+  packages?: DetailingPackage[];
 }
 
 export interface Message {
@@ -124,25 +163,9 @@ export interface BookingData {
   email?: string;
   carModel: string;
   serviceId: string;
+  subServiceTitle?: string;
   date: string;
   note: string;
 }
 
-export interface VehicleServiceHistory {
-  id: string;
-  date: string;
-  serviceName: string;
-  mileage?: number;
-  cost: string;
-  notes?: string;
-}
 
-export interface Vehicle {
-  id: string;
-  make: string;
-  model: string;
-  year: string;
-  licensePlate: string;
-  color?: string;
-  serviceHistory: VehicleServiceHistory[];
-}

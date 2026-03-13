@@ -2,12 +2,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles } from 'lucide-react';
+import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt } from 'lucide-react';
 import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS } from './constants.tsx';
-import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Vehicle, VehicleServiceHistory, Promotion, AiVideoRecord } from './types.ts';
-import { getAIResponse, editImageWithAI, generateImageWithAI, generateVideoWithAI, getMaintenanceAdvice } from './services/geminiService.ts';
+import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage } from './types.ts';
+import { TrackingSection, TrackingManagement, VehicleTracking, DEFAULT_TRACKING } from './components/Tracking';
+import { FeedbackSection, FeedbackManagement } from './components/Feedback';
+import { Review } from './types.ts';
+import { DEFAULT_REVIEWS } from './constants.tsx';
+import { GalleryUploadManager } from './components/Gallery/GalleryUploadManager';
+import { getAIResponse, editImageWithAI, generateImageWithAI, generateVideoWithAI, getMaintenanceAdvice, AIProvider } from './services/geminiService.ts';
 import { GoogleGenAI } from "@google/genai";
 import ReactMarkdown from 'react-markdown';
+import { Toaster, toast } from 'react-hot-toast';
 
 declare global {
   interface Window {
@@ -175,272 +181,27 @@ const EditableImage: React.FC<{
   );
 };
 
-const VehicleManagerModal: React.FC<{ 
-  isOpen: boolean; 
-  onClose: () => void; 
-  vehicles: Vehicle[];
-  setVehicles: React.Dispatch<React.SetStateAction<Vehicle[]>>;
-  onMaintenanceAdvice?: (vehicle: Vehicle) => void;
-}> = ({ isOpen, onClose, vehicles, setVehicles, onMaintenanceAdvice }) => {
-  const [selectedVehicleId, setSelectedVehicleId] = useState<string | null>(null);
-  const [isAddingVehicle, setIsAddingVehicle] = useState(false);
-  const [isEditingVehicle, setIsEditingVehicle] = useState(false);
-  const [newVehicle, setNewVehicle] = useState<Partial<Vehicle>>({ make: '', model: '', year: '', licensePlate: '' });
-  const [editingRecordId, setEditingRecordId] = useState<string | null>(null);
-  const [editingRecord, setEditingRecord] = useState<Partial<VehicleServiceHistory>>({});
-
-  if (!isOpen) return null;
-
-  const selectedVehicle = vehicles.find(v => v.id === selectedVehicleId);
-
-  const handleAddVehicle = () => {
-    if (!newVehicle.make || !newVehicle.model) return;
-    const vehicle: Vehicle = {
-      id: Date.now().toString(),
-      make: newVehicle.make!,
-      model: newVehicle.model!,
-      year: newVehicle.year || '',
-      licensePlate: newVehicle.licensePlate || '',
-      serviceHistory: []
-    };
-    setVehicles([...vehicles, vehicle]);
-    setIsAddingVehicle(false);
-    setNewVehicle({ make: '', model: '', year: '', licensePlate: '' });
-    setSelectedVehicleId(vehicle.id);
-  };
-
-  const handleUpdateVehicle = () => {
-    if (!selectedVehicleId || !newVehicle.make || !newVehicle.model) return;
-    setVehicles(prev => prev.map(v => v.id === selectedVehicleId ? { 
-      ...v, 
-      make: newVehicle.make!, 
-      model: newVehicle.model!, 
-      year: newVehicle.year || '', 
-      licensePlate: newVehicle.licensePlate || '' 
-    } : v));
-    setIsEditingVehicle(false);
-    setNewVehicle({ make: '', model: '', year: '', licensePlate: '' });
-  };
-
-  const handleStartEditVehicle = (vehicle: Vehicle) => {
-    setNewVehicle({ make: vehicle.make, model: vehicle.model, year: vehicle.year, licensePlate: vehicle.licensePlate });
-    setIsEditingVehicle(true);
-    setIsAddingVehicle(false);
-  };
-
-  const handleAddServiceRecord = (vehicleId: string) => {
-    const serviceName = prompt("Tên dịch vụ:");
-    if (!serviceName) return;
-    const cost = prompt("Chi phí (VD: 500.000 VNĐ):") || '0 VNĐ';
-    const record: VehicleServiceHistory = {
-      id: Date.now().toString(),
-      date: new Date().toISOString().split('T')[0],
-      serviceName,
-      cost
-    };
-    setVehicles(prev => prev.map(v => v.id === vehicleId ? { ...v, serviceHistory: [record, ...v.serviceHistory] } : v));
-  };
-
-  const handleUpdateServiceRecord = (vehicleId: string) => {
-    if (!editingRecordId || !editingRecord.serviceName) return;
-    setVehicles(prev => prev.map(v => v.id === vehicleId ? { 
-      ...v, 
-      serviceHistory: v.serviceHistory.map(r => r.id === editingRecordId ? { ...r, ...editingRecord as VehicleServiceHistory } : r) 
-    } : v));
-    setEditingRecordId(null);
-    setEditingRecord({});
-  };
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl"
-        >
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="bg-slate-900 border border-white/10 p-8 rounded-[40px] max-w-4xl w-full h-[80vh] flex flex-col relative shadow-3xl overflow-hidden"
-          >
-            <button onClick={onClose} className="absolute top-6 right-8 text-slate-500 hover:text-white transition-colors text-xl">✕</button>
-            <h3 className="text-3xl font-black text-white mb-8 uppercase tracking-tighter">Gara Của Tôi</h3>
-            
-            <div className="flex-1 flex flex-col md:flex-row gap-8 overflow-hidden">
-              <div className="w-full md:w-72 flex flex-col gap-4 overflow-y-auto no-scrollbar pr-2 border-r border-white/5">
-                <button 
-                  onClick={() => { setIsAddingVehicle(true); setIsEditingVehicle(false); setNewVehicle({ make: '', model: '', year: '', licensePlate: '' }); }}
-                  className="w-full bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-2xl font-black text-[11px] uppercase tracking-widest shadow-lg transition-all active:scale-95"
-                >
-                  ➕ Thêm Xe Mới
-                </button>
-                {vehicles.map(v => (
-                  <button 
-                    key={v.id}
-                    onClick={() => { setSelectedVehicleId(v.id); setIsAddingVehicle(false); setIsEditingVehicle(false); }}
-                    className={`w-full text-left p-5 rounded-2xl transition-all duration-300 border group ${
-                      selectedVehicleId === v.id 
-                        ? 'bg-blue-600 border-blue-400 shadow-2xl shadow-blue-900/40 translate-x-2' 
-                        : 'bg-slate-950/50 border-white/5 hover:bg-slate-800 hover:border-blue-500/30 hover:translate-x-1'
-                    }`}
-                  >
-                    <div className={`font-black uppercase text-sm transition-colors ${selectedVehicleId === v.id ? 'text-white' : 'text-slate-200 group-hover:text-white'}`}>{v.make} {v.model}</div>
-                    <div className={`text-[10px] font-bold transition-colors ${selectedVehicleId === v.id ? 'text-blue-100' : 'text-slate-500 group-hover:text-blue-400'}`}>{v.licensePlate || 'Chưa có biển số'}</div>
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
-                {(isAddingVehicle || isEditingVehicle) ? (
-                  <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
-                    <h4 className="text-xl font-black text-white uppercase tracking-tight">{isEditingVehicle ? 'Sửa Thông Tin Xe' : 'Thông Tin Xe Mới'}</h4>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Hãng Xe</label>
-                        <input value={newVehicle.make} onChange={e => setNewVehicle({...newVehicle, make: e.target.value})} placeholder="VD: Toyota" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Dòng Xe</label>
-                        <input value={newVehicle.model} onChange={e => setNewVehicle({...newVehicle, model: e.target.value})} placeholder="VD: Camry" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Năm Sản Xuất</label>
-                        <input value={newVehicle.year} onChange={e => setNewVehicle({...newVehicle, year: e.target.value})} placeholder="VD: 2022" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Biển Số</label>
-                        <input value={newVehicle.licensePlate} onChange={e => setNewVehicle({...newVehicle, licensePlate: e.target.value})} placeholder="VD: 30A-123.45" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                    </div>
-                    <div className="flex gap-4">
-                      <button onClick={isEditingVehicle ? handleUpdateVehicle : handleAddVehicle} className="flex-1 bg-blue-600 text-white p-4 rounded-xl font-black uppercase">{isEditingVehicle ? 'Cập Nhật' : 'Lưu Xe'}</button>
-                      <button onClick={() => { setIsAddingVehicle(false); setIsEditingVehicle(false); }} className="flex-1 bg-slate-800 text-slate-400 p-4 rounded-xl font-black uppercase">Hủy</button>
-                    </div>
-                  </div>
-                ) : selectedVehicle ? (
-                  <div className="space-y-8 animate-in fade-in">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="text-3xl font-black text-white uppercase tracking-tighter">{selectedVehicle.make} {selectedVehicle.model}</h4>
-                        <p className="text-blue-500 font-bold tracking-widest uppercase text-xs">{selectedVehicle.licensePlate} • {selectedVehicle.year}</p>
-                      </div>
-                      <div className="flex gap-4">
-                        <button 
-                          onClick={() => {
-                            if (onMaintenanceAdvice) onMaintenanceAdvice(selectedVehicle);
-                          }}
-                          className="bg-blue-600/10 text-blue-500 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border border-blue-500/30 flex items-center gap-2"
-                        >
-                          <span>✨</span> Tư vấn AI
-                        </button>
-                        <button 
-                          onClick={() => handleStartEditVehicle(selectedVehicle)}
-                          className="text-blue-500 hover:text-blue-400 text-[10px] font-black uppercase tracking-widest"
-                        >
-                          Sửa
-                        </button>
-                        <button 
-                          onClick={() => confirm("Xóa xe này?") && (setVehicles(vehicles.filter(v => v.id !== selectedVehicle.id)), setSelectedVehicleId(null))}
-                          className="text-red-500 hover:text-red-400 text-[10px] font-black uppercase tracking-widest"
-                        >
-                          Xóa
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-center">
-                        <h5 className="text-sm font-black text-slate-400 uppercase tracking-widest">Lịch Sử Bảo Dưỡng</h5>
-                        <button onClick={() => handleAddServiceRecord(selectedVehicle.id)} className="text-blue-500 hover:text-blue-400 text-[10px] font-black uppercase tracking-widest">➕ Thêm Bản Ghi</button>
-                      </div>
-                      
-                      <div className="space-y-4">
-                        {selectedVehicle.serviceHistory.length > 0 ? selectedVehicle.serviceHistory.map(record => (
-                          <div key={record.id} className="bg-slate-950/50 border border-white/5 p-5 rounded-2xl flex justify-between items-center group hover:border-blue-500/30 transition-all">
-                            {editingRecordId === record.id ? (
-                              <div className="flex-1 flex gap-4 items-end">
-                                <div className="flex-1 space-y-2">
-                                  <input 
-                                    value={editingRecord.serviceName} 
-                                    onChange={e => setEditingRecord({...editingRecord, serviceName: e.target.value})}
-                                    className="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-white text-xs"
-                                  />
-                                  <input 
-                                    value={editingRecord.cost} 
-                                    onChange={e => setEditingRecord({...editingRecord, cost: e.target.value})}
-                                    className="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-blue-400 text-xs font-bold"
-                                  />
-                                </div>
-                                <div className="flex gap-2">
-                                  <button onClick={() => handleUpdateServiceRecord(selectedVehicle.id)} className="bg-blue-600 text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase">Lưu</button>
-                                  <button onClick={() => setEditingRecordId(null)} className="bg-slate-800 text-slate-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase">Hủy</button>
-                                </div>
-                              </div>
-                            ) : (
-                              <>
-                                <div>
-                                  <div className="text-white font-bold text-sm">{record.serviceName}</div>
-                                  <div className="text-slate-500 text-[10px] font-medium">{record.date}</div>
-                                </div>
-                                <div className="text-right flex flex-col items-end gap-2">
-                                  <div className="text-blue-400 font-black text-sm">{record.cost}</div>
-                                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all">
-                                    <button 
-                                      onClick={() => { setEditingRecordId(record.id); setEditingRecord(record); }}
-                                      className="text-[8px] text-blue-500 uppercase font-black"
-                                    >
-                                      Sửa
-                                    </button>
-                                    <button 
-                                      onClick={() => setVehicles(prev => prev.map(v => v.id === selectedVehicle.id ? { ...v, serviceHistory: v.serviceHistory.filter(r => r.id !== record.id) } : v))}
-                                      className="text-[8px] text-red-500 uppercase font-black"
-                                    >
-                                      Xóa
-                                    </button>
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                        )) : (
-                          <div className="text-center py-12 bg-slate-950/20 rounded-3xl border border-dashed border-white/5">
-                            <p className="text-slate-600 text-xs font-medium italic">Chưa có lịch sử bảo dưỡng cho xe này.</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-40">
-                    <div className="text-6xl">🚗</div>
-                    <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Chọn một chiếc xe hoặc thêm xe mới để quản lý</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
-
 const BookingModal: React.FC<{ 
   isOpen: boolean; 
   onClose: () => void; 
   services: Service[];
-  vehicles: Vehicle[];
   siteConfig: SiteConfig;
-}> = ({ isOpen, onClose, services, vehicles, siteConfig }) => {
+  setSiteConfig: React.Dispatch<React.SetStateAction<SiteConfig>>;
+  handlePayment: (serviceName: string, price: string, customerName: string, customerEmail?: string) => Promise<void>;
+  preSelectedSubService?: string;
+}> = ({ isOpen, onClose, services, siteConfig, setSiteConfig, handlePayment, preSelectedSubService }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
   const [formData, setFormData] = useState<BookingData>({
-    name: '', phone: '', email: '', carModel: '', serviceId: services[0]?.id || '', date: '', note: ''
+    name: '', phone: '', email: '', carModel: '', serviceId: services[0]?.id || '', subServiceTitle: preSelectedSubService, date: '', note: ''
   });
+
+  useEffect(() => {
+    if (preSelectedSubService) {
+      setFormData(prev => ({ ...prev, subServiceTitle: preSelectedSubService }));
+    }
+  }, [preSelectedSubService]);
 
   if (!isOpen) return null;
 
@@ -464,7 +225,9 @@ const BookingModal: React.FC<{
     e.preventDefault();
     if (!validate()) return;
     setIsSending(true);
-    const serviceTitle = services.find(s => s.id === formData.serviceId)?.title || 'Chưa chọn';
+    const service = services.find(s => s.id === formData.serviceId);
+    const serviceTitle = service?.title || 'Chưa chọn';
+    const fullServiceTitle = formData.subServiceTitle ? `${serviceTitle} (${formData.subServiceTitle})` : serviceTitle;
     const subject = `[ĐẶT LỊCH ${siteConfig.siteName.toUpperCase()}] - ${formData.name}`;
     
     const adminHtml = `
@@ -474,7 +237,7 @@ const BookingModal: React.FC<{
         <p><strong>SĐT:</strong> ${formData.phone}</p>
         <p><strong>Email:</strong> ${formData.email || 'Không cung cấp'}</p>
         <p><strong>Dòng xe:</strong> ${formData.carModel}</p>
-        <p><strong>Dịch vụ:</strong> ${serviceTitle}</p>
+        <p><strong>Dịch vụ:</strong> ${fullServiceTitle}</p>
         <p><strong>Ngày:</strong> ${formData.date}</p>
         <p><strong>Ghi chú:</strong> ${formData.note}</p>
         <div style="margin-top: 20px; font-size: 12px; color: #666;">
@@ -489,7 +252,7 @@ const BookingModal: React.FC<{
         <p>Chào <strong>${formData.name}</strong>,</p>
         <p>Cảm ơn bạn đã tin tưởng và đặt lịch tại <strong>${siteConfig.siteName}</strong>. Chúng tôi đã nhận được yêu cầu của bạn với thông tin sau:</p>
         <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin: 15px 0;">
-          <p style="margin: 5px 0;"><strong>Dịch vụ:</strong> ${serviceTitle}</p>
+          <p style="margin: 5px 0;"><strong>Dịch vụ:</strong> ${fullServiceTitle}</p>
           <p style="margin: 5px 0;"><strong>Ngày hẹn:</strong> ${formData.date}</p>
           <p style="margin: 5px 0;"><strong>Dòng xe:</strong> ${formData.carModel}</p>
         </div>
@@ -499,20 +262,21 @@ const BookingModal: React.FC<{
     `;
     
     try {
-      // Send to Admin
-      await fetch('/api/send-email', {
+      // Gửi email cho Admin
+      fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: siteConfig.contactEmail || 'carwash68.vn@gmail.com',
           subject: subject,
-          html: adminHtml
+          html: adminHtml,
+          isBooking: true
         })
-      });
+      }).catch(err => console.error("Admin email failed", err));
 
-      // Send to Customer if email provided
+      // Gửi email cho khách hàng nếu có
       if (formData.email) {
-        await fetch('/api/send-email', {
+        fetch('/api/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -520,15 +284,37 @@ const BookingModal: React.FC<{
             subject: `[XÁC NHẬN] Đặt lịch thành công tại ${siteConfig.siteName}`,
             html: customerHtml
           })
-        });
+        }).catch(err => console.error("Customer email failed", err));
       }
       
+      // Chuyển hướng tới Zalo
+      const zaloUrl = `https://zalo.me/${siteConfig.zaloNumber || '0588896699'}`;
+      window.open(zaloUrl, '_blank');
+      
+      // Sync with Admin Appointments
+      const newAppointment: Appointment = {
+        id: Date.now().toString(),
+        customerName: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        carModel: formData.carModel,
+        serviceId: formData.serviceId,
+        subServiceTitle: formData.subServiceTitle,
+        date: formData.date,
+        status: 'pending',
+        note: formData.note,
+        createdAt: new Date().toISOString()
+      };
+      setSiteConfig(prev => ({
+        ...prev,
+        appointments: [newAppointment, ...(prev.appointments || [])]
+      }));
+
       setIsSubmitted(true);
     } catch (error) {
-      console.error("Error sending email:", error);
-      // Fallback to mailto
-      const body = `Họ tên: ${formData.name}\nSĐT: ${formData.phone}\nEmail: ${formData.email}\nDòng xe: ${formData.carModel}\nDịch vụ: ${serviceTitle}\nNgày: ${formData.date}\nGhi chú: ${formData.note}`;
-      window.location.href = `mailto:${siteConfig.contactEmail || 'carwash68.vn@gmail.com'}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      console.error("Error in submission:", error);
+      const zaloUrl = `https://zalo.me/${siteConfig.zaloNumber || '0588896699'}`;
+      window.open(zaloUrl, '_blank');
       setIsSubmitted(true);
     } finally {
       setIsSending(false);
@@ -555,24 +341,6 @@ const BookingModal: React.FC<{
               <form onSubmit={handleSubmit} className="space-y-4">
                 <h3 className="text-2xl font-black text-white text-center mb-6 uppercase">Đặt Lịch Chăm Sóc</h3>
                 
-                {vehicles.length > 0 && (
-                  <div className="space-y-2 mb-4">
-                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Chọn xe từ Gara</label>
-                    <select 
-                      className="w-full bg-blue-600/10 border border-blue-500/20 rounded-xl px-4 py-3 text-blue-400 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                      onChange={(e) => {
-                        const v = vehicles.find(veh => veh.id === e.target.value);
-                        if (v) setFormData({...formData, carModel: `${v.make} ${v.model} (${v.licensePlate})`});
-                      }}
-                    >
-                      <option value="">-- Chọn xe của bạn --</option>
-                      {vehicles.map(v => (
-                        <option key={v.id} value={v.id}>{v.make} {v.model} - {v.licensePlate}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
                 <input required type="text" placeholder="Họ tên" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
@@ -604,9 +372,22 @@ const BookingModal: React.FC<{
                   </div>
                 </div>
                 <input type="text" placeholder="Dòng xe (VD: Porsche 911)" value={formData.carModel} onChange={e => setFormData({...formData, carModel: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
-                <select value={formData.serviceId} onChange={e => setFormData({...formData, serviceId: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                <select value={formData.serviceId} onChange={e => setFormData({...formData, serviceId: e.target.value, subServiceTitle: undefined})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
                   {services.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
                 </select>
+
+                {services.find(s => s.id === formData.serviceId)?.subServices && (
+                  <select 
+                    value={formData.subServiceTitle || ''} 
+                    onChange={e => setFormData({...formData, subServiceTitle: e.target.value})} 
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                  >
+                    <option value="">-- Chọn gói nâng cấp (Tùy chọn) --</option>
+                    {services.find(s => s.id === formData.serviceId)?.subServices?.map((sub, idx) => (
+                      <option key={idx} value={sub.title}>{sub.title} ({sub.price})</option>
+                    ))}
+                  </select>
+                )}
                 <input required type="date" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
                 <textarea placeholder="Ghi chú thêm về xe..." value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white h-24 resize-none focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
                 <button 
@@ -626,13 +407,262 @@ const BookingModal: React.FC<{
               <div className="text-center py-8">
                 <div className="text-6xl mb-4 animate-bounce">✅</div>
                 <h3 className="text-xl font-black text-white mb-2 uppercase">Gửi Thành Công!</h3>
-                <p className="text-slate-400 text-sm mb-6">Thông tin đã được gửi tới hệ thống và Gmail của chúng tôi. Chúng tôi sẽ liên hệ lại sớm nhất!</p>
-                <button onClick={onClose} className="bg-white/5 hover:bg-white/10 text-white px-8 py-3 rounded-xl font-bold transition-all">Đóng</button>
+                <p className="text-slate-400 text-sm mb-6">Thông tin đã được gửi tới hệ thống và Zalo của chúng tôi. Chúng tôi sẽ liên hệ lại sớm nhất!</p>
+                <div className="flex flex-col gap-3">
+                  <button 
+                    onClick={() => {
+                      const service = services.find(s => s.id === formData.serviceId);
+                      handlePayment(service?.title || 'Dịch vụ Detailing', service?.price || '0', formData.name, formData.email);
+                    }}
+                    className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+                  >
+                    <CreditCard className="w-5 h-5" /> Thanh Toán Online Ngay
+                  </button>
+                  <button onClick={onClose} className="bg-white/5 hover:bg-white/10 text-white px-8 py-3 rounded-xl font-bold transition-all">Để sau / Đóng</button>
+                </div>
               </div>
             )}
           </motion.div>
         </motion.div>
       )}
+    </AnimatePresence>
+  );
+};
+
+const ServiceDetailsModal: React.FC<{ 
+  isOpen: boolean; 
+  onClose: () => void; 
+  service: Service | null; 
+  onBooking: (serviceId: string, subServiceTitle?: string) => void;
+}> = ({ isOpen, onClose, service, onBooking }) => {
+  if (!isOpen || !service) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[250] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-2xl"
+      >
+        <div className="absolute inset-0" onClick={onClose} />
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0, y: 50 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.9, opacity: 0, y: 50 }}
+          className="bg-slate-900 border border-white/10 rounded-[40px] shadow-[0_0_100px_rgba(0,0,0,0.5)] max-w-4xl w-full max-h-[90vh] overflow-hidden relative flex flex-col"
+        >
+          {/* Close Button */}
+          <button 
+            onClick={onClose} 
+            className="absolute top-6 right-6 z-50 bg-black/50 hover:bg-red-600 backdrop-blur-xl p-3 rounded-2xl text-white transition-all shadow-2xl active:scale-90"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          
+          {/* Header Image Section */}
+          <div className="w-full h-[300px] sm:h-[450px] relative flex-shrink-0">
+            <img 
+              src={service.image} 
+              alt={service.title} 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent"></div>
+            <div className="absolute bottom-8 left-8 right-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-blue-600/20 backdrop-blur-xl border border-blue-500/30 p-4 rounded-3xl">
+                  <span className="text-4xl sm:text-5xl">{service.icon}</span>
+                </div>
+                <div>
+                  <span className="text-blue-500 font-black uppercase tracking-[0.3em] text-[10px] mb-1 block">Dịch vụ chi tiết</span>
+                  <h3 className="text-3xl sm:text-6xl font-black text-white uppercase tracking-tighter leading-none">{service.title}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="flex-1 overflow-y-auto custom-scrollbar p-8 sm:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+              <div className="lg:col-span-2 space-y-10">
+                {/* Description */}
+                <section>
+                  <h4 className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Info className="w-3 h-3" /> Giới thiệu dịch vụ
+                  </h4>
+                  <p className="text-slate-300 leading-relaxed text-base sm:text-lg font-medium">
+                    {service.description}
+                  </p>
+                </section>
+
+                {/* Sub Services */}
+                {service.subServices && service.subServices.length > 0 && (
+                  <section>
+                    <h4 className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                      <Zap className="w-3 h-3" /> Các gói nâng cấp & Báo giá
+                    </h4>
+                    <div className="grid grid-cols-1 gap-4">
+                      {service.subServices.map((sub, idx) => (
+                        <motion.div 
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.1 }}
+                          className="p-6 rounded-[32px] bg-white/5 border border-white/5 flex justify-between items-center group hover:bg-blue-600/10 hover:border-blue-500/30 transition-all cursor-default"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-2xl bg-slate-950 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+                              <CheckCircle2 className="w-6 h-6" />
+                            </div>
+                            <div>
+                              <p className="text-white font-black text-lg group-hover:text-blue-400 transition-colors">{sub.title}</p>
+                              {sub.note && <p className="text-xs text-slate-500 font-medium mt-1">{sub.note}</p>}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <div className="text-right">
+                              <p className="text-blue-500 font-black text-xl tracking-tighter">{sub.price}</p>
+                              <p className="text-[8px] text-slate-600 uppercase font-black tracking-widest">Giá trọn gói</p>
+                            </div>
+                            <button 
+                              onClick={() => { onBooking(service.id, sub.title); onClose(); }}
+                              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all active:scale-95 shadow-lg shadow-blue-900/20"
+                            >
+                              Chọn gói
+                            </button>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+              </div>
+
+              {/* Sidebar / Action Area */}
+              <div className="lg:col-span-1">
+                <div className="sticky top-0 space-y-6">
+                  <div className="bg-slate-800/50 border border-white/10 p-8 rounded-[40px] backdrop-blur-xl">
+                    <div className="text-center mb-8">
+                      <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">Giá khởi điểm từ</p>
+                      <p className="text-4xl font-black text-white tracking-tighter">{service.price}</p>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <button 
+                        onClick={() => { onBooking(service.id); onClose(); }}
+                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-6 rounded-3xl uppercase tracking-widest transition-all shadow-[0_20px_40px_rgba(37,99,235,0.3)] active:scale-95 flex flex-col items-center justify-center gap-1 group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" /> 
+                          <span>Đặt Lịch Ngay</span>
+                        </div>
+                        <span className="text-[8px] opacity-70 font-medium">Tư vấn miễn phí 24/7</span>
+                      </button>
+
+                      <p className="text-[10px] text-slate-500 text-center leading-relaxed">
+                        * Giá có thể thay đổi tùy theo tình trạng xe và yêu cầu cụ thể của quý khách.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Trust Badges */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white/5 border border-white/5 p-4 rounded-2xl text-center">
+                      <Shield className="w-5 h-5 text-emerald-500 mx-auto mb-2" />
+                      <p className="text-[8px] font-black text-white uppercase tracking-widest">Bảo hành</p>
+                    </div>
+                    <div className="bg-white/5 border border-white/5 p-4 rounded-2xl text-center">
+                      <Award className="w-5 h-5 text-amber-500 mx-auto mb-2" />
+                      <p className="text-[8px] font-black text-white uppercase tracking-widest">Chuyên nghiệp</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+const ShareModal: React.FC<{ isOpen: boolean; onClose: () => void; url: string; title: string }> = ({ isOpen, onClose, url, title }) => {
+  if (!isOpen) return null;
+
+  const shareLinks = [
+    {
+      name: 'Facebook',
+      icon: <Facebook className="w-5 h-5" />,
+      color: 'bg-[#1877F2]',
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+    },
+    {
+      name: 'Twitter',
+      icon: <Twitter className="w-5 h-5" />,
+      color: 'bg-[#1DA1F2]',
+      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
+    },
+    {
+      name: 'WhatsApp',
+      icon: <MessageCircle className="w-5 h-5" />,
+      color: 'bg-[#25D366]',
+      href: `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`
+    }
+  ];
+
+  return (
+    <AnimatePresence>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md"
+      >
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.9, opacity: 0, y: 20 }}
+          className="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl max-w-sm w-full relative"
+        >
+          <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✕</button>
+          <h3 className="text-xl font-black text-white text-center mb-6 uppercase">Chia Sẻ Trang Web</h3>
+          
+          <div className="grid grid-cols-3 gap-4 mb-8">
+            {shareLinks.map(link => (
+              <a 
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-2 group"
+              >
+                <div className={`${link.color} p-4 rounded-2xl text-white shadow-lg group-hover:scale-110 transition-transform`}>
+                  {link.icon}
+                </div>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{link.name}</span>
+              </a>
+            ))}
+          </div>
+
+          <div className="relative">
+            <input 
+              readOnly 
+              value={url}
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-400 outline-none pr-12"
+            />
+            <button 
+              onClick={() => {
+                navigator.clipboard.writeText(url);
+                toast.success("Đã sao chép liên kết!");
+              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-blue-500 hover:text-blue-400 transition-colors"
+            >
+              <Copy className="w-4 h-4" />
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
     </AnimatePresence>
   );
 };
@@ -688,20 +718,27 @@ const ContactSection: React.FC<{ siteConfig: SiteConfig }> = ({ siteConfig }) =>
     `;
 
     try {
-      await fetch('/api/send-email', {
+      // Gửi email ngầm để lưu trữ thông tin
+      fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: siteConfig.contactEmail || 'carwash68.vn@gmail.com',
           subject,
-          html
+          html,
+          isBooking: true
         })
-      });
+      }).catch(err => console.error("Email send failed", err));
+
+      // Chuyển hướng tới Zalo để tư vấn trực tiếp
+      const zaloUrl = `https://zalo.me/${siteConfig.zaloNumber || '0588896699'}`;
+      window.open(zaloUrl, '_blank');
+      
       setIsSubmitted(true);
     } catch (error) {
-      console.error("Error sending email:", error);
-      const body = `Họ tên: ${formData.name}\nSĐT: ${formData.phone}\nEmail: ${formData.email}\nNội dung: ${formData.message}`;
-      window.location.href = `mailto:${siteConfig.contactEmail || 'carwash68.vn@gmail.com'}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      console.error("Error in submission:", error);
+      const zaloUrl = `https://zalo.me/${siteConfig.zaloNumber || '0588896699'}`;
+      window.open(zaloUrl, '_blank');
       setIsSubmitted(true);
     } finally {
       setIsSending(false);
@@ -742,7 +779,7 @@ const ContactSection: React.FC<{ siteConfig: SiteConfig }> = ({ siteConfig }) =>
               </div>
 
               {/* Embedded Map in Contact Section */}
-              <div className="rounded-[32px] overflow-hidden border border-white/10 h-64 shadow-2xl group/map relative mb-6">
+              <div className="rounded-[32px] overflow-hidden border border-white/10 h-48 sm:h-64 shadow-2xl group/map relative mb-6">
                 <iframe 
                   src={siteConfig.mapEmbedUrl} 
                   width="100%" 
@@ -839,7 +876,7 @@ const ContactSection: React.FC<{ siteConfig: SiteConfig }> = ({ siteConfig }) =>
                 <div className="text-center py-12">
                   <div className="w-24 h-24 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl animate-bounce">✓</div>
                   <h3 className="text-3xl font-black text-white mb-4 uppercase tracking-tighter">Gửi thành công!</h3>
-                  <p className="text-slate-400 mb-10 text-lg">Yêu cầu của bạn đã được gửi tới Gmail của chúng tôi. Đội ngũ chuyên gia sẽ liên hệ lại với bạn trong thời gian sớm nhất.</p>
+                  <p className="text-slate-400 mb-10 text-lg">Yêu cầu của bạn đã được gửi tới hệ thống và Zalo của chúng tôi. Đội ngũ chuyên gia sẽ liên hệ lại với bạn trong thời gian sớm nhất.</p>
                   <button onClick={() => setIsSubmitted(false)} className="bg-white/5 hover:bg-white/10 text-white px-8 py-3 rounded-xl font-bold transition-all border border-white/10">Gửi yêu cầu khác</button>
                 </div>
               )}
@@ -931,7 +968,7 @@ const AdminDashboardModal: React.FC<{
   setPremiumSolutions: React.Dispatch<React.SetStateAction<PremiumSolution[]>>;
   customerRecords: CustomerRecord[];
   setCustomerRecords: React.Dispatch<React.SetStateAction<CustomerRecord[]>>;
-  initialTab?: 'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance';
+  initialTab?: 'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages';
   maintenancePreFill?: {brand: string, model: string, year: string, mileage: string, lastMaintenance: string, symptoms: string} | null;
   isSelectingHeroVideo: boolean;
   setIsSelectingHeroVideo: React.Dispatch<React.SetStateAction<boolean>>;
@@ -939,8 +976,12 @@ const AdminDashboardModal: React.FC<{
   setIsSelectingAiVideo: React.Dispatch<React.SetStateAction<boolean>>;
   aiVideoHistory: AiVideoRecord[];
   setAiVideoHistory: React.Dispatch<React.SetStateAction<AiVideoRecord[]>>;
-}> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory }) => {
-  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance'>(initialTab);
+  trackingData: VehicleTracking[];
+  setTrackingData: React.Dispatch<React.SetStateAction<VehicleTracking[]>>;
+  reviews: Review[];
+  setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
+}> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory, trackingData, setTrackingData, reviews, setReviews }) => {
+  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback'>(initialTab);
   
   // Sorting and Filtering States
   const [sortConfig, setSortConfig] = useState<{ key: string, order: 'asc' | 'desc' }>({ key: 'id', order: 'desc' });
@@ -957,6 +998,60 @@ const AdminDashboardModal: React.FC<{
   const [desiredOutcome, setDesiredOutcome] = useState('');
   const [aiSuggestion, setAiSuggestion] = useState<string | null>(null);
   const [isAiGeneratingText, setIsAiGeneratingText] = useState<string | null>(null);
+  const [isGalleryUploadOpen, setIsGalleryUploadOpen] = useState(false);
+
+  const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
+  const [generationStatus, setGenerationStatus] = useState('');
+
+  const [isAddingCustomer, setIsAddingCustomer] = useState(false);
+  const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
+  const [customerForm, setCustomerForm] = useState<Partial<CustomerRecord>>({
+    customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], serviceReviews: [], totalPrice: '', notes: '', rating: 5, date: new Date().toISOString().split('T')[0], discount: 0, paymentStatus: 'paid'
+  });
+
+  const calculateTotal = (selectedServices: string[], currentDiscount: number) => {
+    let total = 0;
+    selectedServices.forEach(sName => {
+      // Find in main services
+      const service = services.find(s => s.title === sName);
+      if (service) {
+        total += parseInt(service.price.replace(/[^0-9]/g, '')) || 0;
+      } else {
+        // Check sub-services
+        services.forEach(s => {
+          const sub = s.subServices?.find(ss => ss.title === sName);
+          if (sub) {
+            total += parseInt(sub.price.replace(/[^0-9]/g, '')) || 0;
+          }
+        });
+      }
+    });
+    return Math.max(0, total - currentDiscount);
+  };
+
+  useEffect(() => {
+    if (isAddingCustomer && customerForm.servicesDone) {
+      const total = calculateTotal(customerForm.servicesDone, customerForm.discount || 0);
+      if (total > 0 || customerForm.servicesDone.length > 0) {
+        setCustomerForm(prev => ({ ...prev, totalPrice: total.toLocaleString('vi-VN') + ' VNĐ' }));
+      }
+    }
+  }, [customerForm.servicesDone, customerForm.discount, isAddingCustomer]);
+
+  const [isAddingAppointment, setIsAddingAppointment] = useState(false);
+  const [editingAppointmentId, setEditingAppointmentId] = useState<string | null>(null);
+  const [appointmentForm, setAppointmentForm] = useState<Partial<Appointment>>({
+    customerName: '', phone: '', carModel: '', serviceId: '', subServiceTitle: '', date: '', time: '', status: 'pending', note: ''
+  });
+
+  const [isAddingPackage, setIsAddingPackage] = useState(false);
+  const [editingPackageId, setEditingPackageId] = useState<string | null>(null);
+  const [packageForm, setPackageForm] = useState<Partial<DetailingPackage>>({
+    title: '', description: '', price: '', duration: '', features: [], isPopular: false
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
 
   useEffect(() => {
     if (isOpen) {
@@ -969,6 +1064,8 @@ const AdminDashboardModal: React.FC<{
       setFilterText('');
       setFilterCategory('all');
       setSortConfig({ key: 'id', order: 'desc' });
+      // Reset authentication when opening if not already authenticated
+      // setIsAuthenticated(false); // Optional: require login every time
     }
   }, [isOpen, initialTab, maintenancePreFill]);
 
@@ -981,6 +1078,87 @@ const AdminDashboardModal: React.FC<{
     else if (activeTab === 'gallery') setSortConfig({ key: 'id', order: 'desc' });
     else setSortConfig({ key: 'id', order: 'desc' });
   }, [activeTab]);
+
+  const handleLogin = () => {
+    const normalizedInput = passwordInput.trim();
+    const normalizedPass = (siteConfig.adminPassword || 'admin').trim();
+    if (normalizedInput === normalizedPass) {
+      setIsAuthenticated(true);
+      setPasswordInput('');
+    } else {
+      alert("Sai mật khẩu quản trị!");
+      setPasswordInput('');
+    }
+  };
+
+  if (!isOpen) return null;
+
+  if (!isAuthenticated) {
+    return (
+      <AnimatePresence>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-2xl"
+        >
+          <div className="absolute inset-0" onClick={onClose} />
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            className="relative bg-slate-900 border border-white/10 p-10 rounded-[40px] w-full max-w-md shadow-[0_0_100px_rgba(0,0,0,0.5)] text-center"
+          >
+            <div className="w-20 h-20 rounded-3xl bg-blue-600 flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-blue-600/20">
+              <Lock className="w-10 h-10 text-white" />
+            </div>
+            <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">Hệ Thống Quản Trị</h3>
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-8">Vui lòng nhập mật khẩu để tiếp tục</p>
+            
+            <input 
+              type="password" 
+              autoFocus 
+              placeholder="••••••••" 
+              className="w-full bg-slate-950 border border-white/10 rounded-2xl p-5 text-center tracking-[0.8em] text-white text-xl outline-none focus:border-blue-500 transition-all mb-6"
+              value={passwordInput}
+              onChange={e => setPasswordInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleLogin()}
+            />
+            
+            <div className="flex gap-4">
+              <button 
+                onClick={handleLogin}
+                className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all active:scale-95"
+              >
+                Đăng Nhập
+              </button>
+              <button 
+                onClick={onClose}
+                className="px-8 bg-slate-800 text-slate-400 rounded-2xl font-black uppercase tracking-widest hover:text-white transition-all"
+              >
+                Hủy
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+    );
+  }
+
+  const tabs = [
+    { id: 'home', label: 'Tổng quan', icon: <Home className="w-5 h-5" /> },
+    { id: 'appointments', label: 'Lịch hẹn', icon: <Calendar className="w-5 h-5" /> },
+    { id: 'customers', label: 'Khách hàng', icon: <Users className="w-5 h-5" /> },
+    { id: 'services', label: 'Dịch vụ', icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'packages', label: 'Gói chăm sóc', icon: <Package className="w-5 h-5" /> },
+    { id: 'premium', label: 'Cao cấp', icon: <ShieldCheck className="w-5 h-5" /> },
+    { id: 'promotions', label: 'Khuyến mãi', icon: <Tag className="w-5 h-5" /> },
+    { id: 'tracking', label: 'Theo dõi xe', icon: <Timer className="w-5 h-5" /> },
+    { id: 'feedback', label: 'Đánh giá', icon: <MessageSquare className="w-5 h-5" /> },
+    { id: 'gallery', label: 'Thư viện', icon: <ImageIcon className="w-5 h-5" /> },
+    { id: 'maintenance', label: 'Tư vấn AI', icon: <Cpu className="w-5 h-5" /> },
+    { id: 'ai-creative', label: 'AI Creative', icon: <Sparkles className="w-5 h-5" /> },
+    { id: 'config', label: 'Cấu hình', icon: <Settings2 className="w-5 h-5" /> },
+  ];
 
   const getFilteredAndSorted = <T extends any>(
     data: T[], 
@@ -1004,10 +1182,16 @@ const AdminDashboardModal: React.FC<{
 
     // Sort
     result.sort((a, b) => {
-      const valA = (a as any)[sortConfig.key];
-      const valB = (b as any)[sortConfig.key];
+      let valA = (a as any)[sortConfig.key];
+      let valB = (b as any)[sortConfig.key];
       
       if (valA === undefined || valB === undefined) return 0;
+
+      // Handle numeric sorting for price strings
+      if (sortConfig.key === 'totalPrice') {
+        valA = parseInt(String(valA).replace(/[^0-9]/g, '')) || 0;
+        valB = parseInt(String(valB).replace(/[^0-9]/g, '')) || 0;
+      }
       
       if (valA < valB) return sortConfig.order === 'asc' ? -1 : 1;
       if (valA > valB) return sortConfig.order === 'asc' ? 1 : -1;
@@ -1016,16 +1200,6 @@ const AdminDashboardModal: React.FC<{
 
     return result;
   };
-  const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
-  const [generationStatus, setGenerationStatus] = useState('');
-
-  const [isAddingCustomer, setIsAddingCustomer] = useState(false);
-  const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
-  const [customerForm, setCustomerForm] = useState<Partial<CustomerRecord>>({
-    customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], totalPrice: '', notes: ''
-  });
-
-  if (!isOpen) return null;
 
   const handleGenerateAiVideo = async () => {
     try {
@@ -1111,7 +1285,7 @@ const AdminDashboardModal: React.FC<{
       description: 'Mô tả dịch vụ mới...',
       price: 'Liên hệ',
       icon: '✨',
-      image: 'https://images.unsplash.com/photo-1599256621730-535171e28e50?q=80&w=800'
+      image: 'https://images.unsplash.com/photo-1599256621730-535171e28e50?auto=format&fit=crop&q=80&w=800'
     };
     setServices(prev => [...prev, newService]);
   };
@@ -1156,7 +1330,7 @@ const AdminDashboardModal: React.FC<{
       id: Date.now().toString(),
       title,
       description: 'Mô tả chương trình khuyến mãi...',
-      image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800',
       expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
     };
     setSiteConfig(prev => ({
@@ -1173,18 +1347,6 @@ const AdminDashboardModal: React.FC<{
       }));
     }
   };
-
-  const tabs = [
-    { id: 'home', label: 'Trang Chủ', icon: '🏠' },
-    { id: 'services', label: 'Dịch Vụ', icon: '🛠️' },
-    { id: 'premium', label: 'Cao Cấp', icon: '💎' },
-    { id: 'promotions', label: 'Khuyến Mãi', icon: '🎁' },
-    { id: 'gallery', label: 'Media', icon: '🖼️' },
-    { id: 'customers', label: 'Khách Hàng', icon: '👤' },
-    { id: 'maintenance', label: 'Bảo Dưỡng', icon: '🛠️' },
-    { id: 'ai-creative', label: 'AI Creative', icon: '🪄' },
-    { id: 'config', label: 'Cài Đặt', icon: '⚙️' },
-  ];
 
   const handleAiAutoCategorize = async () => {
     if (gallery.length === 0) return;
@@ -1407,266 +1569,290 @@ const AdminDashboardModal: React.FC<{
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[300] flex items-center justify-center p-0 md:p-4 bg-slate-950/98 backdrop-blur-3xl"
+          className="fixed inset-0 z-[300] flex items-center justify-center p-0 md:p-4 lg:p-8"
         >
+          <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" onClick={onClose} />
+          
           <motion.div 
-            initial={{ scale: 0.95, opacity: 0, y: 30 }}
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.95, opacity: 0, y: 30 }}
-            className="bg-slate-900 border border-white/5 md:rounded-[48px] w-full max-w-7xl h-full md:h-[92vh] flex flex-col shadow-3xl overflow-hidden"
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            className="relative w-full h-full max-w-7xl bg-slate-950 border border-white/10 md:rounded-[40px] shadow-[0_0_100px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row"
           >
-        {/* Dashboard Header */}
-        <div className="px-6 md:px-10 py-6 md:py-8 border-b border-white/5 flex justify-between items-center bg-slate-900/50">
-          <div className="flex items-center gap-4 md:gap-6">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-blue-600 flex items-center justify-center font-black text-white text-lg md:text-xl shadow-lg shadow-blue-900/40">DC</div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter">{siteConfig.siteName} CMS</h2>
-              <p className="text-blue-500 text-[8px] md:text-[10px] font-black uppercase tracking-widest mt-0.5 animate-pulse hidden sm:block">Hệ thống quản trị đang hoạt động</p>
-            </div>
-          </div>
-          <button onClick={onClose} className="w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-2xl md:rounded-3xl bg-slate-800 text-slate-400 hover:text-white transition-all hover:bg-slate-700 active:scale-90">✕</button>
-        </div>
-
-        {/* Dashboard Body */}
-        <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-          {/* Sidebar / Tabs Navigation */}
-          <div className="w-full md:w-72 border-b md:border-b-0 md:border-r border-white/5 p-2 md:p-6 flex md:flex-col gap-1 md:gap-2 bg-slate-950/20 overflow-x-auto no-scrollbar">
-            {tabs.map(tab => (
-              <motion.button 
-                key={tab.id}
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveTab(tab.id as any)} 
-                className={`flex-shrink-0 md:w-full text-left px-4 py-3 md:p-4 rounded-xl md:rounded-2xl font-black text-[10px] md:text-[11px] uppercase tracking-widest transition-all flex items-center gap-2 md:gap-3 ${activeTab === tab.id ? 'bg-blue-600 text-white shadow-xl shadow-blue-900/20' : 'text-slate-500 hover:bg-slate-800'}`}
-              >
-                <span>{tab.icon}</span>
-                <span className="md:inline">{tab.label}</span>
-                {activeTab === tab.id && (
-                  <motion.div 
-                    layoutId="activeTab"
-                    className="ml-auto w-1.5 h-1.5 rounded-full bg-white hidden md:block"
-                  />
-                )}
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Dynamic Content Area */}
-          <div className="flex-1 overflow-y-auto p-6 md:p-12 custom-scrollbar bg-slate-950/40">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="h-full"
-              >
-                {activeTab === 'home' && (
-                  <div className="space-y-10">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-4">
-                  <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Nội Dung Trang Chủ</h3>
-                  <button onClick={() => { alert("✅ Đã lưu thay đổi!"); onClose(); }} className="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase shadow-lg hover:bg-blue-500 transition-all">Lưu Thay Đổi</button>
-                </div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
-                  <div className="space-y-6">
-                    <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                      <div className="flex justify-between items-center mb-4">
-                        <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Hero Section Text</label>
-                        <div className="flex gap-2">
-                          <AiHelperButton onClick={() => handleAiGenerateText('heroTitle', 'Tiêu đề Hero')} isLoading={isAiGeneratingText === 'heroTitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('heroDescription', 'Mô tả Hero')} isLoading={isAiGeneratingText === 'heroDescription'} />
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <input value={siteConfig.heroTitle} onChange={e => updateConfig('heroTitle', e.target.value)} placeholder="Tiêu đề lớn" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white font-bold" />
-                        <textarea value={siteConfig.heroDescription} onChange={e => updateConfig('heroDescription', e.target.value)} placeholder="Mô tả ngắn" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm h-24" />
-                      </div>
-                    </div>
-                    <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                      <div className="flex justify-between items-center mb-4">
-                        <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Section Headers</label>
-                        <div className="flex gap-2">
-                          <AiHelperButton onClick={() => handleAiGenerateText('servicesTitle', 'Tiêu đề Dịch vụ')} isLoading={isAiGeneratingText === 'servicesTitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('premiumTitle', 'Tiêu đề Cao cấp')} isLoading={isAiGeneratingText === 'premiumTitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('galleryTitle', 'Tiêu đề Thư viện')} isLoading={isAiGeneratingText === 'galleryTitle'} />
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <input value={siteConfig.servicesTitle} onChange={e => updateConfig('servicesTitle', e.target.value)} placeholder="Dịch vụ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                        <input value={siteConfig.premiumTitle} onChange={e => updateConfig('premiumTitle', e.target.value)} placeholder="Cao cấp" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                        <input value={siteConfig.galleryTitle} onChange={e => updateConfig('galleryTitle', e.target.value)} placeholder="Thư viện" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                      </div>
-                    </div>
-                    <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                      <div className="flex justify-between items-center mb-4">
-                        <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Section Subtitles</label>
-                        <div className="flex gap-2">
-                          <AiHelperButton onClick={() => handleAiGenerateText('servicesSubtitle', 'Phụ đề Dịch vụ')} isLoading={isAiGeneratingText === 'servicesSubtitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('premiumSubtitle', 'Phụ đề Cao cấp')} isLoading={isAiGeneratingText === 'premiumSubtitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('gallerySubtitle', 'Phụ đề Thư viện')} isLoading={isAiGeneratingText === 'gallerySubtitle'} />
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <textarea value={siteConfig.servicesSubtitle} onChange={e => updateConfig('servicesSubtitle', e.target.value)} placeholder="Phụ đề Dịch vụ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                        <textarea value={siteConfig.premiumSubtitle} onChange={e => updateConfig('premiumSubtitle', e.target.value)} placeholder="Phụ đề Cao cấp" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                        <textarea value={siteConfig.gallerySubtitle} onChange={e => updateConfig('gallerySubtitle', e.target.value)} placeholder="Phụ đề Thư viện" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                      </div>
-                    </div>
-                    <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                      <div className="flex justify-between items-center mb-4">
-                        <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Reviews & Map Headers</label>
-                        <div className="flex gap-2">
-                          <AiHelperButton onClick={() => handleAiGenerateText('reviewsTitle', 'Tiêu đề Đánh giá')} isLoading={isAiGeneratingText === 'reviewsTitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('reviewsSubtitle', 'Phụ đề Đánh giá')} isLoading={isAiGeneratingText === 'reviewsSubtitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('mapTitle', 'Tiêu đề Bản đồ')} isLoading={isAiGeneratingText === 'mapTitle'} />
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <input value={siteConfig.reviewsTitle} onChange={e => updateConfig('reviewsTitle', e.target.value)} placeholder="Tiêu đề Đánh giá" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                        <textarea value={siteConfig.reviewsSubtitle} onChange={e => updateConfig('reviewsSubtitle', e.target.value)} placeholder="Phụ đề Đánh giá" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                        <input value={siteConfig.mapTitle} onChange={e => updateConfig('mapTitle', e.target.value)} placeholder="Tiêu đề Bản đồ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                      </div>
-                    </div>
-                    <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                      <div className="flex justify-between items-center mb-4">
-                        <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Wrap & PPF Section</label>
-                        <div className="flex gap-2">
-                          <AiHelperButton onClick={() => handleAiGenerateText('wrapPPFTitle', 'Tiêu đề Wrap & PPF')} isLoading={isAiGeneratingText === 'wrapPPFTitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('wrapPPFSubtitle', 'Phụ đề Wrap & PPF')} isLoading={isAiGeneratingText === 'wrapPPFSubtitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('wrapPPFDescription', 'Mô tả Wrap & PPF')} isLoading={isAiGeneratingText === 'wrapPPFDescription'} />
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <input value={siteConfig.wrapPPFTitle} onChange={e => updateConfig('wrapPPFTitle', e.target.value)} placeholder="Tiêu đề Wrap & PPF" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                        <input value={siteConfig.wrapPPFSubtitle} onChange={e => updateConfig('wrapPPFSubtitle', e.target.value)} placeholder="Phụ đề Wrap & PPF" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                        <textarea value={siteConfig.wrapPPFDescription} onChange={e => updateConfig('wrapPPFDescription', e.target.value)} placeholder="Mô tả Wrap & PPF" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm h-24" />
-                      </div>
-                    </div>
-                    <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                      <div className="flex justify-between items-center mb-4">
-                        <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Tuning Section</label>
-                        <div className="flex gap-2">
-                          <AiHelperButton onClick={() => handleAiGenerateText('tuningTitle', 'Tiêu đề Độ Xe')} isLoading={isAiGeneratingText === 'tuningTitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('tuningSubtitle', 'Phụ đề Độ Xe')} isLoading={isAiGeneratingText === 'tuningSubtitle'} />
-                          <AiHelperButton onClick={() => handleAiGenerateText('tuningDescription', 'Mô tả Độ Xe')} isLoading={isAiGeneratingText === 'tuningDescription'} />
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <input value={siteConfig.tuningTitle} onChange={e => updateConfig('tuningTitle', e.target.value)} placeholder="Tiêu đề Độ Xe" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                        <input value={siteConfig.tuningSubtitle} onChange={e => updateConfig('tuningSubtitle', e.target.value)} placeholder="Phụ đề Độ Xe" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                        <textarea value={siteConfig.tuningDescription} onChange={e => updateConfig('tuningDescription', e.target.value)} placeholder="Mô tả Độ Xe" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm h-24" />
-                      </div>
-                    </div>
-                    <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                      <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em] mb-4 block">AI Advisor & Map Settings</label>
-                      <div className="space-y-4">
-                        <div className="space-y-1">
-                          <div className="flex justify-between items-center">
-                            <label className="text-[8px] text-slate-500 uppercase font-black tracking-widest">AI Video Intro URL</label>
-                            <button 
-                              onClick={() => setIsSelectingAiVideo(true)}
-                              className="text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-blue-500/30 bg-blue-600/10 text-blue-500 hover:bg-blue-600 hover:text-white transition-all"
-                            >
-                              📂 Thư viện
-                            </button>
-                          </div>
-                          <input 
-                            value={siteConfig.aiVideoUrl || ''} 
-                            onChange={e => updateConfig('aiVideoUrl', e.target.value)} 
-                            placeholder="Link video giới thiệu AI..." 
-                            className="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white text-[10px]" 
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[8px] text-slate-500 uppercase font-black tracking-widest">Google Maps Embed URL</label>
-                          <input 
-                            value={siteConfig.mapEmbedUrl || ''} 
-                            onChange={e => updateConfig('mapEmbedUrl', e.target.value)} 
-                            placeholder="Link embed Google Maps..." 
-                            className="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white text-[10px]" 
-                          />
-                        </div>
-                      </div>
-                    </div>
+            {/* Sidebar */}
+            <div className="w-full md:w-64 lg:w-72 bg-slate-900/50 border-r border-white/5 flex flex-col shrink-0">
+              <div className="p-8 border-b border-white/5">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/20">
+                    <Settings2 className="w-6 h-6 text-white" />
                   </div>
-                  <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5 relative group">
-                    <div className="flex justify-between items-center mb-4">
-                      <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Hero Media (Video/Image)</label>
-                      <span className="text-[8px] text-slate-500 font-black uppercase">Preview</span>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="group space-y-2">
-                        <div className="flex justify-between items-center">
-                          <label className="text-[8px] text-slate-500 uppercase font-black tracking-widest">Video URL (MP4)</label>
-                          <div className="flex gap-2">
-                            <button 
-                              onClick={() => setIsSelectingHeroVideo(true)}
-                              className="text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-blue-500/30 bg-blue-600/10 text-blue-500 hover:bg-blue-600 hover:text-white transition-all"
-                            >
-                              📂 Thư viện
-                            </button>
-                            <button 
-                              onClick={handleGenerateAiVideo}
-                              disabled={isGeneratingVideo}
-                              className={`text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full border transition-all ${isGeneratingVideo ? 'bg-slate-800 text-slate-500 border-slate-700 cursor-not-allowed' : 'bg-blue-600/10 text-blue-500 border-blue-500/30 hover:bg-blue-600 hover:text-white'}`}
-                            >
-                              {isGeneratingVideo ? '⏳ Đang tạo...' : '✨ Tạo bằng AI'}
-                            </button>
-                          </div>
-                        </div>
-                        <input 
-                          value={siteConfig.heroVideoUrl || ''} 
-                          onChange={e => updateConfig('heroVideoUrl', e.target.value)} 
-                          placeholder="Link video .mp4..." 
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white text-[10px]" 
-                        />
-                        {isGeneratingVideo && (
-                          <p className="text-[8px] text-blue-400 font-bold animate-pulse italic">{generationStatus}</p>
-                        )}
-                      </div>
-                      <div className="aspect-[4/5] sm:aspect-video lg:aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl group/hero">
-                        {siteConfig.heroVideoUrl ? (
-                          <video src={siteConfig.heroVideoUrl} autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                        ) : (
-                          <img src={siteConfig.heroImage} className="w-full h-full object-cover transition-transform duration-700 group-hover/hero:scale-110" alt="Hero Preview" />
-                        )}
-                        <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover/hero:opacity-100 transition-all flex flex-col items-center justify-center gap-4">
-                          <div className="text-center space-y-1">
-                            <p className="text-white font-black text-[10px] uppercase tracking-widest">Thay đổi nền chính</p>
-                            <p className="text-slate-400 text-[8px] uppercase">Ảnh (1920x1080) hoặc Video (.mp4)</p>
-                          </div>
-                          <div className="flex flex-col gap-2 w-full px-8 max-w-[240px]">
-                            <label className="bg-white text-slate-950 py-3 rounded-xl font-black text-[10px] uppercase cursor-pointer hover:bg-blue-500 hover:text-white transition-all shadow-xl active:scale-95 text-center">
-                              Chọn Ảnh Mới
-                              <input type="file" onChange={e => handleImageUpload(e, (b) => updateConfig('heroImage', b))} className="hidden" accept="image/*" />
-                            </label>
-                            <label className="bg-slate-800 text-white py-3 rounded-xl font-black text-[10px] uppercase cursor-pointer hover:bg-blue-500 transition-all shadow-xl active:scale-95 text-center">
-                              Chọn Video Mới
-                              <input type="file" onChange={e => handleImageUpload(e, (b) => updateConfig('heroVideoUrl', b))} className="hidden" accept="video/*" />
-                            </label>
-                            {siteConfig.heroVideoUrl && (
-                              <button 
-                                onClick={() => updateConfig('heroVideoUrl', '')}
-                                className="bg-red-600/20 text-red-500 border border-red-500/30 py-2 rounded-xl font-black text-[9px] uppercase hover:bg-red-600 hover:text-white transition-all"
-                              >
-                                Xóa Video (Dùng Ảnh)
-                              </button>
-                            )}
-                          </div>
-                        </div>
-                        {/* Status indicator */}
-                        <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                          <span className="text-[8px] font-black text-white uppercase tracking-tighter">Live Preview</span>
-                        </div>
-                      </div>
-                    </div>
+                  <div>
+                    <h2 className="text-lg font-black text-white uppercase tracking-tighter leading-none">Admin</h2>
+                    <p className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-1">Control Panel</p>
                   </div>
                 </div>
               </div>
-            )}
+
+              <div className="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar">
+                {tabs.map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id as any)}
+                    className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all group ${
+                      activeTab === tab.id 
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
+                        : 'text-slate-500 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-blue-500'} transition-colors`}>
+                      {tab.icon}
+                    </span>
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="p-6 border-t border-white/5">
+                <button 
+                  onClick={onClose}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-2xl bg-red-950/20 text-red-500 hover:bg-red-600 hover:text-white text-[10px] font-black uppercase tracking-widest transition-all"
+                >
+                  <LogOut className="w-4 h-4" /> Thoát Quản Trị
+                </button>
+              </div>
+            </div>
+
+            {/* Main Content Area */}
+            <div className="flex-1 flex flex-col h-full overflow-hidden bg-slate-950/50">
+              {/* Content Header */}
+              <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-slate-900/20">
+                <div>
+                  <h3 className="text-xl font-black text-white uppercase tracking-tighter">
+                    {tabs.find(t => t.id === activeTab)?.label}
+                  </h3>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">
+                    Quản lý hệ thống / {tabs.find(t => t.id === activeTab)?.label}
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="hidden lg:flex flex-col items-end">
+                    <span className="text-[10px] font-black text-white uppercase tracking-widest">Administrator</span>
+                    <span className="text-[9px] font-bold text-emerald-500 uppercase tracking-widest">Online</span>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-slate-800 border border-white/10 flex items-center justify-center">
+                    <User className="w-5 h-5 text-slate-400" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="h-full"
+                  >
+                    {activeTab === 'home' && (
+                      <div className="space-y-8">
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                          <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] hover:border-blue-500/30 transition-all">
+                            <div className="w-12 h-12 rounded-2xl bg-blue-600/20 flex items-center justify-center mb-4">
+                              <Users className="w-6 h-6 text-blue-500" />
+                            </div>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Khách Hàng</p>
+                            <p className="text-3xl font-black text-white">{customerRecords.length}</p>
+                          </div>
+                          <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] hover:border-emerald-500/30 transition-all">
+                            <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 flex items-center justify-center mb-4">
+                              <Calendar className="w-6 h-6 text-emerald-500" />
+                            </div>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Lịch Hẹn</p>
+                            <p className="text-3xl font-black text-white">{(siteConfig.appointments || []).length}</p>
+                          </div>
+                          <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] hover:border-amber-500/30 transition-all">
+                            <div className="w-12 h-12 rounded-2xl bg-amber-600/20 flex items-center justify-center mb-4">
+                              <Briefcase className="w-6 h-6 text-amber-500" />
+                            </div>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Dịch Vụ</p>
+                            <p className="text-3xl font-black text-white">{services.length}</p>
+                          </div>
+                          <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] hover:border-purple-500/30 transition-all">
+                            <div className="w-12 h-12 rounded-2xl bg-purple-600/20 flex items-center justify-center mb-4">
+                              <ImageIcon className="w-6 h-6 text-purple-500" />
+                            </div>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Media</p>
+                            <p className="text-3xl font-black text-white">{gallery.length}</p>
+                          </div>
+                        </div>
+
+                        {/* Quick Actions */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                          <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px]">
+                            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+                              <Zap className="w-4 h-4 text-blue-500" /> Thao Tác Nhanh
+                            </h4>
+                            <div className="grid grid-cols-2 gap-4">
+                              <button onClick={() => setActiveTab('appointments')} className="p-4 rounded-2xl bg-slate-950 border border-white/5 hover:border-blue-500/50 transition-all text-left">
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Check</p>
+                                <p className="text-xs font-bold text-white">Lịch Hẹn Mới</p>
+                              </button>
+                              <button onClick={() => setActiveTab('customers')} className="p-4 rounded-2xl bg-slate-950 border border-white/5 hover:border-blue-500/50 transition-all text-left">
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Add</p>
+                                <p className="text-xs font-bold text-white">Khách Hàng</p>
+                              </button>
+                              <button onClick={() => setActiveTab('ai-creative')} className="p-4 rounded-2xl bg-slate-950 border border-white/5 hover:border-blue-500/50 transition-all text-left">
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">AI</p>
+                                <p className="text-xs font-bold text-white">Tạo Nội Dung</p>
+                              </button>
+                              <button onClick={() => setActiveTab('config')} className="p-4 rounded-2xl bg-slate-950 border border-white/5 hover:border-blue-500/50 transition-all text-left">
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Setup</p>
+                                <p className="text-xs font-bold text-white">Cấu Hình Web</p>
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px]">
+                            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+                              <Clock className="w-4 h-4 text-emerald-500" /> Lịch Hẹn Gần Đây
+                            </h4>
+                            <div className="space-y-4">
+                              {(siteConfig.appointments || []).slice(0, 3).map(app => (
+                                <div key={app.id} className="flex items-center justify-between p-4 rounded-2xl bg-slate-950 border border-white/5">
+                                  <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-500 font-black text-[10px]">
+                                      {app.date.split('-')[2]}
+                                    </div>
+                                    <div>
+                                      <p className="text-xs font-bold text-white">{app.customerName}</p>
+                                      <p className="text-[10px] text-slate-500 uppercase font-black">{app.carModel}</p>
+                                    </div>
+                                  </div>
+                                  <span className={`text-[8px] font-black uppercase px-2 py-1 rounded-full ${
+                                    app.status === 'confirmed' ? 'bg-emerald-600/20 text-emerald-400' : 'bg-amber-600/20 text-amber-400'
+                                  }`}>
+                                    {app.status === 'pending' ? 'Chờ' : 'OK'}
+                                  </span>
+                                </div>
+                              ))}
+                              <button onClick={() => setActiveTab('appointments')} className="w-full py-3 text-[10px] font-black text-blue-500 uppercase tracking-widest hover:text-blue-400 transition-colors">
+                                Xem tất cả lịch hẹn →
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {activeTab === 'config' && (
+                      <div className="space-y-10">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-4">
+                          <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Cấu Hình Website</h3>
+                          <button onClick={() => { alert("✅ Đã lưu thay đổi!"); onClose(); }} className="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase shadow-lg hover:bg-blue-500 transition-all">Lưu Thay Đổi</button>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+                          <div className="space-y-6">
+                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
+                              <div className="flex justify-between items-center mb-4">
+                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Hero Section Text</label>
+                                <div className="flex gap-2">
+                                  <AiHelperButton onClick={() => handleAiGenerateText('heroTitle', 'Tiêu đề Hero')} isLoading={isAiGeneratingText === 'heroTitle'} />
+                                  <AiHelperButton onClick={() => handleAiGenerateText('heroDescription', 'Mô tả Hero')} isLoading={isAiGeneratingText === 'heroDescription'} />
+                                </div>
+                              </div>
+                              <div className="space-y-4">
+                                <input value={siteConfig.heroTitle} onChange={e => updateConfig('heroTitle', e.target.value)} placeholder="Tiêu đề lớn" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white font-bold" />
+                                <textarea value={siteConfig.heroDescription} onChange={e => updateConfig('heroDescription', e.target.value)} placeholder="Mô tả ngắn" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm h-24" />
+                              </div>
+                            </div>
+                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
+                              <div className="flex justify-between items-center mb-4">
+                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Section Headers</label>
+                                <div className="flex gap-2">
+                                  <AiHelperButton onClick={() => handleAiGenerateText('servicesTitle', 'Tiêu đề Dịch vụ')} isLoading={isAiGeneratingText === 'servicesTitle'} />
+                                  <AiHelperButton onClick={() => handleAiGenerateText('premiumTitle', 'Tiêu đề Cao cấp')} isLoading={isAiGeneratingText === 'premiumTitle'} />
+                                  <AiHelperButton onClick={() => handleAiGenerateText('galleryTitle', 'Tiêu đề Thư viện')} isLoading={isAiGeneratingText === 'galleryTitle'} />
+                                </div>
+                              </div>
+                              <div className="space-y-4">
+                                <input value={siteConfig.servicesTitle} onChange={e => updateConfig('servicesTitle', e.target.value)} placeholder="Dịch vụ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
+                                <input value={siteConfig.premiumTitle} onChange={e => updateConfig('premiumTitle', e.target.value)} placeholder="Cao cấp" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
+                                <input value={siteConfig.galleryTitle} onChange={e => updateConfig('galleryTitle', e.target.value)} placeholder="Thư viện" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
+                              </div>
+                            </div>
+
+                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
+                              <div className="flex justify-between items-center mb-4">
+                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Section Subtitles</label>
+                                <div className="flex gap-2">
+                                  <AiHelperButton onClick={() => handleAiGenerateText('servicesSubtitle', 'Phụ đề Dịch vụ')} isLoading={isAiGeneratingText === 'servicesSubtitle'} />
+                                  <AiHelperButton onClick={() => handleAiGenerateText('premiumSubtitle', 'Phụ đề Cao cấp')} isLoading={isAiGeneratingText === 'premiumSubtitle'} />
+                                  <AiHelperButton onClick={() => handleAiGenerateText('gallerySubtitle', 'Phụ đề Thư viện')} isLoading={isAiGeneratingText === 'gallerySubtitle'} />
+                                </div>
+                              </div>
+                              <div className="space-y-4">
+                                <textarea value={siteConfig.servicesSubtitle} onChange={e => updateConfig('servicesSubtitle', e.target.value)} placeholder="Phụ đề Dịch vụ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
+                                <textarea value={siteConfig.premiumSubtitle} onChange={e => updateConfig('premiumSubtitle', e.target.value)} placeholder="Phụ đề Cao cấp" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
+                                <textarea value={siteConfig.gallerySubtitle} onChange={e => updateConfig('gallerySubtitle', e.target.value)} placeholder="Phụ đề Thư viện" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
+                              <div className="flex justify-between items-center mb-4">
+                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Reviews & Map Headers</label>
+                                <div className="flex gap-2">
+                                  <AiHelperButton onClick={() => handleAiGenerateText('reviewsTitle', 'Tiêu đề Đánh giá')} isLoading={isAiGeneratingText === 'reviewsTitle'} />
+                                  <AiHelperButton onClick={() => handleAiGenerateText('reviewsSubtitle', 'Phụ đề Đánh giá')} isLoading={isAiGeneratingText === 'reviewsSubtitle'} />
+                                  <AiHelperButton onClick={() => handleAiGenerateText('mapTitle', 'Tiêu đề Bản đồ')} isLoading={isAiGeneratingText === 'mapTitle'} />
+                                </div>
+                              </div>
+                              <div className="space-y-4">
+                                <input value={siteConfig.reviewsTitle} onChange={e => updateConfig('reviewsTitle', e.target.value)} placeholder="Tiêu đề Đánh giá" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
+                                <textarea value={siteConfig.reviewsSubtitle} onChange={e => updateConfig('reviewsSubtitle', e.target.value)} placeholder="Phụ đề Đánh giá" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
+                                <input value={siteConfig.mapTitle} onChange={e => updateConfig('mapTitle', e.target.value)} placeholder="Tiêu đề Bản đồ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
+                              </div>
+                            </div>
+
+                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
+                              <div className="flex justify-between items-center mb-4">
+                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Hero Media</label>
+                              </div>
+                              <div className="space-y-4">
+                                <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 relative group/hero">
+                                  {siteConfig.heroVideoUrl ? (
+                                    <video src={siteConfig.heroVideoUrl} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+                                  ) : (
+                                    <img src={siteConfig.heroImage} className="w-full h-full object-cover" alt="Hero Preview" />
+                                  )}
+                                  <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover/hero:opacity-100 transition-all flex flex-col items-center justify-center gap-4">
+                                    <label className="bg-white text-slate-950 px-6 py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer hover:bg-blue-500 hover:text-white transition-all">
+                                      Chọn Ảnh
+                                      <input type="file" onChange={e => handleImageUpload(e, (b) => updateConfig('heroImage', b))} className="hidden" accept="image/*" />
+                                    </label>
+                                    <label className="bg-slate-800 text-white px-6 py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer hover:bg-blue-500 transition-all">
+                                      Chọn Video
+                                      <input type="file" onChange={e => handleImageUpload(e, (b) => updateConfig('heroVideoUrl', b))} className="hidden" accept="video/*" />
+                                    </label>
+                                  </div>
+                                </div>
+                                <input 
+                                  value={siteConfig.heroVideoUrl || ''} 
+                                  onChange={e => updateConfig('heroVideoUrl', e.target.value)} 
+                                  placeholder="Hoặc dán URL video .mp4..." 
+                                  className="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white text-[10px]" 
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                 {activeTab === 'services' && (
                   <div className="space-y-8">
@@ -1925,7 +2111,15 @@ const AdminDashboardModal: React.FC<{
               </div>
             )}
 
-                {activeTab === 'gallery' && (
+                {activeTab === 'tracking' && (
+                  <TrackingManagement trackingData={trackingData} setTrackingData={setTrackingData} />
+                )}
+
+                {activeTab === 'feedback' && (
+                  <FeedbackManagement reviews={reviews} setReviews={setReviews} services={services} />
+                )}
+
+            {activeTab === 'gallery' && (
                   <div className="space-y-8">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Thư Viện Ảnh Dự Án</h3>
@@ -1937,35 +2131,32 @@ const AdminDashboardModal: React.FC<{
                     >
                       {isAiProcessing ? '⏳' : '🪄 AI Phân Loại'}
                     </button>
-                    <label className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/20 transition-all cursor-pointer text-center flex items-center justify-center gap-2 group">
+                    <button 
+                      onClick={() => setIsGalleryUploadOpen(true)}
+                      className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/20 transition-all cursor-pointer text-center flex items-center justify-center gap-2 group"
+                    >
                       <span className="text-lg group-hover:scale-110 transition-transform">🖼️</span>
                       Tải Lên
-                      <input 
-                        type="file" 
-                        className="hidden" 
-                        accept="image/*,video/*" 
-                        multiple
-                        onChange={async (e) => {
-                        const fileList = e.target.files;
-                        if (fileList && fileList.length > 0) {
-                          const files = Array.from(fileList) as File[];
-                          const newImages: GalleryImage[] = [];
-                          for (const file of files) {
-                            const base64 = await fileToBase64(file);
-                            const isVideo = file.type.startsWith('video/');
-                            newImages.push({
-                              id: (Date.now() + Math.random()).toString(),
-                              url: base64,
-                              title: file.name.split('.')[0],
-                              category: 'general',
-                              type: isVideo ? 'video' : 'image'
-                            });
-                          }
-                          setGallery(prev => [...newImages, ...prev]);
-                        }
-                      }} 
-                    />
-                  </label>
+                    </button>
+
+                    <AnimatePresence>
+                      {isGalleryUploadOpen && (
+                        <GalleryUploadManager 
+                          categories={[
+                            { value: 'ceramic', label: 'Ceramic' },
+                            { value: 'wash', label: 'Rửa xe' },
+                            { value: 'interior', label: 'Nội thất' },
+                            { value: 'film', label: 'Dán phim' },
+                            { value: 'general', label: 'Khác' },
+                          ]}
+                          onClose={() => setIsGalleryUploadOpen(false)}
+                          onUpload={(newImages) => {
+                            setGallery(prev => [...newImages, ...prev]);
+                            toast.success(`Đã thêm ${newImages.length} ảnh vào thư viện!`);
+                          }}
+                        />
+                      )}
+                    </AnimatePresence>
                 </div>
               </div>
 
@@ -2046,157 +2237,713 @@ const AdminDashboardModal: React.FC<{
               </div>
             )}
 
-                {activeTab === 'customers' && (
+                {activeTab === 'packages' && (
                   <div className="space-y-8">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
-                  <div className="flex items-center gap-4">
-                    <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Nhật Ký Chăm Sóc</h3>
-                    <button 
-                      onClick={() => {
-                        setIsAddingCustomer(true);
-                        setEditingCustomerId(null);
-                        setCustomerForm({ customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], totalPrice: '', notes: '', date: new Date().toISOString().split('T')[0] });
-                      }}
-                      className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg transition-all active:scale-95"
-                    >
-                      ➕ Thêm Mới
-                    </button>
-                  </div>
-                </div>
-
-                <FilterSortBar 
-                  currentSearch={filterText}
-                  onSearchChange={setFilterText}
-                  currentSort={sortConfig}
-                  onSortChange={setSortConfig}
-                  onClear={() => { setFilterText(''); setFilterCategory('all'); }}
-                  sortOptions={[
-                    { key: 'date', order: 'desc', label: 'Ngày gần nhất' },
-                    { key: 'date', order: 'asc', label: 'Ngày xa nhất' },
-                    { key: 'customerName', order: 'asc', label: 'Tên A-Z' },
-                    { key: 'totalPrice', order: 'desc', label: 'Giá trị cao nhất' },
-                  ]}
-                />
-
-                {isAddingCustomer ? (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-slate-900/50 border border-blue-500/30 p-6 md:p-10 rounded-[32px] space-y-6"
-                  >
-                    <h4 className="text-xl font-black text-white uppercase tracking-tight">{editingCustomerId ? 'Sửa Thông Tin Khách' : 'Thêm Khách Hàng Mới'}</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Tên Khách Hàng</label>
-                        <input value={customerForm.customerName} onChange={e => setCustomerForm({...customerForm, customerName: e.target.value})} placeholder="VD: Nguyễn Văn A" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Số Điện Thoại</label>
-                        <input value={customerForm.phone} onChange={e => setCustomerForm({...customerForm, phone: e.target.value})} placeholder="VD: 0912345678" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Biển Số Xe</label>
-                        <input value={customerForm.licensePlate} onChange={e => setCustomerForm({...customerForm, licensePlate: e.target.value.toUpperCase()})} placeholder="VD: 30A-123.45" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Dòng Xe</label>
-                        <input value={customerForm.carModel} onChange={e => setCustomerForm({...customerForm, carModel: e.target.value})} placeholder="VD: Toyota Camry" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Ngày Thực Hiện</label>
-                        <input type="date" value={customerForm.date} onChange={e => setCustomerForm({...customerForm, date: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Tổng Tiền</label>
-                        <input value={customerForm.totalPrice} onChange={e => setCustomerForm({...customerForm, totalPrice: e.target.value})} placeholder="VD: 5.000.000 VNĐ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
-                      </div>
-                      <div className="space-y-2 md:col-span-2 lg:col-span-3">
-                        <label className="text-[10px] font-black text-slate-500 uppercase">Dịch Vụ Đã Làm (Cách nhau dấu phẩy)</label>
-                        <input 
-                          value={customerForm.servicesDone?.join(', ')} 
-                          onChange={e => setCustomerForm({...customerForm, servicesDone: e.target.value.split(',').map(s => s.trim())})} 
-                          placeholder="VD: Rửa xe, Đánh bóng, Phủ Ceramic" 
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" 
-                        />
-                      </div>
-                    </div>
-                    <div className="flex gap-4 pt-4">
+                    <div className="flex justify-between items-center mb-8">
+                      <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Quản Lý Gói Chăm Sóc</h3>
                       <button 
                         onClick={() => {
-                          if (!customerForm.customerName || !customerForm.phone) {
-                            alert("Vui lòng nhập tên và SĐT!");
-                            return;
-                          }
-                          if (editingCustomerId) {
-                            setCustomerRecords(customerRecords.map(r => r.id === editingCustomerId ? { ...r, ...customerForm as CustomerRecord } : r));
-                          } else {
-                            setCustomerRecords([{ ...customerForm as CustomerRecord, id: Date.now().toString() }, ...customerRecords]);
-                          }
-                          setIsAddingCustomer(false);
+                          setIsAddingPackage(true);
+                          setEditingPackageId(null);
+                          setPackageForm({ title: '', description: '', price: '', duration: '', features: [], isPopular: false });
                         }}
-                        className="flex-1 bg-blue-600 text-white p-4 rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-blue-500 transition-all"
+                        className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg transition-all active:scale-95"
                       >
-                        {editingCustomerId ? 'Cập Nhật' : 'Lưu Bản Ghi'}
+                        ➕ Thêm Gói Mới
                       </button>
-                      <button onClick={() => setIsAddingCustomer(false)} className="flex-1 bg-slate-800 text-slate-400 p-4 rounded-2xl font-black uppercase tracking-widest hover:text-white transition-all">Hủy</button>
                     </div>
-                  </motion.div>
-                ) : (
-                  <div className="overflow-x-auto rounded-2xl md:rounded-[32px] border border-white/5 shadow-2xl overflow-hidden">
-                    <table className="w-full text-left bg-slate-900/30 min-w-[900px]">
-                      <thead>
-                        <tr className="bg-slate-950/50 border-b border-white/5 text-[9px] font-black text-slate-500 uppercase tracking-widest">
-                          <th className="p-4 md:p-6">Thời gian</th>
-                          <th className="p-4 md:p-6">Khách hàng / SĐT</th>
-                          <th className="p-4 md:p-6">Xe / Biển số</th>
-                          <th className="p-4 md:p-6">Dịch vụ đã làm</th>
-                          <th className="p-4 md:p-6 text-right">Thành tiền</th>
-                          <th className="p-4 md:p-6 text-center">Tác vụ</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-white/5">
-                        {getFilteredAndSorted(customerRecords, ['customerName', 'phone', 'licensePlate', 'carModel']).map(r => (
-                          <tr key={r.id} className="hover:bg-blue-600/5 transition-colors group">
-                            <td className="p-4 md:p-6 text-[10px] md:text-xs text-slate-500">{r.date}</td>
-                            <td className="p-4 md:p-6">
-                              <div className="font-bold text-white text-sm">{r.customerName}</div>
-                              <div className="text-[10px] text-blue-500 font-bold tracking-widest">{r.phone}</div>
-                            </td>
-                            <td className="p-4 md:p-6">
-                              <div className="text-xs text-slate-300">{r.carModel}</div>
-                              <div className="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-white/5 inline-block font-black text-slate-400 mt-1">{r.licensePlate}</div>
-                            </td>
-                            <td className="p-4 md:p-6">
-                              <div className="flex flex-wrap gap-1">
-                                {r.servicesDone.map((s, idx) => (
-                                  <span key={idx} className="text-[8px] bg-blue-600/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-bold uppercase">{s}</span>
-                                ))}
-                              </div>
-                            </td>
-                            <td className="p-4 md:p-6 text-right font-black text-white text-sm">{r.totalPrice}</td>
-                            <td className="p-4 md:p-6 text-center">
-                              <div className="flex justify-center gap-2">
-                                <button 
-                                  onClick={() => {
-                                    setIsAddingCustomer(true);
-                                    setEditingCustomerId(r.id);
-                                    setCustomerForm(r);
-                                  }}
-                                  className="w-10 h-10 rounded-xl hover:bg-blue-600/20 text-slate-600 hover:text-blue-500 transition-all flex items-center justify-center"
-                                >
-                                  ✏️
-                                </button>
-                                <button onClick={() => confirm("Xóa bản ghi?") && setCustomerRecords(customerRecords.filter(rec => rec.id !== r.id))} className="w-10 h-10 rounded-xl hover:bg-red-600/20 text-slate-600 hover:text-red-500 transition-all flex items-center justify-center">🗑️</button>
-                              </div>
-                            </td>
-                          </tr>
+
+                    {isAddingPackage ? (
+                      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-slate-900/50 border border-blue-500/30 p-8 rounded-[32px] space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase">Tên Gói</label>
+                            <input value={packageForm.title} onChange={e => setPackageForm({...packageForm, title: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase">Giá</label>
+                            <input value={packageForm.price} onChange={e => setPackageForm({...packageForm, price: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase">Thời gian thực hiện</label>
+                            <input value={packageForm.duration} onChange={e => setPackageForm({...packageForm, duration: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
+                          </div>
+                          <div className="flex items-center gap-3 pt-6">
+                            <input type="checkbox" checked={packageForm.isPopular} onChange={e => setPackageForm({...packageForm, isPopular: e.target.checked})} className="w-5 h-5 rounded bg-slate-950 border-white/10" />
+                            <label className="text-[10px] font-black text-slate-500 uppercase">Gói Phổ Biến</label>
+                          </div>
+                          <div className="space-y-2 md:col-span-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase">Mô tả</label>
+                            <textarea value={packageForm.description} onChange={e => setPackageForm({...packageForm, description: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-24" />
+                          </div>
+                          <div className="space-y-2 md:col-span-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase">Tính năng (Cách nhau dấu phẩy)</label>
+                            <input value={packageForm.features?.join(', ')} onChange={e => setPackageForm({...packageForm, features: e.target.value.split(',').map(f => f.trim())})} className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex gap-4">
+                          <button 
+                            onClick={() => {
+                              const newPackages = siteConfig.packages || [];
+                              const updatedPackages = editingPackageId 
+                                ? newPackages.map(p => p.id === editingPackageId ? { ...p, ...packageForm as DetailingPackage } : p)
+                                : [{ ...packageForm as DetailingPackage, id: Date.now().toString() }, ...newPackages];
+                              setSiteConfig(prev => ({ ...prev, packages: updatedPackages }));
+                              setIsAddingPackage(false);
+                            }}
+                            className="flex-1 bg-blue-600 text-white p-4 rounded-2xl font-black uppercase"
+                          >
+                            Lưu Gói
+                          </button>
+                          <button onClick={() => setIsAddingPackage(false)} className="flex-1 bg-slate-800 text-slate-400 p-4 rounded-2xl font-black uppercase">Hủy</button>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {(siteConfig.packages || []).map(pkg => (
+                          <div key={pkg.id} className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] relative group overflow-hidden flex flex-col">
+                            {pkg.isPopular && <div className="absolute top-4 right-4 bg-blue-600 text-[8px] font-black uppercase px-2 py-1 rounded-full">Phổ biến</div>}
+                            <h4 className="text-xl font-black text-white uppercase mb-2">{pkg.title}</h4>
+                            <p className="text-blue-400 font-black text-lg mb-4">{pkg.price}</p>
+                            <p className="text-slate-500 text-xs mb-6 line-clamp-2">{pkg.description}</p>
+                            <div className="flex justify-end gap-2 mt-auto">
+                              <button onClick={() => { setIsAddingPackage(true); setEditingPackageId(pkg.id); setPackageForm(pkg); }} className="p-2 hover:bg-blue-600/20 rounded-lg transition-all">✏️</button>
+                              <button onClick={() => confirm("Xóa gói này?") && setSiteConfig(prev => ({ ...prev, packages: (prev.packages || []).filter(p => p.id !== pkg.id) }))} className="p-2 hover:bg-red-600/20 rounded-lg transition-all">🗑️</button>
+                            </div>
+                          </div>
                         ))}
-                      </tbody>
-                    </table>
+                      </div>
+                    )}
                   </div>
                 )}
-              </div>
-            )}
+
+                {activeTab === 'appointments' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Quản Lý Lịch Hẹn</h3>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Theo dõi và điều phối lịch chăm sóc xe</p>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          setIsAddingAppointment(true);
+                          setEditingAppointmentId(null);
+                          setAppointmentForm({ customerName: '', phone: '', carModel: '', serviceId: '', date: new Date().toISOString().split('T')[0], time: '09:00', status: 'pending', note: '' });
+                        }}
+                        className="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all active:scale-95 flex items-center justify-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" /> Thêm Lịch Hẹn
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] relative overflow-hidden group">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Chờ xác nhận</p>
+                        <p className="text-3xl font-black text-amber-500">{(siteConfig.appointments || []).filter(a => a.status === 'pending').length}</p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] relative overflow-hidden group">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Đã xác nhận</p>
+                        <p className="text-3xl font-black text-emerald-500">{(siteConfig.appointments || []).filter(a => a.status === 'confirmed').length}</p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] relative overflow-hidden group">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Đã hoàn thành</p>
+                        <p className="text-3xl font-black text-blue-500">{(siteConfig.appointments || []).filter(a => a.status === 'completed').length}</p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] relative overflow-hidden group">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Tổng lịch hẹn</p>
+                        <p className="text-3xl font-black text-white">{(siteConfig.appointments || []).length}</p>
+                      </div>
+                    </div>
+
+                    {isAddingAppointment ? (
+                      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-slate-900 border border-blue-500/30 p-10 rounded-[40px] shadow-2xl">
+                        <div className="flex justify-between items-center mb-10">
+                          <h4 className="text-2xl font-black text-white uppercase tracking-tighter">{editingAppointmentId ? 'Sửa Lịch Hẹn' : 'Tạo Lịch Hẹn Mới'}</h4>
+                          <button onClick={() => setIsAddingAppointment(false)} className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-all">
+                            <X className="w-5 h-5" />
+                          </button>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tên Khách Hàng</label>
+                            <input value={appointmentForm.customerName} onChange={e => setAppointmentForm({...appointmentForm, customerName: e.target.value})} placeholder="VD: Nguyễn Văn A" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Số Điện Thoại</label>
+                            <input value={appointmentForm.phone} onChange={e => setAppointmentForm({...appointmentForm, phone: e.target.value})} placeholder="VD: 0912345678" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Dòng Xe</label>
+                            <input value={appointmentForm.carModel} onChange={e => setAppointmentForm({...appointmentForm, carModel: e.target.value})} placeholder="VD: Toyota Camry" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Ngày Hẹn</label>
+                            <input type="date" value={appointmentForm.date} onChange={e => setAppointmentForm({...appointmentForm, date: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Giờ Hẹn</label>
+                            <input type="time" value={appointmentForm.time} onChange={e => setAppointmentForm({...appointmentForm, time: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Dịch Vụ</label>
+                            <select value={appointmentForm.serviceId} onChange={e => setAppointmentForm({...appointmentForm, serviceId: e.target.value, subServiceTitle: ''})} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none appearance-none">
+                              <option value="">-- Chọn dịch vụ --</option>
+                              {services.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
+                            </select>
+                          </div>
+                          {services.find(s => s.id === appointmentForm.serviceId)?.subServices && (
+                            <div className="space-y-2">
+                              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Gói Nâng Cấp</label>
+                              <select value={appointmentForm.subServiceTitle} onChange={e => setAppointmentForm({...appointmentForm, subServiceTitle: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none appearance-none">
+                                <option value="">-- Chọn gói nâng cấp --</option>
+                                {services.find(s => s.id === appointmentForm.serviceId)?.subServices?.map((sub, idx) => (
+                                  <option key={idx} value={sub.title}>{sub.title}</option>
+                                ))}
+                              </select>
+                            </div>
+                          )}
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Trạng Thái</label>
+                            <select value={appointmentForm.status} onChange={e => setAppointmentForm({...appointmentForm, status: e.target.value as any})} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none appearance-none">
+                              <option value="pending">Chờ xác nhận</option>
+                              <option value="confirmed">Đã xác nhận</option>
+                              <option value="completed">Đã hoàn thành</option>
+                              <option value="cancelled">Đã hủy</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="flex gap-4 pt-10">
+                          <button 
+                            onClick={() => {
+                              const newApps = siteConfig.appointments || [];
+                              const updatedApps = editingAppointmentId 
+                                ? newApps.map(a => a.id === editingAppointmentId ? { ...a, ...appointmentForm as Appointment } : a)
+                                : [{ ...appointmentForm as Appointment, id: Date.now().toString(), createdAt: new Date().toISOString() }, ...newApps];
+                              setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
+                              setIsAddingAppointment(false);
+                            }}
+                            className="flex-1 bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 hover:bg-blue-500 transition-all active:scale-95"
+                          >
+                            Lưu Lịch Hẹn
+                          </button>
+                          <button onClick={() => setIsAddingAppointment(false)} className="px-10 bg-slate-800 text-slate-400 rounded-2xl font-black uppercase tracking-widest hover:text-white transition-all">Hủy</button>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <div className="overflow-x-auto rounded-[40px] border border-white/5 shadow-2xl overflow-hidden bg-slate-900/20">
+                        <table className="w-full text-left min-w-[1000px]">
+                          <thead>
+                            <tr className="bg-slate-900/50 border-b border-white/5 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                              <th className="px-8 py-6">Thời gian hẹn</th>
+                              <th className="px-8 py-6">Khách hàng</th>
+                              <th className="px-8 py-6">Phương tiện</th>
+                              <th className="px-8 py-6">Trạng thái</th>
+                              <th className="px-8 py-6 text-center">Thao tác</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-white/5">
+                            {(siteConfig.appointments || []).map(app => (
+                              <tr key={app.id} className="hover:bg-blue-600/5 transition-colors group">
+                                <td className="px-8 py-6">
+                                  <div className="font-black text-white text-sm">{app.date}</div>
+                                  <div className="text-[10px] text-blue-500 font-bold tracking-widest mt-0.5">{app.time}</div>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <div className="font-black text-white text-sm">{app.customerName}</div>
+                                  <div className="text-[10px] text-slate-500 font-bold tracking-widest mt-0.5">{app.phone}</div>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <div className="text-xs font-bold text-slate-300">{app.carModel}</div>
+                                  {app.subServiceTitle && <div className="text-[10px] text-emerald-500 font-bold mt-1 uppercase tracking-widest">{app.subServiceTitle}</div>}
+                                </td>
+                                <td className="px-8 py-6">
+                                  <span className={`text-[9px] font-black uppercase px-3 py-1.5 rounded-full border ${
+                                    app.status === 'confirmed' ? 'bg-emerald-600/10 text-emerald-400 border-emerald-500/20' :
+                                    app.status === 'completed' ? 'bg-blue-600/10 text-blue-400 border-blue-500/20' :
+                                    app.status === 'cancelled' ? 'bg-red-600/10 text-red-400 border-red-500/20' :
+                                    'bg-amber-600/10 text-amber-400 border-amber-500/20'
+                                  }`}>
+                                    {app.status === 'pending' ? 'Chờ xác nhận' :
+                                     app.status === 'confirmed' ? 'Đã xác nhận' :
+                                     app.status === 'completed' ? 'Đã hoàn thành' : 'Đã hủy'}
+                                  </span>
+                                </td>
+                                <td className="px-8 py-6 text-center">
+                                  <div className="flex justify-center gap-2">
+                                    <button 
+                                      onClick={() => { setIsAddingAppointment(true); setEditingAppointmentId(app.id); setAppointmentForm(app); }}
+                                      className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
+                                    >
+                                      <Edit2 className="w-4 h-4" />
+                                    </button>
+                                    <button 
+                                      onClick={() => confirm("Xóa lịch hẹn này?") && setSiteConfig(prev => ({ ...prev, appointments: (prev.appointments || []).filter(a => a.id !== app.id) }))}
+                                      className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
+                                    >
+                                      <Trash2 className="w-4 h-4" />
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {activeTab === 'customers' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Nhật Ký Chăm Sóc</h3>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Quản lý hồ sơ khách hàng và doanh thu</p>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          setIsAddingCustomer(true);
+                          setEditingCustomerId(null);
+                          setCustomerForm({ customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], totalPrice: '', notes: '', rating: 5, date: new Date().toISOString().split('T')[0], discount: 0, paymentStatus: 'paid' });
+                        }}
+                        className="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all active:scale-95 flex items-center justify-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" /> Thêm Khách Hàng
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <Users className="w-16 h-16 text-blue-500" />
+                        </div>
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Tổng Khách Hàng</p>
+                        <p className="text-4xl font-black text-white">{customerRecords.length}</p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <Coins className="w-16 h-16 text-emerald-500" />
+                        </div>
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Tổng Doanh Thu</p>
+                        <p className="text-4xl font-black text-emerald-500">
+                          {customerRecords.reduce((acc, r) => {
+                            const price = parseInt(r.totalPrice.replace(/[^0-9]/g, '')) || 0;
+                            return acc + price;
+                          }, 0).toLocaleString('vi-VN')}
+                          <span className="text-sm ml-1">VNĐ</span>
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <CreditCard className="w-16 h-16 text-red-500" />
+                        </div>
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Công Nợ (Chưa thanh toán)</p>
+                        <p className="text-4xl font-black text-red-500">
+                          {customerRecords.filter(r => r.paymentStatus === 'pending').reduce((acc, r) => {
+                            const price = parseInt(r.totalPrice.replace(/[^0-9]/g, '')) || 0;
+                            return acc + price;
+                          }, 0).toLocaleString('vi-VN')}
+                          <span className="text-sm ml-1">VNĐ</span>
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <Star className="w-16 h-16 text-amber-500" />
+                        </div>
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Đánh Giá TB</p>
+                        <p className="text-4xl font-black text-amber-500">
+                          {(customerRecords.reduce((acc, r) => acc + (r.rating || 5), 0) / (customerRecords.length || 1)).toFixed(1)}
+                          <span className="text-sm ml-1">⭐</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-900/30 border border-white/5 p-6 rounded-[32px]">
+                      <FilterSortBar 
+                        currentSearch={filterText}
+                        onSearchChange={setFilterText}
+                        currentSort={sortConfig}
+                        onSortChange={setSortConfig}
+                        onClear={() => { setFilterText(''); setFilterCategory('all'); }}
+                        sortOptions={[
+                          { key: 'date', order: 'desc', label: 'Ngày gần nhất' },
+                          { key: 'date', order: 'asc', label: 'Ngày xa nhất' },
+                          { key: 'customerName', order: 'asc', label: 'Tên A-Z' },
+                          { key: 'totalPrice', order: 'desc', label: 'Giá trị cao nhất' },
+                        ]}
+                      />
+                    </div>
+
+                    {isAddingCustomer ? (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-slate-900 border border-blue-500/30 p-10 rounded-[40px] shadow-2xl"
+                      >
+                        <div className="flex justify-between items-center mb-10">
+                          <h4 className="text-2xl font-black text-white uppercase tracking-tighter">{editingCustomerId ? 'Sửa Thông Tin Khách' : 'Thêm Khách Hàng Mới'}</h4>
+                          <button onClick={() => setIsAddingCustomer(false)} className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-all">
+                            <X className="w-5 h-5" />
+                          </button>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tên Khách Hàng</label>
+                            <input value={customerForm.customerName} onChange={e => setCustomerForm({...customerForm, customerName: e.target.value})} placeholder="VD: Nguyễn Văn A" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Số Điện Thoại</label>
+                            <input value={customerForm.phone} onChange={e => setCustomerForm({...customerForm, phone: e.target.value})} placeholder="VD: 0912345678" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Biển Số Xe</label>
+                            <input value={customerForm.licensePlate} onChange={e => setCustomerForm({...customerForm, licensePlate: e.target.value.toUpperCase()})} placeholder="VD: 30A-123.45" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Dòng Xe</label>
+                            <input value={customerForm.carModel} onChange={e => setCustomerForm({...customerForm, carModel: e.target.value})} placeholder="VD: Toyota Camry" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Ngày Thực Hiện</label>
+                            <input type="date" value={customerForm.date} onChange={e => setCustomerForm({...customerForm, date: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tổng Tiền (Tự động tính)</label>
+                            <div className="relative">
+                              <input 
+                                value={customerForm.totalPrice} 
+                                onChange={e => setCustomerForm({...customerForm, totalPrice: e.target.value})} 
+                                placeholder="VD: 5.000.000 VNĐ" 
+                                className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none pl-12" 
+                              />
+                              <Coins className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-500" />
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Giảm Giá (VNĐ)</label>
+                            <input 
+                              type="number"
+                              value={customerForm.discount || 0} 
+                              onChange={e => setCustomerForm({...customerForm, discount: parseInt(e.target.value) || 0})} 
+                              placeholder="0" 
+                              className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" 
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Trạng Thái Thanh Toán</label>
+                            <div className="grid grid-cols-3 gap-2">
+                              {[
+                                { id: 'paid', label: 'Đã thanh toán', color: 'bg-emerald-500' },
+                                { id: 'pending', label: 'Chưa thanh toán', color: 'bg-red-500' },
+                                { id: 'partially_paid', label: 'Thanh toán một phần', color: 'bg-amber-500' }
+                              ].map(status => (
+                                <button
+                                  key={status.id}
+                                  onClick={() => setCustomerForm({...customerForm, paymentStatus: status.id as any})}
+                                  className={`p-3 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all border ${
+                                    customerForm.paymentStatus === status.id 
+                                      ? `${status.color} text-white border-transparent shadow-lg` 
+                                      : 'bg-slate-950 text-slate-500 border-white/10 hover:border-white/20'
+                                  }`}
+                                >
+                                  {status.label}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Đánh Giá (1-5 Sao)</label>
+                            <div className="flex gap-2 p-4 bg-slate-950 border border-white/10 rounded-2xl">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <button
+                                  key={star}
+                                  onClick={() => setCustomerForm({...customerForm, rating: star})}
+                                  className={`transition-all ${customerForm.rating && customerForm.rating >= star ? 'text-yellow-500 scale-110' : 'text-slate-700 hover:text-slate-500'}`}
+                                >
+                                  <Star className={`w-6 h-6 ${customerForm.rating && customerForm.rating >= star ? 'fill-current' : ''}`} />
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="space-y-6 md:col-span-2 lg:col-span-3">
+                            <div className="flex items-center justify-between">
+                              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Chọn Dịch Vụ & Tính Tiền</label>
+                              <span className="text-[10px] font-bold text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full uppercase tracking-widest">
+                                Đã chọn: {customerForm.servicesDone?.length || 0}
+                              </span>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                              {services.map(service => (
+                                <div key={service.id} className="space-y-3">
+                                  <button
+                                    onClick={() => {
+                                      const isSelected = customerForm.servicesDone?.includes(service.title);
+                                      let newServices = [...(customerForm.servicesDone || [])];
+                                      if (isSelected) {
+                                        newServices = newServices.filter(s => s !== service.title);
+                                      } else {
+                                        newServices.push(service.title);
+                                      }
+                                      setCustomerForm({
+                                        ...customerForm,
+                                        servicesDone: newServices,
+                                        serviceReviews: newServices.map(s => {
+                                          const existing = customerForm.serviceReviews?.find(r => r.serviceName === s);
+                                          return existing || { serviceName: s, rating: 5, comment: '' };
+                                        })
+                                      });
+                                    }}
+                                    className={`w-full text-left p-4 rounded-2xl border transition-all flex items-center justify-between group ${
+                                      customerForm.servicesDone?.includes(service.title) 
+                                        ? 'bg-blue-600/20 border-blue-500 shadow-lg shadow-blue-500/10' 
+                                        : 'bg-slate-950 border-white/5 hover:border-white/20'
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-3">
+                                      <span className="text-xl">{service.icon}</span>
+                                      <div>
+                                        <div className="text-xs font-black text-white uppercase tracking-tighter">{service.title}</div>
+                                        <div className="text-[9px] font-bold text-slate-500">{service.price}</div>
+                                      </div>
+                                    </div>
+                                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                                      customerForm.servicesDone?.includes(service.title)
+                                        ? 'bg-blue-500 border-blue-500'
+                                        : 'border-white/10 group-hover:border-white/30'
+                                    }`}>
+                                      {customerForm.servicesDone?.includes(service.title) && <Check className="w-3 h-3 text-white" />}
+                                    </div>
+                                  </button>
+
+                                  {/* Sub-services if any */}
+                                  {service.subServices && service.subServices.length > 0 && (
+                                    <div className="pl-6 space-y-2">
+                                      {service.subServices.map((sub, sIdx) => (
+                                        <button
+                                          key={sIdx}
+                                          onClick={() => {
+                                            const isSelected = customerForm.servicesDone?.includes(sub.title);
+                                            let newServices = [...(customerForm.servicesDone || [])];
+                                            if (isSelected) {
+                                              newServices = newServices.filter(s => s !== sub.title);
+                                            } else {
+                                              newServices.push(sub.title);
+                                            }
+                                            setCustomerForm({
+                                              ...customerForm,
+                                              servicesDone: newServices,
+                                              serviceReviews: newServices.map(s => {
+                                                const existing = customerForm.serviceReviews?.find(r => r.serviceName === s);
+                                                return existing || { serviceName: s, rating: 5, comment: '' };
+                                              })
+                                            });
+                                          }}
+                                          className={`w-full text-left p-3 rounded-xl border text-[10px] transition-all flex items-center justify-between group ${
+                                            customerForm.servicesDone?.includes(sub.title) 
+                                              ? 'bg-emerald-600/20 border-emerald-500' 
+                                              : 'bg-slate-950/50 border-white/5 hover:border-white/10'
+                                          }`}
+                                        >
+                                          <div className="flex flex-col">
+                                            <span className="font-bold text-slate-300">{sub.title}</span>
+                                            <span className="text-[8px] text-slate-500">{sub.price}</span>
+                                          </div>
+                                          <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-all ${
+                                            customerForm.servicesDone?.includes(sub.title)
+                                              ? 'bg-emerald-500 border-emerald-500'
+                                              : 'border-white/10 group-hover:border-white/30'
+                                          }`}>
+                                            {customerForm.servicesDone?.includes(sub.title) && <Check className="w-2.5 h-2.5 text-white" />}
+                                          </div>
+                                        </button>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+
+                            <div className="p-6 bg-blue-600/10 border border-blue-500/20 rounded-[32px] flex flex-col md:flex-row justify-between items-center gap-4">
+                              <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+                                  <Receipt className="w-6 h-6" />
+                                </div>
+                                <div>
+                                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tạm tính</p>
+                                  <p className="text-xl font-black text-white">{customerForm.totalPrice || '0 VNĐ'}</p>
+                                </div>
+                              </div>
+                              <div className="flex gap-2">
+                                <button 
+                                  onClick={() => setCustomerForm({...customerForm, servicesDone: [], totalPrice: '0 VNĐ'})}
+                                  className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all"
+                                >
+                                  Xóa tất cả
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          {customerForm.serviceReviews && customerForm.serviceReviews.length > 0 && (
+                            <div className="md:col-span-2 lg:col-span-3 space-y-4">
+                              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Đánh Giá Chi Tiết Từng Dịch Vụ</label>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {customerForm.serviceReviews.map((review, idx) => (
+                                  <div key={idx} className="bg-slate-950/50 border border-white/5 p-6 rounded-3xl space-y-4">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-xs font-black text-blue-400 uppercase tracking-tighter">{review.serviceName}</span>
+                                      <div className="flex gap-1">
+                                        {[1, 2, 3, 4, 5].map(s => (
+                                          <button 
+                                            key={s} 
+                                            onClick={() => {
+                                              const newReviews = [...(customerForm.serviceReviews || [])];
+                                              newReviews[idx] = { ...newReviews[idx], rating: s };
+                                              setCustomerForm({ ...customerForm, serviceReviews: newReviews });
+                                            }}
+                                          >
+                                            <Star className={`w-4 h-4 ${review.rating >= s ? 'text-yellow-500 fill-current' : 'text-slate-700'}`} />
+                                          </button>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <textarea 
+                                      value={review.comment}
+                                      onChange={e => {
+                                        const newReviews = [...(customerForm.serviceReviews || [])];
+                                        newReviews[idx] = { ...newReviews[idx], comment: e.target.value };
+                                        setCustomerForm({ ...customerForm, serviceReviews: newReviews });
+                                      }}
+                                      placeholder="Nhận xét về dịch vụ này..."
+                                      className="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-xs text-white outline-none focus:border-blue-500 transition-all resize-none h-20"
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex gap-4 pt-10">
+                          <button 
+                            onClick={() => {
+                              if (!customerForm.customerName || !customerForm.phone) {
+                                alert("Vui lòng nhập tên và SĐT!");
+                                return;
+                              }
+                              if (editingCustomerId) {
+                                setCustomerRecords(customerRecords.map(r => r.id === editingCustomerId ? { ...r, ...customerForm as CustomerRecord } : r));
+                              } else {
+                                setCustomerRecords([{ ...customerForm as CustomerRecord, id: Date.now().toString() }, ...customerRecords]);
+                              }
+                              setIsAddingCustomer(false);
+                            }}
+                            className="flex-1 bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 hover:bg-blue-500 transition-all active:scale-95"
+                          >
+                            {editingCustomerId ? 'Cập Nhật Thông Tin' : 'Lưu Bản Ghi Mới'}
+                          </button>
+                          <button onClick={() => setIsAddingCustomer(false)} className="px-10 bg-slate-800 text-slate-400 rounded-2xl font-black uppercase tracking-widest hover:text-white transition-all">Hủy</button>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <div className="overflow-x-auto rounded-[40px] border border-white/5 shadow-2xl overflow-hidden bg-slate-900/20">
+                        <table className="w-full text-left min-w-[1000px]">
+                          <thead>
+                            <tr className="bg-slate-900/50 border-b border-white/5 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                              <th className="px-8 py-6">Thời gian</th>
+                              <th className="px-8 py-6">Khách hàng</th>
+                              <th className="px-8 py-6">Trạng thái</th>
+                              <th className="px-8 py-6">Phương tiện</th>
+                              <th className="px-8 py-6">Dịch vụ đã làm</th>
+                              <th className="px-8 py-6 text-right">Thành tiền</th>
+                              <th className="px-8 py-6 text-center">Thao tác</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-white/5">
+                            {getFilteredAndSorted(customerRecords, ['customerName', 'phone', 'licensePlate', 'carModel']).map(r => (
+                              <tr key={r.id} className="hover:bg-blue-600/5 transition-colors group">
+                                <td className="px-8 py-6">
+                                  <div className="text-xs font-bold text-slate-400">{r.date}</div>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <div className="font-black text-white text-sm">{r.customerName}</div>
+                                  <div className="text-[10px] text-blue-500 font-bold tracking-widest mt-0.5">{r.phone}</div>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <div className={`inline-flex items-center px-2.5 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border ${
+                                    r.paymentStatus === 'paid' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                                    r.paymentStatus === 'pending' ? 'bg-red-500/10 text-red-500 border-red-500/20' :
+                                    'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                                  }`}>
+                                    {r.paymentStatus === 'paid' ? 'Đã thanh toán' :
+                                     r.paymentStatus === 'pending' ? 'Chưa thanh toán' :
+                                     'Thanh toán một phần'}
+                                  </div>
+                                  <div className="flex gap-0.5 mt-2">
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                      <Star 
+                                        key={star} 
+                                        className={`w-2.5 h-2.5 ${r.rating && r.rating >= star ? 'text-yellow-500 fill-current' : 'text-slate-700'}`} 
+                                      />
+                                    ))}
+                                  </div>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <div className="text-xs font-bold text-slate-300">{r.carModel}</div>
+                                  <div className="text-[9px] bg-slate-800 px-2 py-0.5 rounded-lg border border-white/5 inline-block font-black text-slate-500 mt-1 uppercase tracking-tighter">{r.licensePlate}</div>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {r.servicesDone.map((s, idx) => {
+                                      const review = r.serviceReviews?.find(rev => rev.serviceName === s);
+                                      return (
+                                        <div key={idx} className="group/service relative">
+                                          <span className="text-[8px] bg-blue-600/10 text-blue-400 border border-blue-500/10 px-2.5 py-1 rounded-full font-black uppercase tracking-tighter cursor-help">
+                                            {s} {review && `(${review.rating}⭐)`}
+                                          </span>
+                                          {review?.comment && (
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-slate-900 border border-white/10 rounded-xl text-[10px] text-slate-300 opacity-0 group-hover/service:opacity-100 transition-opacity pointer-events-none z-50 shadow-2xl">
+                                              {review.comment}
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </td>
+                                <td className="px-8 py-6 text-right">
+                                  <div className="font-black text-white text-sm">{r.totalPrice}</div>
+                                </td>
+                                <td className="px-8 py-6 text-center">
+                                  <div className="flex justify-center gap-2">
+                                    <button 
+                                      onClick={() => {
+                                        setIsAddingCustomer(true);
+                                        setEditingCustomerId(r.id);
+                                        setCustomerForm(r);
+                                      }}
+                                      className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
+                                    >
+                                      <Edit2 className="w-4 h-4" />
+                                    </button>
+                                    <button 
+                                      onClick={() => confirm("Xóa bản ghi này?") && setCustomerRecords(prev => prev.filter(cr => cr.id !== r.id))}
+                                      className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
+                                    >
+                                      <Trash2 className="w-4 h-4" />
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {activeTab === 'maintenance' && (
                   <div className="space-y-8">
@@ -2615,8 +3362,8 @@ const AdminDashboardModal: React.FC<{
                 </div>
               </div>
             )}
-                {activeTab === 'config' && (
-                  <div className="space-y-8 max-w-5xl">
+            {activeTab === 'config' && (
+              <div className="space-y-8 max-w-5xl">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Cấu Hình Hệ Thống</h3>
@@ -2746,6 +3493,7 @@ const AdminDashboardModal: React.FC<{
                       <div className="group space-y-2">
                         <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Địa Chỉ Văn Phòng</label>
                         <textarea value={siteConfig.contactAddress} onChange={e => updateConfig('contactAddress', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm h-20 resize-none" />
+                        <p className="text-[8px] text-slate-600 italic">* Bản đồ Google Maps sẽ tự động cập nhật theo địa chỉ này.</p>
                       </div>
                     </div>
                   </div>
@@ -2841,10 +3589,9 @@ const SidebarMenu: React.FC<{
   onAdminClick: () => void;
   onAddRecord: () => void;
   onOpenDashboard: () => void;
-  onOpenGarage: () => void;
   onReset: () => void;
   scrollToSection: (id: string) => void;
-}> = ({ isOpen, onClose, isEditMode, siteConfig, onAdminClick, onAddRecord, onOpenDashboard, onOpenGarage, onReset, scrollToSection }) => {
+}> = ({ isOpen, onClose, isEditMode, siteConfig, onAdminClick, onAddRecord, onOpenDashboard, onReset, scrollToSection }) => {
   const handleNav = (id: string) => {
     scrollToSection(id);
     onClose();
@@ -2891,18 +3638,20 @@ const SidebarMenu: React.FC<{
             <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
               <nav className="space-y-2">
                 <button onClick={() => { window.scrollTo({top: 0, behavior: 'smooth'}); onClose(); }} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🏠 Trang Chủ</button>
-                <button onClick={() => { onOpenGarage(); onClose(); }} className="w-full text-left p-4 rounded-2xl bg-blue-600/10 hover:bg-blue-600/20 border border-blue-500/20 transition-all font-bold text-blue-400 flex items-center justify-between group">
-                  <span className="flex items-center gap-3">🚗 Gara Của Tôi</span>
-                  <span className="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">Mới</span>
+                <button onClick={() => handleNav('tracking')} className="w-full text-left p-4 rounded-2xl bg-blue-600/10 hover:bg-blue-600/20 border border-blue-500/20 transition-all font-bold text-blue-400 flex items-center justify-between group">
+                  <span className="flex items-center gap-3">⏱️ Theo Dõi Xe</span>
+                  <span className="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">Live</span>
                 </button>
                 <button onClick={() => handleNav('promotions')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🎁 Khuyến Mãi</button>
                 <button onClick={() => handleNav('services')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🛠️ Dịch Vụ</button>
+                <button onClick={() => handleNav('packages')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">📦 Bảng Giá Gói</button>
                 <button onClick={() => handleNav('window-tinting')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🕶️ Dán Phim</button>
                 <button onClick={() => handleNav('wrap-ppf')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🎨 Wrap & PPF</button>
                 <button onClick={() => handleNav('tuning')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🏎️ Độ Xe</button>
                 <button onClick={() => handleNav('premium')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">💎 Giải Pháp Cao Cấp</button>
                 <button onClick={() => handleNav('ai-advisor')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🤖 Cố Vấn AI</button>
                 <button onClick={() => handleNav('gallery')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🖼️ Thư Viện</button>
+                <button onClick={() => handleNav('reviews')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">⭐ Đánh Giá</button>
               </nav>
               
               <div className="pt-10 border-t border-white/5 mt-6 space-y-4">
@@ -2986,11 +3735,125 @@ const HomePage: React.FC = () => {
   const [dashboardInitialTab, setDashboardInitialTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance'>('home');
   const [dashboardMaintenancePreFill, setDashboardMaintenancePreFill] = useState<{brand: string, model: string, year: string, mileage: string, lastMaintenance: string, symptoms: string} | null>(null);
   const [dashboardTab, setDashboardTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'config'>('home');
-  const [isVehicleModalOpen, setIsVehicleModalOpen] = useState(false);
   const [isSelectingHeroVideo, setIsSelectingHeroVideo] = useState(false);
   const [isSelectingAiVideo, setIsSelectingAiVideo] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [serviceCategory, setServiceCategory] = useState<string>('all');
+  const [serviceSearch, setServiceSearch] = useState<string>('');
+  const [selectedServiceForModal, setSelectedServiceForModal] = useState<Service | null>(null);
+  const [preSelectedSubService, setPreSelectedSubService] = useState<string | undefined>(undefined);
+  
+  const handlePayment = async (serviceName: string, price: string, customerName: string, customerEmail?: string) => {
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          serviceName,
+          price,
+          customerName,
+          customerEmail: customerEmail || '',
+        }),
+      });
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Lỗi khi khởi tạo thanh toán: " + (data.error || "Không rõ nguyên nhân"));
+      }
+    } catch (error: any) {
+      console.error("Payment error:", error);
+      alert("Lỗi kết nối đến máy chủ thanh toán.");
+    }
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: siteConfig.heroTitle,
+      text: siteConfig.heroDescription,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      setIsShareModalOpen(true);
+    }
+  };
   
   const [isScrolled, setIsScrolled] = useState(false);
+  const [notifications, setNotifications] = useState<{id: string, message: string, time: string, read: boolean}[]>([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // WebSocket for real-time notifications
+  useEffect(() => {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const wsUrl = `${protocol}//${window.location.host}`;
+    let socket: WebSocket | null = null;
+    let reconnectTimeout: any = null;
+
+    const connect = () => {
+      socket = new WebSocket(wsUrl);
+
+      socket.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'NEW_BOOKING') {
+            const newNotif = {
+              id: Date.now().toString(),
+              message: data.message,
+              time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
+              read: false
+            };
+            setNotifications(prev => [newNotif, ...prev].slice(0, 10));
+            
+            toast.success(data.message, {
+              duration: 10000,
+              position: 'top-right',
+              icon: '🔔',
+              style: {
+                background: '#1e293b',
+                color: '#fff',
+                border: '1px solid #334155',
+                borderRadius: '16px',
+                padding: '16px',
+                fontWeight: 'bold',
+                fontSize: '14px'
+              }
+            });
+            // Play a subtle sound if possible
+            const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3');
+            audio.play().catch(() => {});
+          }
+        } catch (e) {
+          console.error('WS Error:', e);
+        }
+      };
+
+      socket.onclose = () => {
+        reconnectTimeout = setTimeout(connect, 5000);
+      };
+
+      socket.onerror = (err) => {
+        console.error('WS Connection Error:', err);
+        socket?.close();
+      };
+    };
+
+    connect();
+
+    return () => {
+      if (socket) socket.close();
+      if (reconnectTimeout) clearTimeout(reconnectTimeout);
+    };
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -3043,17 +3906,22 @@ const HomePage: React.FC = () => {
     const saved = localStorage.getItem('dungcar_services_v12');
     return saved ? JSON.parse(saved) : INITIAL_SERVICES;
   });
-  const [vehicles, setVehicles] = useState<Vehicle[]>(() => {
-    const saved = localStorage.getItem('dungcar_vehicles_v12');
-    return saved ? JSON.parse(saved) : [];
-  });
   const [aiVideoHistory, setAiVideoHistory] = useState<AiVideoRecord[]>(() => {
     const saved = localStorage.getItem('dungcar_ai_history_v12');
     return saved ? JSON.parse(saved) : [];
   });
+  const [trackingData, setTrackingData] = useState<VehicleTracking[]>(() => {
+    const saved = localStorage.getItem('dungcar_tracking_v12');
+    return saved ? JSON.parse(saved) : DEFAULT_TRACKING;
+  });
+  const [reviews, setReviews] = useState<Review[]>(() => {
+    const saved = localStorage.getItem('dungcar_reviews_v12');
+    return saved ? JSON.parse(saved) : DEFAULT_REVIEWS;
+  });
 
   const [aiMessages, setAiMessages] = useState<Message[]>([{ role: 'model', text: 'Chào bạn! Tôi là Carwash Detailing AI. Bạn cần tư vấn về dịch vụ detailing nào?' }]);
   const [aiInput, setAiInput] = useState('');
+  const [aiProvider, setAiProvider] = useState<AIProvider>('gemini');
   const [isAiLoading, setIsAiLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -3067,9 +3935,10 @@ const HomePage: React.FC = () => {
     localStorage.setItem('dungcar_gallery_v12', JSON.stringify(gallery));
     localStorage.setItem('dungcar_premium_v12', JSON.stringify(premiumSolutions));
     localStorage.setItem('dungcar_services_v12', JSON.stringify(services));
-    localStorage.setItem('dungcar_vehicles_v12', JSON.stringify(vehicles));
     localStorage.setItem('dungcar_ai_history_v12', JSON.stringify(aiVideoHistory));
-  }, [siteConfig, customerRecords, gallery, services, premiumSolutions, vehicles, aiVideoHistory]);
+    localStorage.setItem('dungcar_tracking_v12', JSON.stringify(trackingData));
+    localStorage.setItem('dungcar_reviews_v12', JSON.stringify(reviews));
+  }, [siteConfig, customerRecords, gallery, services, premiumSolutions, aiVideoHistory, trackingData, reviews]);
 
   const handleAiChat = async () => {
     if (!aiInput.trim()) return;
@@ -3078,7 +3947,7 @@ const HomePage: React.FC = () => {
     const newMsgs: Message[] = [...aiMessages, { role: 'user', text: userText }];
     setAiMessages(newMsgs);
     setIsAiLoading(true);
-    const response = await getAIResponse(userText, aiMessages);
+    const response = await getAIResponse(userText, aiMessages, aiProvider);
     setAiMessages(prev => [...prev, { role: 'model', text: response }]);
     setIsAiLoading(false);
   };
@@ -3091,6 +3960,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen selection:bg-blue-600/30">
+      <Toaster />
       {/* Top Bar */}
       <div className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 bg-slate-900/80 backdrop-blur-md border-b border-white/5 py-2 ${
         isScrolled ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
@@ -3195,11 +4065,13 @@ const HomePage: React.FC = () => {
                 {[
                   { id: 'promotions', label: 'Khuyến Mãi' },
                   { id: 'services', label: 'Dịch Vụ' },
+                  { id: 'packages', label: 'Bảng Giá' },
                   { id: 'window-tinting', label: 'Dán Phim' },
                   { id: 'wrap-ppf', label: 'Wrap & PPF' },
                   { id: 'tuning', label: 'Độ Xe' },
                   { id: 'ai-advisor', label: 'Cố Vấn AI' },
-                  { id: 'gallery', label: 'Thư Viện' }
+                  { id: 'gallery', label: 'Thư Viện' },
+                  { id: 'reviews', label: 'Đánh Giá' }
                 ].map((item) => (
                   <button 
                     key={item.id}
@@ -3214,6 +4086,85 @@ const HomePage: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-4">
+              {/* Tracking Button */}
+              <button 
+                onClick={() => scrollToSection('tracking')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all font-black uppercase text-[10px] tracking-widest ${
+                  isScrolled ? 'bg-blue-600 text-white hover:bg-blue-500' : 'bg-white/10 text-white hover:bg-white/20 border border-white/10'
+                }`}
+              >
+                <Timer className="w-4 h-4" />
+                <span className="hidden sm:inline">Theo Dõi Xe</span>
+              </button>
+
+              {/* Notification Button */}
+              <div className="relative">
+                <button 
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className={`p-2.5 rounded-xl transition-all relative group ${
+                    isScrolled ? 'bg-slate-800/50 hover:bg-slate-800' : 'bg-white/5 hover:bg-white/10'
+                  }`}
+                  title="Thông báo"
+                >
+                  <Bell className={`w-4 h-4 ${notifications.some(n => !n.read) ? 'text-blue-500 animate-pulse' : 'text-slate-400'}`} />
+                  {notifications.some(n => !n.read) && (
+                    <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-slate-950"></span>
+                  )}
+                </button>
+
+                <AnimatePresence>
+                  {showNotifications && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      className="absolute right-0 mt-4 w-72 sm:w-80 bg-slate-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-[70]"
+                    >
+                      <div className="p-4 border-b border-white/5 flex justify-between items-center bg-slate-800/50">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-white">Thông báo mới</span>
+                        <button 
+                          onClick={() => setNotifications(notifications.map(n => ({...n, read: true})))}
+                          className="text-[9px] font-bold text-blue-500 hover:text-white transition-colors uppercase"
+                        >
+                          Đánh dấu đã đọc
+                        </button>
+                      </div>
+                      <div className="max-h-80 overflow-y-auto">
+                        {notifications.length > 0 ? (
+                          notifications.map((n) => (
+                            <div 
+                              key={n.id} 
+                              className={`p-4 border-b border-white/5 hover:bg-white/5 transition-colors flex gap-3 ${!n.read ? 'bg-blue-500/5' : ''}`}
+                            >
+                              <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center flex-shrink-0">
+                                <Bell className="w-4 h-4 text-blue-500" />
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-xs text-white font-medium leading-relaxed">{n.message}</p>
+                                <span className="text-[9px] text-slate-500 mt-1 block">{n.time}</span>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="p-10 text-center">
+                            <Bell className="w-8 h-8 text-slate-700 mx-auto mb-3 opacity-20" />
+                            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Không có thông báo mới</p>
+                          </div>
+                        )}
+                      </div>
+                      {notifications.length > 0 && (
+                        <button 
+                          onClick={() => setNotifications([])}
+                          className="w-full p-3 bg-slate-800/50 hover:bg-slate-800 text-[9px] font-black text-slate-500 hover:text-red-400 transition-all uppercase tracking-widest border-t border-white/5"
+                        >
+                          Xoá tất cả
+                        </button>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               {isEditMode && (
                 <button 
                   onClick={() => setIsDashboardOpen(true)} 
@@ -3266,28 +4217,8 @@ const HomePage: React.FC = () => {
         onAdminClick={() => isEditMode ? setIsEditMode(false) : setIsLoginModalOpen(true)}
         onAddRecord={handleAddCustomer}
         onOpenDashboard={() => { setDashboardInitialTab('home'); setIsDashboardOpen(true); setIsSidebarOpen(false); }}
-        onOpenGarage={() => setIsVehicleModalOpen(true)}
         onReset={() => confirm("Reset trang web?") && (localStorage.clear(), window.location.reload())}
         scrollToSection={scrollToSection}
-      />
-
-      <VehicleManagerModal 
-        isOpen={isVehicleModalOpen} 
-        onClose={() => setIsVehicleModalOpen(false)} 
-        vehicles={vehicles}
-        setVehicles={setVehicles}
-        onMaintenanceAdvice={(v) => {
-          setDashboardInitialTab('maintenance');
-          setDashboardMaintenancePreFill({
-            brand: v.make,
-            model: v.model,
-            year: v.year,
-            mileage: '',
-            lastMaintenance: v.serviceHistory[0]?.date || '',
-            symptoms: ''
-          });
-          setIsDashboardOpen(true);
-        }}
       />
 
       <main className="flex-grow pt-24 sm:pt-32">
@@ -3417,6 +4348,12 @@ const HomePage: React.FC = () => {
                 >
                   Khám Phá Dịch Vụ
                 </button>
+                <button 
+                  onClick={handleShare}
+                  className="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all active:scale-95 flex items-center gap-3"
+                >
+                  <Share2 className="w-4 h-4" /> Chia Sẻ
+                </button>
               </motion.div>
             </div>
           </div>
@@ -3527,7 +4464,7 @@ const HomePage: React.FC = () => {
         {/* Services Section */}
         <section id="services" className="py-24 sm:py-32 bg-slate-950 relative">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center text-center mb-20 sm:mb-28">
+            <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -3537,32 +4474,96 @@ const HomePage: React.FC = () => {
                 <Zap className="w-4 h-4 text-blue-500" />
                 <span className="text-blue-500 font-black uppercase tracking-widest text-[10px]">Professional Services</span>
               </motion.div>
-              <EditableText 
-                tag="h2" 
-                text={siteConfig.servicesTitle} 
-                isEditMode={isEditMode} 
-                onSave={v => setSiteConfig({...siteConfig, servicesTitle: v})}
-                className="text-4xl sm:text-7xl font-black text-white uppercase mb-6 tracking-tighter leading-none"
-              />
-              <EditableText 
-                text={siteConfig.servicesSubtitle} 
-                isEditMode={isEditMode} 
-                onSave={v => setSiteConfig({...siteConfig, servicesSubtitle: v})}
-                className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-lg font-medium"
-              />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <EditableText 
+                  tag="h2" 
+                  text={siteConfig.servicesTitle} 
+                  isEditMode={isEditMode} 
+                  onSave={v => setSiteConfig({...siteConfig, servicesTitle: v})}
+                  className="text-4xl sm:text-7xl font-black text-white uppercase mb-6 tracking-tighter leading-none"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <EditableText 
+                  text={siteConfig.servicesSubtitle} 
+                  isEditMode={isEditMode} 
+                  onSave={v => setSiteConfig({...siteConfig, servicesSubtitle: v})}
+                  className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-lg font-medium mb-12"
+                />
+              </motion.div>
+
+              {/* Catalog Filters & Search */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="w-full max-w-5xl mx-auto space-y-6"
+              >
+                <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+                  {[
+                    { id: 'all', label: 'Tất Cả', icon: <Grid className="w-4 h-4" /> },
+                    { id: 'exterior', label: 'Ngoại Thất', icon: <Sun className="w-4 h-4" /> },
+                    { id: 'interior', label: 'Nội Thất', icon: <Home className="w-4 h-4" /> },
+                    { id: 'protection', label: 'Bảo Vệ', icon: <Shield className="w-4 h-4" /> },
+                    { id: 'tuning', label: 'Nâng Cấp', icon: <Zap className="w-4 h-4" /> },
+                  ].map(cat => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setServiceCategory(cat.id)}
+                      className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all ${
+                        serviceCategory === cat.id 
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' 
+                        : 'bg-slate-900 text-slate-400 hover:bg-slate-800 border border-white/5'
+                      }`}
+                    >
+                      {cat.icon}
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+                
+                <div className="relative max-w-md mx-auto">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                  <input 
+                    type="text" 
+                    placeholder="Tìm kiếm dịch vụ..." 
+                    value={serviceSearch}
+                    onChange={e => setServiceSearch(e.target.value)}
+                    className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                  />
+                </div>
+              </motion.div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
-              {services.map((s, idx) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12">
+              {services
+                .filter(s => {
+                  const matchesCategory = serviceCategory === 'all' || s.category === serviceCategory;
+                  const matchesSearch = s.title.toLowerCase().includes(serviceSearch.toLowerCase()) || 
+                                      s.description.toLowerCase().includes(serviceSearch.toLowerCase());
+                  return matchesCategory && matchesSearch;
+                })
+                .map((s, idx) => (
                 <motion.div 
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                   key={s.id} 
-                  className="group relative bg-slate-900/40 border border-white/5 rounded-[48px] overflow-hidden hover:border-blue-500/30 transition-all duration-500 flex flex-col"
+                  className="group relative bg-slate-900/40 border border-white/5 rounded-[32px] sm:rounded-[48px] overflow-hidden hover:border-blue-500/30 transition-all duration-500 flex flex-col"
                 >
-                  <div className="relative h-64 sm:h-80 overflow-hidden">
+                  <div className="relative h-56 sm:h-80 overflow-hidden">
                     <EditableImage 
                       src={s.image} 
                       isEditMode={isEditMode} 
@@ -3595,44 +4596,125 @@ const HomePage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="p-10 flex-1 flex flex-col">
+                  <div className="p-6 sm:p-10 flex-1 flex flex-col">
                     <EditableText 
                       tag="h3" 
                       text={s.title} 
                       isEditMode={isEditMode} 
                       onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, title: v} : ser))}
-                      className="text-2xl sm:text-3xl font-black text-white mb-4 uppercase tracking-tight group-hover:text-blue-500 transition-colors"
+                      className="text-xl sm:text-3xl font-black text-white mb-3 sm:mb-4 uppercase tracking-tight group-hover:text-blue-500 transition-colors"
                     />
                     <EditableText 
                       text={s.description} 
                       isEditMode={isEditMode} 
                       onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, description: v} : ser))}
                       multiline
-                      className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6 flex-1 opacity-80 group-hover:opacity-100 transition-opacity"
+                      className="text-slate-400 text-xs sm:text-base leading-relaxed mb-6 flex-1 opacity-80 group-hover:opacity-100 transition-opacity"
                     />
 
                     {s.subServices && s.subServices.length > 0 && (
-                      <div className="mb-8 space-y-3">
+                      <div className="mb-6 sm:mb-8 space-y-2 sm:space-y-3">
                         {s.subServices.map((sub, sIdx) => (
-                          <div key={sIdx} className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                          <div key={sIdx} className="flex justify-between items-center p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
                             <div className="flex flex-col">
-                              <span className="text-xs font-bold text-white">{sub.title}</span>
-                              {sub.note && <span className="text-[10px] text-slate-500">{sub.note}</span>}
+                              <span className="text-[10px] sm:text-xs font-bold text-white">{sub.title}</span>
+                              {sub.note && <span className="text-[8px] sm:text-[10px] text-slate-500">{sub.note}</span>}
                             </div>
-                            <span className="text-[10px] font-black text-blue-400">{sub.price}</span>
+                            <span className="text-[9px] sm:text-[10px] font-black text-blue-400">{sub.price}</span>
                           </div>
                         ))}
                       </div>
                     )}
 
                     <button 
-                      onClick={() => window.location.href = `tel:${siteConfig.contactPhone}`} 
-                      className="w-full group/btn relative bg-slate-800 hover:bg-blue-600 text-white font-black uppercase py-5 rounded-2xl transition-all text-xs tracking-[0.2em] shadow-xl active:scale-95 flex items-center justify-center gap-3"
+                      onClick={() => setSelectedServiceForModal(s)} 
+                      className="w-full group/btn relative bg-slate-800 hover:bg-blue-600 text-white font-black uppercase py-4 sm:py-5 rounded-2xl transition-all text-[10px] sm:text-xs tracking-[0.2em] shadow-xl active:scale-95 flex items-center justify-center gap-3"
                     >
-                      <span>Liên Hệ Tư Vấn</span>
+                      <span>Xem Chi Tiết & Báo Giá</span>
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Packages Section */}
+        <section id="packages" className="py-24 sm:py-32 bg-slate-950 relative overflow-hidden">
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col items-center text-center mb-16 sm:mb-24">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-600/10 border border-emerald-500/20 mb-6"
+              >
+                <Package className="w-4 h-4 text-emerald-500" />
+                <span className="text-emerald-500 font-black uppercase tracking-widest text-[10px]">Gói Chăm Sóc Toàn Diện</span>
+              </motion.div>
+              <h2 className="text-4xl sm:text-7xl font-black text-white uppercase mb-6 tracking-tighter leading-none">
+                Bảng Giá Gói Dịch Vụ
+              </h2>
+              <p className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-lg font-medium">
+                Tiết kiệm hơn với các gói chăm sóc xe chuyên sâu được thiết kế riêng cho từng nhu cầu.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {(siteConfig.packages || []).map((pkg, idx) => (
+                <motion.div
+                  key={pkg.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`relative p-8 rounded-[40px] border transition-all duration-500 flex flex-col ${
+                    pkg.isPopular 
+                    ? 'bg-blue-600/10 border-blue-500/50 shadow-2xl shadow-blue-900/20 scale-105 z-10' 
+                    : 'bg-slate-900/40 border-white/5 hover:border-white/20'
+                  }`}
+                >
+                  {pkg.isPopular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl">
+                      Phổ Biến Nhất
+                    </div>
+                  )}
+                  
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-black text-white uppercase mb-2 tracking-tight">{pkg.title}</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed h-12 overflow-hidden">{pkg.description}</p>
+                  </div>
+
+                  <div className="mb-8">
+                    <div className="text-4xl font-black text-white mb-1">{pkg.price}</div>
+                    <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+                      <Clock className="w-3 h-3" />
+                      Thời gian thực hiện: {pkg.duration}
+                    </div>
+                  </div>
+
+                  <div className="flex-1 space-y-4 mb-10">
+                    {pkg.features.map((feature, fIdx) => (
+                      <div key={fIdx} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-emerald-500" />
+                        </div>
+                        <span className="text-slate-300 text-sm font-medium">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button 
+                    onClick={() => setIsBookingModalOpen(true)}
+                    className={`w-full py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] transition-all active:scale-95 ${
+                      pkg.isPopular
+                      ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-900/40'
+                      : 'bg-white text-slate-950 hover:bg-slate-200'
+                    }`}
+                  >
+                    Đặt Lịch Ngay
+                  </button>
                 </motion.div>
               ))}
             </div>
@@ -3669,7 +4751,7 @@ const HomePage: React.FC = () => {
               />
             </div>
 
-            <div className="space-y-32 sm:space-y-48">
+            <div className="space-y-20 sm:space-y-48">
               {premiumSolutions.map((sol, idx) => (
                 <motion.div 
                   key={sol.id}
@@ -3677,10 +4759,10 @@ const HomePage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                  className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 sm:gap-24 items-center`}
+                  className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 sm:gap-24 items-center`}
                 >
                   <div className="w-full lg:w-1/2">
-                    <div className="relative aspect-[4/3] rounded-[48px] sm:rounded-[64px] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.5)] border border-white/10 group">
+                    <div className="relative aspect-[4/3] rounded-[32px] sm:rounded-[64px] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.5)] border border-white/10 group">
                       <div className="absolute inset-0 flex">
                         <div className="w-1/2 h-full relative overflow-hidden">
                           <EditableImage 
@@ -3691,7 +4773,7 @@ const HomePage: React.FC = () => {
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                           />
                           <div className="absolute inset-0 bg-black/20"></div>
-                          <div className="absolute top-8 left-8 bg-slate-950/80 backdrop-blur-md text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest border border-white/10">Trước</div>
+                          <div className="absolute top-4 sm:top-8 left-4 sm:left-8 bg-slate-950/80 backdrop-blur-md text-white text-[8px] sm:text-[10px] font-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-full uppercase tracking-widest border border-white/10">Trước</div>
                         </div>
                         <div className="w-1/2 h-full relative overflow-hidden">
                           <EditableImage 
@@ -3701,22 +4783,22 @@ const HomePage: React.FC = () => {
                             alt="After"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                           />
-                          <div className="absolute top-8 right-8 bg-blue-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl">Sau</div>
+                          <div className="absolute top-4 sm:top-8 right-4 sm:right-8 bg-blue-600 text-white text-[8px] sm:text-[10px] font-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-full uppercase tracking-widest shadow-xl">Sau</div>
                         </div>
                       </div>
                       <div className="absolute inset-0 pointer-events-none border-x border-white/20 left-1/2 -translate-x-1/2 shadow-[0_0_40px_rgba(0,0,0,0.5)]"></div>
                       
                       {/* Label overlay */}
-                      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-slate-950/80 backdrop-blur-md px-8 py-3 rounded-2xl border border-white/10 text-white font-black text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 bg-slate-950/80 backdrop-blur-md px-6 sm:px-8 py-2 sm:py-3 rounded-2xl border border-white/10 text-white font-black text-[8px] sm:text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         Sự Khác Biệt Tuyệt Đối
                       </div>
                     </div>
                   </div>
 
-                  <div className="w-full lg:w-1/2 space-y-10 sm:space-y-12">
-                    <div className="space-y-6">
+                  <div className="w-full lg:w-1/2 space-y-8 sm:space-y-12">
+                    <div className="space-y-4 sm:space-y-6">
                       <div className="flex items-center gap-4">
-                        <span className="text-blue-600 font-black text-4xl sm:text-5xl opacity-20">0{idx + 1}</span>
+                        <span className="text-blue-600 font-black text-3xl sm:text-5xl opacity-20">0{idx + 1}</span>
                         <div className="h-px flex-1 bg-gradient-to-r from-blue-600/50 to-transparent"></div>
                       </div>
                       <EditableText 
@@ -3724,17 +4806,17 @@ const HomePage: React.FC = () => {
                         text={sol.title} 
                         isEditMode={isEditMode} 
                         onSave={v => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, title: v} : p))}
-                        className="text-3xl sm:text-5xl font-black uppercase text-white tracking-tighter leading-none"
+                        className="text-2xl sm:text-5xl font-black uppercase text-white tracking-tighter leading-none"
                       />
                       <EditableText 
                         text={sol.description} 
                         isEditMode={isEditMode} 
                         onSave={v => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, description: v} : p))}
-                        className="text-slate-400 text-base sm:text-xl leading-relaxed font-medium"
+                        className="text-slate-400 text-sm sm:text-xl leading-relaxed font-medium"
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-16">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-16">
                       <div className="space-y-6">
                         <h4 className="text-blue-500 font-black text-[11px] uppercase tracking-[0.3em] flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-blue-500"></div>
@@ -3876,6 +4958,15 @@ const HomePage: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex gap-2">
+                      <select 
+                        value={aiProvider}
+                        onChange={(e) => setAiProvider(e.target.value as AIProvider)}
+                        className="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 outline-none focus:border-blue-500 transition-all cursor-pointer"
+                      >
+                        <option value="gemini" className="bg-slate-900">Gemini (Default)</option>
+                        <option value="openai" className="bg-slate-900">OpenAI (GPT-4o)</option>
+                        <option value="claude" className="bg-slate-900">Claude (3.5 Sonnet)</option>
+                      </select>
                       <button className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-white/10 transition-all"><Phone className="w-4 h-4" /></button>
                       <button className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-white/10 transition-all"><MoreVertical className="w-4 h-4" /></button>
                     </div>
@@ -4307,6 +5398,16 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
+        {/* Tracking Section */}
+        <TrackingSection trackingData={trackingData} />
+
+        {/* Feedback & Reviews Section */}
+        <FeedbackSection 
+          reviews={reviews} 
+          services={services} 
+          onAddReview={(newReview) => setReviews(prev => [{ ...newReview, id: Date.now().toString() } as Review, ...prev])} 
+        />
+
         {/* Gallery Section */}
         <section id="gallery" className="py-24 sm:py-32 bg-slate-950 relative overflow-hidden">
           <div className="container mx-auto px-4 text-center relative z-10">
@@ -4442,6 +5543,7 @@ const HomePage: React.FC = () => {
               <ul className="space-y-3">
                 <li><button onClick={() => scrollToSection('promotions')} className="text-slate-400 hover:text-white text-sm transition-colors">Khuyến Mãi Hot</button></li>
                 <li><button onClick={() => scrollToSection('services')} className="text-slate-400 hover:text-white text-sm transition-colors">Dịch Vụ Detailing</button></li>
+                <li><button onClick={() => scrollToSection('packages')} className="text-slate-400 hover:text-white text-sm transition-colors">Bảng Giá Gói</button></li>
                 <li><button onClick={() => scrollToSection('premium')} className="text-slate-400 hover:text-white text-sm transition-colors">Giải Pháp Cao Cấp</button></li>
                 <li><button onClick={() => scrollToSection('gallery')} className="text-slate-400 hover:text-white text-sm transition-colors">Thư Viện Ảnh</button></li>
                 <li><button onClick={() => scrollToSection('reviews')} className="text-slate-400 hover:text-white text-sm transition-colors">Đánh Giá Khách Hàng</button></li>
@@ -4577,10 +5679,27 @@ const HomePage: React.FC = () => {
       />
       <BookingModal 
         isOpen={isBookingModalOpen} 
-        onClose={() => setIsBookingModalOpen(false)} 
+        onClose={() => { setIsBookingModalOpen(false); setPreSelectedSubService(undefined); }} 
         services={services}
-        vehicles={vehicles}
         siteConfig={siteConfig}
+        setSiteConfig={setSiteConfig}
+        handlePayment={handlePayment}
+        preSelectedSubService={preSelectedSubService}
+      />
+      <ShareModal 
+        isOpen={isShareModalOpen} 
+        onClose={() => setIsShareModalOpen(false)} 
+        url={window.location.href}
+        title={siteConfig.heroTitle}
+      />
+      <ServiceDetailsModal
+        isOpen={!!selectedServiceForModal}
+        onClose={() => setSelectedServiceForModal(null)}
+        service={selectedServiceForModal}
+        onBooking={(serviceId, subServiceTitle) => {
+          setPreSelectedSubService(subServiceTitle);
+          setIsBookingModalOpen(true);
+        }}
       />
       <AdminDashboardModal 
         isOpen={isDashboardOpen} 
@@ -4603,6 +5722,10 @@ const HomePage: React.FC = () => {
         setIsSelectingAiVideo={setIsSelectingAiVideo}
         aiVideoHistory={aiVideoHistory}
         setAiVideoHistory={setAiVideoHistory}
+        trackingData={trackingData}
+        setTrackingData={setTrackingData}
+        reviews={reviews}
+        setReviews={setReviews}
       />
 
       {/* Video Picker Modal */}
