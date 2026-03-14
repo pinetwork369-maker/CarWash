@@ -108,15 +108,33 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center mb-8">
-        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Quản Lý Tiến Độ Xe</h3>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+        <div>
+          <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Quản Lý Tiến Độ Xe</h3>
+          <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">Theo dõi và cập nhật quy trình chăm sóc khách hàng</p>
+        </div>
         <button
           onClick={() => setIsAdding(true)}
-          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-black text-xs uppercase rounded-2xl hover:bg-blue-500 transition-all shadow-lg shadow-blue-600/20"
+          className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white font-black text-xs uppercase rounded-[20px] hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/20 group"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
           Thêm Xe Mới
         </button>
+      </div>
+
+      {/* Dashboard Overview */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {[
+          { label: 'Đang xử lý', count: trackingData.filter(v => v.status === 'working').length, color: 'text-blue-500', bg: 'bg-blue-500/10' },
+          { label: 'Sẵn sàng', count: trackingData.filter(v => v.status === 'ready').length, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+          { label: 'Đang chờ', count: trackingData.filter(v => v.status === 'waiting').length, color: 'text-amber-500', bg: 'bg-amber-500/10' },
+          { label: 'Tổng số xe', count: trackingData.length, color: 'text-white', bg: 'bg-white/5' },
+        ].map((stat, idx) => (
+          <div key={idx} className={`p-6 rounded-3xl border border-white/5 ${stat.bg}`}>
+            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">{stat.label}</p>
+            <p className={`text-3xl font-black ${stat.color}`}>{stat.count}</p>
+          </div>
+        ))}
       </div>
 
       {/* Add Form */}
@@ -238,31 +256,56 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
               onClick={() => setExpandedId(expandedId === vehicle.id ? null : vehicle.id)}
             >
               <div className="flex items-center gap-6">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                  <Car className="w-6 h-6 text-blue-500" />
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+                  <Car className="w-7 h-7 text-blue-500" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-black text-white">{vehicle.licensePlate}</h4>
-                  <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">{vehicle.carModel} - {vehicle.customerName}</p>
+                  <h4 className="text-2xl font-black text-white tracking-tight">{vehicle.licensePlate}</h4>
+                  <div className="flex items-center gap-3 mt-1">
+                    <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{vehicle.carModel}</p>
+                    <span className="w-1 h-1 bg-slate-800 rounded-full" />
+                    <p className="text-[10px] text-blue-500 font-black uppercase tracking-widest">{vehicle.customerName}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-1 max-w-xs mx-8 hidden lg:block">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Tiến độ</span>
+                  <span className="text-[9px] font-black text-white uppercase tracking-widest">
+                    {Math.round(((vehicle.steps.filter(s => s.status === 'completed').length) / vehicle.steps.length) * 100)}%
+                  </span>
+                </div>
+                <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                  <div 
+                    className="bg-gradient-to-r from-blue-500 to-emerald-500 h-full transition-all duration-500"
+                    style={{ width: `${((vehicle.steps.filter(s => s.status === 'completed').length) / vehicle.steps.length) * 100}%` }}
+                  />
                 </div>
               </div>
 
               <div className="flex items-center gap-8">
                 <div className="text-right">
                   <p className="text-[10px] font-black text-slate-500 uppercase mb-1">Trạng thái</p>
-                  <span className={`text-xs font-black uppercase ${
-                    vehicle.status === 'ready' ? 'text-emerald-500' :
-                    vehicle.status === 'working' ? 'text-blue-500' : 'text-slate-500'
-                  }`}>{vehicle.status}</span>
+                  <div className={`inline-flex items-center px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
+                    vehicle.status === 'ready' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                    vehicle.status === 'working' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' : 
+                    'bg-slate-500/10 text-slate-500 border-slate-500/20'
+                  }`}>
+                    {vehicle.status === 'ready' ? 'Sẵn sàng' :
+                     vehicle.status === 'working' ? 'Đang làm' : 'Đang chờ'}
+                  </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <button 
                     onClick={(e) => { e.stopPropagation(); handleDelete(vehicle.id); }}
-                    className="p-2 text-slate-500 hover:text-red-500 transition-colors"
+                    className="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
-                  {expandedId === vehicle.id ? <ChevronDown className="w-5 h-5 text-slate-500" /> : <ChevronRight className="w-5 h-5 text-slate-500" />}
+                  <div className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center transition-transform duration-300 ${expandedId === vehicle.id ? 'rotate-180' : ''}`}>
+                    <ChevronDown className="w-5 h-5 text-slate-500" />
+                  </div>
                 </div>
               </div>
             </div>

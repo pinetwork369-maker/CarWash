@@ -1,5 +1,16 @@
 
 import React, { useState, useRef, useEffect } from 'react';
+import { 
+  BarChart as ReBarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer,
+  AreaChart,
+  Area
+} from 'recharts';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt } from 'lucide-react';
@@ -334,7 +345,7 @@ const BookingModal: React.FC<{
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl max-w-md w-full relative"
+            className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-[32px] sm:rounded-3xl shadow-2xl max-w-md w-full relative overflow-y-auto max-h-[90vh] sm:max-h-none"
           >
             <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✕</button>
             {!isSubmitted ? (
@@ -443,14 +454,14 @@ const ServiceDetailsModal: React.FC<{
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[250] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-2xl"
+        className="fixed inset-0 z-[250] flex items-center justify-center p-0 sm:p-4 bg-slate-950/95 backdrop-blur-2xl"
       >
         <div className="absolute inset-0" onClick={onClose} />
         <motion.div 
-          initial={{ scale: 0.9, opacity: 0, y: 50 }}
+          initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.9, opacity: 0, y: 50 }}
-          className="bg-slate-900 border border-white/10 rounded-[40px] shadow-[0_0_100px_rgba(0,0,0,0.5)] max-w-4xl w-full max-h-[90vh] overflow-hidden relative flex flex-col"
+          exit={{ scale: 0.95, opacity: 0, y: 20 }}
+          className="bg-slate-900 border-t sm:border border-white/10 rounded-t-[40px] sm:rounded-[48px] shadow-[0_0_100px_rgba(0,0,0,0.5)] max-w-6xl w-full h-full sm:h-[90vh] overflow-hidden relative flex flex-col"
         >
           {/* Close Button */}
           <button 
@@ -460,123 +471,155 @@ const ServiceDetailsModal: React.FC<{
             <X className="w-6 h-6" />
           </button>
           
-          {/* Header Image Section */}
-          <div className="w-full h-[300px] sm:h-[450px] relative flex-shrink-0">
-            <img 
-              src={service.image} 
-              alt={service.title} 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent"></div>
-            <div className="absolute bottom-8 left-8 right-8">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="bg-blue-600/20 backdrop-blur-xl border border-blue-500/30 p-4 rounded-3xl">
-                  <span className="text-4xl sm:text-5xl">{service.icon}</span>
+          <div className="flex-1 overflow-y-auto custom-scrollbar">
+            <div className="flex flex-col lg:flex-row min-h-full">
+              {/* Left Column: Content */}
+              <div className="flex-1">
+                {/* Hero Image */}
+                <div className="w-full h-[350px] sm:h-[550px] relative">
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                  <div className="absolute bottom-12 left-8 sm:left-16 right-8 sm:right-16">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="bg-blue-600/20 backdrop-blur-2xl border border-blue-500/30 p-5 rounded-[32px]">
+                          <span className="text-5xl sm:text-6xl">{service.icon}</span>
+                        </div>
+                        <div>
+                          <span className="text-blue-500 font-black uppercase tracking-[0.4em] text-[11px] mb-2 block">Premium Detailing</span>
+                          <h3 className="text-4xl sm:text-8xl font-black text-white uppercase tracking-tighter leading-[0.85]">{service.title}</h3>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-blue-500 font-black uppercase tracking-[0.3em] text-[10px] mb-1 block">Dịch vụ chi tiết</span>
-                  <h3 className="text-3xl sm:text-6xl font-black text-white uppercase tracking-tighter leading-none">{service.title}</h3>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Content Section */}
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-8 sm:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              <div className="lg:col-span-2 space-y-10">
-                {/* Description */}
-                <section>
-                  <h4 className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <Info className="w-3 h-3" /> Giới thiệu dịch vụ
-                  </h4>
-                  <p className="text-slate-300 leading-relaxed text-base sm:text-lg font-medium">
-                    {service.description}
-                  </p>
-                </section>
-
-                {/* Sub Services */}
-                {service.subServices && service.subServices.length > 0 && (
-                  <section>
-                    <h4 className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-6 flex items-center gap-2">
-                      <Zap className="w-3 h-3" /> Các gói nâng cấp & Báo giá
+                <div className="p-8 sm:p-16 space-y-16">
+                  {/* Description Section */}
+                  <section className="max-w-3xl">
+                    <h4 className="text-[11px] font-black text-blue-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+                      <div className="w-8 h-[1px] bg-blue-500/30"></div>
+                      Giới thiệu dịch vụ
                     </h4>
-                    <div className="grid grid-cols-1 gap-4">
-                      {service.subServices.map((sub, idx) => (
-                        <motion.div 
-                          key={idx}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.1 }}
-                          className="p-6 rounded-[32px] bg-white/5 border border-white/5 flex justify-between items-center group hover:bg-blue-600/10 hover:border-blue-500/30 transition-all cursor-default"
-                        >
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-2xl bg-slate-950 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
-                              <CheckCircle2 className="w-6 h-6" />
-                            </div>
-                            <div>
-                              <p className="text-white font-black text-lg group-hover:text-blue-400 transition-colors">{sub.title}</p>
-                              {sub.note && <p className="text-xs text-slate-500 font-medium mt-1">{sub.note}</p>}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-6">
-                            <div className="text-right">
-                              <p className="text-blue-500 font-black text-xl tracking-tighter">{sub.price}</p>
-                              <p className="text-[8px] text-slate-600 uppercase font-black tracking-widest">Giá trọn gói</p>
+                    <p className="text-slate-300 leading-relaxed text-lg sm:text-2xl font-medium italic serif">
+                      "{service.description}"
+                    </p>
+                  </section>
+
+                  {/* Upgrade Packages Section */}
+                  {service.subServices && service.subServices.length > 0 && (
+                    <section>
+                      <h4 className="text-[11px] font-black text-blue-500 uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
+                        <div className="w-8 h-[1px] bg-blue-500/30"></div>
+                        Các gói nâng cấp & Báo giá
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {service.subServices.map((sub, idx) => (
+                          <motion.div 
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="p-8 rounded-[40px] bg-white/5 border border-white/5 flex flex-col justify-between group hover:bg-blue-600/10 hover:border-blue-500/30 transition-all"
+                          >
+                            <div className="mb-8">
+                              <div className="flex justify-between items-start mb-4">
+                                <div className="w-14 h-14 rounded-2xl bg-slate-950 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+                                  <Zap className="w-7 h-7" />
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-blue-500 font-black text-2xl tracking-tighter">{sub.price}</p>
+                                  <p className="text-[9px] text-slate-600 uppercase font-black tracking-widest">Trọn gói</p>
+                                </div>
+                              </div>
+                              <h5 className="text-white font-black text-xl mb-2 group-hover:text-blue-400 transition-colors uppercase tracking-tight">{sub.title}</h5>
+                              {sub.note && <p className="text-sm text-slate-400 font-medium leading-relaxed">{sub.note}</p>}
                             </div>
                             <button 
                               onClick={() => { onBooking(service.id, sub.title); onClose(); }}
-                              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all active:scale-95 shadow-lg shadow-blue-900/20"
+                              className="w-full py-4 bg-white/5 hover:bg-blue-600 text-white text-[11px] font-black uppercase tracking-widest rounded-2xl transition-all active:scale-95 border border-white/10 hover:border-transparent group-hover:shadow-xl group-hover:shadow-blue-600/20"
                             >
-                              Chọn gói
+                              Chọn gói này
                             </button>
-                          </div>
-                        </motion.div>
-                      ))}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Features / Benefits */}
+                  <section className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div className="p-8 rounded-[40px] bg-slate-800/30 border border-white/5">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 flex items-center justify-center text-emerald-500 mb-6">
+                        <ShieldCheck className="w-6 h-6" />
+                      </div>
+                      <h5 className="text-white font-black uppercase tracking-tight mb-2">Cam kết chất lượng</h5>
+                      <p className="text-slate-400 text-sm leading-relaxed">Sử dụng 100% hóa chất nhập khẩu chính hãng, an toàn cho bề mặt xe và sức khỏe người dùng.</p>
+                    </div>
+                    <div className="p-8 rounded-[40px] bg-slate-800/30 border border-white/5">
+                      <div className="w-12 h-12 rounded-2xl bg-amber-600/20 flex items-center justify-center text-amber-500 mb-6">
+                        <Clock className="w-6 h-6" />
+                      </div>
+                      <h5 className="text-white font-black uppercase tracking-tight mb-2">Bảo hành dài hạn</h5>
+                      <p className="text-slate-400 text-sm leading-relaxed">Chế độ bảo hành điện tử minh bạch, hỗ trợ bảo trì định kỳ miễn phí cho các gói cao cấp.</p>
                     </div>
                   </section>
-                )}
+                </div>
               </div>
 
-              {/* Sidebar / Action Area */}
-              <div className="lg:col-span-1">
-                <div className="sticky top-0 space-y-6">
-                  <div className="bg-slate-800/50 border border-white/10 p-8 rounded-[40px] backdrop-blur-xl">
-                    <div className="text-center mb-8">
-                      <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">Giá khởi điểm từ</p>
-                      <p className="text-4xl font-black text-white tracking-tighter">{service.price}</p>
+              {/* Right Column: Sidebar */}
+              <div className="w-full lg:w-[400px] border-t lg:border-t-0 lg:border-l border-white/5 bg-slate-900/50 backdrop-blur-3xl p-8 sm:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-between">
+                <div className="space-y-12">
+                  <div className="text-center lg:text-left">
+                    <span className="text-blue-500 font-black uppercase tracking-[0.2em] text-[10px] mb-4 block">Báo giá cơ bản</span>
+                    <div className="flex items-baseline justify-center lg:justify-start gap-2">
+                      <span className="text-5xl sm:text-6xl font-black text-white tracking-tighter">{service.price.split(' ')[0]}</span>
+                      <span className="text-lg sm:text-xl font-black text-slate-500 uppercase">{service.price.split(' ')[1]}</span>
                     </div>
-                    
-                    <div className="space-y-4">
-                      <button 
-                        onClick={() => { onBooking(service.id); onClose(); }}
-                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-6 rounded-3xl uppercase tracking-widest transition-all shadow-[0_20px_40px_rgba(37,99,235,0.3)] active:scale-95 flex flex-col items-center justify-center gap-1 group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" /> 
-                          <span>Đặt Lịch Ngay</span>
+                    <p className="text-slate-500 text-[10px] sm:text-xs font-medium mt-4">Giá có thể thay đổi tùy theo kích thước và tình trạng thực tế của xe.</p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                      Quy trình thực hiện
+                    </h5>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                      {['Kiểm tra tình trạng xe', 'Tư vấn giải pháp tối ưu', 'Vệ sinh chuyên sâu', 'Thi công kỹ thuật cao', 'Kiểm tra chất lượng (QC)'].map((step, i) => (
+                        <div key={i} className="flex items-center gap-4 group">
+                          <div className="w-8 h-8 rounded-lg bg-slate-800 border border-white/5 flex items-center justify-center text-[10px] font-black text-slate-500 group-hover:border-blue-500/50 group-hover:text-blue-500 transition-all shrink-0">
+                            0{i + 1}
+                          </div>
+                          <span className="text-slate-300 text-sm font-bold group-hover:text-white transition-colors">{step}</span>
                         </div>
-                        <span className="text-[8px] opacity-70 font-medium">Tư vấn miễn phí 24/7</span>
-                      </button>
-
-                      <p className="text-[10px] text-slate-500 text-center leading-relaxed">
-                        * Giá có thể thay đổi tùy theo tình trạng xe và yêu cầu cụ thể của quý khách.
-                      </p>
+                      ))}
                     </div>
                   </div>
+                </div>
 
-                  {/* Trust Badges */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/5 border border-white/5 p-4 rounded-2xl text-center">
-                      <Shield className="w-5 h-5 text-emerald-500 mx-auto mb-2" />
-                      <p className="text-[8px] font-black text-white uppercase tracking-widest">Bảo hành</p>
-                    </div>
-                    <div className="bg-white/5 border border-white/5 p-4 rounded-2xl text-center">
-                      <Award className="w-5 h-5 text-amber-500 mx-auto mb-2" />
-                      <p className="text-[8px] font-black text-white uppercase tracking-widest">Chuyên nghiệp</p>
-                    </div>
-                  </div>
+                <div className="mt-12 space-y-4 sticky bottom-0 bg-slate-900/80 backdrop-blur-xl p-4 -mx-8 sm:-mx-12 lg:mx-0 lg:p-0 lg:bg-transparent lg:backdrop-blur-none lg:static">
+                  <button 
+                    onClick={() => { onBooking(service.id); onClose(); }}
+                    className="w-full py-5 sm:py-6 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-[0.2em] rounded-[20px] sm:rounded-[24px] transition-all active:scale-95 shadow-2xl shadow-blue-600/30 flex items-center justify-center gap-3"
+                  >
+                    <Calendar className="w-5 h-5" /> Đặt lịch ngay
+                  </button>
+                  <button 
+                    onClick={onClose}
+                    className="w-full py-5 sm:py-6 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs font-black uppercase tracking-[0.2em] rounded-[20px] sm:rounded-[24px] transition-all"
+                  >
+                    Quay lại
+                  </button>
                 </div>
               </div>
             </div>
@@ -976,11 +1019,12 @@ const AdminDashboardModal: React.FC<{
   setIsSelectingAiVideo: React.Dispatch<React.SetStateAction<boolean>>;
   aiVideoHistory: AiVideoRecord[];
   setAiVideoHistory: React.Dispatch<React.SetStateAction<AiVideoRecord[]>>;
+  setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   trackingData: VehicleTracking[];
   setTrackingData: React.Dispatch<React.SetStateAction<VehicleTracking[]>>;
   reviews: Review[];
   setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
-}> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory, trackingData, setTrackingData, reviews, setReviews }) => {
+}> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory, setIsEditMode, trackingData, setTrackingData, reviews, setReviews }) => {
   const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback'>(initialTab);
   
   // Sorting and Filtering States
@@ -1579,10 +1623,10 @@ const AdminDashboardModal: React.FC<{
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             className="relative w-full h-full max-w-7xl bg-slate-950 border border-white/10 md:rounded-[40px] shadow-[0_0_100px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row"
           >
-            {/* Sidebar */}
-            <div className="w-full md:w-64 lg:w-72 bg-slate-900/50 border-r border-white/5 flex flex-col shrink-0">
-              <div className="p-8 border-b border-white/5">
-                <div className="flex items-center gap-3 mb-2">
+            {/* Sidebar (Desktop) / Top Nav (Mobile) */}
+            <div className="w-full md:w-64 lg:w-72 bg-slate-900/50 border-b md:border-b-0 md:border-r border-white/5 flex flex-col shrink-0">
+              <div className="p-6 md:p-8 border-b border-white/5 flex items-center justify-between md:block">
+                <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/20">
                     <Settings2 className="w-6 h-6 text-white" />
                   </div>
@@ -1591,14 +1635,26 @@ const AdminDashboardModal: React.FC<{
                     <p className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-1">Control Panel</p>
                   </div>
                 </div>
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => { setIsEditMode(false); onClose(); }}
+                    className="md:hidden w-10 h-10 rounded-xl bg-red-950/20 flex items-center justify-center text-red-500"
+                    title="Thoát Quản Trị"
+                  >
+                    <LogOut className="w-5 h-5" />
+                  </button>
+                  <button onClick={onClose} className="md:hidden w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar">
+              <div className="flex-1 overflow-x-auto md:overflow-y-auto p-2 md:p-4 flex md:flex-col gap-1 md:space-y-1 custom-scrollbar scrollbar-hide bg-slate-950 md:bg-transparent border-b md:border-b-0 border-white/5">
                 {tabs.map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as any)}
-                    className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all group ${
+                    className={`whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-xs font-black uppercase tracking-widest transition-all group shrink-0 ${
                       activeTab === tab.id 
                         ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
                         : 'text-slate-500 hover:text-white hover:bg-white/5'
@@ -1607,12 +1663,12 @@ const AdminDashboardModal: React.FC<{
                     <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-blue-500'} transition-colors`}>
                       {tab.icon}
                     </span>
-                    {tab.label}
+                    <span className="md:inline">{tab.label}</span>
                   </button>
                 ))}
               </div>
 
-              <div className="p-6 border-t border-white/5">
+              <div className="hidden md:block p-6 border-t border-white/5">
                 <button 
                   onClick={onClose}
                   className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-2xl bg-red-950/20 text-red-500 hover:bg-red-600 hover:text-white text-[10px] font-black uppercase tracking-widest transition-all"
@@ -2513,49 +2569,111 @@ const AdminDashboardModal: React.FC<{
                       </button>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
-                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                          <Users className="w-16 h-16 text-blue-500" />
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
+                      <div className="bg-slate-900/50 border border-white/5 p-4 sm:p-8 rounded-[24px] sm:rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-2 sm:p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <Users className="w-8 h-8 sm:w-16 sm:h-16 text-blue-500" />
                         </div>
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Tổng Khách Hàng</p>
-                        <p className="text-4xl font-black text-white">{customerRecords.length}</p>
+                        <p className="text-[8px] sm:text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1 sm:mb-2">Tổng Khách</p>
+                        <p className="text-xl sm:text-4xl font-black text-white">{customerRecords.length}</p>
                       </div>
-                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                          <Coins className="w-16 h-16 text-emerald-500" />
+                      <div className="bg-slate-900/50 border border-white/5 p-4 sm:p-8 rounded-[24px] sm:rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-2 sm:p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <Coins className="w-8 h-8 sm:w-16 sm:h-16 text-emerald-500" />
                         </div>
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Tổng Doanh Thu</p>
-                        <p className="text-4xl font-black text-emerald-500">
+                        <p className="text-[8px] sm:text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1 sm:mb-2">Doanh Thu</p>
+                        <p className="text-xl sm:text-4xl font-black text-emerald-500">
                           {customerRecords.reduce((acc, r) => {
                             const price = parseInt(r.totalPrice.replace(/[^0-9]/g, '')) || 0;
                             return acc + price;
                           }, 0).toLocaleString('vi-VN')}
-                          <span className="text-sm ml-1">VNĐ</span>
                         </p>
                       </div>
-                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                          <CreditCard className="w-16 h-16 text-red-500" />
+                      <div className="bg-slate-900/50 border border-white/5 p-4 sm:p-8 rounded-[24px] sm:rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-2 sm:p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <CreditCard className="w-8 h-8 sm:w-16 sm:h-16 text-red-500" />
                         </div>
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Công Nợ (Chưa thanh toán)</p>
-                        <p className="text-4xl font-black text-red-500">
+                        <p className="text-[8px] sm:text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1 sm:mb-2">Công Nợ</p>
+                        <p className="text-xl sm:text-4xl font-black text-red-500">
                           {customerRecords.filter(r => r.paymentStatus === 'pending').reduce((acc, r) => {
                             const price = parseInt(r.totalPrice.replace(/[^0-9]/g, '')) || 0;
                             return acc + price;
                           }, 0).toLocaleString('vi-VN')}
-                          <span className="text-sm ml-1">VNĐ</span>
                         </p>
                       </div>
-                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                          <Star className="w-16 h-16 text-amber-500" />
+                      <div className="bg-slate-900/50 border border-white/5 p-4 sm:p-8 rounded-[24px] sm:rounded-[40px] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-2 sm:p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <Star className="w-8 h-8 sm:w-16 sm:h-16 text-amber-500" />
                         </div>
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Đánh Giá TB</p>
-                        <p className="text-4xl font-black text-amber-500">
+                        <p className="text-[8px] sm:text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1 sm:mb-2">Đánh Giá</p>
+                        <p className="text-xl sm:text-4xl font-black text-amber-500">
                           {(customerRecords.reduce((acc, r) => acc + (r.rating || 5), 0) / (customerRecords.length || 1)).toFixed(1)}
-                          <span className="text-sm ml-1">⭐</span>
                         </p>
+                      </div>
+                    </div>
+
+                    {/* Revenue Chart */}
+                    <div className="bg-slate-900/50 border border-white/5 p-6 sm:p-10 rounded-[32px] sm:rounded-[48px]">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                        <div>
+                          <h4 className="text-lg font-black text-white uppercase tracking-tighter">Biểu Đồ Doanh Thu</h4>
+                          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Xu hướng doanh thu theo thời gian</p>
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 bg-slate-950 rounded-xl border border-white/5">
+                          <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Doanh thu (VNĐ)</span>
+                        </div>
+                      </div>
+                      <div className="h-[300px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart
+                            data={customerRecords.reduce((acc: any[], r) => {
+                              const date = r.date;
+                              const price = parseInt(r.totalPrice.replace(/[^0-9]/g, '')) || 0;
+                              const existing = acc.find(item => item.date === date);
+                              if (existing) {
+                                existing.revenue += price;
+                              } else {
+                                acc.push({ date, revenue: price });
+                              }
+                              return acc;
+                            }, []).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())}
+                            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                          >
+                            <defs>
+                              <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                              </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                            <XAxis 
+                              dataKey="date" 
+                              stroke="#64748b" 
+                              fontSize={10} 
+                              tickLine={false} 
+                              axisLine={false}
+                              tickFormatter={(str) => {
+                                const d = new Date(str);
+                                return `${d.getDate()}/${d.getMonth() + 1}`;
+                              }}
+                            />
+                            <YAxis 
+                              stroke="#64748b" 
+                              fontSize={10} 
+                              tickLine={false} 
+                              axisLine={false}
+                              tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`}
+                            />
+                            <Tooltip 
+                              contentStyle={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px' }}
+                              itemStyle={{ color: '#3b82f6', fontWeight: 'bold', fontSize: '12px' }}
+                              labelStyle={{ color: '#94a3b8', fontSize: '10px', marginBottom: '4px', fontWeight: 'bold' }}
+                              formatter={(value: number) => [value.toLocaleString('vi-VN') + ' VNĐ', 'Doanh thu']}
+                            />
+                            <Area type="monotone" dataKey="revenue" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" />
+                          </AreaChart>
+                        </ResponsiveContainer>
                       </div>
                     </div>
 
@@ -2579,7 +2697,7 @@ const AdminDashboardModal: React.FC<{
                       <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-slate-900 border border-blue-500/30 p-10 rounded-[40px] shadow-2xl"
+                        className="bg-slate-900 border border-blue-500/30 p-6 sm:p-10 rounded-[40px] shadow-2xl"
                       >
                         <div className="flex justify-between items-center mb-10">
                           <h4 className="text-2xl font-black text-white uppercase tracking-tighter">{editingCustomerId ? 'Sửa Thông Tin Khách' : 'Thêm Khách Hàng Mới'}</h4>
@@ -2588,7 +2706,7 @@ const AdminDashboardModal: React.FC<{
                           </button>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                           <div className="space-y-2">
                             <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tên Khách Hàng</label>
                             <input value={customerForm.customerName} onChange={e => setCustomerForm({...customerForm, customerName: e.target.value})} placeholder="VD: Nguyễn Văn A" className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" />
@@ -2826,7 +2944,7 @@ const AdminDashboardModal: React.FC<{
                             </div>
                           )}
                         </div>
-                        <div className="flex gap-4 pt-10">
+                        <div className="flex flex-col sm:flex-row gap-4 pt-10">
                           <button 
                             onClick={() => {
                               if (!customerForm.customerName || !customerForm.phone) {
@@ -2844,12 +2962,80 @@ const AdminDashboardModal: React.FC<{
                           >
                             {editingCustomerId ? 'Cập Nhật Thông Tin' : 'Lưu Bản Ghi Mới'}
                           </button>
-                          <button onClick={() => setIsAddingCustomer(false)} className="px-10 bg-slate-800 text-slate-400 rounded-2xl font-black uppercase tracking-widest hover:text-white transition-all">Hủy</button>
+                          <button onClick={() => setIsAddingCustomer(false)} className="px-10 py-5 bg-slate-800 text-slate-400 rounded-2xl font-black uppercase tracking-widest hover:text-white transition-all">Hủy</button>
                         </div>
                       </motion.div>
                     ) : (
-                      <div className="overflow-x-auto rounded-[40px] border border-white/5 shadow-2xl overflow-hidden bg-slate-900/20">
-                        <table className="w-full text-left min-w-[1000px]">
+                      <>
+                        {/* Mobile Card View */}
+                        <div className="grid grid-cols-1 gap-4 md:hidden">
+                          {getFilteredAndSorted(customerRecords, ['customerName', 'phone', 'licensePlate', 'carModel']).map(r => (
+                            <div key={r.id} className="bg-slate-900/40 border border-white/5 p-6 rounded-[32px] space-y-4">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">{r.date}</div>
+                                  <div className="font-black text-white text-lg">{r.customerName}</div>
+                                  <div className="text-xs text-blue-500 font-bold tracking-widest">{r.phone}</div>
+                                </div>
+                                <div className={`inline-flex items-center px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${
+                                  r.paymentStatus === 'paid' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                                  r.paymentStatus === 'pending' ? 'bg-red-500/10 text-red-500 border-red-500/20' :
+                                  'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                                }`}>
+                                  {r.paymentStatus === 'paid' ? 'Đã thanh toán' :
+                                   r.paymentStatus === 'pending' ? 'Chưa thanh toán' :
+                                   'Thanh toán một phần'}
+                                </div>
+                              </div>
+
+                              <div className="flex items-center justify-between py-4 border-y border-white/5">
+                                <div>
+                                  <div className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Phương tiện</div>
+                                  <div className="text-sm font-bold text-slate-300">{r.carModel}</div>
+                                  <div className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-lg border border-white/5 inline-block font-black text-slate-400 mt-1 uppercase tracking-tighter">{r.licensePlate}</div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Thành tiền</div>
+                                  <div className="font-black text-white text-lg">{r.totalPrice}</div>
+                                </div>
+                              </div>
+
+                              <div className="space-y-3">
+                                <div className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Dịch vụ đã làm</div>
+                                <div className="flex flex-wrap gap-2">
+                                  {r.servicesDone.map((s, idx) => (
+                                    <span key={idx} className="text-[9px] bg-blue-600/10 text-blue-400 border border-blue-500/10 px-3 py-1.5 rounded-full font-black uppercase tracking-tighter">
+                                      {s}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div className="flex gap-3 pt-2">
+                                <button 
+                                  onClick={() => {
+                                    setIsAddingCustomer(true);
+                                    setEditingCustomerId(r.id);
+                                    setCustomerForm(r);
+                                  }}
+                                  className="flex-1 py-4 rounded-2xl bg-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest"
+                                >
+                                  <Edit2 className="w-4 h-4" /> Sửa
+                                </button>
+                                <button 
+                                  onClick={() => confirm("Xóa bản ghi này?") && setCustomerRecords(prev => prev.filter(cr => cr.id !== r.id))}
+                                  className="w-12 h-14 rounded-2xl bg-slate-800 text-slate-400 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Desktop Table View */}
+                        <div className="hidden md:block overflow-x-auto rounded-[40px] border border-white/5 shadow-2xl overflow-hidden bg-slate-900/20">
+                          <table className="w-full text-left min-w-[1000px]">
                           <thead>
                             <tr className="bg-slate-900/50 border-b border-white/5 text-[10px] font-black text-slate-500 uppercase tracking-widest">
                               <th className="px-8 py-6">Thời gian</th>
@@ -2941,9 +3127,10 @@ const AdminDashboardModal: React.FC<{
                           </tbody>
                         </table>
                       </div>
-                    )}
-                  </div>
-                )}
+                    </>
+                  )}
+                </div>
+              )}
 
                 {activeTab === 'maintenance' && (
                   <div className="space-y-8">
@@ -3362,7 +3549,7 @@ const AdminDashboardModal: React.FC<{
                 </div>
               </div>
             )}
-            {activeTab === 'config' && (
+              {activeTab === 'config' && (
               <div className="space-y-8 max-w-5xl">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
                   <div>
@@ -4302,7 +4489,7 @@ const HomePage: React.FC = () => {
                   isEditMode={isEditMode} 
                   onSave={v => setSiteConfig({...siteConfig, heroTitle: v})}
                   multiline 
-                  className="text-5xl sm:text-7xl md:text-[140px] font-black text-white leading-[0.85] tracking-[-0.04em] uppercase"
+                  className="text-4xl sm:text-7xl md:text-[140px] font-black text-white leading-[0.85] tracking-[-0.04em] uppercase"
                 />
                 {/* Decorative text stroke for desktop */}
                 <div className="hidden lg:block absolute -top-4 -left-4 -z-10 opacity-10 select-none">
@@ -5722,6 +5909,7 @@ const HomePage: React.FC = () => {
         setIsSelectingAiVideo={setIsSelectingAiVideo}
         aiVideoHistory={aiVideoHistory}
         setAiVideoHistory={setAiVideoHistory}
+        setIsEditMode={setIsEditMode}
         trackingData={trackingData}
         setTrackingData={setTrackingData}
         reviews={reviews}
