@@ -1,41 +1,42 @@
 
-import { GalleryImage, SiteConfig, Review, CustomerRecord } from './types';
-import { NewsArticle } from './components/News';
+import { GalleryImage, SiteConfig, Review, CustomerRecord, NewsArticle } from './types';
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
-  siteName: "DŨNG CAR DETAILING",
-  heroTitle: "DŨNG CAR \n DETAILING CÔNG NGHỆ AI",
-  heroDescription: "Chăm sóc xế cưng bằng công nghệ tiên tiến nhất và sự tận tâm từ những chuyên gia hàng đầu tại Dũng Car Detailing.",
+  siteName: "XE ĐẸP AUTO",
+  heroTitle: "XE ĐẸP AUTO - Đẳng Cấp Detailing Chuyên Nghiệp",
+  heroDescription: "Chăm sóc xế cưng bằng công nghệ tiên tiến nhất và sự tận tâm từ những chuyên gia hàng đầu tại XE ĐẸP AUTO.",
   heroImage: "https://images.unsplash.com/photo-1603584173870-7f394833ec96?auto=format&fit=crop&q=80&w=2069",
   heroVideoUrl: "https://assets.mixkit.co/videos/preview/mixkit-man-washing-a-car-with-a-sponge-1587-large.mp4",
-  servicesTitle: "DỊCH VỤ DŨNG CAR DETAILING",
-  servicesSubtitle: "Chọn dịch vụ và liên hệ trực tiếp với chuyên gia Dũng Car Detailing để nhận báo giá tốt nhất.",
+  servicesTitle: "DỊCH VỤ XE ĐẸP AUTO",
+  servicesSubtitle: "Chọn dịch vụ và liên hệ trực tiếp với chuyên gia XE ĐẸP AUTO để nhận báo giá tốt nhất.",
   premiumTitle: "GIẢI PHÁP DETAILING CAO CẤP",
   premiumSubtitle: "Những giải pháp chăm sóc xe chuyên sâu, mang lại sự hoàn mỹ tuyệt đối cho xế cưng của bạn.",
-  aiTitle: "CỐ VẤN DŨNG CAR DETAILING AI",
-  aiSubtitle: "Tư vấn kỹ thuật 24/7. Hỏi bất cứ điều gì về bảo dưỡng xe, AI của Dũng Car Detailing sẽ trả lời ngay lập tức.",
+  aiTitle: "CỐ VẤN XE ĐẸP AUTO AI",
+  aiSubtitle: "Tư vấn kỹ thuật 24/7. Hỏi bất cứ điều gì về bảo dưỡng xe, AI của XE ĐẸP AUTO sẽ trả lời ngay lập tức.",
   aiVideoUrl: "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-human-head-with-glowing-circuits-42610-large.mp4",
   windowTintingTitle: "DÁN PHIM CÁCH NHIỆT",
   windowTintingSubtitle: "Chuyên Gia Cách Nhiệt",
   windowTintingDescription: "Bảo vệ sức khỏe gia đình và nội thất xế cưng với công nghệ phim Ceramic & Nano-Carbon cao cấp. Cản 99% tia UV, giảm nhiệt tức thì và tăng sự riêng tư tuyệt đối.",
   galleryTitle: "THƯ VIỆN HÌNH ÁNH",
-  gallerySubtitle: "Kết quả thực tế từ Carwash Detailing",
+  gallerySubtitle: "Kết quả thực tế từ XE ĐẸP AUTO",
   reviewsTitle: "ĐÁNH GIÁ TỪ KHÁCH HÀNG",
-  reviewsSubtitle: "Sự hài lòng của khách hàng là ưu tiên hàng đầu tại Carwash Detailing.",
+  reviewsSubtitle: "Sự hài lòng của khách hàng là ưu tiên hàng đầu tại XE ĐẸP AUTO.",
+  newsTitle: "TIN TỨC & MẸO CHĂM SÓC XE",
+  newsSubtitle: "Cập nhật những kiến thức bổ ích và chương trình mới nhất từ XE ĐẸP AUTO.",
   contactAddress: "168 Vũ Đức Thận, Long Biên, Hà Nội",
   contactPhone: "0588896699",
   contactEmail: "carwash68.vn@gmail.com",
   contactHours: "08:00 - 18:00 (T2-CN)",
   mapTitle: "VỊ TRÍ CỬA HÀNG",
-  mapSubtitle: "Ghé thăm Carwash Detailing để trải nghiệm dịch vụ chăm sóc xe đẳng cấp nhất.",
+  mapSubtitle: "Ghé thăm XE ĐẸP AUTO để trải nghiệm dịch vụ chăm sóc xe đẳng cấp nhất.",
   mapEmbedUrl: "https://www.google.com/maps?q=168%20V%C5%A9%20%C4%90%E1%BB%A9c%20Th%E1%BA%ADn%2C%20Long%20Bi%C3%AAn%2C%20H%C3%A0%20N%E1%BB%99i&hl=vi&t=&z=15&ie=UTF8&iwloc=&output=embed",
   wrapPPFTitle: "WRAP ĐỔI MÀU & DÁN PPF",
   wrapPPFSubtitle: "Bảo Vệ & Nâng Tầm Đẳng Cấp",
   wrapPPFDescription: "Thay đổi diện mạo xế cưng với hàng trăm màu sắc Wrap độc đáo hoặc bảo vệ lớp sơn nguyên bản tuyệt đối bằng phim PPF (Paint Protection Film) tự phục hồi vết xước. Giải pháp tối ưu để giữ gìn giá trị và vẻ đẹp bền vững.",
   tuningTitle: "ĐỘ XE CHUYÊN NGHIỆP",
   tuningSubtitle: "Nâng Tầm Hiệu Năng & Thẩm Mỹ",
-  tuningDescription: "Từ nâng cấp ánh sáng, âm thanh đến độ bodykit và mâm lốp. Carwash Detailing mang đến những giải pháp độ xe cá nhân hóa, giúp xế cưng của bạn trở nên khác biệt và mạnh mẽ hơn bao giờ hết.",
-  copyright: "Carwash Detailing © 2024",
+  tuningDescription: "Từ nâng cấp ánh sáng, âm thanh đến độ bodykit và mâm lốp. XE ĐẸP AUTO mang đến những giải pháp độ xe cá nhân hóa, giúp xế cưng của bạn trở nên khác biệt và mạnh mẽ hơn bao giờ hết.",
+  copyright: "XE ĐẸP AUTO © 2024",
   adminPassword: "025099010538",
   logoUrl: "",
   facebookUrl: "https://facebook.com",
@@ -46,7 +47,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
     {
       id: 'promo1',
       title: 'Giảm 20% Phủ Ceramic',
-      description: 'Chào hè rực rỡ, Carwash Detailing giảm ngay 20% cho tất cả các gói phủ Ceramic 9H cao cấp.',
+      description: 'Chào hè rực rỡ, XE ĐẸP AUTO giảm ngay 20% cho tất cả các gói phủ Ceramic 9H cao cấp.',
       image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800',
       expiryDate: '2024-06-30'
     },
@@ -370,9 +371,42 @@ export const DEFAULT_GALLERY: GalleryImage[] = [
 ];
 
 export const DEFAULT_REVIEWS: Review[] = [
-  { id: '1', author: 'Anh Hoàng', text: 'Dịch vụ rất chuyên nghiệp. Xe của mình sau khi phủ Ceramic trông như mới mua từ hãng về. Cảm ơn đội ngũ Carwash Detailing.', rating: 5, serviceId: 'ceramic' },
+  { id: '1', author: 'Anh Hoàng', text: 'Dịch vụ rất chuyên nghiệp. Xe của mình sau khi phủ Ceramic trông như mới mua từ hãng về. Cảm ơn đội ngũ XE ĐẸP AUTO.', rating: 5, serviceId: 'ceramic' },
   { id: '2', author: 'Chị Lan', text: 'Nhân viên nhiệt tình, tư vấn kỹ lưỡng. Vệ sinh nội thất rất sạch, mùi thơm dễ chịu và không còn bụi bẩn trong kẽ ghế.', rating: 5, serviceId: 'interior-detailing' },
   { id: '3', author: 'Anh Tuấn', text: 'Giá cả hợp lý so với chất lượng nhận được. Đánh bóng sơn làm xe bóng loáng vượt mong đợi.', rating: 4, serviceId: 'polish' },
   { id: '4', author: 'Anh Minh', text: 'Rửa xe rất kỹ, các kẽ nhỏ đều sạch bong.', rating: 5, serviceId: 'wash' },
+];
+
+export const DEFAULT_NEWS: NewsArticle[] = [
+  {
+    id: 'news1',
+    title: '5 Mẹo Giữ Lớp Sơn Xe Luôn Bóng Như Mới',
+    excerpt: 'Lớp sơn xe là bộ phận dễ bị tổn thương nhất bởi các tác động từ môi trường. Hãy cùng XE ĐẸP AUTO tìm hiểu cách bảo vệ nó.',
+    content: 'Nội dung chi tiết về các mẹo chăm sóc sơn xe...',
+    image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=800',
+    date: '2024-03-10',
+    category: 'tip',
+    author: 'Admin'
+  },
+  {
+    id: 'news2',
+    title: 'Khai Trương Cơ Sở Mới Tại Long Biên',
+    excerpt: 'XE ĐẸP AUTO chính thức khai trương cơ sở mới với quy mô hiện đại hơn, phục vụ quý khách hàng tốt hơn.',
+    content: 'Nội dung chi tiết về sự kiện khai trương...',
+    image: 'https://images.unsplash.com/photo-1562141961-b5d185666062?auto=format&fit=crop&q=80&w=800',
+    date: '2024-03-05',
+    category: 'news',
+    author: 'Admin'
+  },
+  {
+    id: 'news3',
+    title: 'Ưu Đãi Đặc Biệt: Phủ Ceramic Tặng Vệ Sinh Nội Thất',
+    excerpt: 'Chương trình khuyến mãi lớn nhất trong tháng dành cho khách hàng sử dụng dịch vụ phủ Ceramic Diamond.',
+    content: 'Nội dung chi tiết về chương trình khuyến mãi...',
+    image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800',
+    date: '2024-03-01',
+    category: 'promotion',
+    author: 'Admin'
+  }
 ];
 

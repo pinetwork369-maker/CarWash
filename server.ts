@@ -70,7 +70,7 @@ async function startServer() {
 
     try {
       await transporter.sendMail({
-        from: `"Carwash Detailing" <${smtpUser}>`,
+        from: `"XE ĐẸP AUTO" <${smtpUser}>`,
         to,
         subject,
         text,

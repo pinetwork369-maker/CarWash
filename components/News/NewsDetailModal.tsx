@@ -92,7 +92,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                     <div>
                       <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Được viết bởi</p>
                       <p className="text-xl font-black text-white uppercase tracking-tight">{article.author}</p>
-                      <p className="text-xs text-slate-500 font-medium">Chuyên gia Detailing tại Carwash Detailing</p>
+                      <p className="text-xs text-slate-500 font-medium">Chuyên gia Detailing tại XE ĐẸP AUTO</p>
                     </div>
                   </div>
                   <div className="flex gap-4">

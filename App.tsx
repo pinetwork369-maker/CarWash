@@ -13,9 +13,9 @@ import {
 } from 'recharts';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt } from 'lucide-react';
-import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS } from './constants.tsx';
-import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage } from './types.ts';
+import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper } from 'lucide-react';
+import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS, DEFAULT_NEWS } from './constants.tsx';
+import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage, NewsArticle } from './types.ts';
 import { TrackingSection, TrackingManagement, VehicleTracking, DEFAULT_TRACKING } from './components/Tracking';
 import { FeedbackSection, FeedbackManagement } from './components/Feedback';
 import { Review } from './types.ts';
@@ -205,7 +205,7 @@ const BookingModal: React.FC<{
   const [isSending, setIsSending] = useState(false);
   const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
   const [formData, setFormData] = useState<BookingData>({
-    name: '', phone: '', email: '', carModel: '', serviceId: services[0]?.id || '', subServiceTitle: preSelectedSubService, date: '', note: ''
+    name: '', phone: '', email: '', carModel: '', serviceId: services[0]?.id || '', subServiceTitle: preSelectedSubService, date: '', time: '', note: ''
   });
 
   useEffect(() => {
@@ -250,6 +250,7 @@ const BookingModal: React.FC<{
         <p><strong>Dòng xe:</strong> ${formData.carModel}</p>
         <p><strong>Dịch vụ:</strong> ${fullServiceTitle}</p>
         <p><strong>Ngày:</strong> ${formData.date}</p>
+        <p><strong>Giờ:</strong> ${formData.time || 'Chưa chọn'}</p>
         <p><strong>Ghi chú:</strong> ${formData.note}</p>
         <div style="margin-top: 20px; font-size: 12px; color: #666;">
           Đây là email tự động từ hệ thống website ${siteConfig.siteName}.
@@ -265,6 +266,7 @@ const BookingModal: React.FC<{
         <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin: 15px 0;">
           <p style="margin: 5px 0;"><strong>Dịch vụ:</strong> ${fullServiceTitle}</p>
           <p style="margin: 5px 0;"><strong>Ngày hẹn:</strong> ${formData.date}</p>
+          <p style="margin: 5px 0;"><strong>Giờ hẹn:</strong> ${formData.time || 'Chưa chọn'}</p>
           <p style="margin: 5px 0;"><strong>Dòng xe:</strong> ${formData.carModel}</p>
         </div>
         <p>Nhân viên của chúng tôi sẽ liên hệ lại với bạn qua số điện thoại <strong>${formData.phone}</strong> để xác nhận lịch hẹn trong thời gian sớm nhất.</p>
@@ -312,6 +314,7 @@ const BookingModal: React.FC<{
         serviceId: formData.serviceId,
         subServiceTitle: formData.subServiceTitle,
         date: formData.date,
+        time: formData.time,
         status: 'pending',
         note: formData.note,
         createdAt: new Date().toISOString()
@@ -399,7 +402,16 @@ const BookingModal: React.FC<{
                     ))}
                   </select>
                 )}
-                <input required type="date" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-slate-500 uppercase tracking-widest ml-1">Ngày hẹn</label>
+                    <input required type="date" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-slate-500 uppercase tracking-widest ml-1">Giờ ưu tiên</label>
+                    <input required type="time" value={formData.time} onChange={e => setFormData({...formData, time: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                  </div>
+                </div>
                 <textarea placeholder="Ghi chú thêm về xe..." value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white h-24 resize-none focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
                 <button 
                   type="submit" 
@@ -476,7 +488,7 @@ const ServiceDetailsModal: React.FC<{
               {/* Left Column: Content */}
               <div className="flex-1">
                 {/* Hero Image */}
-                <div className="w-full h-[350px] sm:h-[550px] relative">
+                <div className="w-full h-[300px] sm:h-[550px] relative">
                   <img 
                     src={service.image} 
                     alt={service.title} 
@@ -491,19 +503,19 @@ const ServiceDetailsModal: React.FC<{
                       transition={{ delay: 0.2 }}
                     >
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="bg-blue-600/20 backdrop-blur-2xl border border-blue-500/30 p-5 rounded-[32px]">
-                          <span className="text-5xl sm:text-6xl">{service.icon}</span>
+                        <div className="bg-blue-600/20 backdrop-blur-2xl border border-blue-500/30 p-4 sm:p-5 rounded-2xl sm:rounded-[32px]">
+                          <span className="text-4xl sm:text-6xl">{service.icon}</span>
                         </div>
                         <div>
                           <span className="text-blue-500 font-black uppercase tracking-[0.4em] text-[11px] mb-2 block">Premium Detailing</span>
-                          <h3 className="text-4xl sm:text-8xl font-black text-white uppercase tracking-tighter leading-[0.85]">{service.title}</h3>
+                          <h3 className="text-3xl sm:text-8xl font-black text-white uppercase tracking-tighter leading-[0.85]">{service.title}</h3>
                         </div>
                       </div>
                     </motion.div>
                   </div>
                 </div>
 
-                <div className="p-8 sm:p-16 space-y-16">
+                <div className="p-6 sm:p-16 space-y-12 sm:space-y-16">
                   {/* Description Section */}
                   <section className="max-w-3xl">
                     <h4 className="text-[11px] font-black text-blue-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
@@ -530,7 +542,7 @@ const ServiceDetailsModal: React.FC<{
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="p-8 rounded-[40px] bg-white/5 border border-white/5 flex flex-col justify-between group hover:bg-blue-600/10 hover:border-blue-500/30 transition-all"
+                            className="p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-white/5 border border-white/5 flex flex-col justify-between group hover:bg-blue-600/10 hover:border-blue-500/30 transition-all"
                           >
                             <div className="mb-8">
                               <div className="flex justify-between items-start mb-4">
@@ -707,6 +719,179 @@ const ShareModal: React.FC<{ isOpen: boolean; onClose: () => void; url: string; 
         </motion.div>
       </motion.div>
     </AnimatePresence>
+  );
+};
+
+const NewsArticleModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  article: NewsArticle | null;
+}> = ({ isOpen, onClose, article }) => {
+  if (!isOpen || !article) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl"
+      >
+        <div className="absolute inset-0" onClick={onClose} />
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.9, opacity: 0, y: 20 }}
+          className="bg-slate-900 border border-white/10 p-0 rounded-[32px] shadow-2xl max-w-4xl w-full relative overflow-hidden flex flex-col max-h-[90vh]"
+        >
+          <button onClick={onClose} className="absolute top-6 right-6 z-50 bg-black/50 hover:bg-red-600 backdrop-blur-xl p-3 rounded-2xl text-white transition-all shadow-2xl active:scale-90">
+            <X className="w-6 h-6" />
+          </button>
+          
+          <div className="overflow-y-auto custom-scrollbar">
+            <div className="h-[300px] sm:h-[450px] relative">
+              <img src={article.image} alt={article.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+              <div className="absolute bottom-8 left-8 right-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                    article.category === 'promotion' ? 'bg-red-600 text-white' : 
+                    article.category === 'tip' ? 'bg-blue-600 text-white' : 'bg-emerald-600 text-white'
+                  }`}>
+                    {article.category === 'promotion' ? 'Khuyến mãi' : article.category === 'tip' ? 'Mẹo vặt' : 'Tin tức'}
+                  </span>
+                  <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+                    <Calendar className="w-3 h-3" /> {article.date}
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-black text-white uppercase tracking-tighter leading-tight">{article.title}</h3>
+              </div>
+            </div>
+            
+            <div className="p-8 sm:p-12">
+              <div className="prose prose-invert max-w-none">
+                <p className="text-slate-300 text-lg leading-relaxed mb-8 font-medium italic border-l-4 border-blue-600 pl-6">
+                  {article.excerpt}
+                </p>
+                <div className="text-slate-400 leading-relaxed space-y-4">
+                  {article.content.split('\n').map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="mt-12 pt-8 border-t border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-500">
+                    <User className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest">Tác giả</p>
+                    <p className="text-white font-bold">{article.author}</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={onClose}
+                  className="bg-white/5 hover:bg-white/10 text-white px-8 py-3 rounded-xl font-bold transition-all border border-white/10"
+                >
+                  Đóng bài viết
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+const NewsSection: React.FC<{ 
+  siteConfig: SiteConfig; 
+  isEditMode: boolean; 
+  setSiteConfig: React.Dispatch<React.SetStateAction<SiteConfig>>;
+}> = ({ siteConfig, isEditMode, setSiteConfig }) => {
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
+
+  return (
+    <section id="news" className="py-24 relative overflow-hidden bg-slate-950">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-6"
+          >
+            <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+            <EditableText 
+              text={siteConfig.newsSubtitle || "Cập nhật những kiến thức bổ ích và chương trình mới nhất từ XE ĐẸP AUTO."} 
+              isEditMode={isEditMode} 
+              onSave={v => setSiteConfig({...siteConfig, newsSubtitle: v})}
+              className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em]"
+            />
+          </motion.div>
+          <EditableText 
+            tag="h2" 
+            text={siteConfig.newsTitle || "TIN TỨC & MẸO CHĂM SÓC XE"} 
+            isEditMode={isEditMode} 
+            onSave={v => setSiteConfig({...siteConfig, newsTitle: v})}
+            className="text-4xl sm:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-8"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {(siteConfig.news || []).map((article, idx) => (
+            <motion.div
+              key={article.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              onClick={() => setSelectedArticle(article)}
+              className="group cursor-pointer"
+            >
+              <div className="relative h-[250px] rounded-[32px] overflow-hidden mb-6 border border-white/5">
+                <img 
+                  src={article.image} 
+                  alt={article.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
+                <div className="absolute top-4 left-4">
+                  <span className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest ${
+                    article.category === 'promotion' ? 'bg-red-600 text-white' : 
+                    article.category === 'tip' ? 'bg-blue-600 text-white' : 'bg-emerald-600 text-white'
+                  }`}>
+                    {article.category === 'promotion' ? 'Khuyến mãi' : article.category === 'tip' ? 'Mẹo vặt' : 'Tin tức'}
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                  <Calendar className="w-3 h-3" /> {article.date}
+                </div>
+                <h3 className="text-xl font-black text-white group-hover:text-blue-500 transition-colors line-clamp-2 uppercase tracking-tight leading-tight">
+                  {article.title}
+                </h3>
+                <p className="text-slate-400 text-sm line-clamp-2 leading-relaxed">
+                  {article.excerpt}
+                </p>
+                <div className="pt-4 flex items-center gap-2 text-blue-500 font-black text-[10px] uppercase tracking-widest group-hover:gap-4 transition-all">
+                  Xem chi tiết <ArrowRight className="w-3 h-3" />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <NewsArticleModal 
+        isOpen={!!selectedArticle} 
+        onClose={() => setSelectedArticle(null)} 
+        article={selectedArticle} 
+      />
+    </section>
   );
 };
 
@@ -1011,7 +1196,7 @@ const AdminDashboardModal: React.FC<{
   setPremiumSolutions: React.Dispatch<React.SetStateAction<PremiumSolution[]>>;
   customerRecords: CustomerRecord[];
   setCustomerRecords: React.Dispatch<React.SetStateAction<CustomerRecord[]>>;
-  initialTab?: 'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages';
+  initialTab?: 'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'news';
   maintenancePreFill?: {brand: string, model: string, year: string, mileage: string, lastMaintenance: string, symptoms: string} | null;
   isSelectingHeroVideo: boolean;
   setIsSelectingHeroVideo: React.Dispatch<React.SetStateAction<boolean>>;
@@ -1025,7 +1210,7 @@ const AdminDashboardModal: React.FC<{
   reviews: Review[];
   setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
 }> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory, setIsEditMode, trackingData, setTrackingData, reviews, setReviews }) => {
-  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback'>(initialTab);
+  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback' | 'news'>(initialTab);
   
   // Sorting and Filtering States
   const [sortConfig, setSortConfig] = useState<{ key: string, order: 'asc' | 'desc' }>({ key: 'id', order: 'desc' });
@@ -1196,6 +1381,7 @@ const AdminDashboardModal: React.FC<{
     { id: 'packages', label: 'Gói chăm sóc', icon: <Package className="w-5 h-5" /> },
     { id: 'premium', label: 'Cao cấp', icon: <ShieldCheck className="w-5 h-5" /> },
     { id: 'promotions', label: 'Khuyến mãi', icon: <Tag className="w-5 h-5" /> },
+    { id: 'news', label: 'Tin tức', icon: <Newspaper className="w-5 h-5" /> },
     { id: 'tracking', label: 'Theo dõi xe', icon: <Timer className="w-5 h-5" /> },
     { id: 'feedback', label: 'Đánh giá', icon: <MessageSquare className="w-5 h-5" /> },
     { id: 'gallery', label: 'Thư viện', icon: <ImageIcon className="w-5 h-5" /> },
@@ -1457,7 +1643,7 @@ const AdminDashboardModal: React.FC<{
     setIsAiGeneratingText(field);
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
-      const prompt = `Bạn là một chuyên gia marketing cho trung tâm chăm sóc xe "Carwash Detailing". 
+      const prompt = `Bạn là một chuyên gia marketing cho trung tâm chăm sóc xe "XE ĐẸP AUTO". 
       Hãy tạo nội dung cho trường "${label}" của website. 
       Yêu cầu: Ngôn ngữ chuyên nghiệp, hấp dẫn, chuẩn SEO, phù hợp với phong cách sang trọng và công nghệ.
       QUAN TRỌNG: Chỉ trả về nội dung văn bản thuần túy, KHÔNG có dấu ngoặc kép ở đầu/cuối, KHÔNG có định dạng Markdown, KHÔNG có lời giải thích.`;
@@ -1499,7 +1685,7 @@ const AdminDashboardModal: React.FC<{
       else if (type === 'premium') itemTitle = premiumSolutions.find(p => p.id === id)?.title || '';
       else if (type === 'promotion') itemTitle = (siteConfig.promotions || []).find(p => p.id === id)?.title || '';
 
-      const prompt = `Bạn là chuyên gia marketing cho "Carwash Detailing". 
+      const prompt = `Bạn là chuyên gia marketing cho "XE ĐẸP AUTO". 
       Hãy tạo ${label} cho ${type === 'promotion' ? 'chương trình khuyến mãi' : 'dịch vụ'} "${itemTitle || 'mới'}".
       Yêu cầu: Ngôn ngữ hấp dẫn, chuyên nghiệp. 
       QUAN TRỌNG: Chỉ trả về nội dung văn bản thuần túy, KHÔNG có dấu ngoặc kép ở đầu/cuối, KHÔNG có định dạng Markdown, KHÔNG có lời giải thích.`;
@@ -2166,6 +2352,13 @@ const AdminDashboardModal: React.FC<{
                 </div>
               </div>
             )}
+
+                {activeTab === 'news' && (
+                  <NewsManagement 
+                    news={siteConfig.news || []} 
+                    setNews={(newNews) => setSiteConfig({ ...siteConfig, news: newNews })} 
+                  />
+                )}
 
                 {activeTab === 'tracking' && (
                   <TrackingManagement trackingData={trackingData} setTrackingData={setTrackingData} />
@@ -3652,7 +3845,7 @@ const AdminDashboardModal: React.FC<{
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({
                                       to: siteConfig.contactEmail,
-                                      subject: 'Test Email from Carwash Detailing',
+                                      subject: 'Test Email from XE ĐẸP AUTO',
                                       html: '<h1>Hệ thống gửi email hoạt động tốt!</h1><p>Đây là email kiểm tra từ website của bạn.</p>'
                                     })
                                   });
@@ -3736,6 +3929,10 @@ const AdminDashboardModal: React.FC<{
                         <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Mục Cố Vấn AI</label>
                         <input value={siteConfig.aiTitle} onChange={e => updateConfig('aiTitle', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-xs" />
                       </div>
+                      <div className="group space-y-2">
+                        <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Mục Tin Tức</label>
+                        <input value={siteConfig.newsTitle} onChange={e => updateConfig('newsTitle', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-xs" />
+                      </div>
                     </div>
                   </div>
 
@@ -3765,6 +3962,152 @@ const AdminDashboardModal: React.FC<{
 </motion.div>
 )}
 </AnimatePresence>
+  );
+};
+
+const NewsManagement: React.FC<{
+  news: NewsArticle[];
+  setNews: (news: NewsArticle[]) => void;
+}> = ({ news, setNews }) => {
+  const [isAdding, setIsAdding] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [form, setForm] = useState<Partial<NewsArticle>>({
+    title: '', excerpt: '', content: '', image: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0]
+  });
+
+  const handleSave = () => {
+    if (!form.title || !form.content) return alert("Vui lòng nhập tiêu đề và nội dung!");
+    
+    if (editingId) {
+      setNews(news.map(n => n.id === editingId ? { ...n, ...form as NewsArticle } : n));
+    } else {
+      setNews([{ ...form as NewsArticle, id: Date.now().toString() }, ...news]);
+    }
+    setIsAdding(false);
+    setEditingId(null);
+    setForm({ title: '', excerpt: '', content: '', image: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0] });
+  };
+
+  return (
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <div>
+          <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Quản Lý Tin Tức & Mẹo</h3>
+          <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-1">Đăng tải bài viết, hướng dẫn và khuyến mãi</p>
+        </div>
+        <button 
+          onClick={() => setIsAdding(true)}
+          className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest shadow-xl transition-all active:scale-95 flex items-center gap-2"
+        >
+          <Plus className="w-4 h-4" /> Thêm Bài Viết
+        </button>
+      </div>
+
+      {isAdding ? (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-slate-900/50 border border-white/10 p-8 rounded-[32px] space-y-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tiêu đề bài viết</label>
+              <input 
+                value={form.title}
+                onChange={e => setForm({...form, title: e.target.value})}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Phân loại</label>
+              <select 
+                value={form.category}
+                onChange={e => setForm({...form, category: e.target.value as any})}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+              >
+                <option value="tip">Mẹo chăm sóc xe</option>
+                <option value="news">Tin tức dịch vụ</option>
+                <option value="promotion">Khuyến mãi</option>
+              </select>
+            </div>
+            <div className="space-y-2 md:col-span-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mô tả ngắn (Excerpt)</label>
+              <textarea 
+                value={form.excerpt}
+                onChange={e => setForm({...form, excerpt: e.target.value})}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-20 outline-none focus:border-blue-500"
+              />
+            </div>
+            <div className="space-y-2 md:col-span-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Nội dung chi tiết (Markdown)</label>
+              <textarea 
+                value={form.content}
+                onChange={e => setForm({...form, content: e.target.value})}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-60 outline-none focus:border-blue-500 font-mono text-sm"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">URL Ảnh bìa</label>
+              <input 
+                value={form.image}
+                onChange={e => setForm({...form, image: e.target.value})}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tác giả</label>
+              <input 
+                value={form.author}
+                onChange={e => setForm({...form, author: e.target.value})}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+              />
+            </div>
+          </div>
+          <div className="flex gap-4 pt-4">
+            <button onClick={handleSave} className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-black uppercase tracking-widest hover:bg-blue-500 transition-all">Lưu Bài Viết</button>
+            <button onClick={() => { setIsAdding(false); setEditingId(null); }} className="px-8 bg-slate-800 text-slate-400 rounded-xl font-black uppercase tracking-widest hover:text-white transition-all">Hủy</button>
+          </div>
+        </motion.div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {news.map(article => (
+            <div key={article.id} className="bg-slate-900/40 border border-white/5 rounded-3xl overflow-hidden group hover:border-blue-500/30 transition-all">
+              <div className="aspect-video relative overflow-hidden">
+                <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
+                <div className="absolute top-4 left-4 px-3 py-1 bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest rounded-full">
+                  {article.category}
+                </div>
+              </div>
+              <div className="p-6 space-y-4">
+                <h4 className="text-white font-black text-lg line-clamp-2 uppercase tracking-tight">{article.title}</h4>
+                <p className="text-slate-500 text-xs line-clamp-3">{article.excerpt}</p>
+                <div className="flex justify-between items-center pt-4 border-t border-white/5">
+                  <div className="text-[9px] font-bold text-slate-600 uppercase tracking-widest">{article.date}</div>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => {
+                        setForm(article);
+                        setEditingId(article.id);
+                        setIsAdding(true);
+                      }}
+                      className="p-2 bg-slate-800 text-slate-400 hover:text-blue-500 rounded-lg transition-colors"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                    <button 
+                      onClick={() => confirm("Xóa bài viết này?") && setNews(news.filter(n => n.id !== article.id))}
+                      className="p-2 bg-slate-800 text-slate-400 hover:text-red-500 rounded-lg transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -3837,6 +4180,7 @@ const SidebarMenu: React.FC<{
                 <button onClick={() => handleNav('tuning')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🏎️ Độ Xe</button>
                 <button onClick={() => handleNav('premium')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">💎 Giải Pháp Cao Cấp</button>
                 <button onClick={() => handleNav('ai-advisor')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🤖 Cố Vấn AI</button>
+                <button onClick={() => handleNav('news')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">📰 Tin Tức</button>
                 <button onClick={() => handleNav('gallery')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🖼️ Thư Viện</button>
                 <button onClick={() => handleNav('reviews')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">⭐ Đánh Giá</button>
               </nav>
@@ -4070,12 +4414,17 @@ const HomePage: React.FC = () => {
     const saved = localStorage.getItem('dungcar_config_v12');
     if (saved) {
       try {
-        return { ...DEFAULT_SITE_CONFIG, ...JSON.parse(saved) };
+        const parsed = JSON.parse(saved);
+        return { 
+          ...DEFAULT_SITE_CONFIG, 
+          ...parsed,
+          news: parsed.news || DEFAULT_NEWS
+        };
       } catch (e) {
-        return DEFAULT_SITE_CONFIG;
+        return { ...DEFAULT_SITE_CONFIG, news: DEFAULT_NEWS };
       }
     }
-    return DEFAULT_SITE_CONFIG;
+    return { ...DEFAULT_SITE_CONFIG, news: DEFAULT_NEWS };
   });
   const [customerRecords, setCustomerRecords] = useState<CustomerRecord[]>(() => {
     const saved = localStorage.getItem('dungcar_records_v12');
@@ -4106,7 +4455,7 @@ const HomePage: React.FC = () => {
     return saved ? JSON.parse(saved) : DEFAULT_REVIEWS;
   });
 
-  const [aiMessages, setAiMessages] = useState<Message[]>([{ role: 'model', text: 'Chào bạn! Tôi là Carwash Detailing AI. Bạn cần tư vấn về dịch vụ detailing nào?' }]);
+  const [aiMessages, setAiMessages] = useState<Message[]>([{ role: 'model', text: 'Chào bạn! Tôi là XE ĐẸP AUTO AI. Bạn cần tư vấn về dịch vụ detailing nào?' }]);
   const [aiInput, setAiInput] = useState('');
   const [aiProvider, setAiProvider] = useState<AIProvider>('gemini');
   const [isAiLoading, setIsAiLoading] = useState(false);
@@ -4177,9 +4526,9 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* Navbar */}
-      <nav className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
+      <nav className={`fixed left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
         isScrolled 
-          ? 'top-0 py-3 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 shadow-2xl' 
+          ? 'top-0 py-2 bg-slate-950/95 backdrop-blur-2xl border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)]' 
           : 'top-10 py-6 bg-transparent border-b border-transparent'
       }`}>
         <div className="container mx-auto px-4">
@@ -4201,11 +4550,11 @@ const HomePage: React.FC = () => {
                   <img 
                     src={siteConfig.logoUrl} 
                     alt="Logo" 
-                    className="w-10 h-10 object-contain group-hover:scale-110 transition-transform"
+                    className={`object-contain group-hover:scale-110 transition-all duration-500 ${isScrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-emerald-600 rounded-xl flex items-center justify-center font-black text-white text-xl shadow-lg shadow-blue-900/20 group-hover:scale-110 transition-transform">
+                  <div className={`bg-gradient-to-br from-blue-600 to-emerald-600 rounded-xl flex items-center justify-center font-black text-white shadow-lg shadow-blue-900/20 group-hover:scale-110 transition-all duration-500 ${isScrolled ? 'w-8 h-8 text-lg' : 'w-10 h-10 text-xl'}`}>
                     {siteConfig.siteName.charAt(0)}
                   </div>
                 )}
@@ -4235,7 +4584,7 @@ const HomePage: React.FC = () => {
                   </div>
                 )}
                 
-                <div className="flex flex-col">
+                <div className={`flex flex-col transition-all duration-500 ${isScrolled ? 'scale-90 origin-left' : 'scale-100'}`}>
                   <EditableText 
                     text={siteConfig.siteName} 
                     isEditMode={isEditMode} 
@@ -4257,6 +4606,7 @@ const HomePage: React.FC = () => {
                   { id: 'wrap-ppf', label: 'Wrap & PPF' },
                   { id: 'tuning', label: 'Độ Xe' },
                   { id: 'ai-advisor', label: 'Cố Vấn AI' },
+                  { id: 'news', label: 'Tin Tức' },
                   { id: 'gallery', label: 'Thư Viện' },
                   { id: 'reviews', label: 'Đánh Giá' }
                 ].map((item) => (
@@ -4389,7 +4739,7 @@ const HomePage: React.FC = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 20 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-blue-900/40 hover:bg-blue-500 transition-all active:scale-90"
+            className="fixed bottom-8 left-6 sm:left-10 z-50 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-blue-900/40 hover:bg-blue-500 transition-all active:scale-90"
           >
             <ArrowUp className="w-6 h-6" />
           </motion.button>
@@ -4420,13 +4770,13 @@ const HomePage: React.FC = () => {
                 muted 
                 loop 
                 playsInline
-                className="w-full h-full object-cover opacity-30 scale-105"
+                className="w-full h-full object-cover opacity-40 scale-105"
               />
             ) : (
               <img 
                 src={siteConfig.heroImage} 
                 alt="Hero Background"
-                className="w-full h-full object-cover opacity-30 scale-105"
+                className="w-full h-full object-cover opacity-40 scale-105"
                 referrerPolicy="no-referrer"
               />
             )}
@@ -4542,6 +4892,29 @@ const HomePage: React.FC = () => {
                   <Share2 className="w-4 h-4" /> Chia Sẻ
                 </button>
               </motion.div>
+
+              {/* Trust Bar */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="mt-16 sm:mt-24 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-10"
+              >
+                {[
+                  { label: 'Khách Hàng Hài Lòng', value: '5,000+', icon: <Users className="w-4 h-4 text-blue-500" /> },
+                  { label: 'Năm Kinh Nghiệm', value: '10+', icon: <ShieldCheck className="w-4 h-4 text-emerald-500" /> },
+                  { label: 'Đánh Giá Google', value: '5.0 ⭐', icon: <Star className="w-4 h-4 text-yellow-500" /> },
+                  { label: 'Dịch Vụ Cao Cấp', value: '20+', icon: <Zap className="w-4 h-4 text-purple-500" /> }
+                ].map((stat, i) => (
+                  <div key={i} className="flex flex-col items-center md:items-start text-center md:text-left">
+                    <div className="flex items-center gap-3 mb-2">
+                      {stat.icon}
+                      <span className="text-xl sm:text-2xl font-black text-white tracking-tighter">{stat.value}</span>
+                    </div>
+                    <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">{stat.label}</span>
+                  </div>
+                ))}
+              </motion.div>
             </div>
           </div>
 
@@ -4556,99 +4929,7 @@ const HomePage: React.FC = () => {
             <div className="w-px h-12 bg-gradient-to-b from-blue-500 to-transparent"></div>
           </motion.div>
         </section>
-
-        {/* Promotions Section */}
-        {siteConfig.promotions && siteConfig.promotions.length > 0 && (
-          <section id="promotions" className="py-24 sm:py-32 bg-slate-950 border-y border-white/5 relative overflow-hidden">
-            {/* Background Text */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-[0.02] select-none">
-              <div className="text-[300px] font-black uppercase tracking-tighter leading-none whitespace-nowrap">
-                OFFERS OFFERS OFFERS
-              </div>
-            </div>
-
-            <div className="container mx-auto px-4 relative z-10">
-              <div className="flex flex-col lg:flex-row justify-between items-end gap-10 mb-20">
-                <div className="max-w-3xl">
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="flex items-center gap-4 mb-6"
-                  >
-                    <div className="w-12 h-px bg-blue-600"></div>
-                    <span className="text-blue-500 font-black uppercase tracking-[0.3em] text-[10px] sm:text-xs">Limited Time Only</span>
-                  </motion.div>
-                  <h2 className="text-5xl sm:text-8xl font-black text-white leading-[0.85] tracking-tighter uppercase">
-                    Ưu Đãi <span className="text-blue-600 italic">Đặc Biệt</span>
-                  </h2>
-                </div>
-                <p className="text-slate-500 text-sm sm:text-lg font-medium max-w-md lg:text-right">
-                  Nâng tầm trải nghiệm chăm sóc xe với những chương trình ưu đãi độc quyền chỉ có tại {siteConfig.siteName}.
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {siteConfig.promotions.map((promo, idx) => (
-                  <motion.div 
-                    key={promo.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.2 }}
-                    className={`group relative bg-slate-900/50 rounded-[48px] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-700 ${
-                      idx === 0 ? 'lg:col-span-7' : 'lg:col-span-5'
-                    }`}
-                  >
-                    <div className="flex flex-col h-full">
-                      <div className="relative aspect-[16/9] lg:aspect-auto lg:flex-1 overflow-hidden">
-                        <img 
-                          src={promo.image} 
-                          alt={promo.title} 
-                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                        <div className="absolute top-8 left-8">
-                          <div className="bg-blue-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-2xl">
-                            {idx === 0 ? 'Ưu Đãi Lớn Nhất' : 'Khuyến Mãi'}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-10 sm:p-12 flex flex-col justify-between">
-                        <div>
-                          <h3 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight mb-6 group-hover:text-blue-500 transition-colors leading-none">
-                            {promo.title}
-                          </h3>
-                          <p className="text-slate-400 text-sm sm:text-base leading-relaxed line-clamp-2 mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
-                            {promo.description}
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-between pt-8 border-t border-white/5">
-                          <div className="flex flex-col">
-                            <span className="text-[9px] font-black uppercase text-slate-500 tracking-widest mb-1">Thời hạn đến</span>
-                            <div className="flex items-center gap-2 text-blue-500">
-                              <Clock className="w-4 h-4" />
-                              <span className="font-black text-sm sm:text-base">{new Date(promo.expiryDate).toLocaleDateString('vi-VN')}</span>
-                            </div>
-                          </div>
-                          <button 
-                            onClick={() => setIsBookingModalOpen(true)}
-                            className="bg-white text-slate-950 px-8 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-95 flex items-center gap-2"
-                          >
-                            Nhận Ngay <ChevronRight className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Services Section */}
+         {/* Services Section */}
         <section id="services" className="py-24 sm:py-32 bg-slate-950 relative">
           <div className="container mx-auto px-4">
             <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
@@ -4658,82 +4939,58 @@ const HomePage: React.FC = () => {
                 viewport={{ once: true }}
                 className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-6"
               >
-                <Zap className="w-4 h-4 text-blue-500" />
-                <span className="text-blue-500 font-black uppercase tracking-widest text-[10px]">Professional Services</span>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-              >
-                <EditableText 
-                  tag="h2" 
-                  text={siteConfig.servicesTitle} 
-                  isEditMode={isEditMode} 
-                  onSave={v => setSiteConfig({...siteConfig, servicesTitle: v})}
-                  className="text-4xl sm:text-7xl font-black text-white uppercase mb-6 tracking-tighter leading-none"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
+                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
                 <EditableText 
                   text={siteConfig.servicesSubtitle} 
                   isEditMode={isEditMode} 
                   onSave={v => setSiteConfig({...siteConfig, servicesSubtitle: v})}
-                  className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-lg font-medium mb-12"
+                  className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em]"
                 />
               </motion.div>
-
-              {/* Catalog Filters & Search */}
+              <EditableText 
+                tag="h2" 
+                text={siteConfig.servicesTitle} 
+                isEditMode={isEditMode} 
+                onSave={v => setSiteConfig({...siteConfig, servicesTitle: v})}
+                className="text-4xl sm:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-8"
+              />
+              
+              {/* Search & Filter */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="w-full max-w-5xl mx-auto space-y-6"
+                className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl"
               >
-                <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                  {[
-                    { id: 'all', label: 'Tất Cả', icon: <Grid className="w-4 h-4" /> },
-                    { id: 'exterior', label: 'Ngoại Thất', icon: <Sun className="w-4 h-4" /> },
-                    { id: 'interior', label: 'Nội Thất', icon: <Home className="w-4 h-4" /> },
-                    { id: 'protection', label: 'Bảo Vệ', icon: <Shield className="w-4 h-4" /> },
-                    { id: 'tuning', label: 'Nâng Cấp', icon: <Zap className="w-4 h-4" /> },
-                  ].map(cat => (
-                    <button
-                      key={cat.id}
-                      onClick={() => setServiceCategory(cat.id)}
-                      className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all ${
-                        serviceCategory === cat.id 
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' 
-                        : 'bg-slate-900 text-slate-400 hover:bg-slate-800 border border-white/5'
-                      }`}
-                    >
-                      {cat.icon}
-                      {cat.label}
-                    </button>
-                  ))}
-                </div>
-                
-                <div className="relative max-w-md mx-auto">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <div className="relative flex-1 group">
+                  <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-blue-500 transition-colors" />
                   <input 
                     type="text" 
-                    placeholder="Tìm kiếm dịch vụ..." 
+                    placeholder="Tìm kiếm dịch vụ..."
                     value={serviceSearch}
-                    onChange={e => setServiceSearch(e.target.value)}
-                    className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                    onChange={(e) => setServiceSearch(e.target.value)}
+                    className="w-full bg-slate-900/50 border border-white/10 rounded-2xl py-4 pl-14 pr-6 text-white text-sm focus:outline-none focus:border-blue-500 transition-all"
                   />
+                </div>
+                <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 custom-scrollbar">
+                  {['all', 'exterior', 'interior', 'protection', 'tuning'].map(cat => (
+                    <button
+                      key={cat}
+                      onClick={() => setServiceCategory(cat)}
+                      className={`px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                        serviceCategory === cat 
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
+                        : 'bg-slate-900/50 text-slate-500 border border-white/5 hover:border-white/20'
+                      }`}
+                    >
+                      {cat === 'all' ? 'Tất cả' : cat === 'exterior' ? 'Ngoại thất' : cat === 'interior' ? 'Nội thất' : cat === 'protection' ? 'Bảo vệ' : 'Nâng cấp'}
+                    </button>
+                  ))}
                 </div>
               </motion.div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 auto-rows-[300px] sm:auto-rows-[450px]">
               {services
                 .filter(s => {
                   const matchesCategory = serviceCategory === 'all' || s.category === serviceCategory;
@@ -4741,88 +4998,118 @@ const HomePage: React.FC = () => {
                                       s.description.toLowerCase().includes(serviceSearch.toLowerCase());
                   return matchesCategory && matchesSearch;
                 })
-                .map((s, idx) => (
-                <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  key={s.id} 
-                  className="group relative bg-slate-900/40 border border-white/5 rounded-[32px] sm:rounded-[48px] overflow-hidden hover:border-blue-500/30 transition-all duration-500 flex flex-col"
-                >
-                  <div className="relative h-56 sm:h-80 overflow-hidden">
-                    <EditableImage 
-                      src={s.image} 
-                      isEditMode={isEditMode} 
-                      onUpload={base64 => setServices(services.map(ser => ser.id === s.id ? {...ser, image: base64} : ser))}
-                      alt={s.title}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    />
-                    {['ppf', 'wrap', 'tuning', 'underbody'].includes(s.id) && (
-                      <div className="absolute top-6 right-6 z-20">
-                        <div className="bg-emerald-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-xl animate-pulse">New Service</div>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                    <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-                      <div className="bg-slate-950/80 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-2xl">
-                        <EditableText 
-                          text={s.icon} 
-                          isEditMode={isEditMode} 
-                          onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, icon: v} : ser))}
-                          className="text-3xl"
-                        />
-                      </div>
-                      <div className="bg-blue-600 text-white px-4 py-2 rounded-xl font-black text-sm shadow-xl">
-                        <EditableText 
-                          text={s.price} 
-                          isEditMode={isEditMode} 
-                          onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, price: v} : ser))}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                .map((s, idx) => {
+                  // Bento Grid Logic: First item and every 5th item spans 2 columns on large screens
+                  const isLarge = idx === 0 || idx === 4;
                   
-                  <div className="p-6 sm:p-10 flex-1 flex flex-col">
-                    <EditableText 
-                      tag="h3" 
-                      text={s.title} 
-                      isEditMode={isEditMode} 
-                      onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, title: v} : ser))}
-                      className="text-xl sm:text-3xl font-black text-white mb-3 sm:mb-4 uppercase tracking-tight group-hover:text-blue-500 transition-colors"
-                    />
-                    <EditableText 
-                      text={s.description} 
-                      isEditMode={isEditMode} 
-                      onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, description: v} : ser))}
-                      multiline
-                      className="text-slate-400 text-xs sm:text-base leading-relaxed mb-6 flex-1 opacity-80 group-hover:opacity-100 transition-opacity"
-                    />
-
-                    {s.subServices && s.subServices.length > 0 && (
-                      <div className="mb-6 sm:mb-8 space-y-2 sm:space-y-3">
-                        {s.subServices.map((sub, sIdx) => (
-                          <div key={sIdx} className="flex justify-between items-center p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                            <div className="flex flex-col">
-                              <span className="text-[10px] sm:text-xs font-bold text-white">{sub.title}</span>
-                              {sub.note && <span className="text-[8px] sm:text-[10px] text-slate-500">{sub.note}</span>}
-                            </div>
-                            <span className="text-[9px] sm:text-[10px] font-black text-blue-400">{sub.price}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <button 
-                      onClick={() => setSelectedServiceForModal(s)} 
-                      className="w-full group/btn relative bg-slate-800 hover:bg-blue-600 text-white font-black uppercase py-4 sm:py-5 rounded-2xl transition-all text-[10px] sm:text-xs tracking-[0.2em] shadow-xl active:scale-95 flex items-center justify-center gap-3"
+                  return (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      key={s.id} 
+                      className={`group relative bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-[32px] sm:rounded-[60px] overflow-hidden hover:border-blue-500/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] transition-all duration-700 flex flex-col ${
+                        isLarge ? 'lg:col-span-2' : 'lg:col-span-1'
+                      }`}
                     >
-                      <span>Xem Chi Tiết & Báo Giá</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
+                      <div className="relative h-full overflow-hidden">
+                        <EditableImage 
+                          src={s.image} 
+                          isEditMode={isEditMode} 
+                          onUpload={base64 => setServices(services.map(ser => ser.id === s.id ? {...ser, image: base64} : ser))}
+                          alt={s.title}
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        />
+                        
+                        {/* Interactive Overlay (Before/After vibe) */}
+                        <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-px h-full bg-white/30 relative">
+                              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                                <Zap className="w-5 h-5 text-white animate-pulse" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {['ppf', 'wrap', 'tuning', 'underbody'].includes(s.id) && (
+                          <div className="absolute top-8 right-8 z-20">
+                            <div className="bg-emerald-500 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-xl animate-pulse">New Service</div>
+                          </div>
+                        )}
+                        
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                        
+                        <div className="absolute inset-0 p-8 sm:p-12 flex flex-col justify-end">
+                          <div className="flex justify-between items-end mb-6">
+                            <div className="bg-slate-950/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-[32px] border border-white/10 shadow-2xl">
+                              <EditableText 
+                                text={s.icon} 
+                                isEditMode={isEditMode} 
+                                onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, icon: v} : ser))}
+                                className="text-3xl sm:text-4xl"
+                              />
+                            </div>
+                            <div className="bg-slate-950/80 backdrop-blur-md border border-white/10 text-white px-5 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-black text-xs sm:text-base shadow-2xl">
+                              <EditableText 
+                                text={s.price} 
+                                isEditMode={isEditMode} 
+                                onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, price: v} : ser))}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="relative">
+                            {/* Decorative Number */}
+                            <div className="absolute -top-10 right-0 text-6xl sm:text-9xl font-black text-white/5 pointer-events-none select-none italic">
+                              0{idx + 1}
+                            </div>
+
+                            <EditableText 
+                              tag="h3" 
+                              text={s.title} 
+                              isEditMode={isEditMode} 
+                              onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, title: v} : ser))}
+                              className="text-xl sm:text-4xl font-black text-white mb-3 sm:mb-6 uppercase tracking-tighter leading-none group-hover:text-blue-500 transition-colors duration-500"
+                            />
+                            
+                            <div className="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
+                              <EditableText 
+                                text={s.description} 
+                                isEditMode={isEditMode} 
+                                onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, description: v} : ser))}
+                                multiline
+                                className="text-slate-400 text-xs sm:text-lg leading-relaxed mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                              />
+                            </div>
+
+                            <div className="flex items-center justify-between pt-6 sm:pt-8 border-t border-white/5">
+                              <button 
+                                onClick={() => setSelectedServiceForModal(s)}
+                                className="text-[9px] sm:text-xs font-black uppercase tracking-[0.2em] text-blue-500 hover:text-white transition-colors flex items-center gap-2 sm:gap-3 group/btn"
+                              >
+                                Xem chi tiết 
+                                <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 transition-transform" />
+                              </button>
+                              
+                              <div className="flex -space-x-3">
+                                {[1,2,3].map(i => (
+                                  <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-slate-900 bg-slate-800 overflow-hidden">
+                                    <img src={`https://i.pravatar.cc/100?img=${i + idx}`} alt="User" className="w-full h-full object-cover opacity-60" />
+                                  </div>
+                                ))}
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-slate-900 bg-blue-600 flex items-center justify-center text-[8px] sm:text-[10px] font-black text-white">
+                                  +12
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
             </div>
           </div>
         </section>
@@ -5140,7 +5427,7 @@ const HomePage: React.FC = () => {
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-green-500 border-2 border-slate-900"></div>
                       </div>
                       <div>
-                        <div className="text-xs sm:text-sm font-black text-white uppercase tracking-widest">Carwash Detailing AI Advisor</div>
+                        <div className="text-xs sm:text-sm font-black text-white uppercase tracking-widest">XE ĐẸP AUTO AI Advisor</div>
                         <div className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Chuyên gia tư vấn kỹ thuật</div>
                       </div>
                     </div>
@@ -5668,6 +5955,13 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* News Section */}
+        <NewsSection 
+          siteConfig={siteConfig} 
+          isEditMode={isEditMode} 
+          setSiteConfig={setSiteConfig} 
+        />
 
         {/* Contact Form Section */}
         <ContactSection siteConfig={siteConfig} />

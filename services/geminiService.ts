@@ -3,15 +3,15 @@ import { GoogleGenAI } from "@google/genai";
 
 const SYSTEM_INSTRUCTION = `
 Bạn là một chuyên gia detailing (chăm sóc xe chi tiết) hàng đầu thế giới với hơn 20 năm kinh nghiệm. 
-Tên bạn là "Carwash Detailing Advisor".
+Tên bạn là "XE ĐẸP AUTO Advisor".
 Nhiệm vụ của bạn là:
 1. Tư vấn các giải pháp chăm sóc xe (rửa xe, đánh bóng, phủ ceramic, vệ sinh nội thất...).
 2. Giải đáp thắc mắc về các lỗi thường gặp trên bề mặt sơn, nội thất xe.
 3. Hướng dẫn người dùng cách tự chăm sóc xe cơ bản tại nhà.
-4. Giới thiệu các dịch vụ của Carwash Detailing.
+4. Giới thiệu các dịch vụ của XE ĐẸP AUTO.
 
 VỀ VỊ TRÍ CỬA HÀNG:
-Carwash Detailing tọa lạc tại: 168 Vũ Đức Thận, Long Biên, Hà Nội.
+XE ĐẸP AUTO tọa lạc tại: 168 Vũ Đức Thận, Long Biên, Hà Nội.
 Nếu khách hỏi về đường đi hoặc các địa điểm lân cận, hãy sử dụng công cụ Google Maps để hỗ trợ thông tin chính xác.
 
 Hãy trả lời bằng tiếng Việt, giọng điệu chuyên nghiệp, thân thiện và am hiểu kỹ thuật. 
@@ -159,7 +159,7 @@ export const editImageWithAI = async (base64Image: string, prompt: string) => {
           },
           {
             text: `As a world-class professional car detailing photo editor, please modify this image according to this request: ${prompt}. 
-            Maintain the realism and high-end aesthetic of Carwash Detailing. 
+            Maintain the realism and high-end aesthetic of XE ĐẸP AUTO. 
             Return ONLY the modified image data.`,
           },
         ],
@@ -304,7 +304,7 @@ export const getMaintenanceAdvice = async (vehicleData: {
     2. Danh sách các hạng mục cần kiểm tra/thay thế ngay lập tức.
     3. Lịch trình bảo dưỡng dự kiến cho 10.000km tiếp theo.
     4. Lời khuyên để kéo dài tuổi thọ cho dòng xe cụ thể này.
-    5. Nhắc nhở về các dịch vụ detailing phù hợp tại Carwash Detailing (như vệ sinh khoang máy, gầm xe, nội thất).
+    5. Nhắc nhở về các dịch vụ detailing phù hợp tại XE ĐẸP AUTO (như vệ sinh khoang máy, gầm xe, nội thất).
 
     Hãy trình bày bằng Markdown, chuyên nghiệp, dễ hiểu và đầy đủ.
   `;

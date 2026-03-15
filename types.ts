@@ -107,6 +107,17 @@ export interface DetailingPackage {
   category?: string;
 }
 
+export interface NewsArticle {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  date: string;
+  category: 'tip' | 'news' | 'promotion';
+  author: string;
+}
+
 export interface SiteConfig {
   siteName: string;
   heroTitle: string;
@@ -127,6 +138,8 @@ export interface SiteConfig {
   gallerySubtitle: string;
   reviewsTitle: string;
   reviewsSubtitle: string;
+  newsTitle?: string;
+  newsSubtitle?: string;
   contactAddress: string;
   contactPhone: string;
   contactHours: string;
@@ -150,6 +163,7 @@ export interface SiteConfig {
   promotions?: Promotion[];
   appointments?: Appointment[];
   packages?: DetailingPackage[];
+  news?: NewsArticle[];
 }
 
 export interface Message {
@@ -165,6 +179,7 @@ export interface BookingData {
   serviceId: string;
   subServiceTitle?: string;
   date: string;
+  time?: string;
   note: string;
 }
 
