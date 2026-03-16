@@ -53,10 +53,12 @@ const SEO: React.FC<{
   ogType = 'website',
   keywords 
 }) => {
-  const siteTitle = "XE ĐẸP AUTO - Chăm Sóc Xe Chuyên Nghiệp";
+  const siteTitle = "XE ĐẸP AUTO - Detailing Chuyên Nghiệp Hà Nội | Phủ Ceramic, Dán PPF, Chăm Sóc Xe";
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  const defaultDescription = "XE ĐẸP AUTO - Trung tâm chăm sóc xe hơi chuyên nghiệp tại Hà Nội. Chuyên phủ Ceramic, dán PPF, đổi màu xe, vệ sinh nội thất và nâng cấp xe đẳng cấp.";
+  const defaultDescription = "XE ĐẸP AUTO - Trung tâm Detailing & Chăm sóc xe hơi chuyên nghiệp tại 168 Vũ Đức Thận, Long Biên, Hà Nội. Chuyên Phủ Ceramic Diamond 9H, Dán PPF bảo vệ sơn, Wrap đổi màu, Vệ sinh nội thất & Khoang máy bằng hơi nước nóng. Cam kết chất lượng, sản phẩm chính hãng, kỹ thuật viên tay nghề cao.";
   const metaDescription = description || defaultDescription;
+  const defaultKeywords = "xe đẹp auto, detailing hà nội, chăm sóc xe hơi long biên, phủ ceramic hà nội, dán ppf ô tô, wrap đổi màu xe, vệ sinh nội thất ô tô, vệ sinh khoang máy hơi nước, dán phim cách nhiệt 3m, đánh bóng xe hơi";
+  const metaKeywords = keywords ? `${keywords}, ${defaultKeywords}` : defaultKeywords;
   const url = "https://ais-pre-fqxtftwv5qjyrg55tfcqwp-362195985531.asia-southeast1.run.app";
   const fullUrl = canonical ? `${url}${canonical}` : url;
   const defaultOgImage = "https://images.unsplash.com/photo-1603584173870-7f394833ec96?auto=format&fit=crop&q=80&w=2069";
@@ -65,8 +67,8 @@ const SEO: React.FC<{
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={metaDescription} />
+      <meta name="keywords" content={metaKeywords} />
       <meta name="google-site-verification" content="qf8156WuX4TgFxq_CV1cG3fZsBMEilbxB9LEwe2_oC4" />
-      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={fullUrl} />
 
       {/* Open Graph */}
