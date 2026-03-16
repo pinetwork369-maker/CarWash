@@ -29,7 +29,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
   contactHours: "08:00 - 18:00 (T2-CN)",
   mapTitle: "VỊ TRÍ CỬA HÀNG",
   mapSubtitle: "Ghé thăm XE ĐẸP AUTO để trải nghiệm dịch vụ chăm sóc xe đẳng cấp nhất.",
-  mapEmbedUrl: "https://www.google.com/maps?q=168%20V%C5%A9%20%C4%90%E1%BB%A9c%20Th%E1%BA%ADn%2C%20Long%20Bi%C3%AAn%2C%20H%C3%A0%20N%E1%BB%99i&hl=vi&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.324348545806!2d105.89065637503223!3d21.05970348059952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a9796e62232b%3A0x6b4467773024898d!2zMTY4IFbFqSDEkOG7qWMgVGjhuq1uLCBWaeG7h3QgSMawbmcsIExvbmcgQmnDqm4sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1710587654321!5m2!1svi!2s",
   wrapPPFTitle: "WRAP ĐỔI MÀU & DÁN PPF",
   wrapPPFSubtitle: "Bảo Vệ & Nâng Tầm Đẳng Cấp",
   wrapPPFDescription: "Thay đổi diện mạo xế cưng với hàng trăm màu sắc Wrap độc đáo hoặc bảo vệ lớp sơn nguyên bản tuyệt đối bằng phim PPF (Paint Protection Film) tự phục hồi vết xước. Giải pháp tối ưu để giữ gìn giá trị và vẻ đẹp bền vững.",

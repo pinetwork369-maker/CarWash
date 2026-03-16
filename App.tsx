@@ -11,7 +11,8 @@ import {
   AreaChart,
   Area
 } from 'recharts';
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper } from 'lucide-react';
 import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS, DEFAULT_NEWS } from './constants.tsx';
@@ -34,6 +35,97 @@ declare global {
     };
   }
 }
+
+// --- SEO Component ---
+
+const SEO: React.FC<{
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  keywords?: string;
+}> = ({ 
+  title, 
+  description, 
+  canonical, 
+  ogImage, 
+  ogType = 'website',
+  keywords 
+}) => {
+  const siteTitle = "XE ĐẸP AUTO - Chăm Sóc Xe Chuyên Nghiệp";
+  const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+  const defaultDescription = "XE ĐẸP AUTO - Trung tâm chăm sóc xe hơi chuyên nghiệp tại Hà Nội. Chuyên phủ Ceramic, dán PPF, đổi màu xe, vệ sinh nội thất và nâng cấp xe đẳng cấp.";
+  const metaDescription = description || defaultDescription;
+  const url = "https://ais-pre-fqxtftwv5qjyrg55tfcqwp-362195985531.asia-southeast1.run.app";
+  const fullUrl = canonical ? `${url}${canonical}` : url;
+  const defaultOgImage = "https://images.unsplash.com/photo-1603584173870-7f394833ec96?auto=format&fit=crop&q=80&w=2069";
+
+  return (
+    <Helmet>
+      <title>{fullTitle}</title>
+      <meta name="description" content={metaDescription} />
+      <meta name="google-site-verification" content="qf8156WuX4TgFxq_CV1cG3fZsBMEilbxB9LEwe2_oC4" />
+      {keywords && <meta name="keywords" content={keywords} />}
+      <link rel="canonical" href={fullUrl} />
+
+      {/* Open Graph */}
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:url" content={fullUrl} />
+      <meta property="og:image" content={ogImage || defaultOgImage} />
+      <meta property="og:type" content={ogType} />
+      <meta property="og:site_name" content="XE ĐẸP AUTO" />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={metaDescription} />
+      <meta name="twitter:image" content={ogImage || defaultOgImage} />
+
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "XE ĐẸP AUTO",
+          "image": defaultOgImage,
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "168 Vũ Đức Thận",
+            "addressLocality": "Long Biên",
+            "addressRegion": "Hà Nội",
+            "postalCode": "100000",
+            "addressCountry": "VN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 21.0597,
+            "longitude": 105.8906
+          },
+          "url": url,
+          "telephone": "0588896699",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "08:00",
+              "closes": "18:00"
+            }
+          ]
+        })}
+      </script>
+    </Helmet>
+  );
+};
 
 // --- Utilities ---
 
@@ -809,9 +901,9 @@ const NewsSection: React.FC<{
   siteConfig: SiteConfig; 
   isEditMode: boolean; 
   setSiteConfig: React.Dispatch<React.SetStateAction<SiteConfig>>;
-}> = ({ siteConfig, isEditMode, setSiteConfig }) => {
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
-
+  selectedArticle: NewsArticle | null;
+  setSelectedArticle: (article: NewsArticle | null) => void;
+}> = ({ siteConfig, isEditMode, setSiteConfig, selectedArticle, setSelectedArticle }) => {
   return (
     <section id="news" className="py-24 relative overflow-hidden bg-slate-950">
       <div className="container mx-auto px-4 relative z-10">
@@ -1007,7 +1099,7 @@ const ContactSection: React.FC<{ siteConfig: SiteConfig }> = ({ siteConfig }) =>
               </div>
 
               {/* Embedded Map in Contact Section */}
-              <div className="rounded-[32px] overflow-hidden border border-white/10 h-48 sm:h-64 shadow-2xl group/map relative mb-6">
+              <div className="rounded-[32px] overflow-hidden border border-white/10 h-64 sm:h-80 shadow-2xl group/map relative mb-6 bg-slate-900">
                 <iframe 
                   src={siteConfig.mapEmbedUrl} 
                   width="100%" 
@@ -1017,7 +1109,7 @@ const ContactSection: React.FC<{ siteConfig: SiteConfig }> = ({ siteConfig }) =>
                   loading="lazy" 
                   referrerPolicy="no-referrer"
                   title="Bản đồ vị trí"
-                  className="grayscale group-hover/map:grayscale-0 transition-all duration-700"
+                  className="transition-all duration-700"
                 ></iframe>
                 <div className="absolute inset-0 pointer-events-none border border-white/5 rounded-[32px]"></div>
               </div>
@@ -4272,7 +4364,11 @@ const HomePage: React.FC = () => {
   const [serviceCategory, setServiceCategory] = useState<string>('all');
   const [serviceSearch, setServiceSearch] = useState<string>('');
   const [selectedServiceForModal, setSelectedServiceForModal] = useState<Service | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [preSelectedSubService, setPreSelectedSubService] = useState<string | undefined>(undefined);
+  
+  const { id } = useParams();
+  const location = useLocation();
   
   const handlePayment = async (serviceName: string, price: string, customerName: string, customerEmail?: string) => {
     try {
@@ -4455,7 +4551,29 @@ const HomePage: React.FC = () => {
     return saved ? JSON.parse(saved) : DEFAULT_REVIEWS;
   });
 
-  const [aiMessages, setAiMessages] = useState<Message[]>([{ role: 'model', text: 'Chào bạn! Tôi là XE ĐẸP AUTO AI. Bạn cần tư vấn về dịch vụ detailing nào?' }]);
+  useEffect(() => {
+    if (id) {
+      if (location.pathname.startsWith('/services/')) {
+        const service = services.find(s => s.id === id);
+        if (service) setSelectedServiceForModal(service);
+      } else if (location.pathname.startsWith('/news/')) {
+        const article = (siteConfig.news || []).find(a => a.id === id);
+        if (article) setSelectedArticle(article);
+      }
+    }
+  }, [id, location.pathname, services, siteConfig.news]);
+
+  const [aiMessages, setAiMessages] = useState<Message[]>([
+    { role: 'model', text: 'Chào bạn! Tôi là **XE ĐẸP AUTO AI Advisor**. Rất vui được hỗ trợ bạn.\n\nTôi có thể giúp bạn:\n- Tư vấn các gói **Ceramic & PPF**.\n- Hướng dẫn chăm sóc xe tại nhà.\n- Giải đáp thắc mắc về kỹ thuật detailing.\n- Cung cấp thông tin về các dịch vụ tại cửa hàng.\n\nBạn đang quan tâm đến vấn đề gì cho xế yêu của mình?' }
+  ]);
+
+  const clearChat = () => {
+    if (window.confirm('Bạn có muốn xóa toàn bộ lịch sử trò chuyện không?')) {
+      setAiMessages([
+        { role: 'model', text: 'Chào bạn! Tôi là **XE ĐẸP AUTO AI Advisor**. Rất vui được hỗ trợ bạn.\n\nTôi có thể giúp bạn:\n- Tư vấn các gói **Ceramic & PPF**.\n- Hướng dẫn chăm sóc xe tại nhà.\n- Giải đáp thắc mắc về kỹ thuật detailing.\n- Cung cấp thông tin về các dịch vụ tại cửa hàng.\n\nBạn đang quan tâm đến vấn đề gì cho xế yêu của mình?' }
+      ]);
+    }
+  };
   const [aiInput, setAiInput] = useState('');
   const [aiProvider, setAiProvider] = useState<AIProvider>('gemini');
   const [isAiLoading, setIsAiLoading] = useState(false);
@@ -4496,6 +4614,14 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen selection:bg-blue-600/30">
+      <SEO 
+        title={selectedArticle ? selectedArticle.title : selectedServiceForModal ? selectedServiceForModal.title : undefined}
+        description={selectedArticle ? selectedArticle.excerpt : selectedServiceForModal ? selectedServiceForModal.description : undefined}
+        canonical={location.pathname}
+        ogImage={selectedArticle ? selectedArticle.image : selectedServiceForModal ? selectedServiceForModal.image : undefined}
+        ogType={selectedArticle ? 'article' : 'website'}
+        keywords={selectedArticle ? `${selectedArticle.category}, news, xe dep auto` : selectedServiceForModal ? `${selectedServiceForModal.category}, service, car care` : undefined}
+      />
       <Toaster />
       {/* Top Bar */}
       <div className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 bg-slate-900/80 backdrop-blur-md border-b border-white/5 py-2 ${
@@ -4721,10 +4847,10 @@ const HomePage: React.FC = () => {
 
               <button 
                 onClick={() => setIsBookingModalOpen(true)}
-                className="relative group overflow-hidden bg-blue-600 hover:bg-blue-500 text-white px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/40 transition-all active:scale-95"
+                className="relative group overflow-hidden bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 active:shadow-inner"
               >
                 <span className="relative z-10">Đặt Lịch Ngay</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </button>
             </div>
           </div>
@@ -4872,12 +4998,12 @@ const HomePage: React.FC = () => {
               >
                 <button 
                   onClick={() => setIsBookingModalOpen(true)}
-                  className="group relative bg-blue-600 hover:bg-blue-500 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest shadow-2xl shadow-blue-900/40 transition-all active:scale-95 overflow-hidden"
+                  className="group relative bg-blue-600 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest shadow-2xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 active:shadow-inner overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     Đặt Lịch Ngay <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </button>
                 <button 
                   onClick={() => scrollToSection('services')}
@@ -5437,12 +5563,18 @@ const HomePage: React.FC = () => {
                         onChange={(e) => setAiProvider(e.target.value as AIProvider)}
                         className="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 outline-none focus:border-blue-500 transition-all cursor-pointer"
                       >
-                        <option value="gemini" className="bg-slate-900">Gemini (Default)</option>
+                        <option value="gemini" className="bg-slate-900">Gemini (Free)</option>
                         <option value="openai" className="bg-slate-900">OpenAI (GPT-4o)</option>
                         <option value="claude" className="bg-slate-900">Claude (3.5 Sonnet)</option>
                       </select>
+                      <button 
+                        onClick={clearChat}
+                        title="Xóa lịch sử trò chuyện"
+                        className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-red-500/20 hover:text-red-500 transition-all"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                       <button className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-white/10 transition-all"><Phone className="w-4 h-4" /></button>
-                      <button className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-white/10 transition-all"><MoreVertical className="w-4 h-4" /></button>
                     </div>
                   </div>
 
@@ -5501,11 +5633,17 @@ const HomePage: React.FC = () => {
                       </button>
                     </div>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {['Giá phủ Ceramic?', 'PPF là gì?', 'Địa chỉ ở đâu?'].map(text => (
+                      {[
+                        'Giá phủ Ceramic?', 
+                        'PPF là gì?', 
+                        'Vệ sinh nội thất bao nhiêu?', 
+                        'Địa chỉ ở đâu?',
+                        'Mẹo rửa xe tại nhà'
+                      ].map(text => (
                         <button 
                           key={text}
                           onClick={() => { setAiInput(text); }}
-                          className="text-[9px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-500 transition-colors bg-white/5 px-3 py-1 rounded-lg border border-white/5"
+                          className="text-[9px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-500 hover:bg-blue-500/10 transition-all bg-white/5 px-4 py-2 rounded-full border border-white/5"
                         >
                           {text}
                         </button>
@@ -5960,7 +6098,9 @@ const HomePage: React.FC = () => {
         <NewsSection 
           siteConfig={siteConfig} 
           isEditMode={isEditMode} 
-          setSiteConfig={setSiteConfig} 
+          setSiteConfig={setSiteConfig}
+          selectedArticle={selectedArticle}
+          setSelectedArticle={setSelectedArticle}
         />
 
         {/* Contact Form Section */}
@@ -6284,6 +6424,9 @@ const App: React.FC = () => (
   <Router>
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/services/:id" element={<HomePage />} />
+      <Route path="/news/:id" element={<HomePage />} />
+      <Route path="*" element={<HomePage />} />
     </Routes>
   </Router>
 );
