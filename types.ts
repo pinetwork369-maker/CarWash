@@ -53,6 +53,36 @@ export interface CustomerRecord {
   paymentStatus?: 'paid' | 'pending' | 'partially_paid';
   notes?: string;
   rating?: number;
+  loyaltyPoints?: number; // Điểm tích lũy
+}
+
+export interface InventoryItem {
+  id: string;
+  name: string;
+  category: string;
+  quantity: number;
+  unit: string;
+  minThreshold: number; // Ngưỡng cảnh báo hết hàng
+  lastRestocked: string;
+  pricePerUnit?: number;
+}
+
+export interface ECertificate {
+  id: string;
+  customerName: string;
+  licensePlate: string;
+  carModel?: string;
+  serviceType: string;
+  issueDate: string;
+  expiryDate: string;
+  technician?: string;
+  qrCode: string;
+  status: 'active' | 'expired';
+}
+
+export interface LoyaltyConfig {
+  pointsPer100k: number; // Số điểm nhận được mỗi 100k chi tiêu
+  pointValue: number; // Giá trị quy đổi của 1 điểm (VNĐ)
 }
 
 export interface PremiumSolution {
@@ -94,6 +124,7 @@ export interface Appointment {
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
   note?: string;
   createdAt: string;
+  isRead?: boolean;
 }
 
 export interface DetailingPackage {
@@ -116,6 +147,25 @@ export interface NewsArticle {
   date: string;
   category: 'tip' | 'news' | 'promotion';
   author: string;
+}
+
+export interface AppNotification {
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'success' | 'warning' | 'error';
+  date: string;
+  isRead: boolean;
+  link?: string;
+}
+
+export interface Expense {
+  id: string;
+  title: string;
+  amount: number;
+  category: 'rent' | 'salary' | 'utility' | 'inventory' | 'marketing' | 'other';
+  date: string;
+  note?: string;
 }
 
 export interface SiteConfig {
@@ -154,16 +204,19 @@ export interface SiteConfig {
   tuningSubtitle: string;
   tuningDescription: string;
   copyright: string;
-  adminPassword?: string; // Mật khẩu quản trị
+  adminPassword?: string; // Mật khẩu quản trị (Kế toán)
+  designPassword?: string; // Mật khẩu thiết kế (Giao diện)
   logoUrl?: string;
   facebookUrl?: string;
   youtubeUrl?: string;
   instagramUrl?: string;
   zaloNumber?: string;
+  loyaltyConfig?: LoyaltyConfig;
   promotions?: Promotion[];
   appointments?: Appointment[];
   packages?: DetailingPackage[];
   news?: NewsArticle[];
+  expenses?: Expense[];
 }
 
 export interface Message {

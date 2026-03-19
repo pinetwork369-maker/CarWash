@@ -5,9 +5,10 @@ import { VehicleTracking, TrackingStep } from './types';
 
 interface TrackingSectionProps {
   trackingData: VehicleTracking[];
+  t: (key: string) => string;
 }
 
-export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }) => {
+export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, t }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleTracking | null>(null);
 
@@ -26,9 +27,9 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
 
   const getVehicleStatusBadge = (status: string) => {
     switch (status) {
-      case 'ready': return <span className="px-2 py-0.5 bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase rounded-full border border-emerald-500/20">Sẵn sàng</span>;
-      case 'working': return <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[10px] font-black uppercase rounded-full border border-blue-500/20">Đang xử lý</span>;
-      default: return <span className="px-2 py-0.5 bg-slate-500/10 text-slate-500 text-[10px] font-black uppercase rounded-full border border-slate-500/20">Đang chờ</span>;
+      case 'ready': return <span className="px-2 py-0.5 bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase rounded-full border border-emerald-500/20">{t('status_ready')}</span>;
+      case 'working': return <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[10px] font-black uppercase rounded-full border border-blue-500/20">{t('status_working')}</span>;
+      default: return <span className="px-2 py-0.5 bg-slate-500/10 text-slate-500 text-[10px] font-black uppercase rounded-full border border-slate-500/20">{t('status_waiting')}</span>;
     }
   };
 
@@ -51,7 +52,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em]">Hệ thống theo dõi trực tuyến</span>
+              <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em]">{t('tracking_system')}</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -60,7 +61,12 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
               transition={{ delay: 0.1 }}
               className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]"
             >
-              Kiểm Tra <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-emerald-500 to-blue-500 bg-[length:200%_auto] animate-gradient">Tiến Độ</span>
+              {t('check_progress').split(' ').map((word, i) => (
+                <React.Fragment key={i}>
+                  {i === 2 ? <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-emerald-500 to-blue-500 bg-[length:200%_auto] animate-gradient">{word}</span> : word}
+                  {' '}
+                </React.Fragment>
+              ))}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -69,17 +75,17 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
               transition={{ delay: 0.2 }}
               className="text-slate-400 max-w-2xl mx-auto font-medium text-lg"
             >
-              Minh bạch trong từng công đoạn. Nhập biển số xe của bạn để xem quy trình chăm sóc đang diễn ra như thế nào.
+              {t('tracking_desc')}
             </motion.p>
           </div>
 
           {/* Quick Stats Summary */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {[
-              { label: 'Đang xử lý', count: trackingData.filter(v => v.status === 'working').length, icon: Timer, color: 'text-blue-500' },
-              { label: 'Sẵn sàng bàn giao', count: trackingData.filter(v => v.status === 'ready').length, icon: CheckCircle2, color: 'text-emerald-500' },
-              { label: 'Đang chờ', count: trackingData.filter(v => v.status === 'waiting').length, icon: Clock, color: 'text-slate-500' },
-              { label: 'Tổng số xe', count: trackingData.length, icon: Car, color: 'text-white' },
+              { label: t('stat_working'), count: trackingData.filter(v => v.status === 'working').length, icon: Timer, color: 'text-blue-500' },
+              { label: t('stat_ready'), count: trackingData.filter(v => v.status === 'ready').length, icon: CheckCircle2, color: 'text-emerald-500' },
+              { label: t('stat_waiting'), count: trackingData.filter(v => v.status === 'waiting').length, icon: Clock, color: 'text-slate-500' },
+              { label: t('stat_total'), count: trackingData.length, icon: Car, color: 'text-white' },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
@@ -109,14 +115,14 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
               </div>
               <input
                 type="text"
-                placeholder="Nhập biển số xe của bạn (VD: 30A-123.45)..."
+                placeholder={t('search_plate_placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-[32px] py-8 pl-20 pr-8 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500/50 transition-all text-xl font-black uppercase tracking-widest"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 hidden md:block">
                 <div className="px-6 py-3 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-blue-600/20">
-                  Tìm kiếm ngay
+                  {t('search_now')}
                 </div>
               </div>
             </div>
@@ -157,7 +163,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
                       
                       <div className="flex flex-col md:items-end gap-4">
                         <div className="text-left md:text-right">
-                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Tiến độ hiện tại</p>
+                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">{t('current_progress')}</p>
                           <div className="flex items-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
                             <p className="text-white font-black uppercase text-sm tracking-tight">{vehicle.steps[vehicle.currentStepIndex]?.name}</p>
@@ -188,15 +194,15 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
                   <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-6">
                     <Search className="w-8 h-8 text-slate-600" />
                   </div>
-                  <h4 className="text-white font-black uppercase tracking-widest mb-2">Không tìm thấy xe</h4>
-                  <p className="text-slate-500 font-medium">Vui lòng kiểm tra lại biển số xe bạn đã nhập.</p>
+                  <h4 className="text-white font-black uppercase tracking-widest mb-2">{t('no_vehicle_found')}</h4>
+                  <p className="text-slate-500 font-medium">{t('check_plate_again')}</p>
                 </motion.div>
               ) : (
                 <div className="text-center py-20 opacity-20 grayscale">
                    <div className="w-24 h-24 rounded-[40px] bg-white/5 flex items-center justify-center mx-auto mb-8 border border-white/10">
                     <Car className="w-12 h-12 text-white" />
                   </div>
-                  <p className="text-white font-black uppercase tracking-[0.3em] text-xs">Nhập biển số để bắt đầu theo dõi</p>
+                  <p className="text-white font-black uppercase tracking-[0.3em] text-xs">{t('enter_plate_to_track')}</p>
                 </div>
               )}
             </AnimatePresence>
@@ -232,7 +238,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
                     <div className="flex items-center gap-3">
                       <p className="text-blue-500 font-black uppercase tracking-widest text-xs">{selectedVehicle.carModel}</p>
                       <span className="w-1 h-1 bg-slate-700 rounded-full" />
-                      <p className="text-emerald-500 font-black uppercase tracking-widest text-xs">{selectedVehicle.serviceType || 'Dịch vụ Detailing'}</p>
+                      <p className="text-emerald-500 font-black uppercase tracking-widest text-xs">{selectedVehicle.serviceType || t('default_service')}</p>
                     </div>
                   </div>
                   <button 
@@ -247,21 +253,21 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
                   <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
                       <User className="w-3 h-3 text-slate-500" />
-                      <span className="text-[10px] font-black text-slate-500 uppercase">Khách hàng</span>
+                      <span className="text-[10px] font-black text-slate-500 uppercase">{t('customer')}</span>
                     </div>
                     <p className="text-white font-bold text-sm">{selectedVehicle.customerName}</p>
                   </div>
                   <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
                       <Briefcase className="w-3 h-3 text-slate-500" />
-                      <span className="text-[10px] font-black text-slate-500 uppercase">KTV Phụ trách</span>
+                      <span className="text-[10px] font-black text-slate-500 uppercase">{t('technician_in_charge')}</span>
                     </div>
-                    <p className="text-white font-bold text-sm">{selectedVehicle.technicianName || 'Đang cập nhật'}</p>
+                    <p className="text-white font-bold text-sm">{selectedVehicle.technicianName || t('ai_processing')}</p>
                   </div>
                   <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
                       <Clock className="w-3 h-3 text-slate-500" />
-                      <span className="text-[10px] font-black text-slate-500 uppercase">Dự kiến xong</span>
+                      <span className="text-[10px] font-black text-slate-500 uppercase">{t('estimated_finish')}</span>
                     </div>
                     <p className="text-white font-bold text-sm">
                       {new Date(selectedVehicle.estimatedEndTime).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
@@ -270,7 +276,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
                   <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
                       <DollarSign className="w-3 h-3 text-slate-500" />
-                      <span className="text-[10px] font-black text-slate-500 uppercase">Tổng chi phí</span>
+                      <span className="text-[10px] font-black text-slate-500 uppercase">{t('total_cost')}</span>
                     </div>
                     <p className="text-white font-bold text-sm">{selectedVehicle.totalAmount?.toLocaleString('vi-VN')}đ</p>
                   </div>
@@ -311,14 +317,14 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
                               <div className="flex items-center gap-2 mt-1">
                                 <Clock className="w-3 h-3 text-slate-500" />
                                 <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                                  Hoàn thành lúc: {new Date(step.timestamp).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+                                  {t('finish_at')} {new Date(step.timestamp).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
                                 </span>
                               </div>
                             )}
                           </div>
                           {step.status === 'in-progress' && (
                             <span className="px-3 py-1 bg-blue-500/10 text-blue-500 text-[8px] font-black uppercase tracking-widest rounded-full border border-blue-500/20">
-                              Đang thực hiện
+                              {t('in_progress_badge')}
                             </span>
                           )}
                         </div>
@@ -341,7 +347,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
                                   <User className="w-3 h-3 text-slate-400" />
                                 </div>
                                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                                  Kỹ thuật viên: <span className="text-slate-300">{step.technician}</span>
+                                  {t('technician')} <span className="text-slate-300">{step.technician}</span>
                                 </p>
                               </div>
                             )}
@@ -357,13 +363,13 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData }
               <div className="p-8 bg-white/5 border-t border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Dữ liệu được bảo mật & cập nhật liên tục</span>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('data_secured')}</span>
                 </div>
                 <button 
                   onClick={() => setSelectedVehicle(null)}
                   className="px-6 py-2 bg-white text-black font-black text-[10px] uppercase rounded-full hover:bg-slate-200 transition-colors"
                 >
-                  Đóng
+                  {t('close')}
                 </button>
               </div>
             </motion.div>

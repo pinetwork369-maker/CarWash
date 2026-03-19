@@ -7,9 +7,10 @@ import { NewsArticle } from './types';
 interface NewsDetailModalProps {
   article: NewsArticle | null;
   onClose: () => void;
+  t: (key: string) => string;
 }
 
-export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClose }) => {
+export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClose, t }) => {
   return (
     <AnimatePresence>
       {article && (
@@ -50,7 +51,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                       {article.category}
                     </span>
                     <span className="bg-white/10 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-white/10">
-                      5 Phút Đọc
+                      {t('read_time')}
                     </span>
                   </div>
                   <h2 className="text-3xl sm:text-6xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-4">
@@ -74,7 +75,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                     {article.author}
                   </div>
                   <button className="ml-auto flex items-center gap-2 hover:text-white transition-colors">
-                    <Share2 className="w-4 h-4" /> Chia sẻ
+                    <Share2 className="w-4 h-4" /> {t('share_article')}
                   </button>
                 </div>
 
@@ -90,9 +91,9 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                       {article.author.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Được viết bởi</p>
+                      <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">{t('written_by')}</p>
                       <p className="text-xl font-black text-white uppercase tracking-tight">{article.author}</p>
-                      <p className="text-xs text-slate-500 font-medium">Chuyên gia Detailing tại XE ĐẸP AUTO</p>
+                      <p className="text-xs text-slate-500 font-medium">{t('detailing_expert')}</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -100,7 +101,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                       onClick={onClose}
                       className="bg-white text-slate-950 px-10 py-5 rounded-2xl font-black uppercase tracking-widest transition-all active:scale-95 text-xs"
                     >
-                      Đóng Bài Viết
+                      {t('close_article')}
                     </button>
                   </div>
                 </div>

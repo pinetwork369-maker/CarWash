@@ -9,14 +9,17 @@ import {
   Tooltip, 
   ResponsiveContainer,
   AreaChart,
-  Area
+  Area,
+  PieChart as RePieChart,
+  Pie,
+  Cell
 } from 'recharts';
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper } from 'lucide-react';
-import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS, DEFAULT_NEWS } from './constants.tsx';
-import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage, NewsArticle } from './types.ts';
+import { MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ArrowUp, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper, Bot, Boxes, Gift, BarChart3, FileCheck, AlertTriangle } from 'lucide-react';
+import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS, DEFAULT_NEWS, DEFAULT_INVENTORY, DEFAULT_E_CERTIFICATES } from './constants.tsx';
+import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage, NewsArticle, AppNotification, InventoryItem, ECertificate, LoyaltyConfig } from './types.ts';
 import { TrackingSection, TrackingManagement, VehicleTracking, DEFAULT_TRACKING } from './components/Tracking';
 import { FeedbackSection, FeedbackManagement } from './components/Feedback';
 import { Review } from './types.ts';
@@ -178,11 +181,12 @@ const AiHelperButton: React.FC<{
 const EditableText: React.FC<{ 
   text: string; 
   isEditMode: boolean; 
+  isDesignAuthenticated?: boolean;
   onSave: (newVal: string) => void; 
   className?: string; 
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'div';
   multiline?: boolean;
-}> = ({ text, isEditMode, onSave, className, tag = 'p', multiline = false }) => {
+}> = ({ text, isEditMode, isDesignAuthenticated = false, onSave, className, tag = 'p', multiline = false }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [tempValue, setTempValue] = useState(text || '');
   const inputRef = useRef<HTMLTextAreaElement | HTMLInputElement>(null);
@@ -203,7 +207,9 @@ const EditableText: React.FC<{
   const Tag = tag as any;
   const safeText = text || '';
 
-  if (isEditMode && isEditing) {
+  const canEdit = isEditMode && isDesignAuthenticated;
+
+  if (canEdit && isEditing) {
     const commonClasses = `${className} bg-slate-800 text-white border-2 border-blue-500 rounded px-2 outline-none w-full shadow-[0_0_20px_rgba(59,130,246,0.4)] z-10`;
     return multiline ? (
       <textarea
@@ -226,13 +232,13 @@ const EditableText: React.FC<{
 
   return (
     <div 
-      className={`relative group/edit ${isEditMode ? 'cursor-text hover:ring-2 hover:ring-blue-500/50 hover:bg-blue-500/5 p-1 rounded transition-all duration-300' : ''}`} 
-      onClick={() => isEditMode && setIsEditing(true)}
+      className={`relative group/edit ${canEdit ? 'cursor-text hover:ring-2 hover:ring-blue-500/50 hover:bg-blue-500/5 p-1 rounded transition-all duration-300' : ''}`} 
+      onClick={() => canEdit && setIsEditing(true)}
     >
       <Tag className={`${className} transition-colors duration-300`}>
         {safeText.split('\n').map((line, i) => <React.Fragment key={i}>{line}{i < safeText.split('\n').length - 1 && <br/>}</React.Fragment>)}
       </Tag>
-      {isEditMode && !isEditing && (
+      {canEdit && !isEditing && (
         <motion.span 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -248,10 +254,11 @@ const EditableText: React.FC<{
 const EditableImage: React.FC<{
   src: string;
   isEditMode: boolean;
+  isDesignAuthenticated?: boolean;
   onUpload: (base64: string) => void;
   className: string;
   alt: string;
-}> = ({ src, isEditMode, onUpload, className, alt }) => {
+}> = ({ src, isEditMode, isDesignAuthenticated = false, onUpload, className, alt }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -262,10 +269,12 @@ const EditableImage: React.FC<{
     }
   };
 
+  const canEdit = isEditMode && isDesignAuthenticated;
+
   return (
     <div className={`relative group/img ${className}`}>
       <img src={src} alt={alt} className="w-full h-full object-cover" />
-      {isEditMode && (
+      {canEdit && (
         <div className="absolute inset-0 bg-blue-600/30 backdrop-blur-[2px] opacity-0 group-hover/img:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
           <button 
             onClick={() => fileInputRef.current?.click()}
@@ -286,6 +295,206 @@ const EditableImage: React.FC<{
   );
 };
 
+const NotificationCenter: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  notifications: AppNotification[];
+  onMarkAsRead: (id: string) => void;
+  onClearAll: () => void;
+}> = ({ isOpen, onClose, notifications, onMarkAsRead, onClearAll }) => {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[300] flex items-start justify-end p-4 bg-black/20 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 300, opacity: 0 }}
+          className="bg-slate-900 border border-white/10 w-full max-w-sm rounded-[32px] shadow-2xl overflow-hidden mt-20"
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="p-6 border-b border-white/5 flex items-center justify-between bg-slate-950/50">
+            <div>
+              <h3 className="text-lg font-black text-white uppercase tracking-tighter">Thông báo</h3>
+              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+                {notifications.filter(n => !n.isRead).length} thông báo mới
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={onClearAll}
+                className="p-2 hover:bg-white/5 rounded-xl text-slate-500 hover:text-red-500 transition-all"
+                title="Xóa tất cả"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+              <button 
+                onClick={onClose}
+                className="p-2 hover:bg-white/5 rounded-xl text-slate-500 hover:text-white transition-all"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
+            {notifications.length === 0 ? (
+              <div className="p-12 text-center">
+                <div className="w-16 h-16 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-600">
+                  <BellOff className="w-8 h-8" />
+                </div>
+                <p className="text-slate-500 text-sm font-medium">Không có thông báo nào</p>
+              </div>
+            ) : (
+              <div className="divide-y divide-white/5">
+                {notifications.map(notification => (
+                  <div 
+                    key={notification.id}
+                    className={`p-5 hover:bg-white/5 transition-all cursor-pointer relative group ${!notification.isRead ? 'bg-blue-600/5' : ''}`}
+                    onClick={() => onMarkAsRead(notification.id)}
+                  >
+                    {!notification.isRead && (
+                      <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-blue-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                    )}
+                    <div className="flex gap-4">
+                      <div className={`w-10 h-10 rounded-xl shrink-0 flex items-center justify-center ${
+                        notification.type === 'success' ? 'bg-emerald-500/10 text-emerald-500' :
+                        notification.type === 'warning' ? 'bg-amber-500/10 text-amber-500' :
+                        notification.type === 'error' ? 'bg-red-500/10 text-red-500' :
+                        'bg-blue-500/10 text-blue-500'
+                      }`}>
+                        {notification.type === 'success' ? <CheckCircle2 className="w-5 h-5" /> :
+                         notification.type === 'warning' ? <AlertCircle className="w-5 h-5" /> :
+                         notification.type === 'error' ? <XCircle className="w-5 h-5" /> :
+                         <Info className="w-5 h-5" />}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-1">
+                          <h4 className="text-sm font-bold text-white truncate pr-4">{notification.title}</h4>
+                          <span className="text-[9px] text-slate-500 font-medium whitespace-nowrap">{notification.date}</span>
+                        </div>
+                        <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">{notification.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {notifications.length > 0 && (
+            <div className="p-4 bg-slate-950/50 border-t border-white/5">
+              <button 
+                onClick={onClose}
+                className="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-[10px] font-black uppercase tracking-widest transition-all border border-white/10"
+              >
+                Đóng
+              </button>
+            </div>
+          )}
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+const BeforeAfterSlider: React.FC<{ before: string; after: string; title?: string }> = ({ before, after, title }) => {
+  const [sliderPos, setSliderPos] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+    const position = ((x - rect.left) / rect.width) * 100;
+    setSliderPos(Math.min(Math.max(position, 0), 100));
+  };
+
+  return (
+    <div 
+      ref={containerRef}
+      className="relative w-full aspect-video rounded-[32px] overflow-hidden cursor-col-resize select-none group"
+      onMouseMove={handleMove}
+      onTouchMove={handleMove}
+    >
+      <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" />
+      <div 
+        className="absolute inset-0 w-full h-full overflow-hidden"
+        style={{ width: `${sliderPos}%` }}
+      >
+        <img src={before} alt="Before" className="absolute inset-0 w-full h-full object-cover max-w-none" style={{ width: containerRef.current?.offsetWidth }} />
+      </div>
+      <div 
+        className="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] z-10"
+        style={{ left: `${sliderPos}%` }}
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-xl flex items-center justify-center">
+          <div className="flex gap-0.5">
+            <div className="w-0.5 h-3 bg-slate-400 rounded-full" />
+            <div className="w-0.5 h-3 bg-slate-400 rounded-full" />
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase text-white tracking-widest">Trước</div>
+      <div className="absolute bottom-4 right-4 bg-blue-600/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase text-white tracking-widest">Sau</div>
+      {title && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white uppercase tracking-tighter">
+          {title}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const FloatingSocialButtons: React.FC<{ zaloNumber?: string; facebookUrl?: string }> = ({ zaloNumber, facebookUrl }) => {
+  return (
+    <div className="fixed bottom-6 right-6 z-[200] flex flex-col gap-3">
+      {zaloNumber && (
+        <motion.a
+          href={`https://zalo.me/${zaloNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.1 }}
+          className="w-14 h-14 bg-blue-500 rounded-full shadow-2xl flex items-center justify-center text-white overflow-hidden border-2 border-white/20"
+        >
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/1200px-Icon_of_Zalo.svg.png" alt="Zalo" className="w-full h-full object-cover" />
+        </motion.a>
+      )}
+      {facebookUrl && (
+        <motion.a
+          href={facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.1 }}
+          className="w-14 h-14 bg-[#1877F2] rounded-full shadow-2xl flex items-center justify-center text-white border-2 border-white/20"
+        >
+          <Facebook className="w-7 h-7" />
+        </motion.a>
+      )}
+      <motion.button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        className="w-14 h-14 bg-slate-900/80 backdrop-blur-md rounded-full shadow-2xl flex items-center justify-center text-white border-2 border-white/10"
+      >
+        <ArrowUp className="w-6 h-6" />
+      </motion.button>
+    </div>
+  );
+};
+
 const BookingModal: React.FC<{ 
   isOpen: boolean; 
   onClose: () => void; 
@@ -294,7 +503,10 @@ const BookingModal: React.FC<{
   setSiteConfig: React.Dispatch<React.SetStateAction<SiteConfig>>;
   handlePayment: (serviceName: string, price: string, customerName: string, customerEmail?: string) => Promise<void>;
   preSelectedSubService?: string;
-}> = ({ isOpen, onClose, services, siteConfig, setSiteConfig, handlePayment, preSelectedSubService }) => {
+  onAddNotification?: (notification: Omit<AppNotification, 'id' | 'date' | 'isRead'>) => void;
+  scrollToSection: (id: string) => void;
+}> = ({ isOpen, onClose, services, siteConfig, setSiteConfig, handlePayment, preSelectedSubService, onAddNotification, scrollToSection }) => {
+  const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
@@ -310,25 +522,44 @@ const BookingModal: React.FC<{
 
   if (!isOpen) return null;
 
-  const validate = () => {
+  const validateStep = (currentStep: number) => {
     const newErrors: { phone?: string; email?: string } = {};
-    const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
-    if (!phoneRegex.test(formData.phone)) {
-      newErrors.phone = 'SĐT không hợp lệ';
-    }
-    if (formData.email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        newErrors.email = 'Email sai định dạng';
+    if (currentStep === 1) {
+      const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+      if (!phoneRegex.test(formData.phone)) {
+        newErrors.phone = 'SĐT không hợp lệ';
       }
+      if (formData.email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+          newErrors.email = 'Email sai định dạng';
+        }
+      }
+      if (!formData.name || !formData.carModel) return false;
+    }
+    if (currentStep === 2) {
+      if (!formData.serviceId) return false;
+    }
+    if (currentStep === 3) {
+      if (!formData.date || !formData.time) return false;
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const nextStep = () => {
+    if (validateStep(step)) {
+      setStep(prev => prev + 1);
+    } else {
+      toast.error('Vui lòng điền đầy đủ thông tin hợp lệ');
+    }
+  };
+
+  const prevStep = () => setStep(prev => prev - 1);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validateStep(3)) return;
     setIsSending(true);
     const service = services.find(s => s.id === formData.serviceId);
     const serviceTitle = service?.title || 'Chưa chọn';
@@ -394,10 +625,6 @@ const BookingModal: React.FC<{
         }).catch(err => console.error("Customer email failed", err));
       }
       
-      // Chuyển hướng tới Zalo
-      const zaloUrl = `https://zalo.me/${siteConfig.zaloNumber || '0588896699'}`;
-      window.open(zaloUrl, '_blank');
-      
       // Sync with Admin Appointments
       const newAppointment: Appointment = {
         id: Date.now().toString(),
@@ -411,23 +638,33 @@ const BookingModal: React.FC<{
         time: formData.time,
         status: 'pending',
         note: formData.note,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        isRead: false
       };
       setSiteConfig(prev => ({
         ...prev,
         appointments: [newAppointment, ...(prev.appointments || [])]
       }));
 
+      if (onAddNotification) {
+        onAddNotification({
+          title: 'Đặt lịch thành công',
+          message: `Lịch hẹn dịch vụ ${fullServiceTitle} vào lúc ${formData.time} ngày ${formData.date} đã được gửi đi.`,
+          type: 'success'
+        });
+      }
+
+      toast.success('Đặt lịch thành công!');
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error in submission:", error);
-      const zaloUrl = `https://zalo.me/${siteConfig.zaloNumber || '0588896699'}`;
-      window.open(zaloUrl, '_blank');
-      setIsSubmitted(true);
+      toast.error('Có lỗi xảy ra, vui lòng thử lại sau');
     } finally {
       setIsSending(false);
     }
   };
+
+  const selectedService = services.find(s => s.id === formData.serviceId);
 
   return (
     <AnimatePresence>
@@ -442,101 +679,287 @@ const BookingModal: React.FC<{
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-[32px] sm:rounded-3xl shadow-2xl max-w-md w-full relative overflow-y-auto max-h-[90vh] sm:max-h-none"
+            className="bg-slate-900 border border-white/10 p-0 rounded-[40px] shadow-2xl max-w-lg w-full relative overflow-hidden flex flex-col max-h-[90vh]"
           >
-            <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✕</button>
-            {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <h3 className="text-2xl font-black text-white text-center mb-6 uppercase">Đặt Lịch Chăm Sóc</h3>
-                
-                <input required type="text" placeholder="Họ tên" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <input 
-                      required 
-                      type="tel" 
-                      placeholder="Số điện thoại" 
-                      value={formData.phone} 
-                      onChange={e => {
-                        setFormData({...formData, phone: e.target.value});
-                        if (errors.phone) setErrors({...errors, phone: undefined});
-                      }} 
-                      className={`w-full bg-slate-950 border ${errors.phone ? 'border-red-500' : 'border-slate-800'} rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all`} 
+            {/* Header */}
+            <div className="p-8 border-b border-white/5 bg-slate-950/50 flex items-center justify-between">
+              <div>
+                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Đặt Lịch Chăm Sóc</h3>
+                <div className="flex gap-2 mt-2">
+                  {[1, 2, 3, 4].map(i => (
+                    <div 
+                      key={i} 
+                      className={`h-1 rounded-full transition-all duration-500 ${
+                        i === step ? 'w-8 bg-blue-600' : 
+                        i < step ? 'w-4 bg-emerald-500' : 'w-4 bg-slate-800'
+                      }`}
                     />
-                    {errors.phone && <p className="text-[9px] text-red-500 font-bold ml-1">{errors.phone}</p>}
-                  </div>
-                  <div className="space-y-1">
-                    <input 
-                      type="email" 
-                      placeholder="Email (để nhận xác nhận)" 
-                      value={formData.email} 
-                      onChange={e => {
-                        setFormData({...formData, email: e.target.value});
-                        if (errors.email) setErrors({...errors, email: undefined});
-                      }} 
-                      className={`w-full bg-slate-950 border ${errors.email ? 'border-red-500' : 'border-slate-800'} rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all`} 
-                    />
-                    {errors.email && <p className="text-[9px] text-red-500 font-bold ml-1">{errors.email}</p>}
-                  </div>
+                  ))}
                 </div>
-                <input type="text" placeholder="Dòng xe (VD: Porsche 911)" value={formData.carModel} onChange={e => setFormData({...formData, carModel: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
-                <select value={formData.serviceId} onChange={e => setFormData({...formData, serviceId: e.target.value, subServiceTitle: undefined})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
-                  {services.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
-                </select>
+              </div>
+              <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-xl text-slate-500 hover:text-white transition-all">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
 
-                {services.find(s => s.id === formData.serviceId)?.subServices && (
-                  <select 
-                    value={formData.subServiceTitle || ''} 
-                    onChange={e => setFormData({...formData, subServiceTitle: e.target.value})} 
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                  >
-                    <option value="">-- Chọn gói nâng cấp (Tùy chọn) --</option>
-                    {services.find(s => s.id === formData.serviceId)?.subServices?.map((sub, idx) => (
-                      <option key={idx} value={sub.title}>{sub.title} ({sub.price})</option>
-                    ))}
-                  </select>
-                )}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-[9px] font-bold text-slate-500 uppercase tracking-widest ml-1">Ngày hẹn</label>
-                    <input required type="date" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[9px] font-bold text-slate-500 uppercase tracking-widest ml-1">Giờ ưu tiên</label>
-                    <input required type="time" value={formData.time} onChange={e => setFormData({...formData, time: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+            <div className="p-8 overflow-y-auto custom-scrollbar flex-1">
+              {!isSubmitted ? (
+                <div className="space-y-6">
+                  {step === 1 && (
+                    <motion.div 
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      className="space-y-4"
+                    >
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-500">
+                          <User className="w-5 h-5" />
+                        </div>
+                        <h4 className="text-lg font-bold text-white">Thông tin khách hàng</h4>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Họ và tên</label>
+                          <input required type="text" placeholder="Nhập họ tên của bạn..." value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Số điện thoại</label>
+                            <input 
+                              required 
+                              type="tel" 
+                              placeholder="090..." 
+                              value={formData.phone} 
+                              onChange={e => {
+                                setFormData({...formData, phone: e.target.value});
+                                if (errors.phone) setErrors({...errors, phone: undefined});
+                              }} 
+                              className={`w-full bg-slate-950 border ${errors.phone ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all`} 
+                            />
+                            {errors.phone && <p className="text-[10px] text-red-500 font-bold ml-1">{errors.phone}</p>}
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Email (Tùy chọn)</label>
+                            <input 
+                              type="email" 
+                              placeholder="example@gmail.com" 
+                              value={formData.email} 
+                              onChange={e => {
+                                setFormData({...formData, email: e.target.value});
+                                if (errors.email) setErrors({...errors, email: undefined});
+                              }} 
+                              className={`w-full bg-slate-950 border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all`} 
+                            />
+                            {errors.email && <p className="text-[10px] text-red-500 font-bold ml-1">{errors.email}</p>}
+                          </div>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Dòng xe</label>
+                          <input required type="text" placeholder="VD: Mercedes S450, BMW X5..." value={formData.carModel} onChange={e => setFormData({...formData, carModel: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {step === 2 && (
+                    <motion.div 
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      className="space-y-4"
+                    >
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-600/20 flex items-center justify-center text-emerald-500">
+                          <Zap className="w-5 h-5" />
+                        </div>
+                        <h4 className="text-lg font-bold text-white">Chọn dịch vụ</h4>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Dịch vụ chính</label>
+                          <select value={formData.serviceId} onChange={e => setFormData({...formData, serviceId: e.target.value, subServiceTitle: undefined})} className="w-full bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all appearance-none">
+                            {services.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
+                          </select>
+                        </div>
+
+                        {selectedService?.subServices && (
+                          <div className="space-y-3">
+                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Gói nâng cấp (Tùy chọn)</label>
+                            <div className="grid grid-cols-1 gap-2">
+                              {selectedService.subServices.map((sub, idx) => (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onClick={() => setFormData({...formData, subServiceTitle: formData.subServiceTitle === sub.title ? undefined : sub.title})}
+                                  className={`p-4 rounded-2xl border transition-all text-left flex items-center justify-between group ${
+                                    formData.subServiceTitle === sub.title 
+                                    ? 'bg-blue-600/10 border-blue-500 text-white' 
+                                    : 'bg-slate-950 border-white/5 text-slate-400 hover:border-white/20'
+                                  }`}
+                                >
+                                  <div>
+                                    <p className="font-bold text-sm">{sub.title}</p>
+                                    <p className="text-[10px] text-blue-500 font-black uppercase tracking-widest mt-1">{sub.price}</p>
+                                  </div>
+                                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                                    formData.subServiceTitle === sub.title ? 'bg-blue-500 border-blue-500' : 'border-white/10'
+                                  }`}>
+                                    {formData.subServiceTitle === sub.title && <Check className="w-3 h-3 text-white" />}
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {step === 3 && (
+                    <motion.div 
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      className="space-y-4"
+                    >
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-10 h-10 rounded-xl bg-amber-600/20 flex items-center justify-center text-amber-500">
+                          <Clock className="w-5 h-5" />
+                        </div>
+                        <h4 className="text-lg font-bold text-white">Thời gian hẹn</h4>
+                      </div>
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Ngày hẹn</label>
+                            <input required type="date" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Giờ ưu tiên</label>
+                            <input required type="time" value={formData.time} onChange={e => setFormData({...formData, time: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                          </div>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Ghi chú thêm</label>
+                          <textarea placeholder="Bạn có yêu cầu đặc biệt nào không?" value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})} className="w-full bg-slate-950 border border-white/10 rounded-2xl px-5 py-4 text-white h-32 resize-none focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {step === 4 && (
+                    <motion.div 
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      className="space-y-6"
+                    >
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-500">
+                          <CheckCircle2 className="w-5 h-5" />
+                        </div>
+                        <h4 className="text-lg font-bold text-white">Xác nhận thông tin</h4>
+                      </div>
+                      <div className="bg-slate-950/50 border border-white/5 rounded-[32px] p-6 space-y-4">
+                        <div className="flex justify-between items-start border-b border-white/5 pb-4">
+                          <div>
+                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Khách hàng</p>
+                            <p className="text-white font-bold">{formData.name}</p>
+                            <p className="text-slate-400 text-xs">{formData.phone}</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Dòng xe</p>
+                            <p className="text-white font-bold">{formData.carModel}</p>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-start border-b border-white/5 pb-4">
+                          <div>
+                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Dịch vụ</p>
+                            <p className="text-white font-bold">{selectedService?.title}</p>
+                            {formData.subServiceTitle && <p className="text-blue-500 text-xs font-bold">{formData.subServiceTitle}</p>}
+                          </div>
+                          <div className="text-right">
+                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Thời gian</p>
+                            <p className="text-white font-bold">{formData.time}</p>
+                            <p className="text-slate-400 text-xs">{formData.date}</p>
+                          </div>
+                        </div>
+                        {formData.note && (
+                          <div>
+                            <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Ghi chú</p>
+                            <p className="text-slate-400 text-xs italic">"{formData.note}"</p>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-4 bg-blue-600/10 border border-blue-500/20 rounded-2xl flex gap-3">
+                        <Info className="w-5 h-5 text-blue-500 shrink-0" />
+                        <p className="text-[10px] text-blue-400 leading-relaxed font-medium">
+                          Bằng cách nhấn "Xác nhận đặt lịch", bạn đồng ý với các điều khoản dịch vụ của chúng tôi. Chúng tôi sẽ liên hệ lại để xác nhận trong vòng 30 phút.
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="w-24 h-24 bg-emerald-600/20 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl animate-bounce">✓</div>
+                  <h3 className="text-3xl font-black text-white mb-4 uppercase tracking-tighter">Đặt lịch thành công!</h3>
+                  <p className="text-slate-400 mb-10 text-lg">Yêu cầu của bạn đã được gửi tới hệ thống. Đội ngũ chuyên gia sẽ liên hệ lại với bạn trong thời gian sớm nhất qua số điện thoại <strong>{formData.phone}</strong>.</p>
+                  
+                  <div className="flex flex-col gap-4">
+                    <button 
+                      onClick={() => {
+                        handlePayment(selectedService?.title || 'Dịch vụ Detailing', selectedService?.price || '0', formData.name, formData.email);
+                      }}
+                      className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-5 rounded-2xl uppercase tracking-widest transition-all shadow-2xl shadow-blue-900/40 active:scale-95 flex items-center justify-center gap-3 group"
+                    >
+                      <CreditCard className="w-6 h-6" /> Thanh Toán Online Ngay
+                    </button>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <button 
+                        onClick={() => {
+                          onClose();
+                          scrollToSection('tracking');
+                        }}
+                        className="py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white text-[10px] font-black uppercase tracking-widest transition-all border border-white/10 flex items-center justify-center gap-2"
+                      >
+                        <Timer className="w-4 h-4" /> Theo Dõi Xe
+                      </button>
+                      <button 
+                        onClick={onClose}
+                        className="py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white text-[10px] font-black uppercase tracking-widest transition-all border border-white/10"
+                      >
+                        Đóng
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <textarea placeholder="Ghi chú thêm về xe..." value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white h-24 resize-none focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+              )}
+            </div>
+
+            {/* Footer Actions */}
+            {!isSubmitted && (
+              <div className="p-8 border-t border-white/5 bg-slate-950/50 flex gap-4">
+                {step > 1 && (
+                  <button 
+                    onClick={prevStep}
+                    className="flex-1 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white text-[10px] font-black uppercase tracking-widest transition-all border border-white/10 flex items-center justify-center gap-2"
+                  >
+                    <ArrowLeft className="w-4 h-4" /> Quay lại
+                  </button>
+                )}
                 <button 
-                  type="submit" 
+                  onClick={step === 4 ? handleSubmit : nextStep}
                   disabled={isSending}
-                  className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-black py-4 rounded-xl uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+                  className="flex-[2] bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-black py-4 rounded-2xl uppercase tracking-widest transition-all shadow-xl active:scale-95 flex items-center justify-center gap-2 group"
                 >
                   {isSending ? (
+                    <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
                     <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Đang gửi...
+                      {step === 4 ? 'Xác nhận đặt lịch' : 'Tiếp theo'}
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </>
-                  ) : 'Gửi Yêu Cầu'}
+                  )}
                 </button>
-              </form>
-            ) : (
-              <div className="text-center py-8">
-                <div className="text-6xl mb-4 animate-bounce">✅</div>
-                <h3 className="text-xl font-black text-white mb-2 uppercase">Gửi Thành Công!</h3>
-                <p className="text-slate-400 text-sm mb-6">Thông tin đã được gửi tới hệ thống và Zalo của chúng tôi. Chúng tôi sẽ liên hệ lại sớm nhất!</p>
-                <div className="flex flex-col gap-3">
-                  <button 
-                    onClick={() => {
-                      const service = services.find(s => s.id === formData.serviceId);
-                      handlePayment(service?.title || 'Dịch vụ Detailing', service?.price || '0', formData.name, formData.email);
-                    }}
-                    className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
-                  >
-                    <CreditCard className="w-5 h-5" /> Thanh Toán Online Ngay
-                  </button>
-                  <button onClick={onClose} className="bg-white/5 hover:bg-white/10 text-white px-8 py-3 rounded-xl font-bold transition-all">Để sau / Đóng</button>
-                </div>
               </div>
             )}
           </motion.div>
@@ -551,7 +974,8 @@ const ServiceDetailsModal: React.FC<{
   onClose: () => void; 
   service: Service | null; 
   onBooking: (serviceId: string, subServiceTitle?: string) => void;
-}> = ({ isOpen, onClose, service, onBooking }) => {
+  onAiChat: (service: Service) => void;
+}> = ({ isOpen, onClose, service, onBooking, onAiChat }) => {
   if (!isOpen || !service) return null;
 
   return (
@@ -721,6 +1145,12 @@ const ServiceDetailsModal: React.FC<{
                     <Calendar className="w-5 h-5" /> Đặt lịch ngay
                   </button>
                   <button 
+                    onClick={() => { onAiChat(service); onClose(); }}
+                    className="w-full py-5 sm:py-6 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black uppercase tracking-[0.2em] rounded-[20px] sm:rounded-[24px] transition-all active:scale-95 shadow-2xl shadow-emerald-600/30 flex items-center justify-center gap-3"
+                  >
+                    <Bot className="w-5 h-5" /> Tư vấn với AI
+                  </button>
+                  <button 
                     onClick={onClose}
                     className="w-full py-5 sm:py-6 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs font-black uppercase tracking-[0.2em] rounded-[20px] sm:rounded-[24px] transition-all"
                   >
@@ -736,6 +1166,152 @@ const ServiceDetailsModal: React.FC<{
   );
 };
 
+const AiServiceChatModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  service: Service | null;
+  aiMessages: Message[];
+  aiInput: string;
+  setAiInput: (v: string) => void;
+  handleAiChat: (customInput?: string) => void;
+  isAiLoading: boolean;
+  aiProvider: AIProvider;
+  setAiProvider: (v: AIProvider) => void;
+  clearChat: () => void;
+  chatEndRef: React.RefObject<HTMLDivElement>;
+}> = ({ 
+  isOpen, onClose, service, aiMessages, aiInput, setAiInput, 
+  handleAiChat, isAiLoading, aiProvider, setAiProvider, clearChat, chatEndRef 
+}) => {
+  if (!isOpen || !service) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[300] flex items-center justify-center p-0 sm:p-4 bg-slate-950/95 backdrop-blur-2xl"
+      >
+        <div className="absolute inset-0" onClick={onClose} />
+        <motion.div 
+          initial={{ scale: 0.95, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.95, opacity: 0, y: 20 }}
+          className="bg-slate-900 border-t sm:border border-white/10 rounded-t-[40px] sm:rounded-[48px] shadow-[0_0_100px_rgba(0,0,0,0.5)] max-w-4xl w-full h-full sm:h-[85vh] overflow-hidden relative flex flex-col"
+        >
+          {/* Header */}
+          <div className="p-6 sm:p-8 bg-white/5 border-b border-white/5 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center font-black text-xl overflow-hidden border border-white/10 shadow-lg">
+                  <Bot className="w-6 h-6 text-white" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-green-500 border-2 border-slate-900"></div>
+              </div>
+              <div>
+                <div className="text-xs sm:text-sm font-black text-white uppercase tracking-widest">Tư vấn dịch vụ: {service.title}</div>
+                <div className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">AI Advisor đang trực tuyến</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <select 
+                value={aiProvider}
+                onChange={(e) => setAiProvider(e.target.value as AIProvider)}
+                className="hidden sm:block bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 outline-none focus:border-blue-500 transition-all cursor-pointer"
+              >
+                <option value="gemini" className="bg-slate-900">Gemini</option>
+                <option value="openai" className="bg-slate-900">OpenAI</option>
+                <option value="claude" className="bg-slate-900">Claude</option>
+              </select>
+              <button 
+                onClick={onClose} 
+                className="bg-white/5 hover:bg-red-600 p-3 rounded-2xl text-white transition-all active:scale-90"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Chat Body */}
+          <div className="flex-1 overflow-y-auto p-6 sm:p-10 space-y-6 sm:space-y-8 custom-scrollbar bg-slate-900/50">
+            {aiMessages.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full text-center space-y-6 opacity-50">
+                <div className="w-20 h-20 rounded-full bg-blue-600/10 flex items-center justify-center">
+                  <MessageSquare className="w-10 h-10 text-blue-500" />
+                </div>
+                <div className="space-y-2">
+                  <p className="text-white font-black uppercase tracking-widest text-sm">Bắt đầu cuộc trò chuyện</p>
+                  <p className="text-slate-500 text-xs max-w-xs">Hỏi AI bất cứ điều gì về dịch vụ {service.title} để được tư vấn chi tiết.</p>
+                </div>
+              </div>
+            )}
+            {aiMessages.map((m, i) => (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                key={i} 
+                className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className={`max-w-[85%] sm:max-w-[75%] p-4 sm:p-6 rounded-[28px] text-sm sm:text-base leading-relaxed shadow-xl ${
+                  m.role === 'user' 
+                    ? 'bg-blue-600 text-white rounded-tr-none' 
+                    : 'bg-slate-800/50 border border-white/5 text-slate-200 rounded-tl-none'
+                }`}>
+                  <ReactMarkdown>{m.text}</ReactMarkdown>
+                </div>
+              </motion.div>
+            ))}
+            {isAiLoading && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex items-center gap-3 ml-2"
+              >
+                <div className="flex gap-1">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce"></div>
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce delay-150"></div>
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce delay-300"></div>
+                </div>
+                <span className="text-slate-600 text-[10px] uppercase font-black tracking-widest italic">AI đang xử lý...</span>
+              </motion.div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          {/* Chat Input */}
+          <div className="p-6 sm:p-8 border-t border-white/5 bg-slate-950/50 shrink-0">
+            <div className="relative flex items-center gap-4">
+              <input 
+                value={aiInput}
+                onChange={e => setAiInput(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleAiChat()}
+                disabled={isAiLoading}
+                placeholder="Nhập câu hỏi của bạn..." 
+                className="flex-1 bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-white text-sm sm:text-base placeholder:text-slate-600 disabled:opacity-50"
+              />
+              <button 
+                onClick={() => handleAiChat()} 
+                disabled={isAiLoading || !aiInput.trim()}
+                className="bg-blue-600 hover:bg-blue-500 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center transition-all shadow-2xl shadow-blue-900/40 active:scale-90 group disabled:opacity-50"
+              >
+                <Send className="w-5 h-5 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </button>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button 
+                onClick={clearChat}
+                className="text-[9px] font-black uppercase tracking-widest text-slate-500 hover:text-red-500 transition-all flex items-center gap-2"
+              >
+                <Trash2 className="w-3 h-3" /> Xóa lịch sử
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
 const ShareModal: React.FC<{ isOpen: boolean; onClose: () => void; url: string; title: string }> = ({ isOpen, onClose, url, title }) => {
   if (!isOpen) return null;
 
@@ -902,10 +1478,11 @@ const NewsArticleModal: React.FC<{
 const NewsSection: React.FC<{ 
   siteConfig: SiteConfig; 
   isEditMode: boolean; 
+  isDesignAuthenticated?: boolean;
   setSiteConfig: React.Dispatch<React.SetStateAction<SiteConfig>>;
   selectedArticle: NewsArticle | null;
   setSelectedArticle: (article: NewsArticle | null) => void;
-}> = ({ siteConfig, isEditMode, setSiteConfig, selectedArticle, setSelectedArticle }) => {
+}> = ({ siteConfig, isEditMode, isDesignAuthenticated, setSiteConfig, selectedArticle, setSelectedArticle }) => {
   return (
     <section id="news" className="py-24 relative overflow-hidden bg-slate-950">
       <div className="container mx-auto px-4 relative z-10">
@@ -920,6 +1497,7 @@ const NewsSection: React.FC<{
             <EditableText 
               text={siteConfig.newsSubtitle || "Cập nhật những kiến thức bổ ích và chương trình mới nhất từ XE ĐẸP AUTO."} 
               isEditMode={isEditMode} 
+              isDesignAuthenticated={isDesignAuthenticated}
               onSave={v => setSiteConfig({...siteConfig, newsSubtitle: v})}
               className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em]"
             />
@@ -928,6 +1506,7 @@ const NewsSection: React.FC<{
             tag="h2" 
             text={siteConfig.newsTitle || "TIN TỨC & MẸO CHĂM SÓC XE"} 
             isEditMode={isEditMode} 
+            isDesignAuthenticated={isDesignAuthenticated}
             onSave={v => setSiteConfig({...siteConfig, newsTitle: v})}
             className="text-4xl sm:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-8"
           />
@@ -1290,7 +1869,7 @@ const AdminDashboardModal: React.FC<{
   setPremiumSolutions: React.Dispatch<React.SetStateAction<PremiumSolution[]>>;
   customerRecords: CustomerRecord[];
   setCustomerRecords: React.Dispatch<React.SetStateAction<CustomerRecord[]>>;
-  initialTab?: 'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'news';
+  initialTab?: 'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'news' | 'ui-design';
   maintenancePreFill?: {brand: string, model: string, year: string, mileage: string, lastMaintenance: string, symptoms: string} | null;
   isSelectingHeroVideo: boolean;
   setIsSelectingHeroVideo: React.Dispatch<React.SetStateAction<boolean>>;
@@ -1299,12 +1878,26 @@ const AdminDashboardModal: React.FC<{
   aiVideoHistory: AiVideoRecord[];
   setAiVideoHistory: React.Dispatch<React.SetStateAction<AiVideoRecord[]>>;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  isDesignAuthenticated: boolean;
+  setIsDesignAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  designPasswordInput: string;
+  setDesignPasswordInput: React.Dispatch<React.SetStateAction<string>>;
+  showDesignLock: boolean;
+  setShowDesignLock: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDesignLogin: () => void;
   trackingData: VehicleTracking[];
   setTrackingData: React.Dispatch<React.SetStateAction<VehicleTracking[]>>;
   reviews: Review[];
   setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
-}> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory, setIsEditMode, trackingData, setTrackingData, reviews, setReviews }) => {
-  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback' | 'news'>(initialTab);
+  inventory: InventoryItem[];
+  setInventory: React.Dispatch<React.SetStateAction<InventoryItem[]>>;
+  eCertificates: ECertificate[];
+  setECertificates: React.Dispatch<React.SetStateAction<ECertificate[]>>;
+  expenses: Expense[];
+  setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>;
+  t: (key: string) => string;
+}> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory, setIsEditMode, isDesignAuthenticated, setIsDesignAuthenticated, designPasswordInput, setDesignPasswordInput, showDesignLock, setShowDesignLock, handleDesignLogin, trackingData, setTrackingData, reviews, setReviews, inventory, setInventory, eCertificates, setECertificates, expenses, setExpenses, t }) => {
+  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback' | 'news' | 'ui-design' | 'inventory' | 'loyalty' | 'reports' | 'ecerts' | 'expenses'>(initialTab as any);
   
   // Sorting and Filtering States
   const [sortConfig, setSortConfig] = useState<{ key: string, order: 'asc' | 'desc' }>({ key: 'id', order: 'desc' });
@@ -1373,8 +1966,8 @@ const AdminDashboardModal: React.FC<{
     title: '', description: '', price: '', duration: '', features: [], isPopular: false
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [passwordInput, setPasswordInput] = useState('');
+  // const [isAuthenticated, setIsAuthenticated] = useState(true); // Removed redundant login state
+  // const [passwordInput, setPasswordInput] = useState(''); // Removed redundant login state
 
   useEffect(() => {
     if (isOpen) {
@@ -1402,87 +1995,55 @@ const AdminDashboardModal: React.FC<{
     else setSortConfig({ key: 'id', order: 'desc' });
   }, [activeTab]);
 
-  const handleLogin = () => {
-    const normalizedInput = passwordInput.trim();
-    const normalizedPass = (siteConfig.adminPassword || 'admin').trim();
-    if (normalizedInput === normalizedPass) {
-      setIsAuthenticated(true);
-      setPasswordInput('');
-    } else {
-      alert("Sai mật khẩu quản trị!");
-      setPasswordInput('');
+  // Removed redundant login logic
+  
+  useEffect(() => {
+    if (isOpen && activeTab === 'appointments' && siteConfig.appointments?.some(a => a.isRead === false)) {
+      setSiteConfig(prev => ({
+        ...prev,
+        appointments: (prev.appointments || []).map(a => ({ ...a, isRead: true }))
+      }));
     }
-  };
+  }, [isOpen, activeTab, siteConfig.appointments, setSiteConfig]);
 
   if (!isOpen) return null;
 
-  if (!isAuthenticated) {
-    return (
-      <AnimatePresence>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-2xl"
-        >
-          <div className="absolute inset-0" onClick={onClose} />
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            className="relative bg-slate-900 border border-white/10 p-10 rounded-[40px] w-full max-w-md shadow-[0_0_100px_rgba(0,0,0,0.5)] text-center"
-          >
-            <div className="w-20 h-20 rounded-3xl bg-blue-600 flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-blue-600/20">
-              <Lock className="w-10 h-10 text-white" />
-            </div>
-            <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">Hệ Thống Quản Trị</h3>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-8">Vui lòng nhập mật khẩu để tiếp tục</p>
-            
-            <input 
-              type="password" 
-              autoFocus 
-              placeholder="••••••••" 
-              className="w-full bg-slate-950 border border-white/10 rounded-2xl p-5 text-center tracking-[0.8em] text-white text-xl outline-none focus:border-blue-500 transition-all mb-6"
-              value={passwordInput}
-              onChange={e => setPasswordInput(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleLogin()}
-            />
-            
-            <div className="flex gap-4">
-              <button 
-                onClick={handleLogin}
-                className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all active:scale-95"
-              >
-                Đăng Nhập
-              </button>
-              <button 
-                onClick={onClose}
-                className="px-8 bg-slate-800 text-slate-400 rounded-2xl font-black uppercase tracking-widest hover:text-white transition-all"
-              >
-                Hủy
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
-    );
-  }
-
-  const tabs = [
-    { id: 'home', label: 'Tổng quan', icon: <Home className="w-5 h-5" /> },
-    { id: 'appointments', label: 'Lịch hẹn', icon: <Calendar className="w-5 h-5" /> },
-    { id: 'customers', label: 'Khách hàng', icon: <Users className="w-5 h-5" /> },
-    { id: 'services', label: 'Dịch vụ', icon: <Briefcase className="w-5 h-5" /> },
-    { id: 'packages', label: 'Gói chăm sóc', icon: <Package className="w-5 h-5" /> },
-    { id: 'premium', label: 'Cao cấp', icon: <ShieldCheck className="w-5 h-5" /> },
-    { id: 'promotions', label: 'Khuyến mãi', icon: <Tag className="w-5 h-5" /> },
-    { id: 'news', label: 'Tin tức', icon: <Newspaper className="w-5 h-5" /> },
-    { id: 'tracking', label: 'Theo dõi xe', icon: <Timer className="w-5 h-5" /> },
-    { id: 'feedback', label: 'Đánh giá', icon: <MessageSquare className="w-5 h-5" /> },
-    { id: 'gallery', label: 'Thư viện', icon: <ImageIcon className="w-5 h-5" /> },
-    { id: 'maintenance', label: 'Tư vấn AI', icon: <Cpu className="w-5 h-5" /> },
-    { id: 'ai-creative', label: 'AI Creative', icon: <Sparkles className="w-5 h-5" /> },
-    { id: 'config', label: 'Cấu hình', icon: <Settings2 className="w-5 h-5" /> },
+  const businessTabs = [
+    { id: 'home', label: t('admin_tab_overview'), icon: <Home className="w-5 h-5" /> },
+    { id: 'appointments', label: t('admin_tab_appointments'), icon: <Calendar className="w-5 h-5" /> },
+    { id: 'customers', label: t('admin_tab_customers'), icon: <Users className="w-5 h-5" /> },
+    { id: 'inventory', label: t('admin_tab_inventory'), icon: <Boxes className="w-5 h-5" /> },
+    { id: 'loyalty', label: t('admin_tab_loyalty'), icon: <Gift className="w-5 h-5" /> },
+    { id: 'reports', label: t('admin_tab_reports'), icon: <BarChart3 className="w-5 h-5" /> },
+    { id: 'expenses', label: t('admin_tab_expenses'), icon: <Receipt className="w-5 h-5" /> },
+    { id: 'ecerts', label: t('admin_tab_ecerts'), icon: <FileCheck className="w-5 h-5" /> },
+    { id: 'tracking', label: t('admin_tab_tracking'), icon: <Timer className="w-5 h-5" /> },
+    { id: 'feedback', label: t('admin_tab_feedback'), icon: <MessageSquare className="w-5 h-5" /> },
+    { id: 'maintenance', label: t('admin_tab_ai_advice'), icon: <Cpu className="w-5 h-5" /> },
   ];
+
+  const designTabs = [
+    { id: 'services', label: t('admin_tab_services'), icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'packages', label: t('admin_tab_packages'), icon: <Package className="w-5 h-5" /> },
+    { id: 'premium', label: t('admin_tab_premium'), icon: <ShieldCheck className="w-5 h-5" /> },
+    { id: 'promotions', label: t('admin_tab_promotions'), icon: <Tag className="w-5 h-5" /> },
+    { id: 'news', label: t('admin_tab_news'), icon: <Newspaper className="w-5 h-5" /> },
+    { id: 'gallery', label: t('admin_tab_gallery'), icon: <ImageIcon className="w-5 h-5" /> },
+    { id: 'ui-design', label: t('admin_tab_ui_design'), icon: <Palette className="w-5 h-5" /> },
+    { id: 'ai-creative', label: t('admin_tab_ai_creative'), icon: <Sparkles className="w-5 h-5" /> },
+    { id: 'config', label: t('admin_tab_config'), icon: <Settings2 className="w-5 h-5" /> },
+  ];
+
+  const handleTabClick = (tabId: any) => {
+    const isDesignTab = designTabs.some(t => t.id === tabId);
+    // Allow 'config' tab for all admins without extra design lock
+    if (isDesignTab && !isDesignAuthenticated && tabId !== 'config') {
+      setShowDesignLock(true);
+      return;
+    }
+    setActiveTab(tabId);
+    setShowDesignLock(false);
+  };
 
   const getFilteredAndSorted = <T extends any>(
     data: T[], 
@@ -1930,20 +2491,61 @@ const AdminDashboardModal: React.FC<{
               </div>
 
               <div className="flex-1 overflow-x-auto md:overflow-y-auto p-2 md:p-4 flex md:flex-col gap-1 md:space-y-1 custom-scrollbar scrollbar-hide bg-slate-950 md:bg-transparent border-b md:border-b-0 border-white/5">
-                {tabs.map(tab => (
+                <div className="px-4 py-2 hidden md:block">
+                  <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Kế Toán & Vận Hành</p>
+                </div>
+                {businessTabs.map(tab => {
+                  const unreadCount = tab.id === 'appointments' 
+                    ? (siteConfig.appointments?.filter(a => a.isRead === false).length || 0)
+                    : 0;
+                  
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabClick(tab.id as any)}
+                      className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-xs font-black uppercase tracking-widest transition-all group shrink-0 ${
+                        activeTab === tab.id 
+                          ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
+                          : 'text-slate-500 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-blue-500'} transition-colors`}>
+                        {tab.icon}
+                      </span>
+                      <span className="md:inline">{tab.label}</span>
+                      {unreadCount > 0 && (
+                        <span className="absolute -top-1 -right-1 md:top-2 md:right-2 w-5 h-5 bg-red-600 text-white text-[10px] flex items-center justify-center rounded-full border-2 border-slate-950 animate-pulse">
+                          {unreadCount}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+
+                <div className="w-px h-8 bg-white/5 mx-2 md:w-full md:h-px md:my-4 shrink-0" />
+                
+                <div className="px-4 py-2 hidden md:block">
+                  <p className="text-[9px] font-black text-amber-600/70 uppercase tracking-[0.2em] flex items-center gap-2">
+                    <Shield className="w-3 h-3" /> Thiết Kế & Giao Diện
+                  </p>
+                </div>
+                {designTabs.map(tab => (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id as any)}
-                    className={`whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-xs font-black uppercase tracking-widest transition-all group shrink-0 ${
+                    onClick={() => handleTabClick(tab.id as any)}
+                    className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-xs font-black uppercase tracking-widest transition-all group shrink-0 ${
                       activeTab === tab.id 
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
+                        ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/20' 
                         : 'text-slate-500 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-blue-500'} transition-colors`}>
+                    <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-amber-500'} transition-colors`}>
                       {tab.icon}
                     </span>
                     <span className="md:inline">{tab.label}</span>
+                    {!isDesignAuthenticated && (
+                      <Lock className="w-2.5 h-2.5 text-slate-700 absolute top-2 right-2 hidden md:block" />
+                    )}
                   </button>
                 ))}
               </div>
@@ -1964,13 +2566,25 @@ const AdminDashboardModal: React.FC<{
               <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-slate-900/20">
                 <div>
                   <h3 className="text-xl font-black text-white uppercase tracking-tighter">
-                    {tabs.find(t => t.id === activeTab)?.label}
+                    {[...businessTabs, ...designTabs].find(t => t.id === activeTab)?.label}
                   </h3>
                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">
-                    Quản lý hệ thống / {tabs.find(t => t.id === activeTab)?.label}
+                    Quản lý hệ thống / {[...businessTabs, ...designTabs].find(t => t.id === activeTab)?.label}
                   </p>
                 </div>
                 <div className="flex items-center gap-4">
+                  {isDesignAuthenticated && (
+                    <button 
+                      onClick={() => {
+                        setIsDesignAuthenticated(false);
+                        const isDesignTab = designTabs.some(t => t.id === activeTab);
+                        if (isDesignTab) setShowDesignLock(true);
+                      }}
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-600/10 text-red-500 hover:bg-red-600 hover:text-white text-[9px] font-black uppercase tracking-widest transition-all"
+                    >
+                      <Lock className="w-3 h-3" /> Khóa Giao Diện
+                    </button>
+                  )}
                   <div className="hidden lg:flex flex-col items-end">
                     <span className="text-[10px] font-black text-white uppercase tracking-widest">Administrator</span>
                     <span className="text-[9px] font-bold text-emerald-500 uppercase tracking-widest">Online</span>
@@ -1982,7 +2596,51 @@ const AdminDashboardModal: React.FC<{
               </div>
 
               {/* Scrollable Content */}
-              <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+              <div className="flex-1 overflow-y-auto p-8 custom-scrollbar relative">
+                <AnimatePresence>
+                  {showDesignLock && (
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 z-50 flex items-center justify-center p-8 bg-slate-950/90 backdrop-blur-xl"
+                    >
+                      <div className="max-w-sm w-full text-center">
+                        <div className="w-16 h-16 rounded-2xl bg-amber-600 flex items-center justify-center mx-auto mb-6 shadow-xl shadow-amber-600/20">
+                          <Shield className="w-8 h-8 text-white" />
+                        </div>
+                        <h4 className="text-xl font-black text-white uppercase tracking-tighter mb-2">Chế Độ Thiết Kế</h4>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-8">Khu vực này yêu cầu mật khẩu kỹ thuật để thay đổi giao diện</p>
+                        
+                        <input 
+                          type="password" 
+                          autoFocus 
+                          placeholder="Mật khẩu thiết kế" 
+                          className="w-full bg-slate-900 border border-white/10 rounded-2xl p-4 text-center tracking-[0.5em] text-white text-lg outline-none focus:border-amber-500 transition-all mb-4"
+                          value={designPasswordInput}
+                          onChange={e => setDesignPasswordInput(e.target.value)}
+                          onKeyDown={e => e.key === 'Enter' && handleDesignLogin()}
+                        />
+                        
+                        <div className="flex gap-3">
+                          <button 
+                            onClick={handleDesignLogin}
+                            className="flex-1 bg-amber-600 hover:bg-amber-500 text-white py-4 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all"
+                          >
+                            Xác Nhận
+                          </button>
+                          <button 
+                            onClick={() => setShowDesignLock(false)}
+                            className="px-6 bg-slate-800 text-slate-400 rounded-xl font-black uppercase tracking-widest text-[10px] hover:text-white transition-all"
+                          >
+                            Hủy
+                          </button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeTab}
@@ -1995,6 +2653,29 @@ const AdminDashboardModal: React.FC<{
                     {activeTab === 'home' && (
                       <div className="space-y-8">
                         {/* Stats Grid */}
+                        {(siteConfig.appointments?.filter(a => a.isRead === false).length || 0) > 0 && (
+                          <motion.div 
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="bg-red-600/10 border border-red-600/20 p-4 rounded-2xl flex items-center justify-between mb-6"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center animate-bounce">
+                                <Bell className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <p className="text-xs font-black text-white uppercase tracking-widest">Thông báo mới</p>
+                                <p className="text-[10px] font-bold text-red-400">Bạn có {(siteConfig.appointments?.filter(a => a.isRead === false).length || 0)} lịch hẹn mới chưa xem!</p>
+                              </div>
+                            </div>
+                            <button 
+                              onClick={() => setActiveTab('appointments')}
+                              className="px-4 py-2 bg-red-600 text-white text-[9px] font-black uppercase rounded-xl hover:bg-red-500 transition-all"
+                            >
+                              Xem ngay
+                            </button>
+                          </motion.div>
+                        )}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                           <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] hover:border-blue-500/30 transition-all">
                             <div className="w-12 h-12 rounded-2xl bg-blue-600/20 flex items-center justify-center mb-4">
@@ -2083,112 +2764,330 @@ const AdminDashboardModal: React.FC<{
                         </div>
                       </div>
                     )}
-                    {activeTab === 'config' && (
-                      <div className="space-y-10">
-                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-4">
-                          <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Cấu Hình Website</h3>
-                          <button onClick={() => { alert("✅ Đã lưu thay đổi!"); onClose(); }} className="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase shadow-lg hover:bg-blue-500 transition-all">Lưu Thay Đổi</button>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
-                          <div className="space-y-6">
-                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                              <div className="flex justify-between items-center mb-4">
-                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Hero Section Text</label>
-                                <div className="flex gap-2">
-                                  <AiHelperButton onClick={() => handleAiGenerateText('heroTitle', 'Tiêu đề Hero')} isLoading={isAiGeneratingText === 'heroTitle'} />
-                                  <AiHelperButton onClick={() => handleAiGenerateText('heroDescription', 'Mô tả Hero')} isLoading={isAiGeneratingText === 'heroDescription'} />
-                                </div>
-                              </div>
-                              <div className="space-y-4">
-                                <input value={siteConfig.heroTitle} onChange={e => updateConfig('heroTitle', e.target.value)} placeholder="Tiêu đề lớn" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white font-bold" />
-                                <textarea value={siteConfig.heroDescription} onChange={e => updateConfig('heroDescription', e.target.value)} placeholder="Mô tả ngắn" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm h-24" />
-                              </div>
-                            </div>
-                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                              <div className="flex justify-between items-center mb-4">
-                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Section Headers</label>
-                                <div className="flex gap-2">
-                                  <AiHelperButton onClick={() => handleAiGenerateText('servicesTitle', 'Tiêu đề Dịch vụ')} isLoading={isAiGeneratingText === 'servicesTitle'} />
-                                  <AiHelperButton onClick={() => handleAiGenerateText('premiumTitle', 'Tiêu đề Cao cấp')} isLoading={isAiGeneratingText === 'premiumTitle'} />
-                                  <AiHelperButton onClick={() => handleAiGenerateText('galleryTitle', 'Tiêu đề Thư viện')} isLoading={isAiGeneratingText === 'galleryTitle'} />
-                                </div>
-                              </div>
-                              <div className="space-y-4">
-                                <input value={siteConfig.servicesTitle} onChange={e => updateConfig('servicesTitle', e.target.value)} placeholder="Dịch vụ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                                <input value={siteConfig.premiumTitle} onChange={e => updateConfig('premiumTitle', e.target.value)} placeholder="Cao cấp" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                                <input value={siteConfig.galleryTitle} onChange={e => updateConfig('galleryTitle', e.target.value)} placeholder="Thư viện" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                              </div>
-                            </div>
+                    {activeTab === 'ui-design' && (
+                  <div className="space-y-8 max-w-5xl">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Thiết Kế Giao Diện</h3>
+                        <p className="text-slate-500 text-[10px] md:text-[11px] font-black uppercase tracking-widest mt-1">Tùy chỉnh nội dung hiển thị trên trang chủ</p>
+                      </div>
+                    </div>
 
-                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                              <div className="flex justify-between items-center mb-4">
-                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Section Subtitles</label>
-                                <div className="flex gap-2">
-                                  <AiHelperButton onClick={() => handleAiGenerateText('servicesSubtitle', 'Phụ đề Dịch vụ')} isLoading={isAiGeneratingText === 'servicesSubtitle'} />
-                                  <AiHelperButton onClick={() => handleAiGenerateText('premiumSubtitle', 'Phụ đề Cao cấp')} isLoading={isAiGeneratingText === 'premiumSubtitle'} />
-                                  <AiHelperButton onClick={() => handleAiGenerateText('gallerySubtitle', 'Phụ đề Thư viện')} isLoading={isAiGeneratingText === 'gallerySubtitle'} />
-                                </div>
-                              </div>
-                              <div className="space-y-4">
-                                <textarea value={siteConfig.servicesSubtitle} onChange={e => updateConfig('servicesSubtitle', e.target.value)} placeholder="Phụ đề Dịch vụ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                                <textarea value={siteConfig.premiumSubtitle} onChange={e => updateConfig('premiumSubtitle', e.target.value)} placeholder="Phụ đề Cao cấp" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                                <textarea value={siteConfig.gallerySubtitle} onChange={e => updateConfig('gallerySubtitle', e.target.value)} placeholder="Phụ đề Thư viện" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                              </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      {/* Hero Section */}
+                      <div className="bg-slate-900/50 p-8 rounded-[32px] border border-white/5 space-y-6">
+                        <h4 className="text-[11px] font-black uppercase text-blue-500 tracking-widest flex items-center gap-3">
+                          <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.6)]"></span> Phần Đầu Trang (Hero)
+                        </h4>
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <label className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Tiêu đề chính</label>
+                            <input 
+                              value={siteConfig.heroTitle} 
+                              onChange={e => updateConfig('heroTitle', e.target.value)} 
+                              className="w-full bg-slate-950 border border-white/5 rounded-xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Mô tả ngắn</label>
+                            <textarea 
+                              value={siteConfig.heroDescription} 
+                              onChange={e => updateConfig('heroDescription', e.target.value)} 
+                              className="w-full bg-slate-950 border border-white/5 rounded-xl p-4 text-white text-sm h-24 resize-none focus:ring-1 focus:ring-blue-500 outline-none"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Ảnh Nền Hero (Fallback)</label>
+                            <div className="flex gap-2">
+                              <input 
+                                value={siteConfig.heroImage || ''} 
+                                onChange={e => updateConfig('heroImage', e.target.value)} 
+                                placeholder="URL ảnh nền..."
+                                className="flex-1 bg-slate-950 border border-white/5 rounded-xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+                              />
+                              <label className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-xl flex items-center justify-center cursor-pointer hover:bg-blue-600/40 transition-all shrink-0">
+                                <input 
+                                  type="file" 
+                                  onChange={e => handleImageUpload(e, (b) => updateConfig('heroImage', b))} 
+                                  className="hidden" 
+                                  accept="image/*" 
+                                />
+                                <Upload className="w-5 h-5 text-blue-500" />
+                              </label>
                             </div>
                           </div>
-
-                          <div className="space-y-6">
-                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                              <div className="flex justify-between items-center mb-4">
-                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Reviews & Map Headers</label>
-                                <div className="flex gap-2">
-                                  <AiHelperButton onClick={() => handleAiGenerateText('reviewsTitle', 'Tiêu đề Đánh giá')} isLoading={isAiGeneratingText === 'reviewsTitle'} />
-                                  <AiHelperButton onClick={() => handleAiGenerateText('reviewsSubtitle', 'Phụ đề Đánh giá')} isLoading={isAiGeneratingText === 'reviewsSubtitle'} />
-                                  <AiHelperButton onClick={() => handleAiGenerateText('mapTitle', 'Tiêu đề Bản đồ')} isLoading={isAiGeneratingText === 'mapTitle'} />
-                                </div>
-                              </div>
-                              <div className="space-y-4">
-                                <input value={siteConfig.reviewsTitle} onChange={e => updateConfig('reviewsTitle', e.target.value)} placeholder="Tiêu đề Đánh giá" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                                <textarea value={siteConfig.reviewsSubtitle} onChange={e => updateConfig('reviewsSubtitle', e.target.value)} placeholder="Phụ đề Đánh giá" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs h-20" />
-                                <input value={siteConfig.mapTitle} onChange={e => updateConfig('mapTitle', e.target.value)} placeholder="Tiêu đề Bản đồ" className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm" />
-                              </div>
-                            </div>
-
-                            <div className="bg-slate-900/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/5">
-                              <div className="flex justify-between items-center mb-4">
-                                <label className="text-[10px] font-black uppercase text-blue-500 tracking-[0.2em]">Hero Media</label>
-                              </div>
-                              <div className="space-y-4">
-                                <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 relative group/hero">
-                                  {siteConfig.heroVideoUrl ? (
-                                    <video src={siteConfig.heroVideoUrl} autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                                  ) : (
-                                    <img src={siteConfig.heroImage} className="w-full h-full object-cover" alt="Hero Preview" />
-                                  )}
-                                  <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover/hero:opacity-100 transition-all flex flex-col items-center justify-center gap-4">
-                                    <label className="bg-white text-slate-950 px-6 py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer hover:bg-blue-500 hover:text-white transition-all">
-                                      Chọn Ảnh
-                                      <input type="file" onChange={e => handleImageUpload(e, (b) => updateConfig('heroImage', b))} className="hidden" accept="image/*" />
-                                    </label>
-                                    <label className="bg-slate-800 text-white px-6 py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer hover:bg-blue-500 transition-all">
-                                      Chọn Video
-                                      <input type="file" onChange={e => handleImageUpload(e, (b) => updateConfig('heroVideoUrl', b))} className="hidden" accept="video/*" />
-                                    </label>
-                                  </div>
-                                </div>
-                                <input 
-                                  value={siteConfig.heroVideoUrl || ''} 
-                                  onChange={e => updateConfig('heroVideoUrl', e.target.value)} 
-                                  placeholder="Hoặc dán URL video .mp4..." 
-                                  className="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white text-[10px]" 
-                                />
-                              </div>
-                            </div>
+                          <div className="space-y-2">
+                            <label className="text-[9px] text-slate-500 uppercase font-black tracking-widest">URL Video Hero</label>
+                            <input 
+                              value={siteConfig.heroVideoUrl || ''} 
+                              onChange={e => updateConfig('heroVideoUrl', e.target.value)} 
+                              placeholder="Dán link video mp4..."
+                              className="w-full bg-slate-950 border border-white/5 rounded-xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+                            />
                           </div>
                         </div>
                       </div>
-                    )}
+
+                      {/* Section Titles */}
+                      <div className="bg-slate-900/50 p-8 rounded-[32px] border border-white/5 space-y-6">
+                        <h4 className="text-[11px] font-black uppercase text-blue-500 tracking-widest flex items-center gap-3">
+                          <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.6)]"></span> Tiêu Đề Các Mục
+                        </h4>
+                        <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                          {[
+                            { label: 'Dịch vụ', key: 'servicesTitle', subKey: 'servicesSubtitle' },
+                            { label: 'Cao cấp', key: 'premiumTitle', subKey: 'premiumSubtitle' },
+                            { label: 'Thư viện', key: 'galleryTitle', subKey: 'gallerySubtitle' },
+                            { label: 'Đánh giá', key: 'reviewsTitle', subKey: 'reviewsSubtitle' },
+                            { label: 'Cố vấn AI', key: 'aiTitle', subKey: 'aiSubtitle' },
+                            { label: 'Tin tức', key: 'newsTitle', subKey: 'newsSubtitle' },
+                            { label: 'Bản đồ', key: 'mapTitle', subKey: 'mapSubtitle' },
+                          ].map((item) => (
+                            <div key={item.key} className="p-4 bg-slate-950/50 rounded-2xl border border-white/5 space-y-3">
+                              <p className="text-[10px] font-black text-white uppercase">{item.label}</p>
+                              <div className="space-y-2">
+                                <input 
+                                  value={(siteConfig as any)[item.key] || ''} 
+                                  onChange={e => updateConfig(item.key as any, e.target.value)} 
+                                  placeholder="Tiêu đề chính"
+                                  className="w-full bg-slate-900 border border-white/5 rounded-lg p-3 text-white text-xs outline-none"
+                                />
+                                <input 
+                                  value={(siteConfig as any)[item.subKey] || ''} 
+                                  onChange={e => updateConfig(item.subKey as any, e.target.value)} 
+                                  placeholder="Tiêu đề phụ"
+                                  className="w-full bg-slate-900 border border-white/5 rounded-lg p-3 text-slate-400 text-[10px] outline-none"
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Specialized Services */}
+                      <div className="bg-slate-900/50 p-8 rounded-[32px] border border-white/5 space-y-6 md:col-span-2">
+                        <h4 className="text-[11px] font-black uppercase text-blue-500 tracking-widest flex items-center gap-3">
+                          <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.6)]"></span> Nội Dung Dịch Vụ Đặc Thù
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                          {[
+                            { label: 'Dán Phim Cách Nhiệt', key: 'windowTintingTitle', descKey: 'windowTintingDescription' },
+                            { label: 'Wrap & PPF', key: 'wrapPPFTitle', descKey: 'wrapPPFDescription' },
+                            { label: 'Nâng Cấp & Độ Xe', key: 'tuningTitle', descKey: 'tuningDescription' },
+                          ].map((item) => (
+                            <div key={item.key} className="p-6 bg-slate-950/50 rounded-2xl border border-white/5 space-y-4">
+                              <div className="space-y-2">
+                                <label className="text-[9px] text-slate-500 uppercase font-black tracking-widest">{item.label}</label>
+                                <input 
+                                  value={(siteConfig as any)[item.key] || ''} 
+                                  onChange={e => updateConfig(item.key as any, e.target.value)} 
+                                  className="w-full bg-slate-900 border border-white/5 rounded-xl p-3 text-white text-xs outline-none"
+                                />
+                              </div>
+                              <div className="space-y-2">
+                                <label className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Mô tả chi tiết</label>
+                                <textarea 
+                                  value={(siteConfig as any)[item.descKey] || ''} 
+                                  onChange={e => updateConfig(item.descKey as any, e.target.value)} 
+                                  className="w-full bg-slate-900 border border-white/5 rounded-xl p-3 text-slate-300 text-[10px] h-32 resize-none outline-none"
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'config' && (
+                  <div className="space-y-8 max-w-5xl">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Cấu Hình Hệ Thống</h3>
+                        <p className="text-slate-500 text-[10px] md:text-[11px] font-black uppercase tracking-widest mt-1">Quản lý định danh, liên hệ và bảo mật</p>
+                      </div>
+                      <div className="flex gap-2 w-full sm:w-auto">
+                        <button onClick={onClose} className="flex-1 sm:flex-none px-6 py-3 rounded-xl md:rounded-2xl bg-slate-800 text-slate-400 font-black uppercase text-[9px] md:text-[10px] hover:text-white transition-all">Đóng</button>
+                        <button onClick={() => { alert("✅ Cấu hình đã được áp dụng!"); onClose(); }} className="flex-1 sm:flex-none px-6 py-3 rounded-xl md:rounded-2xl bg-blue-600 text-white font-black uppercase text-[9px] md:text-[10px] shadow-xl hover:bg-blue-500 transition-all active:scale-95">Lưu & Áp Dụng</button>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                      {/* Identity & Security */}
+                      <div className="bg-slate-900/50 p-6 md:p-10 rounded-[24px] md:rounded-[40px] border border-white/5 space-y-6 md:space-y-8 flex flex-col">
+                        <h4 className="text-[10px] md:text-[11px] font-black uppercase text-blue-500 tracking-[0.2em] flex items-center gap-3">
+                          <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.6)]"></span> Định Danh & Bảo Mật
+                        </h4>
+                        <div className="space-y-4 md:space-y-6 flex-1">
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Tên Dự Án (Site Name)</label>
+                            <input 
+                              value={siteConfig.siteName} 
+                              onChange={e => updateConfig('siteName', e.target.value)} 
+                              className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+                            />
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Logo Thương Hiệu</label>
+                            <div className="flex flex-col sm:flex-row gap-3">
+                              <div className="flex-1 flex gap-2">
+                                <input 
+                                  value={siteConfig.logoUrl || ''} 
+                                  onChange={e => updateConfig('logoUrl', e.target.value)} 
+                                  placeholder="Nhập URL ảnh hoặc tải lên..."
+                                  className="flex-1 bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+                                />
+                                <label className="w-12 h-12 md:w-14 md:h-14 bg-blue-600/20 border border-blue-500/30 rounded-xl md:rounded-2xl flex items-center justify-center cursor-pointer hover:bg-blue-600/40 transition-all shrink-0 group/upload">
+                                  <input 
+                                    type="file" 
+                                    onChange={e => handleImageUpload(e, (b) => updateConfig('logoUrl', b))} 
+                                    className="hidden" 
+                                    accept="image/*" 
+                                  />
+                                  <Upload className="w-5 h-5 text-blue-500 group-hover/upload:scale-110 transition-transform" />
+                                </label>
+                              </div>
+                              <div className="w-12 h-12 md:w-14 md:h-14 bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl flex items-center justify-center overflow-hidden shrink-0">
+                                {siteConfig.logoUrl ? (
+                                  <img src={siteConfig.logoUrl} alt="Logo Preview" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
+                                ) : (
+                                  <div className="w-full h-full bg-gradient-to-br from-blue-600 to-emerald-600 flex items-center justify-center font-black text-white text-xs">
+                                    {siteConfig.siteName.charAt(0)}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <p className="text-[8px] text-slate-600 italic">Để trống để dùng chữ cái đầu của tên thương hiệu.</p>
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Tên Bản Quyền</label>
+                            <input 
+                              value={siteConfig.copyright} 
+                              onChange={e => updateConfig('copyright', e.target.value)} 
+                              className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+                            />
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Mật Khẩu Quản Trị (Kế Toán)</label>
+                            <input 
+                              type="password" 
+                              value={siteConfig.adminPassword} 
+                              onChange={e => updateConfig('adminPassword', e.target.value)} 
+                              className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none transition-all tracking-[0.3em] md:tracking-[0.5em]"
+                            />
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Mật Khẩu Thiết Kế (Giao Diện)</label>
+                            <input 
+                              type="password" 
+                              value={siteConfig.designPassword} 
+                              onChange={e => updateConfig('designPassword', e.target.value)} 
+                              className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none transition-all tracking-[0.3em] md:tracking-[0.5em]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Contact Info */}
+                      <div className="bg-slate-900/50 p-6 md:p-10 rounded-[24px] md:rounded-[40px] border border-white/5 space-y-6 md:space-y-8 flex flex-col">
+                        <h4 className="text-[10px] md:text-[11px] font-black uppercase text-blue-500 tracking-[0.2em] flex items-center gap-3">
+                          <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.6)]"></span> Liên Hệ
+                        </h4>
+                        <div className="space-y-4 md:space-y-6 flex-1">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="group space-y-2">
+                              <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Hotline</label>
+                              <input value={siteConfig.contactPhone} onChange={e => updateConfig('contactPhone', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm" />
+                            </div>
+                            <div className="group space-y-2">
+                              <div className="flex justify-between items-center">
+                                <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Email</label>
+                                <button 
+                                  onClick={async () => {
+                                    if (!siteConfig.contactEmail) return alert("Vui lòng nhập email trước!");
+                                    try {
+                                      const res = await fetch('/api/send-email', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({
+                                          to: siteConfig.contactEmail,
+                                          subject: 'Test Email from XE ĐẸP AUTO',
+                                          html: '<h1>Hệ thống gửi email hoạt động tốt!</h1><p>Đây là email kiểm tra từ website của bạn.</p>'
+                                        })
+                                      });
+                                      if (res.ok) alert("Đã gửi email kiểm tra thành công!");
+                                      else {
+                                        const err = await res.json();
+                                        alert("Lỗi: " + (err.error || "Không rõ nguyên nhân"));
+                                      }
+                                    } catch (e) {
+                                      alert("Lỗi kết nối server!");
+                                    }
+                                  }}
+                                  className="text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded bg-blue-600/10 text-blue-500 hover:bg-blue-600 hover:text-white transition-all"
+                                >
+                                  🚀 Test Email
+                                </button>
+                              </div>
+                              <input value={siteConfig.contactEmail} onChange={e => updateConfig('contactEmail', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm" />
+                            </div>
+                            <div className="group space-y-2">
+                              <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Giờ Mở Cửa</label>
+                              <input value={siteConfig.contactHours} onChange={e => updateConfig('contactHours', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm" />
+                            </div>
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Địa Chỉ Văn Phòng</label>
+                            <textarea value={siteConfig.contactAddress} onChange={e => updateConfig('contactAddress', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm h-20 resize-none" />
+                            <p className="text-[8px] text-slate-600 italic">* Bản đồ Google Maps sẽ tự động cập nhật theo địa chỉ này.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Social Media Links */}
+                      <div className="bg-slate-900/50 p-6 md:p-10 rounded-[24px] md:rounded-[40px] border border-white/5 space-y-6 md:space-y-8 flex flex-col md:col-span-2">
+                        <h4 className="text-[10px] md:text-[11px] font-black uppercase text-blue-500 tracking-[0.2em] flex items-center gap-3">
+                          <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.6)]"></span> Mạng Xã Hội
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 flex-1">
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors flex items-center gap-2">Facebook</label>
+                            <input value={siteConfig.facebookUrl} onChange={e => updateConfig('facebookUrl', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-xs" />
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-red-500 transition-colors flex items-center gap-2">YouTube</label>
+                            <input value={siteConfig.youtubeUrl} onChange={e => updateConfig('youtubeUrl', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-xs" />
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-pink-500 transition-colors flex items-center gap-2">Instagram</label>
+                            <input value={siteConfig.instagramUrl} onChange={e => updateConfig('instagramUrl', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-xs" />
+                          </div>
+                          <div className="group space-y-2">
+                            <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-emerald-500 transition-colors flex items-center gap-2">Zalo</label>
+                            <input value={siteConfig.zaloNumber} onChange={e => updateConfig('zaloNumber', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-xs" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Danger Zone */}
+                      <div className="bg-red-950/20 p-6 md:p-10 rounded-[24px] md:rounded-[40px] border border-red-500/20 space-y-6 md:space-y-8 flex flex-col md:col-span-2">
+                        <h4 className="text-[10px] md:text-[11px] font-black uppercase text-red-500 tracking-[0.2em] flex items-center gap-3">Tác Vụ Nguy Hiểm</h4>
+                        <div className="flex flex-col lg:flex-row items-center gap-4 md:gap-8">
+                          <p className="flex-1 text-[10px] md:text-[11px] text-slate-400 font-medium leading-relaxed italic">
+                            Lưu ý: Các hành động dưới đây không thể hoàn tác. Mọi dữ liệu sẽ bị xóa sạch và khôi phục về trạng thái gốc.
+                          </p>
+                          <button 
+                            onClick={() => confirm("⚠️ RESET TOÀN BỘ HỆ THỐNG?") && (localStorage.clear(), window.location.reload())} 
+                            className="w-full lg:w-auto bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/30 px-6 md:px-10 py-4 md:py-5 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] font-black uppercase transition-all shadow-xl active:scale-95"
+                          >
+                            Reset Hệ Thống
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {activeTab === 'services' && (
                   <div className="space-y-8">
@@ -2479,23 +3378,24 @@ const AdminDashboardModal: React.FC<{
                       className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/20 transition-all cursor-pointer text-center flex items-center justify-center gap-2 group"
                     >
                       <span className="text-lg group-hover:scale-110 transition-transform">🖼️</span>
-                      Tải Lên
+                      {t('gallery_upload_button')}
                     </button>
 
                     <AnimatePresence>
                       {isGalleryUploadOpen && (
                         <GalleryUploadManager 
+                          t={t}
                           categories={[
-                            { value: 'ceramic', label: 'Ceramic' },
-                            { value: 'wash', label: 'Rửa xe' },
-                            { value: 'interior', label: 'Nội thất' },
-                            { value: 'film', label: 'Dán phim' },
-                            { value: 'general', label: 'Khác' },
+                            { value: 'ceramic', label: t('service_ceramic') },
+                            { value: 'wash', label: t('service_wash') },
+                            { value: 'interior', label: t('service_interior') },
+                            { value: 'film', label: t('service_ppf') },
+                            { value: 'general', label: t('service_other') },
                           ]}
                           onClose={() => setIsGalleryUploadOpen(false)}
                           onUpload={(newImages) => {
                             setGallery(prev => [...newImages, ...prev]);
-                            toast.success(`Đã thêm ${newImages.length} ảnh vào thư viện!`);
+                            toast.success(t('gallery_upload_success').replace('{{count}}', newImages.length.toString()));
                           }}
                         />
                       )}
@@ -2660,6 +3560,607 @@ const AdminDashboardModal: React.FC<{
                   </div>
                 )}
 
+                {activeTab === 'inventory' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Quản Lý Kho Vật Tư</h3>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Theo dõi dung dịch, hóa chất và dụng cụ</p>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          const name = prompt("Tên vật tư mới:");
+                          if (!name) return;
+                          const newItem: InventoryItem = {
+                            id: Date.now().toString(),
+                            name,
+                            category: 'General',
+                            quantity: 0,
+                            unit: 'cái',
+                            minThreshold: 5,
+                            lastRestocked: new Date().toISOString().split('T')[0],
+                            pricePerUnit: 0
+                          };
+                          setInventory(prev => [...prev, newItem]);
+                        }}
+                        className="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all active:scale-95 flex items-center justify-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" /> Thêm Vật Tư
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Tổng mặt hàng</p>
+                        <p className="text-3xl font-black text-white">{inventory.length}</p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-red-500/20 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-red-500 uppercase tracking-widest mb-1">Sắp hết kho</p>
+                        <p className="text-3xl font-black text-red-500">{inventory.filter(item => item.quantity <= item.minThreshold).length}</p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-emerald-500/20 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-emerald-500 uppercase tracking-widest mb-1">Giá trị kho ước tính</p>
+                        <p className="text-3xl font-black text-emerald-500">
+                          {(inventory.reduce((acc, item) => acc + (item.quantity * (item.pricePerUnit || 0)), 0)).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-900/50 border border-white/5 rounded-[40px] overflow-hidden">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="bg-white/5 border-b border-white/5">
+                            <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Tên Vật Tư</th>
+                            <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Danh Mục</th>
+                            <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Số Lượng</th>
+                            <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Trạng Thái</th>
+                            <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Thao Tác</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-white/5">
+                          {inventory.map(item => (
+                            <tr key={item.id} className="hover:bg-white/5 transition-colors group">
+                              <td className="p-6">
+                                <p className="text-sm font-bold text-white">{item.name}</p>
+                                <p className="text-[10px] text-slate-500 mt-1">Cập nhật: {item.lastRestocked}</p>
+                              </td>
+                              <td className="p-6">
+                                <span className="px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[9px] font-black uppercase tracking-widest">
+                                  {item.category}
+                                </span>
+                              </td>
+                              <td className="p-6">
+                                <div className="flex items-center gap-3">
+                                  <button 
+                                    onClick={() => {
+                                      setInventory(prev => prev.map(i => i.id === item.id ? { ...i, quantity: Math.max(0, i.quantity - 1) } : i));
+                                    }}
+                                    className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition-all"
+                                  >
+                                    -
+                                  </button>
+                                  <span className="text-sm font-black text-white w-12 text-center">{item.quantity} {item.unit}</span>
+                                  <button 
+                                    onClick={() => {
+                                      setInventory(prev => prev.map(i => i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i));
+                                    }}
+                                    className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-600 hover:text-white transition-all"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </td>
+                              <td className="p-6">
+                                {item.quantity <= item.minThreshold ? (
+                                  <span className="flex items-center gap-2 text-red-500 text-[10px] font-black uppercase tracking-widest">
+                                    <AlertTriangle className="w-3 h-3" /> Sắp hết
+                                  </span>
+                                ) : (
+                                  <span className="flex items-center gap-2 text-emerald-500 text-[10px] font-black uppercase tracking-widest">
+                                    <CheckCircle2 className="w-3 h-3" /> Bình thường
+                                  </span>
+                                )}
+                              </td>
+                              <td className="p-6 text-right">
+                                <button 
+                                  onClick={() => {
+                                    if (confirm("Xóa vật tư này khỏi kho?")) {
+                                      setInventory(prev => prev.filter(i => i.id !== item.id));
+                                    }
+                                  }}
+                                  className="p-2 text-slate-500 hover:text-red-500 transition-colors"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'loyalty' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Hệ Thống Tích Điểm</h3>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Quản lý điểm thưởng và ưu đãi khách hàng</p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                      {/* Loyalty Config */}
+                      <div className="lg:col-span-1 space-y-6">
+                        <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px]">
+                          <h4 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <Settings2 className="w-4 h-4 text-blue-500" /> Cấu Hình Điểm
+                          </h4>
+                          <div className="space-y-4">
+                            <div>
+                              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Điểm trên mỗi 100.000đ</label>
+                              <input 
+                                type="number"
+                                value={siteConfig.loyaltyConfig?.pointsPer100k || 10}
+                                onChange={(e) => setSiteConfig(prev => ({
+                                  ...prev,
+                                  loyaltyConfig: { ...prev.loyaltyConfig!, pointsPer100k: parseInt(e.target.value) || 0 }
+                                }))}
+                                className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-blue-500 transition-all"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Giá trị 1 điểm (VNĐ)</label>
+                              <input 
+                                type="number"
+                                value={siteConfig.loyaltyConfig?.pointValue || 1000}
+                                onChange={(e) => setSiteConfig(prev => ({
+                                  ...prev,
+                                  loyaltyConfig: { ...prev.loyaltyConfig!, pointValue: parseInt(e.target.value) || 0 }
+                                }))}
+                                className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-blue-500 transition-all"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="bg-blue-600/10 border border-blue-600/20 p-6 rounded-[32px]">
+                          <p className="text-[10px] font-bold text-blue-400 leading-relaxed">
+                            💡 Mẹo: Thiết lập tỷ lệ điểm hấp dẫn để khuyến khích khách hàng quay lại sử dụng dịch vụ thường xuyên hơn.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Customer Points List */}
+                      <div className="lg:col-span-2">
+                        <div className="bg-slate-900/50 border border-white/5 rounded-[40px] overflow-hidden">
+                          <div className="p-6 border-b border-white/5 flex justify-between items-center">
+                            <h4 className="text-sm font-black text-white uppercase tracking-widest">Bảng Điểm Khách Hàng</h4>
+                            <div className="relative">
+                              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                              <input 
+                                type="text"
+                                placeholder="Tìm khách hàng..."
+                                value={filterText}
+                                onChange={(e) => setFilterText(e.target.value)}
+                                className="bg-slate-950 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-xs text-white focus:border-blue-500 transition-all w-48 sm:w-64"
+                              />
+                            </div>
+                          </div>
+                          <div className="max-h-[500px] overflow-y-auto custom-scrollbar">
+                            <table className="w-full text-left border-collapse">
+                              <thead>
+                                <tr className="bg-white/5 border-b border-white/5">
+                                  <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Khách Hàng</th>
+                                  <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Biển Số</th>
+                                  <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Điểm Tích Lũy</th>
+                                  <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Giá Trị Quy Đổi</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-white/5">
+                                {getFilteredAndSorted(customerRecords, ['customerName', 'phone', 'licensePlate']).map(customer => (
+                                  <tr key={customer.id} className="hover:bg-white/5 transition-colors">
+                                    <td className="p-6">
+                                      <p className="text-sm font-bold text-white">{customer.customerName}</p>
+                                      <p className="text-[10px] text-slate-500 mt-1">{customer.phone}</p>
+                                    </td>
+                                    <td className="p-6">
+                                      <span className="px-3 py-1 rounded-lg bg-slate-800 text-white text-[10px] font-mono">
+                                        {customer.licensePlate}
+                                      </span>
+                                    </td>
+                                    <td className="p-6">
+                                      <div className="flex items-center gap-2">
+                                        <div className="w-8 h-8 rounded-full bg-amber-600/20 flex items-center justify-center text-amber-500">
+                                          <Star className="w-4 h-4" />
+                                        </div>
+                                        <span className="text-lg font-black text-white">{customer.loyaltyPoints || 0}</span>
+                                      </div>
+                                    </td>
+                                    <td className="p-6">
+                                      <p className="text-sm font-black text-emerald-500">
+                                        {((customer.loyaltyPoints || 0) * (siteConfig.loyaltyConfig?.pointValue || 1000)).toLocaleString('vi-VN')} đ
+                                      </p>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'reports' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Báo Cáo Doanh Thu</h3>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Phân tích hiệu quả kinh doanh và dịch vụ</p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Doanh thu tháng này</p>
+                        <p className="text-3xl font-black text-blue-500">
+                          {customerRecords.filter(r => r.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, r) => acc + (parseInt(r.totalPrice?.replace(/[^0-9]/g, '') || '0')), 0).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Chi phí tháng này</p>
+                        <p className="text-3xl font-black text-red-500">
+                          {expenses.filter(e => e.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, e) => acc + e.amount, 0).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Lợi nhuận tháng này</p>
+                        <p className="text-3xl font-black text-emerald-500">
+                          {(customerRecords.filter(r => r.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, r) => acc + (parseInt(r.totalPrice?.replace(/[^0-9]/g, '') || '0')), 0) - 
+                            expenses.filter(e => e.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, e) => acc + e.amount, 0)).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      {/* Revenue Chart */}
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px]">
+                        <h4 className="text-sm font-black text-white uppercase tracking-widest mb-8">Doanh Thu Theo Thời Gian</h4>
+                        <div className="h-[300px] w-full">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={
+                              Array.from({ length: 7 }, (_, i) => {
+                                const d = new Date();
+                                d.setDate(d.getDate() - (6 - i));
+                                const dateStr = d.toISOString().split('T')[0];
+                                const dayTotal = customerRecords
+                                  .filter(r => r.date === dateStr)
+                                  .reduce((acc, r) => acc + (parseInt(r.totalPrice?.replace(/[^0-9]/g, '') || '0')), 0);
+                                return { name: d.toLocaleDateString('vi-VN', { weekday: 'short' }), total: dayTotal };
+                              })
+                            }>
+                              <defs>
+                                <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                                </linearGradient>
+                              </defs>
+                              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                              <XAxis dataKey="name" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} />
+                              <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(value) => `${value / 1000000}M`} />
+                              <Tooltip 
+                                contentStyle={{ background: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px', fontSize: '10px' }}
+                                itemStyle={{ color: '#3b82f6' }}
+                              />
+                              <Area type="monotone" dataKey="total" stroke="#3b82f6" fillOpacity={1} fill="url(#colorTotal)" strokeWidth={3} />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+
+                      {/* Service Popularity Chart */}
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px]">
+                        <h4 className="text-sm font-black text-white uppercase tracking-widest mb-8">Dịch Vụ Phổ Biến</h4>
+                        <div className="h-[300px] w-full">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <RePieChart>
+                              <Pie
+                                data={
+                                  (() => {
+                                    const counts: Record<string, number> = {};
+                                    customerRecords.forEach(r => {
+                                      r.servicesDone?.forEach(s => {
+                                        counts[s] = (counts[s] || 0) + 1;
+                                      });
+                                    });
+                                    return Object.entries(counts)
+                                      .map(([name, value]) => ({ name, value }))
+                                      .sort((a, b) => b.value - a.value)
+                                      .slice(0, 5);
+                                  })()
+                                }
+                                cx="50%"
+                                cy="50%"
+                                innerRadius={60}
+                                outerRadius={80}
+                                paddingAngle={5}
+                                dataKey="value"
+                              >
+                                {['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444'].map((color, index) => (
+                                  <Cell key={`cell-${index}`} fill={color} />
+                                ))}
+                              </Pie>
+                              <Tooltip 
+                                contentStyle={{ background: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px', fontSize: '10px' }}
+                              />
+                            </RePieChart>
+                          </ResponsiveContainer>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4 mt-4">
+                          {(() => {
+                            const counts: Record<string, number> = {};
+                            customerRecords.forEach(r => {
+                              r.servicesDone?.forEach(s => {
+                                counts[s] = (counts[s] || 0) + 1;
+                              });
+                            });
+                            return Object.entries(counts)
+                              .map(([name, value]) => ({ name, value }))
+                              .sort((a, b) => b.value - a.value)
+                              .slice(0, 4);
+                          })().map((item, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <div className="w-2 h-2 rounded-full" style={{ background: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'][i] }} />
+                              <span className="text-[10px] font-bold text-slate-400 truncate">{item.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'expenses' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Quản Lý Chi Phí</h3>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Theo dõi các khoản chi tiêu vận hành</p>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          const title = prompt('Tên khoản chi:');
+                          const amount = parseInt(prompt('Số tiền (VNĐ):') || '0');
+                          const category = prompt('Danh mục (rent, salary, utility, inventory, marketing, other):') as any;
+                          if (title && amount > 0) {
+                            const newExpense: Expense = {
+                              id: Date.now().toString(),
+                              title,
+                              amount,
+                              category: category || 'other',
+                              date: new Date().toISOString().split('T')[0]
+                            };
+                            setExpenses(prev => [newExpense, ...prev]);
+                          }
+                        }}
+                        className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" /> Thêm Chi Phí
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Tổng chi tháng này</p>
+                        <p className="text-3xl font-black text-red-500">
+                          {expenses.filter(e => e.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, e) => acc + e.amount, 0).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Tiền thuê & Lương</p>
+                        <p className="text-3xl font-black text-amber-500">
+                          {expenses.filter(e => (e.category === 'rent' || e.category === 'salary') && e.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, e) => acc + e.amount, 0).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Vật tư & Marketing</p>
+                        <p className="text-3xl font-black text-blue-500">
+                          {expenses.filter(e => (e.category === 'inventory' || e.category === 'marketing') && e.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, e) => acc + e.amount, 0).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px]">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Điện nước & Khác</p>
+                        <p className="text-3xl font-black text-purple-500">
+                          {expenses.filter(e => (e.category === 'utility' || e.category === 'other') && e.date.startsWith(new Date().toISOString().slice(0, 7))).reduce((acc, e) => acc + e.amount, 0).toLocaleString('vi-VN')} đ
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-900/50 border border-white/5 rounded-[40px] overflow-hidden">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                          <thead>
+                            <tr className="border-b border-white/5">
+                              <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Ngày</th>
+                              <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Khoản chi</th>
+                              <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Danh mục</th>
+                              <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Số tiền</th>
+                              <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Thao tác</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {expenses.sort((a, b) => b.date.localeCompare(a.date)).map(expense => (
+                              <tr key={expense.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                                <td className="px-8 py-6">
+                                  <p className="text-xs font-bold text-slate-400">{expense.date}</p>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <p className="text-sm font-black text-white uppercase tracking-tight">{expense.title}</p>
+                                </td>
+                                <td className="px-8 py-6">
+                                  <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                                    expense.category === 'rent' ? 'bg-blue-500/10 text-blue-500' :
+                                    expense.category === 'salary' ? 'bg-emerald-500/10 text-emerald-500' :
+                                    expense.category === 'utility' ? 'bg-amber-500/10 text-amber-500' :
+                                    expense.category === 'inventory' ? 'bg-purple-500/10 text-purple-500' :
+                                    expense.category === 'marketing' ? 'bg-pink-500/10 text-pink-500' :
+                                    'bg-slate-500/10 text-slate-500'
+                                  }`}>
+                                    {expense.category === 'rent' ? 'Mặt bằng' :
+                                     expense.category === 'salary' ? 'Lương' :
+                                     expense.category === 'utility' ? 'Điện nước' :
+                                     expense.category === 'inventory' ? 'Vật tư' :
+                                     expense.category === 'marketing' ? 'Marketing' : 'Khác'}
+                                  </span>
+                                </td>
+                                <td className="px-8 py-6 text-right">
+                                  <p className="text-sm font-black text-red-500">-{expense.amount.toLocaleString('vi-VN')} đ</p>
+                                </td>
+                                <td className="px-8 py-6 text-right">
+                                  <button 
+                                    onClick={() => {
+                                      if (window.confirm('Xóa khoản chi này?')) {
+                                        setExpenses(prev => prev.filter(e => e.id !== expense.id));
+                                      }
+                                    }}
+                                    className="p-2 text-slate-600 hover:text-red-500 transition-colors"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {activeTab === 'ecerts' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Chứng Chỉ Điện Tử</h3>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Quản lý và cấp chứng chỉ bảo hành</p>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          const id = `CERT-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+                          const newCert = {
+                            id,
+                            customerName: '',
+                            licensePlate: '',
+                            serviceType: 'Ceramic Coating',
+                            issueDate: new Date().toISOString().split('T')[0],
+                            expiryDate: new Date(new Date().setFullYear(new Date().getFullYear() + 2)).toISOString().split('T')[0],
+                            qrCode: `https://xedepauto.vn/verify/${id}`,
+                            status: 'active' as const
+                          };
+                          setECertificates([newCert, ...eCertificates]);
+                        }}
+                        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all active:scale-95"
+                      >
+                        <Plus size={14} />
+                        Cấp Chứng Chỉ Mới
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {eCertificates.map((cert) => (
+                        <div key={cert.id} className="bg-slate-900/50 border border-white/5 p-6 rounded-[32px] relative group overflow-hidden">
+                          <div className="absolute top-0 right-0 p-4">
+                            <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-full ${
+                              cert.status === 'active' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-slate-500/10 text-slate-500'
+                            }`}>
+                              {cert.status === 'active' ? 'Đang hiệu lực' : 'Hết hạn'}
+                            </span>
+                          </div>
+                          
+                          <div className="flex items-center gap-4 mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500">
+                              <ShieldCheck size={24} />
+                            </div>
+                            <div>
+                              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mã chứng chỉ</p>
+                              <p className="text-sm font-black text-white">{cert.id}</p>
+                            </div>
+                          </div>
+
+                          <div className="space-y-4 mb-6">
+                            <div>
+                              <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Khách hàng</p>
+                              <input 
+                                type="text"
+                                value={cert.customerName}
+                                onChange={(e) => {
+                                  const updated = eCertificates.map(c => c.id === cert.id ? { ...c, customerName: e.target.value } : c);
+                                  setECertificates(updated);
+                                }}
+                                placeholder="Tên khách hàng..."
+                                className="w-full bg-slate-800/50 border border-white/5 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-500/50"
+                              />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Biển số</p>
+                                <input 
+                                  type="text"
+                                  value={cert.licensePlate}
+                                  onChange={(e) => {
+                                    const updated = eCertificates.map(c => c.id === cert.id ? { ...c, licensePlate: e.target.value } : c);
+                                    setECertificates(updated);
+                                  }}
+                                  placeholder="29A-12345"
+                                  className="w-full bg-slate-800/50 border border-white/5 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-500/50"
+                                />
+                              </div>
+                              <div>
+                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Dịch vụ</p>
+                                <select 
+                                  value={cert.serviceType}
+                                  onChange={(e) => {
+                                    const updated = eCertificates.map(c => c.id === cert.id ? { ...c, serviceType: e.target.value } : c);
+                                    setECertificates(updated);
+                                  }}
+                                  className="w-full bg-slate-800/50 border border-white/5 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-500/50"
+                                >
+                                  <option value="Ceramic Coating">Ceramic Coating</option>
+                                  <option value="PPF Protection">PPF Protection</option>
+                                  <option value="Window Tinting">Window Tinting</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                            <div className="text-[9px] font-bold text-slate-500">
+                              Hết hạn: {new Date(cert.expiryDate).toLocaleDateString('vi-VN')}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <button 
+                                onClick={() => {
+                                  const updated = eCertificates.filter(c => c.id !== cert.id);
+                                  setECertificates(updated);
+                                }}
+                                className="p-2 text-slate-500 hover:text-red-500 transition-colors"
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                              <button className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-xl font-black text-[9px] uppercase tracking-widest transition-all">
+                                <FileCheck size={12} />
+                                Xem/In
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {activeTab === 'appointments' && (
                   <div className="space-y-8">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -2793,7 +4294,12 @@ const AdminDashboardModal: React.FC<{
                                   <div className="text-[10px] text-blue-500 font-bold tracking-widest mt-0.5">{app.time}</div>
                                 </td>
                                 <td className="px-8 py-6">
-                                  <div className="font-black text-white text-sm">{app.customerName}</div>
+                                  <div className="flex items-center gap-2">
+                                    <div className="font-black text-white text-sm">{app.customerName}</div>
+                                    {app.isRead === false && (
+                                      <span className="bg-red-600 text-white text-[8px] font-black px-1.5 py-0.5 rounded-md animate-pulse uppercase">Mới</span>
+                                    )}
+                                  </div>
                                   <div className="text-[10px] text-slate-500 font-bold tracking-widest mt-0.5">{app.phone}</div>
                                 </td>
                                 <td className="px-8 py-6">
@@ -3905,11 +5411,20 @@ const AdminDashboardModal: React.FC<{
                         />
                       </div>
                       <div className="group space-y-2">
-                        <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Mật Khẩu Quản Trị</label>
+                        <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Mật Khẩu Quản Trị (Kế Toán)</label>
                         <input 
                           type="password" 
                           value={siteConfig.adminPassword} 
                           onChange={e => updateConfig('adminPassword', e.target.value)} 
+                          className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none transition-all tracking-[0.3em] md:tracking-[0.5em]"
+                        />
+                      </div>
+                      <div className="group space-y-2">
+                        <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-blue-500 transition-colors">Mật Khẩu Thiết Kế (Giao Diện)</label>
+                        <input 
+                          type="password" 
+                          value={siteConfig.designPassword} 
+                          onChange={e => updateConfig('designPassword', e.target.value)} 
                           className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-sm focus:ring-1 focus:ring-blue-500 outline-none transition-all tracking-[0.3em] md:tracking-[0.5em]"
                         />
                       </div>
@@ -4302,7 +5817,7 @@ const SidebarMenu: React.FC<{
   );
 };
 
-const AdminLoginModal: React.FC<{ isOpen: boolean; onClose: () => void; onSuccess: () => void; pass?: string; siteName: string }> = ({ isOpen, onClose, onSuccess, pass, siteName }) => {
+const AdminLoginModal: React.FC<{ isOpen: boolean; onClose: () => void; onSuccess: () => void; pass?: string; siteName: string; t: (key: string) => string }> = ({ isOpen, onClose, onSuccess, pass, siteName, t }) => {
   const [input, setInput] = useState('');
   
   // Xóa trắng input khi modal đóng hoặc mở
@@ -4321,7 +5836,7 @@ const AdminLoginModal: React.FC<{ isOpen: boolean; onClose: () => void; onSucces
     if (normalizedInput === normalizedPass) {
       onSuccess();
     } else {
-      alert("Sai mật khẩu! Vui lòng kiểm tra lại.");
+      alert(t('admin_wrong_password'));
       setInput('');
     }
   };
@@ -4333,7 +5848,7 @@ const AdminLoginModal: React.FC<{ isOpen: boolean; onClose: () => void; onSucces
         <input 
           type="password" 
           autoFocus 
-          placeholder="Mật khẩu bảo mật..." 
+          placeholder={t('admin_password_placeholder')} 
           className="w-full bg-slate-950 border border-white/5 rounded-2xl p-4 text-center tracking-[0.3em] md:tracking-[0.8em] mb-4 text-white outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           value={input}
           onChange={e => setInput(e.target.value)}
@@ -4342,8 +5857,8 @@ const AdminLoginModal: React.FC<{ isOpen: boolean; onClose: () => void; onSucces
         <button 
           onClick={handleLogin} 
           className="w-full bg-blue-600 p-4 rounded-2xl font-black uppercase tracking-widest text-white shadow-xl shadow-blue-900/40 hover:bg-blue-500 transition-all active:scale-95"
-        >Đăng Nhập</button>
-        <button onClick={onClose} className="w-full mt-4 text-slate-500 text-xs uppercase font-bold tracking-widest hover:text-white transition-colors">Huỷ bỏ</button>
+        >{t('admin_login')}</button>
+        <button onClick={onClose} className="w-full mt-4 text-slate-500 text-xs uppercase font-bold tracking-widest hover:text-white transition-colors">{t('admin_cancel')}</button>
       </div>
     </div>
   );
@@ -4351,12 +5866,496 @@ const AdminLoginModal: React.FC<{ isOpen: boolean; onClose: () => void; onSucces
 
 // --- HomePage ---
 
+const translations = {
+  vi: {
+    hero_subtitle: "Nghệ Thuật Chăm Sóc Xe",
+    hero_title: "XE ĐẸP AUTO",
+    hero_description: "Trung tâm Detailing & Chăm sóc xe hơi chuyên nghiệp hàng đầu Hà Nội. Chúng tôi mang đến sự hoàn hảo cho xế yêu của bạn.",
+    book_now: "Đặt Lịch Ngay",
+    explore_services: "Khám Phá Dịch Vụ",
+    share: "Chia Sẻ",
+    track_car: "Theo Dõi Xe",
+    ai_advisor: "Cố Vấn AI",
+    promotions: "Khuyến Mãi",
+    services: "Dịch Vụ",
+    packages: "Bảng Giá",
+    news: "Tin Tức",
+    gallery: "Thư Viện",
+    reviews: "Đánh Giá",
+    hotline: "Hotline 24/7",
+    address: "Địa Chỉ",
+    hours: "Giờ Mở Cửa",
+    satisfied_customers: "Khách Hàng Hài Lòng",
+    years_experience: "Năm Kinh Nghiệm",
+    google_reviews: "Đánh Giá Google",
+    premium_services: "Dịch Vụ Cao Cấp",
+    scroll: "Cuộn",
+    all: "Tất Cả",
+    cat_exterior: "Ngoại Thất",
+    cat_interior: "Nội Thất",
+    cat_protection: "Bảo Vệ",
+    cat_tuning: "Nâng Cấp",
+    search_placeholder: "Tìm kiếm dịch vụ...",
+    view_details: "Xem Chi Tiết",
+    chat_with_ai: "Chat với AI",
+    new_service: "Dịch Vụ Mới",
+    comprehensive_care_package: "Gói Chăm Sóc Toàn Diện",
+    service_package_pricing: "Bảng Giá Gói Dịch Vụ",
+    packages_description: "Tiết kiệm hơn với các gói chăm sóc xe chuyên sâu được thiết kế riêng cho từng nhu cầu.",
+    most_popular: "Phổ Biến Nhất",
+    execution_time: "Thời gian thực hiện",
+    book_now_package: "Đặt Lịch Ngay",
+    before: "Trước",
+    after: "Sau",
+    absolute_difference: "Sự Khác Biệt Tuyệt Đối",
+    standard_process: "Quy Trình Chuẩn",
+    superior_benefits: "Lợi ích vượt trội",
+    get_quote: "Nhận báo giá chi tiết",
+    ai_powered_assistant: "Trợ lý AI",
+    ai_detailing_advice: "Tư vấn Detailing",
+    ai_detailing_desc: "Hỏi về Ceramic, PPF, vệ sinh nội thất...",
+    ai_maintenance: "Bảo dưỡng xe",
+    ai_maintenance_desc: "Lịch trình bảo dưỡng, xử lý lỗi vặt...",
+    customers_used: "Khách hàng đã sử dụng",
+    ai_technical_expert: "Chuyên gia tư vấn kỹ thuật",
+    clear_chat_history: "Xóa lịch sử trò chuyện",
+    ai_processing: "AI đang xử lý...",
+    ai_input_placeholder: "Nhập câu hỏi của bạn tại đây...",
+    ai_answering: "AI đang trả lời...",
+    tint_uv_protection: "Cản 99% Tia UV",
+    tint_uv_desc: "Bảo vệ da và mắt khỏi tác hại của ánh nắng.",
+    tint_heat_reduction: "Giảm Nhiệt 97%",
+    tint_heat_desc: "Tiết kiệm nhiên liệu, làm mát nhanh chóng.",
+    tint_privacy: "Riêng Tư Tuyệt Đối",
+    tint_privacy_desc: "Người ngoài khó nhìn vào, bên trong nhìn rõ.",
+    tint_warranty: "Bảo Hành Trọn Đời",
+    tint_warranty_desc: "Cam kết chất lượng, không bong tróc, bay màu.",
+    tint_consult: "Tư Vấn Dán Phim",
+    tint_view_packages: "Xem Các Gói Phim",
+    tint_3m_title: "Phim Cách Nhiệt 3M",
+    tint_3m_desc: "Chính hãng Hoa Kỳ",
+    tint_3m_quote: "\"Công nghệ phim quang học đa lớp độc quyền, mang lại hiệu suất cản nhiệt vượt trội mà vẫn giữ được độ trong suốt hoàn hảo.\"",
+    ppf_self_healing: "PPF Tự Phục Hồi",
+    ppf_self_healing_desc: "Vết xước dăm tự biến mất dưới tác động nhiệt.",
+    wrap_color_change: "Wrap Đổi Màu",
+    wrap_color_change_desc: "Hơn 500+ mã màu từ các thương hiệu hàng đầu.",
+    ppf_protect_original: "Bảo Vệ Sơn Gốc",
+    ppf_protect_original_desc: "Giữ lớp sơn nguyên bản luôn như mới sau nhiều năm.",
+    wrap_durability: "Độ Bền 5-10 Năm",
+    wrap_durability_desc: "Cam kết không bong tróc, không để lại keo.",
+    ppf_consult: "Tư Vấn Wrap & PPF",
+    ppf_view_colors: "Xem Bảng Màu",
+    ppf_tpu_title: "Paint Protection Film",
+    ppf_tpu_desc: "Công nghệ TPU cao cấp",
+    ppf_tpu_quote: "\"Lớp giáp vô hình bảo vệ xế cưng khỏi đá văng, trầy xước và tác động của môi trường, đồng thời tăng độ bóng sâu cho sơn xe.\"",
+    tuning_lighting: "Nâng Cấp Ánh Sáng",
+    tuning_lighting_desc: "Độ đèn Bi-LED, Laser tăng sáng vượt trội và thẩm mỹ.",
+    tuning_audio: "Âm Thanh Hi-End",
+    tuning_audio_desc: "Hệ thống loa, sub, dsp từ các thương hiệu danh tiếng.",
+    tuning_bodykit: "Bodykit & Mâm",
+    tuning_bodykit_desc: "Cá nhân hóa ngoại thất, tạo điểm nhấn riêng biệt.",
+    tuning_performance: "Performance",
+    tuning_performance_desc: "Tối ưu hiệu năng vận hành, cảm giác lái phấn khích.",
+    tuning_consult: "Tư Vấn Độ Xe",
+    tuning_view_projects: "Xem Dự Án",
+    tuning_pro_title: "Professional Tuning",
+    tuning_pro_desc: "Kỹ thuật viên tay nghề cao",
+    tuning_pro_quote: "\"Biến ý tưởng của bạn thành hiện thực với những giải pháp độ xe an toàn, thẩm mỹ và tuân thủ các tiêu chuẩn kỹ thuật khắt khe nhất.\"",
+    visual_showcase: "Visual Showcase",
+    ai_edit: "AI Edit",
+    ai_edit_prompt: "AI Chỉnh sửa ảnh này (VD: Hiệu ứng bóng sơn):",
+    privacy_policy: "Chính Sách Bảo Mật",
+    terms_of_service: "Điều Khoản Dịch Vụ",
+    zalo_consult: "Tư vấn Zalo",
+    before_after: "Trước & Sau",
+    tracking_title: "Theo Dõi Tiến Độ",
+    tracking_description: "Nhập biển số xe để kiểm tra tình trạng chăm sóc xe của bạn.",
+    plate_placeholder: "VD: 30A-12345",
+    check_status: "Kiểm Tra Trạng Thái",
+    tracking_system: "Hệ thống theo dõi trực tuyến",
+    check_progress: "Kiểm Tra Tiến Độ",
+    tracking_desc: "Minh bạch trong từng công đoạn. Nhập biển số xe của bạn để xem quy trình chăm sóc đang diễn ra như thế nào.",
+    stat_working: "Đang xử lý",
+    stat_ready: "Sẵn sàng bàn giao",
+    stat_waiting: "Đang chờ",
+    stat_total: "Tổng số xe",
+    search_plate_placeholder: "Nhập biển số xe của bạn (VD: 30A-123.45)...",
+    search_now: "Tìm kiếm ngay",
+    no_vehicle_found: "Không tìm thấy xe",
+    check_plate_again: "Vui lòng kiểm tra lại biển số xe bạn đã nhập.",
+    enter_plate_to_track: "Nhập biển số để bắt đầu theo dõi",
+    current_progress: "Tiến độ hiện tại",
+    customer: "Khách hàng",
+    technician_in_charge: "KTV Phụ trách",
+    estimated_finish: "Dự kiến xong",
+    total_cost: "Tổng chi phí",
+    finish_at: "Hoàn thành lúc:",
+    technician: "Kỹ thuật viên:",
+    data_secured: "Dữ liệu được bảo mật & cập nhật liên tục",
+    close: "Đóng",
+    status_ready: "Sẵn sàng",
+    status_working: "Đang xử lý",
+    status_waiting: "Đang chờ",
+    in_progress_badge: "Đang thực hiện",
+    feedback_subtitle: "Khách Hàng Nói Gì",
+    feedback_title: "Đánh Giá & Phản Hồi",
+    send_your_feedback: "Gửi Đánh Giá Của Bạn",
+    service_used: "Dịch vụ đã sử dụng",
+    default_service: "Dịch vụ Detailing",
+    thank_you: "Cảm Ơn Bạn!",
+    feedback_success: "Đánh giá của bạn đã được gửi thành công và đang chờ duyệt.",
+    submit_feedback: "Gửi Đánh Giá",
+    your_name: "Họ Tên Của Bạn",
+    name_placeholder: "VD: Nguyễn Văn A",
+    select_service: "Chọn dịch vụ...",
+    satisfaction_level: "Mức Độ Hài Lòng",
+    your_comment: "Nhận Xét Của Bạn",
+    comment_placeholder: "Chia sẻ trải nghiệm của bạn tại Dũng Car Detailing...",
+    send_feedback_now: "Gửi Đánh Giá Ngay",
+    news_subtitle: "Kiến Thức & Theo Dõi",
+    news_title: "Tin Tức & Theo Dõi Xe",
+    search_plate_to_track: "Nhập biển số xe để theo dõi...",
+    featured_article: "Bài Viết Nổi Bật",
+    read_time: "Phút Đọc",
+    written_by: "Được viết bởi",
+    detailing_expert: "Chuyên gia Detailing tại XE ĐẸP AUTO",
+    share_article: "Chia sẻ",
+    close_article: "Đóng Bài Viết",
+    load_more_news: "Xem Thêm Bài Viết",
+    last_update: "Cập nhật cuối",
+    read_more: "Đọc Thêm",
+    admin_wrong_password: "Sai mật khẩu! Vui lòng kiểm tra lại.",
+    admin_password_placeholder: "Mật khẩu bảo mật...",
+    warranty_lookup_title: "Tra Cứu Bảo Hành Điện Tử",
+    warranty_lookup_desc: "Nhập biển số xe hoặc mã QR để kiểm tra thông tin bảo hành các dịch vụ Ceramic, PPF, Phim cách nhiệt.",
+    warranty_plate_placeholder: "VD: 30A-123.45 hoặc mã QR",
+    warranty_check_btn: "Tra cứu bảo hành",
+    warranty_info_title: "Thông tin bảo hành",
+    warranty_customer: "Khách hàng",
+    warranty_plate: "Biển số",
+    warranty_service: "Dịch vụ",
+    warranty_issue_date: "Ngày cấp",
+    warranty_expiry_date: "Ngày hết hạn",
+    warranty_status: "Trạng thái",
+    warranty_active: "Đang hiệu lực",
+    warranty_expired: "Hết hạn",
+    warranty_not_found: "Không tìm thấy thông tin bảo hành",
+    warranty_close: "Đóng",
+    admin_login: "Đăng Nhập",
+    admin_cancel: "Huỷ bỏ",
+    gallery_url_image: "Ảnh từ URL",
+    gallery_add_title: "Thêm Ảnh Vào Thư Viện",
+    gallery_add_desc: "Tải lên nhiều ảnh, chỉnh sửa thông tin trước khi lưu",
+    gallery_drag_drop: "Kéo thả ảnh hoặc video vào đây",
+    gallery_formats: "Hỗ trợ định dạng JPG, PNG, WEBP, MP4",
+    gallery_select_computer: "Chọn Từ Máy Tính",
+    gallery_add_url: "Thêm từ đường dẫn (URL)",
+    gallery_url_placeholder: "Dán link ảnh hoặc video tại đây...",
+    gallery_url_tip: "Mẹo: Bạn có thể dán link từ Google Drive, Dropbox hoặc các trang lưu trữ ảnh.",
+    gallery_queue: "Danh sách chờ tải lên",
+    gallery_delete_all: "Xóa tất cả",
+    gallery_image_title_placeholder: "Tiêu đề ảnh...",
+    gallery_no_images: "Chưa có ảnh nào được chọn",
+    gallery_selected_files: "Đã chọn {{count}} tệp tin",
+    gallery_please_select: "Vui lòng chọn tệp tin để tải lên",
+    gallery_cancel: "Hủy Bỏ",
+    gallery_confirm_upload: "Xác Nhận Tải Lên",
+    admin_tab_overview: "Tổng quan",
+    admin_tab_appointments: "Lịch hẹn",
+    admin_tab_customers: "Khách hàng",
+    admin_tab_inventory: "Kho vật tư",
+    admin_tab_loyalty: "Tích điểm",
+    admin_tab_reports: "Báo cáo",
+    admin_tab_expenses: "Chi phí",
+    admin_tab_ecerts: "Chứng chỉ",
+    admin_tab_tracking: "Theo dõi xe",
+    admin_tab_feedback: "Đánh giá",
+    admin_tab_ai_advice: "Tư vấn AI",
+    admin_tab_services: "Dịch vụ",
+    admin_tab_packages: "Gói chăm sóc",
+    admin_tab_premium: "Cao cấp",
+    admin_tab_promotions: "Khuyến mãi",
+    admin_tab_news: "Tin tức",
+    admin_tab_gallery: "Thư viện",
+    admin_tab_ui_design: "Giao diện",
+    admin_tab_ai_creative: "AI Creative",
+    admin_tab_config: "Cấu hình",
+    working_hours: "Giờ làm việc",
+    zalo_consultation: "Tư vấn Zalo",
+    select_video_from_gallery: "Chọn Video Từ Thư Viện",
+    no_videos_in_gallery: "Chưa có video nào trong thư viện.",
+    please_upload_video_first: "Vui lòng tải video lên ở tab \"Thư Viện\" trước.",
+    go_to_gallery: "Đến Thư Viện",
+    select_video: "Chọn Video",
+    footer_description: "XE ĐẸP AUTO - Nơi xế yêu của bạn được chăm sóc bởi những chuyên gia hàng đầu.",
+    quick_links: "Liên Kết Nhanh",
+    contact_info: "Thông Tin Liên Hệ",
+    copyright: "© 2024 XE ĐẸP AUTO. Tất cả quyền được bảo lưu.",
+    designed_by: "Thiết kế bởi AI Studio",
+  },
+  en: {
+    hero_subtitle: "The Art of Car Detailing",
+    hero_title: "XE DEP AUTO",
+    hero_description: "Leading professional Detailing & Car Care center in Hanoi. We bring perfection to your beloved car.",
+    book_now: "Book Now",
+    explore_services: "Explore Services",
+    share: "Share",
+    track_car: "Track Your Car",
+    ai_advisor: "AI Advisor",
+    promotions: "Promotions",
+    services: "Services",
+    packages: "Price List",
+    news: "News",
+    gallery: "Gallery",
+    reviews: "Reviews",
+    hotline: "Hotline 24/7",
+    address: "Address",
+    hours: "Opening Hours",
+    satisfied_customers: "Satisfied Customers",
+    years_experience: "Years Experience",
+    google_reviews: "Google Reviews",
+    premium_services: "Premium Services",
+    scroll: "Scroll",
+    all: "All",
+    cat_exterior: "Exterior",
+    cat_interior: "Interior",
+    cat_protection: "Protection",
+    cat_tuning: "Tuning",
+    search_placeholder: "Search services...",
+    view_details: "View Details",
+    chat_with_ai: "Chat with AI",
+    new_service: "New Service",
+    comprehensive_care_package: "Comprehensive Care Package",
+    service_package_pricing: "Service Package Pricing",
+    packages_description: "Save more with specialized car care packages designed for every need.",
+    most_popular: "Most Popular",
+    execution_time: "Execution time",
+    book_now_package: "Book Now",
+    before: "Before",
+    after: "After",
+    absolute_difference: "Absolute Difference",
+    standard_process: "Standard Process",
+    superior_benefits: "Superior Benefits",
+    get_quote: "Get detailed quote",
+    ai_powered_assistant: "AI Powered Assistant",
+    ai_detailing_advice: "Detailing Advice",
+    ai_detailing_desc: "Ask about Ceramic, PPF, interior cleaning...",
+    ai_maintenance: "Car Maintenance",
+    ai_maintenance_desc: "Maintenance schedule, minor troubleshooting...",
+    customers_used: "Customers used",
+    ai_technical_expert: "Technical Advisor",
+    clear_chat_history: "Clear chat history",
+    ai_processing: "AI is processing...",
+    ai_input_placeholder: "Enter your question here...",
+    ai_answering: "AI is answering...",
+    tint_uv_protection: "99% UV Protection",
+    tint_uv_desc: "Protects skin and eyes from sun damage.",
+    tint_heat_reduction: "97% Heat Reduction",
+    tint_heat_desc: "Saves fuel, cools down quickly.",
+    tint_privacy: "Absolute Privacy",
+    tint_privacy_desc: "Hard to see in, clear view from inside.",
+    tint_warranty: "Lifetime Warranty",
+    tint_warranty_desc: "Quality commitment, no peeling or fading.",
+    tint_consult: "Tinting Consultation",
+    tint_view_packages: "View Tint Packages",
+    tint_3m_title: "3M Window Tint",
+    tint_3m_desc: "Genuine USA",
+    tint_3m_quote: "\"Exclusive multi-layer optical film technology, providing superior heat rejection while maintaining perfect transparency.\"",
+    ppf_self_healing: "Self-Healing PPF",
+    ppf_self_healing_desc: "Minor scratches disappear under heat.",
+    wrap_color_change: "Color Change Wrap",
+    wrap_color_change_desc: "Over 500+ colors from top brands.",
+    ppf_protect_original: "Protect Original Paint",
+    ppf_protect_original_desc: "Keep original paint like new for years.",
+    wrap_durability: "5-10 Year Durability",
+    wrap_durability_desc: "No peeling, no glue residue.",
+    ppf_consult: "Wrap & PPF Consultation",
+    ppf_view_colors: "View Color Chart",
+    ppf_tpu_title: "Paint Protection Film",
+    ppf_tpu_desc: "Premium TPU Technology",
+    ppf_tpu_quote: "\"An invisible shield protecting your car from stone chips, scratches, and environmental impacts, while enhancing paint depth.\"",
+    tuning_lighting: "Lighting Upgrade",
+    tuning_lighting_desc: "Bi-LED, Laser retrofits for superior brightness and aesthetics.",
+    tuning_audio: "Hi-End Audio",
+    tuning_audio_desc: "Speaker systems, subs, DSP from famous brands.",
+    tuning_bodykit: "Bodykit & Rims",
+    tuning_bodykit_desc: "Personalize exterior, create unique highlights.",
+    tuning_performance: "Performance",
+    tuning_performance_desc: "Optimize performance, exciting driving feel.",
+    tuning_consult: "Tuning Consultation",
+    tuning_view_projects: "View Projects",
+    tuning_pro_title: "Professional Tuning",
+    tuning_pro_desc: "Highly skilled technicians",
+    tuning_pro_quote: "\"Turn your ideas into reality with safe, aesthetic tuning solutions that meet the strictest technical standards.\"",
+    visual_showcase: "Visual Showcase",
+    ai_edit: "AI Edit",
+    ai_edit_prompt: "AI Edit this photo (e.g., Paint gloss effect):",
+    privacy_policy: "Privacy Policy",
+    terms_of_service: "Terms of Service",
+    zalo_consult: "Zalo Consultation",
+    before_after: "Before & After",
+    tracking_title: "Track Progress",
+    tracking_description: "Enter your license plate to check your car's care status.",
+    plate_placeholder: "Ex: 30A-12345",
+    check_status: "Check Status",
+    tracking_system: "Online Tracking System",
+    check_progress: "Check Progress",
+    tracking_desc: "Transparency in every stage. Enter your license plate to see how the care process is going.",
+    stat_working: "Processing",
+    stat_ready: "Ready for delivery",
+    stat_waiting: "Waiting",
+    stat_total: "Total vehicles",
+    search_plate_placeholder: "Enter your license plate (e.g., 30A-123.45)...",
+    search_now: "Search Now",
+    no_vehicle_found: "No vehicle found",
+    check_plate_again: "Please check the license plate you entered again.",
+    enter_plate_to_track: "Enter license plate to start tracking",
+    current_progress: "Current Progress",
+    customer: "Customer",
+    technician_in_charge: "Technician in Charge",
+    estimated_finish: "Estimated Finish",
+    total_cost: "Total Cost",
+    finish_at: "Completed at:",
+    technician: "Technician:",
+    data_secured: "Data is secured & continuously updated",
+    close: "Close",
+    status_ready: "Ready",
+    status_working: "Working",
+    status_waiting: "Waiting",
+    in_progress_badge: "In Progress",
+    feedback_subtitle: "What Our Customers Say",
+    feedback_title: "Reviews & Feedback",
+    send_your_feedback: "Send Your Feedback",
+    service_used: "Service used",
+    default_service: "Detailing Service",
+    thank_you: "Thank You!",
+    feedback_success: "Your review has been submitted successfully and is pending approval.",
+    submit_feedback: "Submit Review",
+    your_name: "Your Name",
+    name_placeholder: "e.g., John Doe",
+    select_service: "Select service...",
+    satisfaction_level: "Satisfaction Level",
+    your_comment: "Your Comment",
+    comment_placeholder: "Share your experience at Dung Car Detailing...",
+    send_feedback_now: "Send Review Now",
+    news_subtitle: "Knowledge & Tracking",
+    news_title: "News & Car Tracking",
+    search_plate_to_track: "Enter license plate to track...",
+    featured_article: "Featured Article",
+    read_time: "Min Read",
+    written_by: "Written by",
+    detailing_expert: "Detailing Expert at XE DEP AUTO",
+    share_article: "Share",
+    close_article: "Close Article",
+    load_more_news: "Load More News",
+    last_update: "Last update",
+    read_more: "Read More",
+    admin_wrong_password: "Wrong password! Please check again.",
+    admin_password_placeholder: "Security password...",
+    warranty_lookup_title: "E-Warranty Lookup",
+    warranty_lookup_desc: "Enter license plate or QR code to check warranty information for Ceramic, PPF, and Tint services.",
+    warranty_plate_placeholder: "Ex: 30A-123.45 or QR code",
+    warranty_check_btn: "Check Warranty",
+    warranty_info_title: "Warranty Information",
+    warranty_customer: "Customer",
+    warranty_plate: "License Plate",
+    warranty_service: "Service",
+    warranty_issue_date: "Issue Date",
+    warranty_expiry_date: "Expiry Date",
+    warranty_status: "Status",
+    warranty_active: "Active",
+    warranty_expired: "Expired",
+    warranty_not_found: "Warranty information not found",
+    warranty_close: "Close",
+    admin_login: "Login",
+    admin_cancel: "Cancel",
+    gallery_url_image: "Image from URL",
+    gallery_add_title: "Add Image to Gallery",
+    gallery_add_desc: "Upload multiple images, edit info before saving",
+    gallery_drag_drop: "Drag and drop images or videos here",
+    gallery_formats: "Supports JPG, PNG, WEBP, MP4 formats",
+    gallery_select_computer: "Select From Computer",
+    gallery_add_url: "Add from URL",
+    gallery_url_placeholder: "Paste image or video link here...",
+    gallery_url_tip: "Tip: You can paste links from Google Drive, Dropbox, or image hosting sites.",
+    gallery_queue: "Upload queue",
+    gallery_delete_all: "Delete all",
+    gallery_image_title_placeholder: "Image title...",
+    gallery_no_images: "No images selected",
+    gallery_selected_files: "Selected {{count}} files",
+    gallery_please_select: "Please select files to upload",
+    gallery_cancel: "Cancel",
+    gallery_confirm_upload: "Confirm Upload",
+    admin_tab_overview: "Overview",
+    admin_tab_appointments: "Appointments",
+    admin_tab_customers: "Customers",
+    admin_tab_inventory: "Inventory",
+    admin_tab_loyalty: "Loyalty",
+    admin_tab_reports: "Reports",
+    admin_tab_expenses: "Expenses",
+    admin_tab_ecerts: "E-Certs",
+    admin_tab_tracking: "Car Tracking",
+    admin_tab_feedback: "Feedback",
+    admin_tab_ai_advice: "AI Advice",
+    admin_tab_services: "Services",
+    admin_tab_packages: "Care Packages",
+    admin_tab_premium: "Premium",
+    admin_tab_promotions: "Promotions",
+    admin_tab_news: "News",
+    admin_tab_gallery: "Gallery",
+    admin_tab_ui_design: "UI Design",
+    admin_tab_ai_creative: "AI Creative",
+    admin_tab_config: "Configuration",
+    working_hours: "Working Hours",
+    zalo_consultation: "Zalo Consultation",
+    select_video_from_gallery: "Select Video From Gallery",
+    no_videos_in_gallery: "No videos in gallery.",
+    please_upload_video_first: "Please upload a video in the \"Gallery\" tab first.",
+    go_to_gallery: "Go to Gallery",
+    select_video: "Select Video",
+    footer_description: "XE DEP AUTO - Where your beloved car is cared for by leading experts.",
+    quick_links: "Quick Links",
+    contact_info: "Contact Information",
+    copyright: "© 2024 XE DEP AUTO. All rights reserved.",
+    designed_by: "Designed by AI Studio",
+  }
+};
+
 const HomePage: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('dungcar_theme_v1');
+    return (saved as 'light' | 'dark') || 'dark';
+  });
+  const [language, setLanguage] = useState<'vi' | 'en'>(() => {
+    const saved = localStorage.getItem('dungcar_lang_v1');
+    return (saved as 'vi' | 'en') || 'vi';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('dungcar_theme_v1', theme);
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+    }
+  }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem('dungcar_lang_v1', language);
+  }, [language]);
+
+  const t = (key: string) => {
+    return (translations[language] as any)[key] || key;
+  };
+
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+  const [isDesignAuthenticated, setIsDesignAuthenticated] = useState(false);
+  const [designPasswordInput, setDesignPasswordInput] = useState('');
+  const [showDesignLock, setShowDesignLock] = useState(false);
   const [dashboardInitialTab, setDashboardInitialTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance'>('home');
   const [dashboardMaintenancePreFill, setDashboardMaintenancePreFill] = useState<{brand: string, model: string, year: string, mileage: string, lastMaintenance: string, symptoms: string} | null>(null);
   const [dashboardTab, setDashboardTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'config'>('home');
@@ -4416,10 +6415,48 @@ const HomePage: React.FC = () => {
       setIsShareModalOpen(true);
     }
   };
+
+  const handleDesignLogin = () => {
+    const normalizedInput = designPasswordInput.trim();
+    const normalizedPass = (siteConfig.designPassword || DEFAULT_SITE_CONFIG.designPassword || 'admin').trim();
+    if (normalizedInput === normalizedPass) {
+      setIsDesignAuthenticated(true);
+      setDesignPasswordInput('');
+      setShowDesignLock(false);
+    } else {
+      alert("Sai mật khẩu thiết kế!");
+      setDesignPasswordInput('');
+    }
+  };
   
   const [isScrolled, setIsScrolled] = useState(false);
-  const [notifications, setNotifications] = useState<{id: string, message: string, time: string, read: boolean}[]>([]);
+  const [notifications, setNotifications] = useState<AppNotification[]>(() => {
+    const saved = localStorage.getItem('dungcar_notifications_v1');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [showNotifications, setShowNotifications] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('dungcar_notifications_v1', JSON.stringify(notifications));
+  }, [notifications]);
+
+  const addNotification = (notif: Omit<AppNotification, 'id' | 'date' | 'isRead'>) => {
+    const newNotif: AppNotification = {
+      ...notif,
+      id: Date.now().toString(),
+      date: new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' }),
+      isRead: false
+    };
+    setNotifications(prev => [newNotif, ...prev]);
+  };
+
+  const markNotificationAsRead = (id: string) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, isRead: true } : n));
+  };
+
+  const clearNotifications = () => {
+    setNotifications([]);
+  };
 
   // WebSocket for real-time notifications
   useEffect(() => {
@@ -4435,13 +6472,11 @@ const HomePage: React.FC = () => {
         try {
           const data = JSON.parse(event.data);
           if (data.type === 'NEW_BOOKING') {
-            const newNotif = {
-              id: Date.now().toString(),
+            addNotification({
+              title: 'Yêu cầu đặt lịch mới',
               message: data.message,
-              time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
-              read: false
-            };
-            setNotifications(prev => [newNotif, ...prev].slice(0, 10));
+              type: 'info'
+            });
             
             toast.success(data.message, {
               duration: 10000,
@@ -4513,6 +6548,13 @@ const HomePage: React.FC = () => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        // Force update password if it's the old one to ensure user can login
+        if (parsed.adminPassword === "025099010538") {
+          parsed.adminPassword = DEFAULT_SITE_CONFIG.adminPassword;
+        }
+        if (parsed.designPassword === "admin") {
+          parsed.designPassword = DEFAULT_SITE_CONFIG.designPassword;
+        }
         return { 
           ...DEFAULT_SITE_CONFIG, 
           ...parsed,
@@ -4551,6 +6593,18 @@ const HomePage: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>(() => {
     const saved = localStorage.getItem('dungcar_reviews_v12');
     return saved ? JSON.parse(saved) : DEFAULT_REVIEWS;
+  });
+  const [inventory, setInventory] = useState<InventoryItem[]>(() => {
+    const saved = localStorage.getItem('dungcar_inventory_v12');
+    return saved ? JSON.parse(saved) : DEFAULT_INVENTORY;
+  });
+  const [eCertificates, setECertificates] = useState<ECertificate[]>(() => {
+    const saved = localStorage.getItem('dungcar_ecerts_v12');
+    return saved ? JSON.parse(saved) : DEFAULT_E_CERTIFICATES;
+  });
+  const [expenses, setExpenses] = useState<Expense[]>(() => {
+    const saved = localStorage.getItem('dungcar_expenses_v12');
+    return saved ? JSON.parse(saved) : (siteConfig.expenses || []);
   });
 
   useEffect(() => {
@@ -4594,18 +6648,56 @@ const HomePage: React.FC = () => {
     localStorage.setItem('dungcar_ai_history_v12', JSON.stringify(aiVideoHistory));
     localStorage.setItem('dungcar_tracking_v12', JSON.stringify(trackingData));
     localStorage.setItem('dungcar_reviews_v12', JSON.stringify(reviews));
-  }, [siteConfig, customerRecords, gallery, services, premiumSolutions, aiVideoHistory, trackingData, reviews]);
+    localStorage.setItem('dungcar_inventory_v12', JSON.stringify(inventory));
+    localStorage.setItem('dungcar_ecerts_v12', JSON.stringify(eCertificates));
+    localStorage.setItem('dungcar_expenses_v12', JSON.stringify(expenses));
+  }, [siteConfig, customerRecords, gallery, services, premiumSolutions, aiVideoHistory, trackingData, reviews, inventory, eCertificates, expenses]);
 
-  const handleAiChat = async () => {
-    if (!aiInput.trim()) return;
-    const userText = aiInput;
-    setAiInput('');
+  const [isAiServiceModalOpen, setIsAiServiceModalOpen] = useState(false);
+  const [selectedServiceForAi, setSelectedServiceForAi] = useState<Service | null>(null);
+
+  const handleOpenAiServiceChat = (service: Service) => {
+    setSelectedServiceForAi(service);
+    setIsAiServiceModalOpen(true);
+    const initialPrompt = `Tôi muốn tìm hiểu về dịch vụ "${service.title}". ${service.description}. Bạn có thể tư vấn thêm cho tôi không?`;
+    setAiInput(initialPrompt);
+  };
+
+  const [foundCertificate, setFoundCertificate] = useState<ECertificate | null>(null);
+  const [warrantySearch, setWarrantySearch] = useState('');
+
+  const handleWarrantySearch = () => {
+    const cert = eCertificates.find(c => 
+      c.licensePlate.toLowerCase().includes(warrantySearch.toLowerCase()) || 
+      c.qrCode.toLowerCase().includes(warrantySearch.toLowerCase())
+    );
+    if (cert) {
+      setFoundCertificate(cert);
+    } else {
+      toast.error('Không tìm thấy thông tin bảo hành cho biển số/mã này');
+      setFoundCertificate(null);
+    }
+  };
+
+  const handleAiChat = async (customInput?: string) => {
+    const textToChat = customInput || aiInput;
+    if (!textToChat.trim()) return;
+    
+    const userText = textToChat;
+    if (!customInput) setAiInput('');
+    
     const newMsgs: Message[] = [...aiMessages, { role: 'user', text: userText }];
     setAiMessages(newMsgs);
     setIsAiLoading(true);
-    const response = await getAIResponse(userText, aiMessages, aiProvider);
-    setAiMessages(prev => [...prev, { role: 'model', text: response }]);
-    setIsAiLoading(false);
+    try {
+      const response = await getAIResponse(userText, aiMessages, aiProvider);
+      setAiMessages(prev => [...prev, { role: 'model', text: response }]);
+    } catch (error) {
+      console.error("AI Chat Error:", error);
+      toast.error("Có lỗi xảy ra khi kết nối với AI.");
+    } finally {
+      setIsAiLoading(false);
+    }
   };
 
   const handleAddCustomer = () => {
@@ -4646,6 +6738,27 @@ const HomePage: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 bg-white/5 rounded-lg p-1">
+              <button 
+                onClick={() => setLanguage('vi')}
+                className={`px-2 py-0.5 rounded text-[8px] font-black transition-all ${language === 'vi' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+              >
+                VI
+              </button>
+              <button 
+                onClick={() => setLanguage('en')}
+                className={`px-2 py-0.5 rounded text-[8px] font-black transition-all ${language === 'en' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+              >
+                EN
+              </button>
+            </div>
+            <button 
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="p-1.5 rounded-lg bg-white/5 text-slate-400 hover:text-white transition-all"
+              title={theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
+            >
+              {theme === 'dark' ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+            </button>
             {siteConfig.facebookUrl && <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors"><Facebook className="w-3 h-3" /></a>}
             {siteConfig.instagramUrl && <a href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors"><Instagram className="w-3 h-3" /></a>}
             {siteConfig.youtubeUrl && <a href={siteConfig.youtubeUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors"><Youtube className="w-3 h-3" /></a>}
@@ -4687,7 +6800,7 @@ const HomePage: React.FC = () => {
                   </div>
                 )}
                 
-                {isEditMode && (
+                {isEditMode && isDesignAuthenticated && (
                   <div className="absolute -top-2 -left-2 z-20 flex gap-1">
                     <label className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-xl cursor-pointer hover:bg-blue-500 transition-colors" title="Tải ảnh logo lên">
                       <input 
@@ -4716,6 +6829,7 @@ const HomePage: React.FC = () => {
                   <EditableText 
                     text={siteConfig.siteName} 
                     isEditMode={isEditMode} 
+                    isDesignAuthenticated={isDesignAuthenticated}
                     onSave={v => setSiteConfig({...siteConfig, siteName: v})}
                     className="text-lg sm:text-xl font-black text-white uppercase tracking-tighter leading-none"
                   />
@@ -4727,16 +6841,16 @@ const HomePage: React.FC = () => {
             <div className="hidden lg:flex items-center gap-10">
               <div className="flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 {[
-                  { id: 'promotions', label: 'Khuyến Mãi' },
-                  { id: 'services', label: 'Dịch Vụ' },
-                  { id: 'packages', label: 'Bảng Giá' },
+                  { id: 'promotions', label: t('promotions') },
+                  { id: 'services', label: t('services') },
+                  { id: 'packages', label: t('packages') },
                   { id: 'window-tinting', label: 'Dán Phim' },
                   { id: 'wrap-ppf', label: 'Wrap & PPF' },
                   { id: 'tuning', label: 'Độ Xe' },
-                  { id: 'ai-advisor', label: 'Cố Vấn AI' },
-                  { id: 'news', label: 'Tin Tức' },
-                  { id: 'gallery', label: 'Thư Viện' },
-                  { id: 'reviews', label: 'Đánh Giá' }
+                  { id: 'ai-advisor', label: t('ai_advisor') },
+                  { id: 'news', label: t('news') },
+                  { id: 'gallery', label: t('gallery') },
+                  { id: 'reviews', label: t('reviews') }
                 ].map((item) => (
                   <button 
                     key={item.id}
@@ -4751,6 +6865,20 @@ const HomePage: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-4">
+              {/* Notification Button */}
+              <button 
+                onClick={() => setShowNotifications(true)}
+                className={`relative p-2.5 rounded-xl transition-all ${
+                  isScrolled ? 'bg-slate-800/50 hover:bg-slate-800 text-white' : 'bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white'
+                }`}
+                title="Thông báo"
+              >
+                <Bell className={`w-5 h-5 ${notifications.some(n => !n.isRead) ? 'animate-bounce text-blue-500' : ''}`} />
+                {notifications.some(n => !n.isRead) && (
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-slate-900 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></span>
+                )}
+              </button>
+
               {/* Tracking Button */}
               <button 
                 onClick={() => scrollToSection('tracking')}
@@ -4759,76 +6887,8 @@ const HomePage: React.FC = () => {
                 }`}
               >
                 <Timer className="w-4 h-4" />
-                <span className="hidden sm:inline">Theo Dõi Xe</span>
+                <span className="hidden sm:inline">{t('track_car')}</span>
               </button>
-
-              {/* Notification Button */}
-              <div className="relative">
-                <button 
-                  onClick={() => setShowNotifications(!showNotifications)}
-                  className={`p-2.5 rounded-xl transition-all relative group ${
-                    isScrolled ? 'bg-slate-800/50 hover:bg-slate-800' : 'bg-white/5 hover:bg-white/10'
-                  }`}
-                  title="Thông báo"
-                >
-                  <Bell className={`w-4 h-4 ${notifications.some(n => !n.read) ? 'text-blue-500 animate-pulse' : 'text-slate-400'}`} />
-                  {notifications.some(n => !n.read) && (
-                    <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-slate-950"></span>
-                  )}
-                </button>
-
-                <AnimatePresence>
-                  {showNotifications && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute right-0 mt-4 w-72 sm:w-80 bg-slate-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-[70]"
-                    >
-                      <div className="p-4 border-b border-white/5 flex justify-between items-center bg-slate-800/50">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-white">Thông báo mới</span>
-                        <button 
-                          onClick={() => setNotifications(notifications.map(n => ({...n, read: true})))}
-                          className="text-[9px] font-bold text-blue-500 hover:text-white transition-colors uppercase"
-                        >
-                          Đánh dấu đã đọc
-                        </button>
-                      </div>
-                      <div className="max-h-80 overflow-y-auto">
-                        {notifications.length > 0 ? (
-                          notifications.map((n) => (
-                            <div 
-                              key={n.id} 
-                              className={`p-4 border-b border-white/5 hover:bg-white/5 transition-colors flex gap-3 ${!n.read ? 'bg-blue-500/5' : ''}`}
-                            >
-                              <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center flex-shrink-0">
-                                <Bell className="w-4 h-4 text-blue-500" />
-                              </div>
-                              <div className="flex-1">
-                                <p className="text-xs text-white font-medium leading-relaxed">{n.message}</p>
-                                <span className="text-[9px] text-slate-500 mt-1 block">{n.time}</span>
-                              </div>
-                            </div>
-                          ))
-                        ) : (
-                          <div className="p-10 text-center">
-                            <Bell className="w-8 h-8 text-slate-700 mx-auto mb-3 opacity-20" />
-                            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Không có thông báo mới</p>
-                          </div>
-                        )}
-                      </div>
-                      {notifications.length > 0 && (
-                        <button 
-                          onClick={() => setNotifications([])}
-                          className="w-full p-3 bg-slate-800/50 hover:bg-slate-800 text-[9px] font-black text-slate-500 hover:text-red-400 transition-all uppercase tracking-widest border-t border-white/5"
-                        >
-                          Xoá tất cả
-                        </button>
-                      )}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
 
               {isEditMode && (
                 <button 
@@ -4841,7 +6901,7 @@ const HomePage: React.FC = () => {
               )}
               
               <div className="hidden md:flex flex-col items-end mr-2">
-                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Hotline 24/7</span>
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{t('hotline')}</span>
                 <a href={`tel:${siteConfig.contactPhone}`} className="text-sm font-black text-white hover:text-blue-500 transition-colors">
                   {siteConfig.contactPhone}
                 </a>
@@ -4851,7 +6911,7 @@ const HomePage: React.FC = () => {
                 onClick={() => setIsBookingModalOpen(true)}
                 className="relative group overflow-hidden bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 active:shadow-inner"
               >
-                <span className="relative z-10">Đặt Lịch Ngay</span>
+                <span className="relative z-10">{t('book_now')}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </button>
             </div>
@@ -4916,7 +6976,7 @@ const HomePage: React.FC = () => {
           <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] animate-pulse"></div>
           <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
 
-          {isEditMode && (
+          {isEditMode && isDesignAuthenticated && (
             <div className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-blue-600/10 backdrop-blur-[2px] opacity-0 group-hover/hero-section:opacity-100 transition-opacity">
               <div className="flex gap-3">
                 <button 
@@ -4956,7 +7016,7 @@ const HomePage: React.FC = () => {
                 className="mb-6"
               >
                 <span className="text-blue-500 font-black uppercase tracking-[0.5em] text-[10px] sm:text-xs bg-blue-500/10 px-6 py-2 rounded-full border border-blue-500/20">
-                  The Art of Car Detailing
+                  {t('hero_subtitle')}
                 </span>
               </motion.div>
 
@@ -4965,6 +7025,7 @@ const HomePage: React.FC = () => {
                   tag="h1" 
                   text={siteConfig.heroTitle} 
                   isEditMode={isEditMode} 
+                  isDesignAuthenticated={isDesignAuthenticated}
                   onSave={v => setSiteConfig({...siteConfig, heroTitle: v})}
                   multiline 
                   className="text-4xl sm:text-7xl md:text-[140px] font-black text-white leading-[0.85] tracking-[-0.04em] uppercase"
@@ -4986,6 +7047,7 @@ const HomePage: React.FC = () => {
                 <EditableText 
                   text={siteConfig.heroDescription} 
                   isEditMode={isEditMode} 
+                  isDesignAuthenticated={isDesignAuthenticated}
                   onSave={v => setSiteConfig({...siteConfig, heroDescription: v})}
                   multiline 
                   className="text-base sm:text-xl md:text-2xl text-slate-400 font-medium leading-relaxed"
@@ -5003,7 +7065,7 @@ const HomePage: React.FC = () => {
                   className="group relative bg-blue-600 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest shadow-2xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 active:shadow-inner overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
-                    Đặt Lịch Ngay <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    {t('book_now')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </button>
@@ -5011,13 +7073,13 @@ const HomePage: React.FC = () => {
                   onClick={() => scrollToSection('services')}
                   className="bg-slate-900 hover:bg-slate-800 text-white border border-white/10 px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all active:scale-95"
                 >
-                  Khám Phá Dịch Vụ
+                  {t('explore_services')}
                 </button>
                 <button 
                   onClick={handleShare}
                   className="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all active:scale-95 flex items-center gap-3"
                 >
-                  <Share2 className="w-4 h-4" /> Chia Sẻ
+                  <Share2 className="w-4 h-4" /> {t('share')}
                 </button>
               </motion.div>
 
@@ -5029,10 +7091,10 @@ const HomePage: React.FC = () => {
                 className="mt-16 sm:mt-24 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-10"
               >
                 {[
-                  { label: 'Khách Hàng Hài Lòng', value: '5,000+', icon: <Users className="w-4 h-4 text-blue-500" /> },
-                  { label: 'Năm Kinh Nghiệm', value: '10+', icon: <ShieldCheck className="w-4 h-4 text-emerald-500" /> },
-                  { label: 'Đánh Giá Google', value: '5.0 ⭐', icon: <Star className="w-4 h-4 text-yellow-500" /> },
-                  { label: 'Dịch Vụ Cao Cấp', value: '20+', icon: <Zap className="w-4 h-4 text-purple-500" /> }
+                  { label: t('satisfied_customers'), value: '5,000+', icon: <Users className="w-4 h-4 text-blue-500" /> },
+                  { label: t('years_experience'), value: '10+', icon: <ShieldCheck className="w-4 h-4 text-emerald-500" /> },
+                  { label: t('google_reviews'), value: '5.0 ⭐', icon: <Star className="w-4 h-4 text-yellow-500" /> },
+                  { label: t('premium_services'), value: '20+', icon: <Zap className="w-4 h-4 text-purple-500" /> }
                 ].map((stat, i) => (
                   <div key={i} className="flex flex-col items-center md:items-start text-center md:text-left">
                     <div className="flex items-center gap-3 mb-2">
@@ -5053,7 +7115,7 @@ const HomePage: React.FC = () => {
             transition={{ delay: 1.5, duration: 1 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
           >
-            <span className="text-[8px] font-black uppercase tracking-[0.3em] text-slate-500">Scroll</span>
+            <span className="text-[8px] font-black uppercase tracking-[0.3em] text-slate-500">{t('scroll')}</span>
             <div className="w-px h-12 bg-gradient-to-b from-blue-500 to-transparent"></div>
           </motion.div>
         </section>
@@ -5071,6 +7133,7 @@ const HomePage: React.FC = () => {
                 <EditableText 
                   text={siteConfig.servicesSubtitle} 
                   isEditMode={isEditMode} 
+                  isDesignAuthenticated={isDesignAuthenticated}
                   onSave={v => setSiteConfig({...siteConfig, servicesSubtitle: v})}
                   className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em]"
                 />
@@ -5079,6 +7142,7 @@ const HomePage: React.FC = () => {
                 tag="h2" 
                 text={siteConfig.servicesTitle} 
                 isEditMode={isEditMode} 
+                isDesignAuthenticated={isDesignAuthenticated}
                 onSave={v => setSiteConfig({...siteConfig, servicesTitle: v})}
                 className="text-4xl sm:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-8"
               />
@@ -5094,7 +7158,7 @@ const HomePage: React.FC = () => {
                   <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-blue-500 transition-colors" />
                   <input 
                     type="text" 
-                    placeholder="Tìm kiếm dịch vụ..."
+                    placeholder={t('search_placeholder')}
                     value={serviceSearch}
                     onChange={(e) => setServiceSearch(e.target.value)}
                     className="w-full bg-slate-900/50 border border-white/10 rounded-2xl py-4 pl-14 pr-6 text-white text-sm focus:outline-none focus:border-blue-500 transition-all"
@@ -5111,7 +7175,7 @@ const HomePage: React.FC = () => {
                         : 'bg-slate-900/50 text-slate-500 border border-white/5 hover:border-white/20'
                       }`}
                     >
-                      {cat === 'all' ? 'Tất cả' : cat === 'exterior' ? 'Ngoại thất' : cat === 'interior' ? 'Nội thất' : cat === 'protection' ? 'Bảo vệ' : 'Nâng cấp'}
+                      {t(`cat_${cat}`)}
                     </button>
                   ))}
                 </div>
@@ -5145,6 +7209,7 @@ const HomePage: React.FC = () => {
                         <EditableImage 
                           src={s.image} 
                           isEditMode={isEditMode} 
+                          isDesignAuthenticated={isDesignAuthenticated}
                           onUpload={base64 => setServices(services.map(ser => ser.id === s.id ? {...ser, image: base64} : ser))}
                           alt={s.title}
                           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -5163,7 +7228,7 @@ const HomePage: React.FC = () => {
 
                         {['ppf', 'wrap', 'tuning', 'underbody'].includes(s.id) && (
                           <div className="absolute top-8 right-8 z-20">
-                            <div className="bg-emerald-500 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-xl animate-pulse">New Service</div>
+                            <div className="bg-emerald-500 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-xl animate-pulse">{t('new_service')}</div>
                           </div>
                         )}
                         
@@ -5175,6 +7240,7 @@ const HomePage: React.FC = () => {
                               <EditableText 
                                 text={s.icon} 
                                 isEditMode={isEditMode} 
+                                isDesignAuthenticated={isDesignAuthenticated}
                                 onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, icon: v} : ser))}
                                 className="text-3xl sm:text-4xl"
                               />
@@ -5183,6 +7249,7 @@ const HomePage: React.FC = () => {
                               <EditableText 
                                 text={s.price} 
                                 isEditMode={isEditMode} 
+                                isDesignAuthenticated={isDesignAuthenticated}
                                 onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, price: v} : ser))}
                               />
                             </div>
@@ -5198,6 +7265,7 @@ const HomePage: React.FC = () => {
                               tag="h3" 
                               text={s.title} 
                               isEditMode={isEditMode} 
+                              isDesignAuthenticated={isDesignAuthenticated}
                               onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, title: v} : ser))}
                               className="text-xl sm:text-4xl font-black text-white mb-3 sm:mb-6 uppercase tracking-tighter leading-none group-hover:text-blue-500 transition-colors duration-500"
                             />
@@ -5206,6 +7274,7 @@ const HomePage: React.FC = () => {
                               <EditableText 
                                 text={s.description} 
                                 isEditMode={isEditMode} 
+                                isDesignAuthenticated={isDesignAuthenticated}
                                 onSave={v => setServices(services.map(ser => ser.id === s.id ? {...ser, description: v} : ser))}
                                 multiline
                                 className="text-slate-400 text-xs sm:text-lg leading-relaxed mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
@@ -5213,15 +7282,24 @@ const HomePage: React.FC = () => {
                             </div>
 
                             <div className="flex items-center justify-between pt-6 sm:pt-8 border-t border-white/5">
-                              <button 
-                                onClick={() => setSelectedServiceForModal(s)}
-                                className="text-[9px] sm:text-xs font-black uppercase tracking-[0.2em] text-blue-500 hover:text-white transition-colors flex items-center gap-2 sm:gap-3 group/btn"
-                              >
-                                Xem chi tiết 
-                                <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 transition-transform" />
-                              </button>
+                              <div className="flex items-center gap-4">
+                                <button 
+                                  onClick={() => setSelectedServiceForModal(s)}
+                                  className="text-[9px] sm:text-xs font-black uppercase tracking-[0.2em] text-blue-500 hover:text-white transition-colors flex items-center gap-2 sm:gap-3 group/btn"
+                                >
+                                  {t('view_details')} 
+                                  <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 transition-transform" />
+                                </button>
+                                <button 
+                                  onClick={() => handleOpenAiServiceChat(s)}
+                                  className="text-[9px] sm:text-xs font-black uppercase tracking-[0.2em] text-emerald-500 hover:text-white transition-colors flex items-center gap-2 sm:gap-3 group/btn"
+                                >
+                                  {t('chat_with_ai')}
+                                  <Bot className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:scale-110 transition-transform" />
+                                </button>
+                              </div>
                               
-                              <div className="flex -space-x-3">
+                              <div className="hidden sm:flex -space-x-3">
                                 {[1,2,3].map(i => (
                                   <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-slate-900 bg-slate-800 overflow-hidden">
                                     <img src={`https://i.pravatar.cc/100?img=${i + idx}`} alt="User" className="w-full h-full object-cover opacity-60" />
@@ -5253,13 +7331,13 @@ const HomePage: React.FC = () => {
                 className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-600/10 border border-emerald-500/20 mb-6"
               >
                 <Package className="w-4 h-4 text-emerald-500" />
-                <span className="text-emerald-500 font-black uppercase tracking-widest text-[10px]">Gói Chăm Sóc Toàn Diện</span>
+                <span className="text-emerald-500 font-black uppercase tracking-widest text-[10px]">{t('comprehensive_care_package')}</span>
               </motion.div>
               <h2 className="text-4xl sm:text-7xl font-black text-white uppercase mb-6 tracking-tighter leading-none">
-                Bảng Giá Gói Dịch Vụ
+                {t('service_package_pricing')}
               </h2>
               <p className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-lg font-medium">
-                Tiết kiệm hơn với các gói chăm sóc xe chuyên sâu được thiết kế riêng cho từng nhu cầu.
+                {t('packages_description')}
               </p>
             </div>
 
@@ -5279,7 +7357,7 @@ const HomePage: React.FC = () => {
                 >
                   {pkg.isPopular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl">
-                      Phổ Biến Nhất
+                      {t('most_popular')}
                     </div>
                   )}
                   
@@ -5292,7 +7370,7 @@ const HomePage: React.FC = () => {
                     <div className="text-4xl font-black text-white mb-1">{pkg.price}</div>
                     <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
                       <Clock className="w-3 h-3" />
-                      Thời gian thực hiện: {pkg.duration}
+                      {t('execution_time')}: {pkg.duration}
                     </div>
                   </div>
 
@@ -5315,7 +7393,7 @@ const HomePage: React.FC = () => {
                       : 'bg-white text-slate-950 hover:bg-slate-200'
                     }`}
                   >
-                    Đặt Lịch Ngay
+                    {t('book_now_package')}
                   </button>
                 </motion.div>
               ))}
@@ -5342,12 +7420,14 @@ const HomePage: React.FC = () => {
                 tag="h2" 
                 text={siteConfig.premiumTitle} 
                 isEditMode={isEditMode} 
+                isDesignAuthenticated={isDesignAuthenticated}
                 onSave={v => setSiteConfig({...siteConfig, premiumTitle: v})}
                 className="text-4xl sm:text-7xl font-black text-white uppercase mb-6 tracking-tighter leading-none"
               />
               <EditableText 
                 text={siteConfig.premiumSubtitle} 
                 isEditMode={isEditMode} 
+                isDesignAuthenticated={isDesignAuthenticated}
                 onSave={v => setSiteConfig({...siteConfig, premiumSubtitle: v})}
                 className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-lg font-medium"
               />
@@ -5370,29 +7450,31 @@ const HomePage: React.FC = () => {
                           <EditableImage 
                             src={sol.beforeImage} 
                             isEditMode={isEditMode} 
+                            isDesignAuthenticated={isDesignAuthenticated}
                             onUpload={base64 => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, beforeImage: base64} : p))}
                             alt="Before"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                           />
                           <div className="absolute inset-0 bg-black/20"></div>
-                          <div className="absolute top-4 sm:top-8 left-4 sm:left-8 bg-slate-950/80 backdrop-blur-md text-white text-[8px] sm:text-[10px] font-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-full uppercase tracking-widest border border-white/10">Trước</div>
+                          <div className="absolute top-4 sm:top-8 left-4 sm:left-8 bg-slate-950/80 backdrop-blur-md text-white text-[8px] sm:text-[10px] font-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-full uppercase tracking-widest border border-white/10">{t('before')}</div>
                         </div>
                         <div className="w-1/2 h-full relative overflow-hidden">
                           <EditableImage 
                             src={sol.afterImage} 
                             isEditMode={isEditMode} 
+                            isDesignAuthenticated={isDesignAuthenticated}
                             onUpload={base64 => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, afterImage: base64} : p))}
                             alt="After"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                           />
-                          <div className="absolute top-4 sm:top-8 right-4 sm:right-8 bg-blue-600 text-white text-[8px] sm:text-[10px] font-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-full uppercase tracking-widest shadow-xl">Sau</div>
+                          <div className="absolute top-4 sm:top-8 right-4 sm:right-8 bg-blue-600 text-white text-[8px] sm:text-[10px] font-black px-4 sm:px-6 py-1.5 sm:py-2 rounded-full uppercase tracking-widest shadow-xl">{t('after')}</div>
                         </div>
                       </div>
                       <div className="absolute inset-0 pointer-events-none border-x border-white/20 left-1/2 -translate-x-1/2 shadow-[0_0_40px_rgba(0,0,0,0.5)]"></div>
                       
                       {/* Label overlay */}
                       <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 bg-slate-950/80 backdrop-blur-md px-6 sm:px-8 py-2 sm:py-3 rounded-2xl border border-white/10 text-white font-black text-[8px] sm:text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        Sự Khác Biệt Tuyệt Đối
+                        {t('absolute_difference')}
                       </div>
                     </div>
                   </div>
@@ -5407,12 +7489,14 @@ const HomePage: React.FC = () => {
                         tag="h3" 
                         text={sol.title} 
                         isEditMode={isEditMode} 
+                        isDesignAuthenticated={isDesignAuthenticated}
                         onSave={v => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, title: v} : p))}
                         className="text-2xl sm:text-5xl font-black uppercase text-white tracking-tighter leading-none"
                       />
                       <EditableText 
                         text={sol.description} 
                         isEditMode={isEditMode} 
+                        isDesignAuthenticated={isDesignAuthenticated}
                         onSave={v => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, description: v} : p))}
                         className="text-slate-400 text-sm sm:text-xl leading-relaxed font-medium"
                       />
@@ -5422,7 +7506,7 @@ const HomePage: React.FC = () => {
                       <div className="space-y-6">
                         <h4 className="text-blue-500 font-black text-[11px] uppercase tracking-[0.3em] flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                          Quy trình chuẩn
+                          {t('standard_process')}
                         </h4>
                         <ul className="space-y-4">
                           {sol.process.map((step, sIdx) => (
@@ -5431,6 +7515,7 @@ const HomePage: React.FC = () => {
                               <EditableText 
                                 text={step} 
                                 isEditMode={isEditMode} 
+                                isDesignAuthenticated={isDesignAuthenticated}
                                 onSave={v => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, process: p.process.map((st, i) => i === sIdx ? v : st)} : p))}
                               />
                             </li>
@@ -5451,6 +7536,7 @@ const HomePage: React.FC = () => {
                               <EditableText 
                                 text={benefit} 
                                 isEditMode={isEditMode} 
+                                isDesignAuthenticated={isDesignAuthenticated}
                                 onSave={v => setPremiumSolutions(prev => prev.map(p => p.id === sol.id ? {...p, benefits: p.benefits.map((bt, i) => i === bIdx ? v : bt)} : p))}
                               />
                             </li>
@@ -5496,12 +7582,14 @@ const HomePage: React.FC = () => {
                   tag="h2" 
                   text={siteConfig.aiTitle} 
                   isEditMode={isEditMode} 
+                  isDesignAuthenticated={isDesignAuthenticated}
                   onSave={v => setSiteConfig({...siteConfig, aiTitle: v})}
                   className="text-4xl sm:text-7xl font-black text-white uppercase mb-8 leading-[0.9] tracking-tighter"
                 />
                 <EditableText 
                   text={siteConfig.aiSubtitle} 
                   isEditMode={isEditMode} 
+                  isDesignAuthenticated={isDesignAuthenticated}
                   onSave={v => setSiteConfig({...siteConfig, aiSubtitle: v})}
                   multiline
                   className="text-slate-400 text-base sm:text-xl mb-12 leading-relaxed font-medium"
@@ -5627,7 +7715,7 @@ const HomePage: React.FC = () => {
                         className="flex-1 bg-slate-800/50 border border-white/10 rounded-2xl px-6 py-5 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-white text-sm sm:text-base placeholder:text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed"
                       />
                       <button 
-                        onClick={handleAiChat} 
+                        onClick={() => handleAiChat()} 
                         disabled={isAiLoading || !aiInput.trim()}
                         className="bg-blue-600 hover:bg-blue-500 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center transition-all shadow-2xl shadow-blue-900/40 active:scale-90 group disabled:opacity-50 disabled:grayscale"
                       >
@@ -6013,13 +8101,14 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Tracking Section */}
-        <TrackingSection trackingData={trackingData} />
+        <TrackingSection trackingData={trackingData} t={t} />
 
         {/* Feedback & Reviews Section */}
         <FeedbackSection 
           reviews={reviews} 
           services={services} 
           onAddReview={(newReview) => setReviews(prev => [{ ...newReview, id: Date.now().toString() } as Review, ...prev])} 
+          t={t}
         />
 
         {/* Gallery Section */}
@@ -6039,12 +8128,14 @@ const HomePage: React.FC = () => {
                 tag="h2" 
                 text={siteConfig.galleryTitle} 
                 isEditMode={isEditMode} 
+                isDesignAuthenticated={isDesignAuthenticated}
                 onSave={v => setSiteConfig({...siteConfig, galleryTitle: v})}
                 className="text-4xl sm:text-7xl font-black uppercase mb-6 tracking-tighter text-white"
               />
               <EditableText 
                 text={siteConfig.gallerySubtitle} 
                 isEditMode={isEditMode} 
+                isDesignAuthenticated={isDesignAuthenticated}
                 onSave={v => setSiteConfig({...siteConfig, gallerySubtitle: v})}
                 className="text-slate-500 text-sm sm:text-xl font-medium leading-relaxed"
               />
@@ -6063,6 +8154,7 @@ const HomePage: React.FC = () => {
                   <EditableImage 
                     src={img.url} 
                     isEditMode={isEditMode} 
+                    isDesignAuthenticated={isDesignAuthenticated}
                     onUpload={base64 => setGallery(gallery.map(g => g.id === img.id ? {...g, url: base64} : g))}
                     alt={img.title}
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -6074,21 +8166,24 @@ const HomePage: React.FC = () => {
                     <EditableText 
                       text={img.title} 
                       isEditMode={isEditMode} 
+                      isDesignAuthenticated={isDesignAuthenticated}
                       onSave={v => setGallery(gallery.map(g => g.id === img.id ? {...g, title: v} : g))}
                       className="text-white font-black uppercase tracking-widest text-[10px] sm:text-xs text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-200"
                     />
-                    <button 
-                      onClick={async () => {
-                        const prompt = window.prompt("AI Chỉnh sửa ảnh này (VD: Hiệu ứng bóng sơn):");
-                        if (prompt) {
-                          const result = await editImageWithAI(img.url, prompt);
-                          if (result) setGallery(gallery.map(g => g.id === img.id ? {...g, url: result} : g));
-                        }
-                      }} 
-                      className="mt-6 bg-blue-600 text-[8px] sm:text-[10px] font-black uppercase px-6 py-3 rounded-xl hover:bg-blue-500 transition-all shadow-xl active:scale-95 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-500 delay-300"
-                    >
-                      🪄 AI Edit
-                    </button>
+                    {isDesignAuthenticated && (
+                      <button 
+                        onClick={async () => {
+                          const prompt = window.prompt("AI Chỉnh sửa ảnh này (VD: Hiệu ứng bóng sơn):");
+                          if (prompt) {
+                            const result = await editImageWithAI(img.url, prompt);
+                            if (result) setGallery(gallery.map(g => g.id === img.id ? {...g, url: result} : g));
+                          }
+                        }} 
+                        className="mt-6 bg-blue-600 text-[8px] sm:text-[10px] font-black uppercase px-6 py-3 rounded-xl hover:bg-blue-500 transition-all shadow-xl active:scale-95 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-500 delay-300"
+                      >
+                        🪄 AI Edit
+                      </button>
+                    )}
                   </div>
                 </motion.div>
               ))}
@@ -6100,6 +8195,7 @@ const HomePage: React.FC = () => {
         <NewsSection 
           siteConfig={siteConfig} 
           isEditMode={isEditMode} 
+          isDesignAuthenticated={isDesignAuthenticated}
           setSiteConfig={setSiteConfig}
           selectedArticle={selectedArticle}
           setSelectedArticle={setSelectedArticle}
@@ -6110,7 +8206,126 @@ const HomePage: React.FC = () => {
       </main>
 
       {/* Footer */}
-       <footer className="bg-slate-950 border-t border-white/5 pt-20 pb-10">
+       {/* Warranty Lookup Section */}
+      <section id="warranty-lookup" className="py-24 bg-slate-900/30 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
+                <ShieldCheck className="w-4 h-4 text-blue-500" />
+                <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">{t('warranty_lookup_title')}</span>
+              </div>
+              <h2 className="text-5xl font-black text-white uppercase tracking-tighter mb-6 leading-none">
+                {t('warranty_lookup_title')}
+              </h2>
+              <p className="text-slate-400 text-lg font-medium leading-relaxed mb-8 max-w-xl">
+                {t('warranty_lookup_desc')}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                  <input 
+                    type="text" 
+                    placeholder={t('warranty_plate_placeholder')} 
+                    className="w-full bg-slate-950 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white font-bold outline-none focus:border-blue-500 transition-all"
+                    value={warrantySearch}
+                    onChange={e => setWarrantySearch(e.target.value)}
+                    onKeyDown={e => e.key === 'Enter' && handleWarrantySearch()}
+                  />
+                </div>
+                <button 
+                  onClick={handleWarrantySearch}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] transition-all shadow-xl shadow-blue-600/20"
+                >
+                  {t('warranty_check_btn')}
+                </button>
+              </div>
+            </div>
+
+            <div className="relative">
+              <AnimatePresence mode="wait">
+                {foundCertificate ? (
+                  <motion.div 
+                    key="cert-found"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="bg-slate-950 border border-blue-500/30 p-8 rounded-[40px] shadow-2xl relative overflow-hidden"
+                  >
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-3xl rounded-full -mr-16 -mt-16" />
+                    
+                    <div className="flex justify-between items-start mb-8">
+                      <div>
+                        <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">{t('warranty_info_title')}</p>
+                        <h4 className="text-2xl font-black text-white uppercase tracking-tight">{foundCertificate.qrCode}</h4>
+                      </div>
+                      <div className="w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center">
+                        <ShieldCheck className="w-6 h-6 text-blue-500" />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-6 mb-8">
+                      <div>
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">{t('warranty_customer')}</p>
+                        <p className="text-sm font-bold text-white">{foundCertificate.customerName}</p>
+                      </div>
+                      <div>
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">{t('warranty_plate')}</p>
+                        <p className="text-sm font-bold text-white">{foundCertificate.licensePlate}</p>
+                      </div>
+                      <div>
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">{t('warranty_service')}</p>
+                        <p className="text-sm font-bold text-blue-500">{foundCertificate.serviceType}</p>
+                      </div>
+                      <div>
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">{t('warranty_status')}</p>
+                        <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                          foundCertificate.status === 'active' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-red-500/10 text-red-500'
+                        }`}>
+                          {foundCertificate.status === 'active' ? t('warranty_active') : t('warranty_expired')}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-slate-900 border border-white/5 flex items-center justify-between">
+                      <div>
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">{t('warranty_expiry_date')}</p>
+                        <p className="text-sm font-bold text-white">{foundCertificate.expiryDate}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">{t('technician')}</p>
+                        <p className="text-sm font-bold text-white">{foundCertificate.technician}</p>
+                      </div>
+                    </div>
+                    
+                    <button 
+                      onClick={() => setFoundCertificate(null)}
+                      className="w-full mt-6 text-[10px] font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors"
+                    >
+                      {t('warranty_close')}
+                    </button>
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    key="cert-empty"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="bg-slate-950/50 border border-dashed border-white/10 p-12 rounded-[40px] flex flex-col items-center justify-center text-center"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-slate-900 flex items-center justify-center mb-6">
+                      <Search className="w-8 h-8 text-slate-700" />
+                    </div>
+                    <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Kết quả tra cứu sẽ hiển thị tại đây</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-slate-950 border-t border-white/5 pt-20 pb-10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             {/* Brand Section */}
@@ -6132,6 +8347,7 @@ const HomePage: React.FC = () => {
                   <EditableText 
                     text={siteConfig.siteName} 
                     isEditMode={isEditMode} 
+                    isDesignAuthenticated={isDesignAuthenticated}
                     onSave={v => setSiteConfig({...siteConfig, siteName: v})}
                   />
                 </h3>
@@ -6139,6 +8355,7 @@ const HomePage: React.FC = () => {
               <EditableText 
                 text={siteConfig.heroDescription} 
                 isEditMode={isEditMode} 
+                isDesignAuthenticated={isDesignAuthenticated}
                 onSave={v => setSiteConfig({...siteConfig, heroDescription: v})}
                 multiline
                 className="text-slate-500 text-sm leading-relaxed"
@@ -6190,6 +8407,7 @@ const HomePage: React.FC = () => {
                       <EditableText 
                         text={siteConfig.contactAddress} 
                         isEditMode={isEditMode} 
+                        isDesignAuthenticated={isDesignAuthenticated}
                         onSave={v => setSiteConfig(prev => ({
                           ...prev, 
                           contactAddress: v,
@@ -6211,6 +8429,7 @@ const HomePage: React.FC = () => {
                       <EditableText 
                         text={siteConfig.contactPhone} 
                         isEditMode={isEditMode} 
+                        isDesignAuthenticated={isDesignAuthenticated}
                         onSave={v => setSiteConfig({...siteConfig, contactPhone: v})}
                         className="text-slate-300 text-sm font-bold"
                       />
@@ -6228,6 +8447,7 @@ const HomePage: React.FC = () => {
                       <EditableText 
                         text={siteConfig.contactEmail || ''} 
                         isEditMode={isEditMode} 
+                        isDesignAuthenticated={isDesignAuthenticated}
                         onSave={v => setSiteConfig({...siteConfig, contactEmail: v})}
                         className="text-slate-300 text-sm font-medium"
                       />
@@ -6237,10 +8457,11 @@ const HomePage: React.FC = () => {
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-500 shrink-0">⏰</div>
                   <div className="flex-1">
-                    <p className="text-[10px] font-black uppercase text-slate-500 mb-1">Giờ làm việc</p>
+                    <p className="text-[10px] font-black uppercase text-slate-500 mb-1">{t('working_hours')}</p>
                     <EditableText 
                       text={siteConfig.contactHours} 
                       isEditMode={isEditMode} 
+                      isDesignAuthenticated={isDesignAuthenticated}
                       onSave={v => setSiteConfig({...siteConfig, contactHours: v})}
                       className="text-slate-300 text-sm font-medium"
                     />
@@ -6249,7 +8470,7 @@ const HomePage: React.FC = () => {
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-500 shrink-0">💬</div>
                   <div className="flex-1">
-                    <p className="text-[10px] font-black uppercase text-slate-500 mb-1">Tư vấn Zalo</p>
+                    <p className="text-[10px] font-black uppercase text-slate-500 mb-1">{t('zalo_consultation')}</p>
                     <a 
                       href={`https://zalo.me/${siteConfig.zaloNumber}`}
                       target="_blank"
@@ -6269,6 +8490,7 @@ const HomePage: React.FC = () => {
             <EditableText 
               text={siteConfig.copyright} 
               isEditMode={isEditMode} 
+              isDesignAuthenticated={isDesignAuthenticated}
               onSave={v => setSiteConfig({...siteConfig, copyright: v})}
               className="text-slate-600 text-[10px] uppercase tracking-[0.2em] font-medium"
             />
@@ -6299,6 +8521,14 @@ const HomePage: React.FC = () => {
         onSuccess={() => {setIsEditMode(true); setIsLoginModalOpen(false);}} 
         pass={siteConfig.adminPassword} 
         siteName={siteConfig.siteName}
+        t={t}
+      />
+      <NotificationCenter 
+        isOpen={showNotifications}
+        onClose={() => setShowNotifications(false)}
+        notifications={notifications}
+        onMarkAsRead={markNotificationAsRead}
+        onClearAll={clearNotifications}
       />
       <BookingModal 
         isOpen={isBookingModalOpen} 
@@ -6308,6 +8538,8 @@ const HomePage: React.FC = () => {
         setSiteConfig={setSiteConfig}
         handlePayment={handlePayment}
         preSelectedSubService={preSelectedSubService}
+        onAddNotification={addNotification}
+        scrollToSection={scrollToSection}
       />
       <ShareModal 
         isOpen={isShareModalOpen} 
@@ -6323,6 +8555,21 @@ const HomePage: React.FC = () => {
           setPreSelectedSubService(subServiceTitle);
           setIsBookingModalOpen(true);
         }}
+        onAiChat={handleOpenAiServiceChat}
+      />
+      <AiServiceChatModal
+        isOpen={isAiServiceModalOpen}
+        onClose={() => setIsAiServiceModalOpen(false)}
+        service={selectedServiceForAi}
+        aiMessages={aiMessages}
+        aiInput={aiInput}
+        setAiInput={setAiInput}
+        handleAiChat={handleAiChat}
+        isAiLoading={isAiLoading}
+        aiProvider={aiProvider}
+        setAiProvider={setAiProvider}
+        clearChat={clearChat}
+        chatEndRef={chatEndRef}
       />
       <AdminDashboardModal 
         isOpen={isDashboardOpen} 
@@ -6346,10 +8593,24 @@ const HomePage: React.FC = () => {
         aiVideoHistory={aiVideoHistory}
         setAiVideoHistory={setAiVideoHistory}
         setIsEditMode={setIsEditMode}
+        isDesignAuthenticated={isDesignAuthenticated}
+        setIsDesignAuthenticated={setIsDesignAuthenticated}
+        designPasswordInput={designPasswordInput}
+        setDesignPasswordInput={setDesignPasswordInput}
+        showDesignLock={showDesignLock}
+        setShowDesignLock={setShowDesignLock}
+        handleDesignLogin={handleDesignLogin}
         trackingData={trackingData}
         setTrackingData={setTrackingData}
         reviews={reviews}
         setReviews={setReviews}
+        inventory={inventory}
+        setInventory={setInventory}
+        eCertificates={eCertificates}
+        setECertificates={setECertificates}
+        expenses={expenses}
+        setExpenses={setExpenses}
+        t={t}
       />
 
       {/* Video Picker Modal */}
@@ -6368,7 +8629,7 @@ const HomePage: React.FC = () => {
               className="bg-slate-900 border border-white/10 rounded-[32px] w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col shadow-2xl"
             >
               <div className="p-6 border-b border-white/5 flex justify-between items-center">
-                <h3 className="text-xl font-black text-white uppercase tracking-tighter">Chọn Video Từ Thư Viện</h3>
+                <h3 className="text-xl font-black text-white uppercase tracking-tighter">{t('select_video_from_gallery')}</h3>
                 <button onClick={() => { setIsSelectingHeroVideo(false); setIsSelectingAiVideo(false); }} className="text-slate-500 hover:text-white transition-colors">✕</button>
               </div>
               <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
@@ -6387,7 +8648,7 @@ const HomePage: React.FC = () => {
                       >
                         <video src={video.url} className="w-full h-full object-cover" muted playsInline />
                         <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
-                          <span className="bg-blue-600 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase shadow-xl">Chọn Video</span>
+                          <span className="bg-blue-600 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase shadow-xl">{t('select_video')}</span>
                         </div>
                         <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
                           <p className="text-[10px] text-white font-bold truncate">{video.title}</p>
@@ -6398,8 +8659,8 @@ const HomePage: React.FC = () => {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-20 text-center">
                     <span className="text-4xl mb-4">🎬</span>
-                    <p className="text-slate-400 font-bold">Chưa có video nào trong thư viện.</p>
-                    <p className="text-slate-600 text-xs mt-2">Vui lòng tải video lên ở tab "Thư Viện" trước.</p>
+                    <p className="text-slate-400 font-bold">{t('no_videos_in_gallery')}</p>
+                    <p className="text-slate-600 text-xs mt-2">{t('please_upload_video_first')}</p>
                     <button 
                       onClick={() => {
                         setDashboardInitialTab('gallery');
@@ -6409,7 +8670,7 @@ const HomePage: React.FC = () => {
                       }}
                       className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-xl text-[10px] font-black uppercase hover:bg-blue-500 transition-all"
                     >
-                      Đến Thư Viện
+                      {t('go_to_gallery')}
                     </button>
                   </div>
                 )}

@@ -13,9 +13,10 @@ interface GalleryUploadManagerProps {
   onUpload: (images: GalleryImage[]) => void;
   onClose: () => void;
   categories: { value: string; label: string }[];
+  t: (key: string) => string;
 }
 
-export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUpload, onClose, categories }) => {
+export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUpload, onClose, categories, t }) => {
   const [pendingImages, setPendingImages] = useState<PendingImage[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [urlInput, setUrlInput] = useState('');
@@ -63,7 +64,7 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
     const newImg: PendingImage = {
       id: Math.random().toString(36).substr(2, 9),
       url: urlInput,
-      title: 'Ảnh từ URL',
+      title: t('gallery_url_image'),
       category: 'general',
       type: isVideo ? 'video' : 'image',
       status: 'pending'
@@ -111,8 +112,8 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
         {/* Header */}
         <div className="p-6 border-b border-white/5 flex items-center justify-between bg-slate-900/50">
           <div>
-            <h3 className="text-xl font-black text-white uppercase tracking-tight">Thêm Ảnh Vào Thư Viện</h3>
-            <p className="text-slate-500 text-xs font-medium">Tải lên nhiều ảnh, chỉnh sửa thông tin trước khi lưu</p>
+            <h3 className="text-xl font-black text-white uppercase tracking-tight">{t('gallery_add_title')}</h3>
+            <p className="text-slate-500 text-xs font-medium">{t('gallery_add_desc')}</p>
           </div>
           <button 
             onClick={onClose}
@@ -136,11 +137,11 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
               <div className="w-16 h-16 rounded-2xl bg-blue-600/20 text-blue-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Upload className="w-8 h-8" />
               </div>
-              <h4 className="text-white font-bold mb-2">Kéo thả ảnh hoặc video vào đây</h4>
-              <p className="text-slate-500 text-xs mb-6 max-w-[200px]">Hỗ trợ định dạng JPG, PNG, WEBP, MP4</p>
+              <h4 className="text-white font-bold mb-2">{t('gallery_drag_drop')}</h4>
+              <p className="text-slate-500 text-xs mb-6 max-w-[200px]">{t('gallery_formats')}</p>
               
               <label className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer shadow-lg shadow-blue-900/20">
-                Chọn Từ Máy Tính
+                {t('gallery_select_computer')}
                 <input 
                   type="file" 
                   className="hidden" 
@@ -156,7 +157,7 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
                   <LinkIcon className="w-5 h-5" />
                 </div>
-                <h4 className="text-white font-bold">Thêm từ đường dẫn (URL)</h4>
+                <h4 className="text-white font-bold">{t('gallery_add_url')}</h4>
               </div>
               <div className="space-y-4">
                 <div className="relative">
@@ -164,7 +165,7 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
                     type="text" 
                     value={urlInput}
                     onChange={(e) => setUrlInput(e.target.value)}
-                    placeholder="Dán link ảnh hoặc video tại đây..."
+                    placeholder={t('gallery_url_placeholder')}
                     className="w-full bg-slate-950 border border-white/10 rounded-xl py-4 pl-4 pr-12 text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                   />
                   <button 
@@ -174,7 +175,7 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
                     <Plus className="w-5 h-5" />
                   </button>
                 </div>
-                <p className="text-[10px] text-slate-500 italic">Mẹo: Bạn có thể dán link từ Google Drive, Dropbox hoặc các trang lưu trữ ảnh.</p>
+                <p className="text-[10px] text-slate-500 italic">{t('gallery_url_tip')}</p>
               </div>
             </div>
           </div>
@@ -184,14 +185,14 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h4 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
-                  Danh sách chờ tải lên 
+                  {t('gallery_queue')} 
                   <span className="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full">{pendingImages.length}</span>
                 </h4>
                 <button 
                   onClick={() => setPendingImages([])}
                   className="text-red-500 text-[10px] font-black uppercase tracking-widest hover:underline"
                 >
-                  Xóa tất cả
+                  {t('gallery_delete_all')}
                 </button>
               </div>
 
@@ -223,7 +224,7 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
                             value={img.title}
                             onChange={(e) => updatePending(img.id, { title: e.target.value })}
                             className="bg-transparent border-b border-white/10 text-white font-bold text-sm focus:border-blue-500 outline-none w-full pb-1"
-                            placeholder="Tiêu đề ảnh..."
+                            placeholder={t('gallery_image_title_placeholder')}
                           />
                           <button 
                             onClick={() => removePending(img.id)}
@@ -259,7 +260,7 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
           {pendingImages.length === 0 && (
             <div className="py-20 flex flex-col items-center justify-center text-slate-600 border border-white/5 border-dashed rounded-[32px]">
               <ImageIcon className="w-12 h-12 mb-4 opacity-20" />
-              <p className="text-sm font-medium">Chưa có ảnh nào được chọn</p>
+              <p className="text-sm font-medium">{t('gallery_no_images')}</p>
             </div>
           )}
         </div>
@@ -267,14 +268,14 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
         {/* Footer */}
         <div className="p-6 border-t border-white/5 bg-slate-900/80 flex items-center justify-between">
           <div className="text-slate-500 text-[10px] font-medium">
-            {pendingImages.length > 0 ? `Đã chọn ${pendingImages.length} tệp tin` : 'Vui lòng chọn tệp tin để tải lên'}
+            {pendingImages.length > 0 ? t('gallery_selected_files').replace('{{count}}', pendingImages.length.toString()) : t('gallery_please_select')}
           </div>
           <div className="flex gap-4">
             <button 
               onClick={onClose}
               className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-all"
             >
-              Hủy Bỏ
+              {t('gallery_cancel')}
             </button>
             <button 
               disabled={pendingImages.length === 0}
@@ -282,7 +283,7 @@ export const GalleryUploadManager: React.FC<GalleryUploadManagerProps> = ({ onUp
               className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white px-10 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/20 transition-all flex items-center gap-2"
             >
               <CheckCircle2 className="w-4 h-4" />
-              Xác Nhận Tải Lên
+              {t('gallery_confirm_upload')}
             </button>
           </div>
         </div>

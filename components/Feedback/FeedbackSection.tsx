@@ -7,9 +7,10 @@ interface FeedbackSectionProps {
   reviews: Review[];
   services: Service[];
   onAddReview: (review: Omit<Review, 'id'>) => void;
+  t: (key: string) => string;
 }
 
-export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, services, onAddReview }) => {
+export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, services, onAddReview, t }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newReview, setNewReview] = useState({
     author: '',
@@ -43,16 +44,21 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, servi
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
-            <span className="text-blue-500 font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Khách Hàng Nói Gì</span>
+            <span className="text-blue-500 font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">{t('feedback_subtitle')}</span>
             <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
-              Đánh Giá <span className="text-blue-500">& Phản Hồi</span>
+              {t('feedback_title').split(' ').map((word, i) => (
+                <React.Fragment key={i}>
+                  {i >= 2 ? <span className="text-blue-500">{word}</span> : word}
+                  {' '}
+                </React.Fragment>
+              ))}
             </h2>
           </div>
           <button 
             onClick={() => setIsModalOpen(true)}
             className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-lg shadow-blue-600/20"
           >
-            Gửi Đánh Giá Của Bạn
+            {t('send_your_feedback')}
           </button>
         </div>
 
@@ -89,9 +95,9 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, servi
 
               {review.serviceId && (
                 <div className="pt-6 border-t border-white/5">
-                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Dịch vụ đã sử dụng</span>
+                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">{t('service_used')}</span>
                   <span className="text-blue-400 font-bold text-sm">
-                    {services.find(s => s.id === review.serviceId)?.title || 'Dịch vụ Detailing'}
+                    {services.find(s => s.id === review.serviceId)?.title || t('default_service')}
                   </span>
                 </div>
               )}
@@ -122,13 +128,13 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, servi
                   <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
                     <CheckCircle2 className="w-10 h-10 text-emerald-500" />
                   </div>
-                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">Cảm Ơn Bạn!</h3>
-                  <p className="text-slate-400 font-medium">Đánh giá của bạn đã được gửi thành công và đang chờ duyệt.</p>
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">{t('thank_you')}</h3>
+                  <p className="text-slate-400 font-medium">{t('feedback_success')}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="p-8 sm:p-12">
                   <div className="flex justify-between items-center mb-8">
-                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Gửi Đánh Giá</h3>
+                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter">{t('submit_feedback')}</h3>
                     <button 
                       type="button"
                       onClick={() => setIsModalOpen(false)}
@@ -140,25 +146,25 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, servi
 
                   <div className="space-y-6">
                     <div>
-                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Họ Tên Của Bạn</label>
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">{t('your_name')}</label>
                       <input 
                         type="text"
                         required
                         value={newReview.author}
                         onChange={e => setNewReview({...newReview, author: e.target.value})}
-                        placeholder="VD: Nguyễn Văn A"
+                        placeholder={t('name_placeholder')}
                         className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500/50 transition-all font-bold"
                       />
                     </div>
 
                     <div>
-                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Dịch Vụ Đã Sử Dụng</label>
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">{t('service_used')}</label>
                       <select 
                         value={newReview.serviceId}
                         onChange={e => setNewReview({...newReview, serviceId: e.target.value})}
                         className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-blue-500/50 transition-all font-bold appearance-none"
                       >
-                        <option value="" className="bg-slate-900">Chọn dịch vụ...</option>
+                        <option value="" className="bg-slate-900">{t('select_service')}</option>
                         {services.map(service => (
                           <option key={service.id} value={service.id} className="bg-slate-900">{service.title}</option>
                         ))}
@@ -166,7 +172,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, servi
                     </div>
 
                     <div>
-                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Mức Độ Hài Lòng</label>
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">{t('satisfaction_level')}</label>
                       <div className="flex gap-4">
                         {[1, 2, 3, 4, 5].map(star => (
                           <button
@@ -186,13 +192,13 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, servi
                     </div>
 
                     <div>
-                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Nhận Xét Của Bạn</label>
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">{t('your_comment')}</label>
                       <textarea 
                         required
                         rows={4}
                         value={newReview.text}
                         onChange={e => setNewReview({...newReview, text: e.target.value})}
-                        placeholder="Chia sẻ trải nghiệm của bạn tại Dũng Car Detailing..."
+                        placeholder={t('comment_placeholder')}
                         className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500/50 transition-all font-bold resize-none"
                       />
                     </div>
@@ -202,7 +208,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({ reviews, servi
                       className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3"
                     >
                       <Send className="w-4 h-4" />
-                      Gửi Đánh Giá Ngay
+                      {t('send_feedback_now')}
                     </button>
                   </div>
                 </form>

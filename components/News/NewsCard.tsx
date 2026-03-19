@@ -7,9 +7,10 @@ interface NewsCardProps {
   article: NewsArticle;
   idx: number;
   onClick: () => void;
+  t: (key: string) => string;
 }
 
-export const NewsCard: React.FC<NewsCardProps> = ({ article, idx, onClick }) => {
+export const NewsCard: React.FC<NewsCardProps> = ({ article, idx, onClick, t }) => {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -44,7 +45,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article, idx, onClick }) => 
         {article.summary}
       </p>
       <div className="flex items-center gap-2 text-blue-500 text-[10px] font-black uppercase tracking-widest group-hover:gap-4 transition-all">
-        Đọc Thêm <ArrowRight className="w-3 h-3" />
+        {t('read_more')} <ArrowRight className="w-3 h-3" />
       </div>
     </motion.div>
   );

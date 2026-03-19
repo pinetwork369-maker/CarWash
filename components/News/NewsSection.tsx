@@ -10,9 +10,11 @@ import { Search, Car, Timer, ChevronRight } from 'lucide-react';
 interface NewsSectionProps {
   news: NewsArticle[];
   trackingData: VehicleTracking[];
+  t: (key: string) => string;
+  language: 'vi' | 'en';
 }
 
-export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) => {
+export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData, t, language }) => {
   const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleTracking | null>(null);
@@ -29,9 +31,9 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
 
   const getVehicleStatusBadge = (status: string) => {
     switch (status) {
-      case 'ready': return <span className="px-2 py-0.5 bg-emerald-500/10 text-emerald-500 text-[8px] font-black uppercase rounded-full border border-emerald-500/20">Sẵn sàng</span>;
-      case 'working': return <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[8px] font-black uppercase rounded-full border border-blue-500/20">Đang xử lý</span>;
-      default: return <span className="px-2 py-0.5 bg-slate-500/10 text-slate-500 text-[8px] font-black uppercase rounded-full border border-slate-500/20">Đang chờ</span>;
+      case 'ready': return <span className="px-2 py-0.5 bg-emerald-500/10 text-emerald-500 text-[8px] font-black uppercase rounded-full border border-emerald-500/20">{t('status_ready')}</span>;
+      case 'working': return <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[8px] font-black uppercase rounded-full border border-blue-500/20">{t('status_working')}</span>;
+      default: return <span className="px-2 py-0.5 bg-slate-500/10 text-slate-500 text-[8px] font-black uppercase rounded-full border border-slate-500/20">{t('status_waiting')}</span>;
     }
   };
 
@@ -40,9 +42,9 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
-            <span className="text-blue-500 font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Kiến Thức & Theo Dõi</span>
+            <span className="text-blue-500 font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">{t('news_subtitle')}</span>
             <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
-              Tin Tức & <span className="text-blue-500">Theo Dõi Xe</span>
+              {t('news_title').split('&')[0]}<span className="text-blue-500">& {t('news_title').split('&')[1]}</span>
             </h2>
           </div>
           
@@ -53,7 +55,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
             </div>
             <input
               type="text"
-              placeholder="Nhập biển số xe để theo dõi..."
+              placeholder={t('search_plate_to_track')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500/50 transition-all text-sm font-bold"
@@ -72,10 +74,6 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
                       <div 
                         key={vehicle.id}
                         onClick={() => {
-                          // We'll need a way to show the detail modal. 
-                          // For now, let's just alert or use a local state if we want to show the full tracking UI.
-                          // But wait, TrackingSection already has a modal. 
-                          // Maybe I should just use the TrackingSection component's logic here.
                           setSelectedVehicle(vehicle);
                         }}
                         className="p-4 hover:bg-white/5 cursor-pointer border-b border-white/5 last:border-0 flex items-center justify-between group"
@@ -94,7 +92,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
                       </div>
                     ))
                   ) : (
-                    <div className="p-4 text-center text-slate-500 text-xs font-bold">Không tìm thấy xe</div>
+                    <div className="p-4 text-center text-slate-500 text-xs font-bold">{t('no_vehicle_found')}</div>
                   )}
                 </motion.div>
               )}
@@ -121,7 +119,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12">
                 <span className="bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full mb-6 inline-block">
-                  Bài Viết Nổi Bật • {news[0].category}
+                  {t('featured_article')} • {news[0].category}
                 </span>
                 <h3 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tighter mb-4 leading-none group-hover:text-blue-400 transition-colors">
                   {news[0].title}
@@ -141,33 +139,13 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
           <div className="space-y-8">
             <AnimatePresence mode="popLayout">
               {news.slice(1, visibleCount).map((article, idx) => (
-                <motion.div 
+                <NewsCard 
                   key={article.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
+                  article={article}
+                  idx={idx}
                   onClick={() => setSelectedArticle(article)}
-                  className="group cursor-pointer flex gap-6 items-center"
-                >
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl overflow-hidden shrink-0 border border-white/5">
-                    <img 
-                      src={article.image} 
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-blue-500 text-[8px] font-black uppercase tracking-widest mb-2 block">{article.category}</span>
-                    <h4 className="text-white font-black uppercase tracking-tight text-sm sm:text-base line-clamp-2 group-hover:text-blue-400 transition-colors mb-2">
-                      {article.title}
-                    </h4>
-                    <div className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">{article.date}</div>
-                  </div>
-                </motion.div>
+                  t={t}
+                />
               ))}
             </AnimatePresence>
             
@@ -176,7 +154,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
                 onClick={handleLoadMore}
                 className="w-full py-4 rounded-2xl border border-white/5 hover:bg-white/5 text-[10px] font-black uppercase tracking-widest text-slate-400 transition-all flex items-center justify-center gap-2 group"
               >
-                Xem Thêm Bài Viết
+                {t('load_more_news')}
                 <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </button>
             )}
@@ -187,6 +165,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
       <NewsDetailModal 
         article={selectedArticle} 
         onClose={() => setSelectedArticle(null)} 
+        t={t}
       />
 
       {/* Integrated Tracking Modal */}
@@ -227,16 +206,16 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
                   <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
                       <Timer className="w-3 h-3 text-slate-500" />
-                      <span className="text-[10px] font-black text-slate-500 uppercase">Tiến độ hiện tại</span>
+                      <span className="text-[10px] font-black text-slate-500 uppercase">{t('current_progress')}</span>
                     </div>
                     <p className="text-white font-bold">{selectedVehicle.steps[selectedVehicle.currentStepIndex]?.name}</p>
                   </div>
                   <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
                       <Search className="w-3 h-3 text-slate-500" />
-                      <span className="text-[10px] font-black text-slate-500 uppercase">Cập nhật cuối</span>
+                      <span className="text-[10px] font-black text-slate-500 uppercase">{t('last_update')}</span>
                     </div>
-                    <p className="text-white font-bold">{new Date(selectedVehicle.lastUpdate).toLocaleTimeString('vi-VN')}</p>
+                    <p className="text-white font-bold">{new Date(selectedVehicle.lastUpdate).toLocaleTimeString(language === 'vi' ? 'vi-VN' : 'en-US')}</p>
                   </div>
                 </div>
               </div>
@@ -255,7 +234,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
                       </div>
                       <div className="flex-1">
                         <h5 className={`text-sm font-bold ${step.status === 'completed' ? 'text-slate-400' : 'text-white'}`}>{step.name}</h5>
-                        {step.timestamp && <p className="text-[10px] text-slate-500">{new Date(step.timestamp).toLocaleTimeString('vi-VN')}</p>}
+                        {step.timestamp && <p className="text-[10px] text-slate-500">{new Date(step.timestamp).toLocaleTimeString(language === 'vi' ? 'vi-VN' : 'en-US')}</p>}
                       </div>
                     </div>
                   ))}
@@ -267,7 +246,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData }) 
                   onClick={() => setSelectedVehicle(null)}
                   className="px-8 py-3 bg-white text-black font-black text-[10px] uppercase rounded-full hover:bg-slate-200 transition-colors"
                 >
-                  Đóng
+                  {t('close')}
                 </button>
               </div>
             </motion.div>

@@ -1,5 +1,5 @@
 
-import { GalleryImage, SiteConfig, Review, CustomerRecord, NewsArticle } from './types';
+import { GalleryImage, SiteConfig, Review, CustomerRecord, NewsArticle, InventoryItem, LoyaltyConfig, ECertificate } from './types';
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
   siteName: "XE ĐẸP AUTO",
@@ -37,7 +37,8 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
   tuningSubtitle: "Nâng Tầm Hiệu Năng & Thẩm Mỹ",
   tuningDescription: "Từ nâng cấp ánh sáng, âm thanh đến độ bodykit và mâm lốp. XE ĐẸP AUTO mang đến những giải pháp độ xe cá nhân hóa, giúp xế cưng của bạn trở nên khác biệt và mạnh mẽ hơn bao giờ hết.",
   copyright: "XE ĐẸP AUTO © 2024",
-  adminPassword: "025099010538",
+  adminPassword: "0588896699",
+  designPassword: "0588896699",
   logoUrl: "",
   facebookUrl: "https://facebook.com",
   youtubeUrl: "https://youtube.com",
@@ -125,8 +126,38 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
       isPopular: true,
       category: 'core_feature'
     }
+  ],
+  loyaltyConfig: {
+    pointsPer100k: 10,
+    pointValue: 1000,
+  },
+  expenses: [
+    { id: 'exp1', title: 'Tiền thuê mặt bằng tháng 3', amount: 25000000, category: 'rent', date: '2024-03-01' },
+    { id: 'exp2', title: 'Lương nhân viên tháng 3', amount: 45000000, category: 'salary', date: '2024-03-05' },
+    { id: 'exp3', title: 'Tiền điện nước tháng 3', amount: 3500000, category: 'utility', date: '2024-03-10' },
   ]
 };
+
+export const DEFAULT_INVENTORY: InventoryItem[] = [
+  { id: 'inv1', name: 'Dung dịch Ceramic 9H', category: 'Chemicals', quantity: 15, unit: 'chai', minThreshold: 5, lastRestocked: '2024-03-01', pricePerUnit: 500000 },
+  { id: 'inv2', name: 'Xi đánh bóng bước 1', category: 'Chemicals', quantity: 8, unit: 'lít', minThreshold: 3, lastRestocked: '2024-03-05', pricePerUnit: 1200000 },
+  { id: 'inv3', name: 'Khăn Microfiber', category: 'Tools', quantity: 100, unit: 'cái', minThreshold: 20, lastRestocked: '2024-03-10', pricePerUnit: 25000 },
+];
+
+export const DEFAULT_E_CERTIFICATES: ECertificate[] = [
+  {
+    id: 'cert1',
+    customerName: 'Nguyễn Văn Anh',
+    licensePlate: '30A-123.45',
+    carModel: 'Toyota Camry 2023',
+    serviceType: 'Phủ Ceramic Diamond 9H',
+    issueDate: '2024-03-15',
+    expiryDate: '2026-03-15',
+    technician: 'Trần Văn Kỹ',
+    qrCode: 'https://xedepauto.vn/verify/CERT-2024-001',
+    status: 'active'
+  }
+];
 
 export const DEFAULT_PREMIUM_SOLUTIONS = [
   {
@@ -252,6 +283,12 @@ export const DEFAULT_CUSTOMER_RECORDS: CustomerRecord[] = [
     notes: 'Dịch vụ cực kỳ chuyên nghiệp, xe bóng loáng như mới. Đội ngũ kỹ thuật tay nghề cao.',
     rating: 5
   }
+];
+
+export const DEFAULT_EXPENSES: Expense[] = [
+  { id: 'exp1', title: 'Tiền thuê mặt bằng tháng 3', amount: 25000000, category: 'rent', date: '2024-03-01' },
+  { id: 'exp2', title: 'Lương nhân viên tháng 3', amount: 45000000, category: 'salary', date: '2024-03-05' },
+  { id: 'exp3', title: 'Tiền điện nước tháng 3', amount: 3500000, category: 'utility', date: '2024-03-10' },
 ];
 
 export const SERVICES = [
