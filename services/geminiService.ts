@@ -2,11 +2,11 @@
 import { GoogleGenAI } from "@google/genai";
 
 const SYSTEM_INSTRUCTION = `
-Bạn là "XE ĐẸP AUTO Advisor" - một chuyên gia tư vấn chăm sóc xe hơi (detailing) cao cấp với hơn 20 năm kinh nghiệm thực chiến. 
+Bạn là "XE ĐẸP PRO Advisor" - một chuyên gia tư vấn chăm sóc xe hơi (detailing) cao cấp với hơn 20 năm kinh nghiệm thực chiến. 
 Phong cách của bạn: Chuyên nghiệp, tận tâm, am hiểu sâu sắc về kỹ thuật nhưng giải thích dễ hiểu, luôn đặt lợi ích và sự an toàn của xe khách hàng lên hàng đầu.
 
 NHIỆM VỤ CỦA BẠN:
-1. TƯ VẤN DỊCH VỤ: Giải thích chi tiết về các dịch vụ tại XE ĐẸP AUTO như:
+1. TƯ VẤN DỊCH VỤ: Giải thích chi tiết về các dịch vụ tại XE ĐẸP PRO như:
    - Phủ Ceramic (bảo vệ sơn, tạo độ bóng).
    - Dán PPF (chống trầy xước, tự phục hồi).
    - Vệ sinh nội thất chuyên sâu (diệt khuẩn, dưỡng da/nhựa).
@@ -28,7 +28,7 @@ QUY TẮC TRẢ LỜI:
 - Luôn chào hỏi thân thiện.
 - Sử dụng Markdown để trình bày rõ ràng (bullet points, bold text).
 - Nếu khách hàng hỏi về giá, hãy đưa ra khoảng giá tham khảo và khuyên khách hàng mang xe đến cửa hàng để được báo giá chính xác nhất sau khi kiểm tra tình trạng xe.
-- Luôn nhắc đến việc XE ĐẸP AUTO sử dụng các sản phẩm chính hãng (như Gyeon, IGL, 3M, XPEL...).
+- Luôn nhắc đến việc XE ĐẸP PRO sử dụng các sản phẩm chính hãng (như Gyeon, IGL, 3M, XPEL...).
 - Kết thúc câu trả lời bằng một lời mời hoặc một câu hỏi gợi mở để tiếp tục hỗ trợ.
 - Trả lời bằng tiếng Việt.
 `;
@@ -41,12 +41,13 @@ export type AIProvider = 'gemini' | 'openai' | 'claude';
 export const getAIResponse = async (
   userMessage: string, 
   history: {role: 'user' | 'model', text: string}[],
-  provider: AIProvider = 'gemini'
+  provider: AIProvider = 'gemini',
+  customSystemInstruction?: string
 ) => {
   if (provider === 'openai') {
-    return getOpenAIResponse(userMessage, history);
+    return getOpenAIResponse(userMessage, history, customSystemInstruction);
   } else if (provider === 'claude') {
-    return getClaudeResponse(userMessage, history);
+    return getClaudeResponse(userMessage, history, customSystemInstruction);
   }
   
   // Default to Gemini
@@ -79,7 +80,7 @@ export const getAIResponse = async (
         { role: 'user', parts: [{ text: userMessage }] }
       ],
       config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
+        systemInstruction: customSystemInstruction || SYSTEM_INSTRUCTION,
         temperature: 0.7,
         tools: [{ googleSearch: {} }],
       },
@@ -113,14 +114,14 @@ export const getAIResponse = async (
 /**
  * Get response from OpenAI via backend
  */
-const getOpenAIResponse = async (userMessage: string, history: {role: 'user' | 'model', text: string}[]) => {
+const getOpenAIResponse = async (userMessage: string, history: {role: 'user' | 'model', text: string}[], customSystemInstruction?: string) => {
   try {
     const response = await fetch('/api/ai/openai', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         prompt: userMessage,
-        systemInstruction: SYSTEM_INSTRUCTION,
+        systemInstruction: customSystemInstruction || SYSTEM_INSTRUCTION,
         history // History handling can be added if needed, but for now simple prompt
       }),
     });
@@ -135,14 +136,14 @@ const getOpenAIResponse = async (userMessage: string, history: {role: 'user' | '
 /**
  * Get response from Claude via backend
  */
-const getClaudeResponse = async (userMessage: string, history: {role: 'user' | 'model', text: string}[]) => {
+const getClaudeResponse = async (userMessage: string, history: {role: 'user' | 'model', text: string}[], customSystemInstruction?: string) => {
   try {
     const response = await fetch('/api/ai/claude', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         prompt: userMessage,
-        systemInstruction: SYSTEM_INSTRUCTION,
+        systemInstruction: customSystemInstruction || SYSTEM_INSTRUCTION,
         history
       }),
     });
@@ -174,7 +175,7 @@ export const editImageWithAI = async (base64Image: string, prompt: string) => {
           },
           {
             text: `As a world-class professional car detailing photo editor, please modify this image according to this request: ${prompt}. 
-            Maintain the realism and high-end aesthetic of XE ĐẸP AUTO. 
+            Maintain the realism and high-end aesthetic of XE ĐẸP PRO. 
             Return ONLY the modified image data.`,
           },
         ],
@@ -319,7 +320,7 @@ export const getMaintenanceAdvice = async (vehicleData: {
     2. Danh sách các hạng mục cần kiểm tra/thay thế ngay lập tức.
     3. Lịch trình bảo dưỡng dự kiến cho 10.000km tiếp theo.
     4. Lời khuyên để kéo dài tuổi thọ cho dòng xe cụ thể này.
-    5. Nhắc nhở về các dịch vụ detailing phù hợp tại XE ĐẸP AUTO (như vệ sinh khoang máy, gầm xe, nội thất).
+    5. Nhắc nhở về các dịch vụ detailing phù hợp tại XE ĐẸP PRO (như vệ sinh khoang máy, gầm xe, nội thất).
 
     Hãy trình bày bằng Markdown, chuyên nghiệp, dễ hiểu và đầy đủ.
   `;
@@ -338,5 +339,62 @@ export const getMaintenanceAdvice = async (vehicleData: {
   } catch (error) {
     console.error("Maintenance Advice Error:", error);
     return "Đã xảy ra lỗi khi lấy tư vấn bảo dưỡng. Vui lòng thử lại sau.";
+  }
+};
+
+/**
+ * AI Paint Assessment: Analyzes car condition from an image.
+ */
+export const analyzeCarCondition = async (base64Image: string) => {
+  const apiKey = process.env.GEMINI_API_KEY || '';
+  if (!apiKey) return { text: "Lỗi: Chưa cấu hình API Key.", suggestions: [] };
+  const ai = new GoogleGenAI({ apiKey });
+  
+  const prompt = `
+    Bạn là một chuyên gia giám định sơn và tình trạng xe hơi tại XE ĐẸP PRO.
+    Hãy phân tích hình ảnh này để xác định:
+    1. Tình trạng bề mặt sơn (xước xoáy, xước sâu, ố nước, mất độ bóng).
+    2. Các vấn đề khác có thể thấy (đèn mờ, nhựa nhám bạc màu, mâm xe bẩn).
+    3. Đánh giá mức độ hư tổn (Thấp - Trung bình - Cao).
+    4. Đề xuất bộ 3 dịch vụ phù hợp nhất từ danh sách: Phủ Ceramic, Dán PPF, Hiệu chỉnh sơn, Vệ sinh nội thất, Vệ sinh khoang máy, Tẩy ố kính.
+    5. Dự tính thời gian thi công sơ bộ.
+
+    Yêu cầu trả lời bằng tiếng Việt, chuyên nghiệp, trung thực.
+    Sau phần phân tích, hãy liệt kê 3 dịch vụ đề xuất dưới dạng danh sách tên dịch vụ để tôi có thể xử lý lập trình (ví dụ: ["Dịch vụ 1", "Dịch vụ 2", "Dịch vụ 3"]).
+  `;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            {
+              inlineData: {
+                data: base64Image.split(',')[1] || base64Image,
+                mimeType: 'image/jpeg',
+              },
+            },
+            { text: prompt }
+          ]
+        }
+      ],
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION,
+        temperature: 0.4,
+      },
+    });
+
+    const text = response.text || "Không thể phân tích hình ảnh.";
+    
+    // Attempt to extract suggestions list from the text
+    const suggestionsMatch = text.match(/\["(.*?)",\s*"(.*?)",\s*"(.*?)"\]/);
+    const suggestions = suggestionsMatch ? [suggestionsMatch[1], suggestionsMatch[2], suggestionsMatch[3]] : [];
+
+    return { text, suggestions };
+  } catch (error) {
+    console.error("AI Condition Analysis Error:", error);
+    return { text: "Đã xảy ra lỗi khi phân tích hình ảnh. Vui lòng thử lại sau.", suggestions: [] };
   }
 };

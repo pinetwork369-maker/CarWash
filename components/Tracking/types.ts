@@ -18,6 +18,7 @@ export interface VehicleTracking {
   customerPhone?: string;
   carModel: string;
   technicianName?: string;
+  serviceId?: string;
   serviceType?: string;
   status: VehicleStatus;
   startTime: string;

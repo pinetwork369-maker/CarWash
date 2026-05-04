@@ -1,5 +1,9 @@
 {
-  "name": "XE ĐẸP AUTO",
-  "description": "XE ĐẸP AUTO - Nền tảng chăm sóc xe hiện đại tích hợp trí tuệ nhân tạo để tư vấn bảo dưỡng, đặt lịch dịch vụ và cung cấp giải pháp detailing cao cấp.",
-  "requestFramePermissions": []
+  "name": "XE ĐẸP PRO | AI Detailing Lab",
+  "description": "XE ĐẸP PRO - Nền tảng chăm sóc xe hiện đại tích hợp trí tuệ nhân tạo để tư vấn bảo dưỡng, bảo vệ xe theo thời tiết và cá nhân hóa trải nghiệm Detailing cao cấp.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera",
+    "microphone"
+  ]
 }

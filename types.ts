@@ -15,6 +15,14 @@ export interface Service {
   category?: string;
   videoUrl?: string;
   subServices?: SubService[];
+  inventoryConsumptions?: InventoryConsumption[]; // Định mức vật tư
+  seoKeywords?: string;
+  seoDescription?: string;
+}
+
+export interface InventoryConsumption {
+  itemId: string;
+  amount: number;
 }
 
 export interface GalleryImage {
@@ -23,6 +31,7 @@ export interface GalleryImage {
   category: string;
   title: string;
   type?: 'image' | 'video';
+  tags?: string[];
 }
 
 export interface Review {
@@ -31,12 +40,23 @@ export interface Review {
   text: string;
   rating: number;
   serviceId?: string; // Liên kết với Service.id
+  customerImage?: string;
+  carModel?: string;
 }
 
 export interface ServiceReview {
   serviceName: string;
   rating: number;
   comment?: string;
+}
+
+export interface BeforeAfterImage {
+  id: string;
+  before: string;
+  after: string;
+  label: string;
+  date: string;
+  serviceName?: string;
 }
 
 export interface CustomerRecord {
@@ -54,6 +74,77 @@ export interface CustomerRecord {
   notes?: string;
   rating?: number;
   loyaltyPoints?: number; // Điểm tích lũy
+  tier?: LoyaltyTier;
+  technicianId?: string; // ID kỹ thuật viên thực hiện chính
+  inspectionId?: string; // ID bản kiểm tra xe
+  beforeAfterImages?: BeforeAfterImage[];
+}
+
+export interface Staff {
+  id: string;
+  name: string;
+  phone: string;
+  email?: string;
+  avatar?: string;
+  role: 'technician' | 'manager' | 'receptionist' | 'admin';
+  commissionRate: number; // Tỷ lệ hoa hồng (%)
+  status: 'active' | 'inactive';
+  joinedDate: string;
+}
+
+export interface InspectionPoint {
+  id: string;
+  x: number; // Tọa độ % trên sơ đồ
+  y: number;
+  view: 'front' | 'rear' | 'left' | 'right'; // Góc nhìn của điểm đánh dấu
+  type: 'scratch' | 'dent' | 'crack' | 'other';
+  note?: string;
+  photo?: string; // Ảnh chụp cận cảnh vết thương
+}
+
+export interface CarInspection {
+  id: string;
+  customerId?: string;
+  customerName: string;
+  phone?: string; // Số điện thoại để tra cứu
+  licensePlate: string;
+  date: string;
+  points: InspectionPoint[];
+  checklist?: Record<string, 'ok' | 'warning' | 'error' | 'na'>;
+  images?: {
+    front?: string;
+    rear?: string;
+    left?: string;
+    right?: string;
+  };
+  status?: 'pending' | 'completed' | 'draft';
+  technicianId?: string;
+  notes?: string;
+}
+
+export interface MaintenanceReminder {
+  id: string;
+  customerId: string;
+  customerName: string;
+  phone: string;
+  licensePlate?: string;
+  serviceName: string;
+  lastServiceDate: string;
+  nextServiceDate: string;
+  status: 'pending' | 'sent' | 'completed' | 'overdue' | 'cancelled';
+  note?: string;
+}
+
+export interface BankInfo {
+  bankName: string;
+  accountNumber: string;
+  accountName: string;
+  bin: string; // Mã BIN ngân hàng cho VietQR
+}
+
+export interface MomoInfo {
+  phone: string;
+  name: string;
 }
 
 export interface InventoryItem {
@@ -65,14 +156,17 @@ export interface InventoryItem {
   minThreshold: number; // Ngưỡng cảnh báo hết hàng
   lastRestocked: string;
   pricePerUnit?: number;
+  barcode?: string; // Mã vạch/QR Code để quét
 }
 
 export interface ECertificate {
   id: string;
   customerName: string;
+  phone?: string; // Số điện thoại để tra cứu
   licensePlate: string;
   carModel?: string;
   serviceType: string;
+  serviceName?: string; // Tên dịch vụ cụ thể
   issueDate: string;
   expiryDate: string;
   technician?: string;
@@ -80,15 +174,29 @@ export interface ECertificate {
   status: 'active' | 'expired';
 }
 
+export type LoyaltyTier = 'bronze' | 'silver' | 'gold' | 'diamond';
+
+export interface TierBenefit {
+  id: string;
+  name: string;
+  tier: LoyaltyTier;
+  minPoints: number;
+  multiplier: number; // Hệ số tích điểm (ví dụ: 1.0, 1.2, 1.5, 2.0)
+  perks: string[];
+  color: string;
+}
+
 export interface LoyaltyConfig {
   pointsPer100k: number; // Số điểm nhận được mỗi 100k chi tiêu
   pointValue: number; // Giá trị quy đổi của 1 điểm (VNĐ)
+  tiers: TierBenefit[];
 }
 
 export interface PremiumSolution {
   id: string;
   title: string;
   description: string;
+  price?: string; // Giá dịch vụ cao cấp
   beforeImage: string;
   afterImage: string;
   process: string[]; // Các bước thực hiện
@@ -125,6 +233,8 @@ export interface Appointment {
   note?: string;
   createdAt: string;
   isRead?: boolean;
+  paymentStatus?: 'unpaid' | 'deposit_paid' | 'fully_paid';
+  depositAmount?: number;
 }
 
 export interface DetailingPackage {
@@ -147,6 +257,8 @@ export interface NewsArticle {
   date: string;
   category: 'tip' | 'news' | 'promotion';
   author: string;
+  metaKeywords?: string;
+  metaDescription?: string;
 }
 
 export interface AppNotification {
@@ -168,12 +280,109 @@ export interface Expense {
   note?: string;
 }
 
+export type UserRole = 'admin' | 'staff' | 'manager';
+
+export interface AuditLog {
+  id: string;
+  userId: string;
+  userName: string;
+  action: string;
+  details: string;
+  timestamp: string;
+  ip?: string;
+}
+
+export interface AutomationSettings {
+  enableMaintenanceReminder: boolean;
+  enableBirthdayGreeting: boolean;
+  enableServiceCompletion: boolean;
+  maintenanceReminderDays: number;
+  birthdayDiscount: number;
+  notifyServiceDone?: boolean;
+  notifyMaintenanceReminder?: boolean;
+  notifyBirthday?: boolean;
+  notifyPromotion?: boolean;
+  notifyThanks24h?: boolean;
+  autoGoldVoucher?: boolean;
+  channel: 'zalo' | 'sms' | 'both';
+}
+
+export interface SubscriptionPackage {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  durationMonths: number;
+  servicesPerMonth: { serviceId: string, count: number }[];
+  perks: string[];
+  color: string;
+  isPopular?: boolean;
+  icon: string;
+  interval: string;
+  features: string[];
+}
+
+export interface UserSubscription {
+  id: string;
+  customerId: string;
+  packageId: string;
+  startDate: string;
+  endDate: string;
+  status: 'active' | 'expired' | 'cancelled';
+  remainingUses: { serviceId: string, count: number }[];
+}
+
+export interface Expert {
+  id: string;
+  name: string;
+  role: string;
+  exp: string;
+  cert: string;
+  img: string;
+}
+
+export interface DecalColor {
+  id: string;
+  name: string;
+  hex: string;
+  category: 'Gloss' | 'Matte' | 'Satin' | 'Chrome' | 'Carbon' | 'ColorShift';
+  finish: string;
+  code: string;
+}
+
+export interface WrapProject {
+  id: string;
+  title: string;
+  img: string;
+  color: string;
+  date?: string;
+  objectPosition?: string;
+}
+
+export interface ServiceProposal {
+  id: string;
+  customerId?: string;
+  customerName: string;
+  phone: string;
+  licensePlate: string;
+  carModel: string;
+  date: string;
+  expiryDate: string;
+  services: { serviceId: string, price: string, note?: string }[];
+  expertNote: string; // Lời tư vấn từ chuyên gia (có thể dùng AI gen)
+  status: 'draft' | 'sent' | 'accepted' | 'rejected';
+  totalPrice: number;
+}
+
 export interface SiteConfig {
   siteName: string;
   heroTitle: string;
+  heroSubtitle?: string;
   heroDescription: string;
   heroImage: string;
   heroVideoUrl?: string;
+  featureBefore?: string;
+  featureAfter?: string;
   servicesTitle: string;
   servicesSubtitle: string;
   premiumTitle: string;
@@ -186,10 +395,17 @@ export interface SiteConfig {
   windowTintingDescription: string;
   galleryTitle: string;
   gallerySubtitle: string;
+  aiAssessmentTitle?: string;
+  aiAssessmentSubtitle?: string;
+  aiAssessmentDescription?: string;
   reviewsTitle: string;
   reviewsSubtitle: string;
   newsTitle?: string;
   newsSubtitle?: string;
+  promotionsTitle?: string;
+  promotionsSubtitle?: string;
+  contactTitle?: string;
+  contactSubtitle?: string;
   contactAddress: string;
   contactPhone: string;
   contactHours: string;
@@ -204,19 +420,54 @@ export interface SiteConfig {
   tuningSubtitle: string;
   tuningDescription: string;
   copyright: string;
-  adminPassword?: string; // Mật khẩu quản trị (Kế toán)
-  designPassword?: string; // Mật khẩu thiết kế (Giao diện)
+  whyChooseUsTitle?: string;
+  whyChooseUsSubtitle?: string;
+  faqTitle?: string;
+  faqSubtitle?: string;
+  processTitle?: string;
+  processSubtitle?: string;
+  expertsTitle?: string;
+  expertsSubtitle?: string;
+  transformations?: BeforeAfterImage[];
+  aiAdvisorTitle?: string;
+  aiAdvisorSubtitle?: string;
+  aiAdvisorWelcome?: string;
+  aiSystemPrompt?: string;
+  accountingLockPassword?: string; // Mật khẩu kế toán vận hành
+  designPassword?: string; // Mật khẩu thiết kế và giao diện
+  inspectionPassword?: string; // Mật khẩu phiếu kiểm tra xe
+  enableAccountingLock?: boolean; // Bật/tắt khóa kế toán (Global)
+  enableDesignLock?: boolean; // Bật/tắt khóa thiết kế (Global)
+  enableInspectionLock?: boolean; // Bật/tắt khóa phiếu kiểm tra xe
+  accountingLockSettings?: Record<string, boolean>; // Bật/tắt khóa cho từng mục
+  designLockSettings?: Record<string, boolean>; // Bật/tắt khóa cho từng mục thiết kế
+  wrapProjects?: WrapProject[];
   logoUrl?: string;
   facebookUrl?: string;
   youtubeUrl?: string;
   instagramUrl?: string;
   zaloNumber?: string;
   loyaltyConfig?: LoyaltyConfig;
+  bankInfo?: BankInfo;
+  momoInfo?: MomoInfo;
+  staff?: Staff[];
+  inspections?: CarInspection[];
+  reminders?: MaintenanceReminder[];
   promotions?: Promotion[];
   appointments?: Appointment[];
   packages?: DetailingPackage[];
   news?: NewsArticle[];
   expenses?: Expense[];
+  services?: Service[];
+  automation?: AutomationSettings;
+  subscriptions?: SubscriptionPackage[];
+  experts?: Expert[];
+  proposals?: ServiceProposal[];
+  seoKeywords?: string;
+  seoDescription?: string;
+  googleVerificationCode?: string;
+  themeColor?: string; // Màu chủ đạo (Accent Color)
+  secondaryColor?: string; // Màu phụ
 }
 
 export interface Message {
@@ -228,6 +479,7 @@ export interface BookingData {
   name: string;
   phone: string;
   email?: string;
+  vehicleType?: 'mini' | 'sedan' | 'suv' | 'supercar';
   carModel: string;
   serviceId: string;
   subServiceTitle?: string;

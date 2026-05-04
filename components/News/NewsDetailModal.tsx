@@ -60,46 +60,46 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                 </div>
               </div>
 
-              <div className="p-6 sm:p-16">
-                <div className="flex flex-wrap items-center gap-8 text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-12 pb-12 border-b border-white/5">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center">
-                      <Calendar className="w-4 h-4 text-blue-500" />
+              <div className="p-5 sm:p-16">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-slate-500 text-[8px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-8 sm:mb-12 pb-8 sm:pb-12 border-b border-white/5">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-blue-600/20 flex items-center justify-center">
+                      <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />
                     </div>
                     {article.date}
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center">
-                      <User className="w-4 h-4 text-blue-500" />
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-blue-600/20 flex items-center justify-center">
+                      <User className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />
                     </div>
                     {article.author}
                   </div>
                   <button className="ml-auto flex items-center gap-2 hover:text-white transition-colors">
-                    <Share2 className="w-4 h-4" /> {t('share_article')}
+                    <Share2 className="w-3 h-3 sm:w-4 sm:h-4" /> {t('share_article')}
                   </button>
                 </div>
 
                 <div className="max-w-3xl mx-auto">
-                  <div className="markdown-body prose prose-invert prose-blue max-w-none">
+                  <div className="markdown-body prose prose-invert prose-blue max-w-none prose-sm sm:prose-base">
                     <ReactMarkdown>{article.content}</ReactMarkdown>
                   </div>
                 </div>
 
-                <div className="mt-20 pt-12 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-10">
-                  <div className="flex items-center gap-6">
-                    <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-black text-2xl shadow-xl">
+                <div className="mt-12 sm:mt-20 pt-8 sm:pt-12 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-8 sm:gap-10">
+                  <div className="flex items-center gap-4 sm:gap-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-black text-xl sm:text-2xl shadow-xl">
                       {article.author.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">{t('written_by')}</p>
-                      <p className="text-xl font-black text-white uppercase tracking-tight">{article.author}</p>
-                      <p className="text-xs text-slate-500 font-medium">{t('detailing_expert')}</p>
+                      <p className="text-[8px] sm:text-[10px] font-black uppercase text-slate-500 tracking-widest mb-0.5 sm:mb-1">{t('written_by')}</p>
+                      <p className="text-lg sm:text-xl font-black text-white uppercase tracking-tight">{article.author}</p>
+                      <p className="text-[10px] sm:text-xs text-slate-500 font-medium">{t('detailing_expert')}</p>
                     </div>
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 w-full sm:w-auto">
                     <button 
                       onClick={onClose}
-                      className="bg-white text-slate-950 px-10 py-5 rounded-2xl font-black uppercase tracking-widest transition-all active:scale-95 text-xs"
+                      className="w-full sm:w-auto bg-white text-slate-950 px-8 sm:px-10 py-4 sm:py-5 rounded-xl sm:rounded-2xl font-black uppercase tracking-widest transition-all active:scale-95 text-[10px] sm:text-xs"
                     >
                       {t('close_article')}
                     </button>

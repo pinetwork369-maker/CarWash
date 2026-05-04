@@ -1,5 +1,4 @@
 import express from "express";
-import { createServer as createViteServer } from "vite";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import path from "path";
@@ -70,7 +69,7 @@ async function startServer() {
 
     try {
       await transporter.sendMail({
-        from: `"XE ĐẸP AUTO" <${smtpUser}>`,
+        from: `"XE ĐẸP PRO" <${smtpUser}>`,
         to,
         subject,
         text,
@@ -190,6 +189,7 @@ async function startServer() {
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -198,7 +198,7 @@ async function startServer() {
   } else {
     // In production, serve the dist folder
     app.use(express.static(path.join(__dirname, "dist")));
-    app.get("*", (req, res) => {
+    app.get("*all", (req, res) => {
       res.sendFile(path.join(__dirname, "dist", "index.html"));
     });
   }

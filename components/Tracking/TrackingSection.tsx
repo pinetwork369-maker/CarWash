@@ -14,7 +14,8 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, 
 
   const filteredData = trackingData.filter(item => 
     item.licensePlate.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.customerName.toLowerCase().includes(searchQuery.toLowerCase())
+    item.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.customerPhone?.includes(searchQuery)
   );
 
   const getStatusColor = (status: string) => {
@@ -59,7 +60,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]"
+              className="section-title text-5xl md:text-8xl mb-8 leading-[0.9]"
             >
               {t('check_progress').split(' ').map((word, i) => (
                 <React.Fragment key={i}>
@@ -73,7 +74,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-slate-400 max-w-2xl mx-auto font-medium text-lg"
+              className="section-subtitle max-w-2xl mx-auto text-lg"
             >
               {t('tracking_desc')}
             </motion.p>
@@ -93,13 +94,13 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + idx * 0.1 }}
-                className="bg-slate-900/40 border border-white/5 rounded-2xl p-4 flex items-center gap-4"
+                className="card-premium p-4 flex items-center gap-4"
               >
                 <div className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center ${stat.color}`}>
                   <stat.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">{stat.label}</p>
+                  <p className="label-premium mb-0">{stat.label}</p>
                   <p className="text-xl font-black text-white leading-none mt-1">{stat.count}</p>
                 </div>
               </motion.div>
@@ -118,10 +119,10 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, 
                 placeholder={t('search_plate_placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-[32px] py-8 pl-20 pr-8 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500/50 transition-all text-xl font-black uppercase tracking-widest"
+                className="input-premium w-full py-8 pl-20 pr-8 text-xl"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 hidden md:block">
-                <div className="px-6 py-3 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-blue-600/20">
+                <div className="btn-primary px-6 py-3">
                   {t('search_now')}
                 </div>
               </div>
@@ -134,7 +135,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, 
               {searchQuery && filteredData.length > 0 ? (
                 filteredData.map((vehicle) => (
                   <motion.div
-                    key={vehicle.id}
+                    key={`tracking-section-${vehicle.id}`}
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -285,12 +286,44 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({ trackingData, 
 
               {/* Progress Steps */}
               <div className="p-8 max-h-[50vh] overflow-y-auto custom-scrollbar bg-slate-950/30">
+                <div className="mb-10 p-6 bg-blue-600/5 border border-blue-500/20 rounded-3xl flex items-center gap-6">
+                  <div className="relative w-20 h-20 flex-shrink-0">
+                    <svg className="w-full h-full -rotate-90">
+                      <circle cx="40" cy="40" r="36" fill="none" stroke="currentColor" strokeWidth="4" className="text-slate-800" />
+                      <circle 
+                        cx="40" cy="40" r="36" fill="none" stroke="currentColor" strokeWidth="4" 
+                        strokeDasharray={226}
+                        strokeDashoffset={226 - (226 * (selectedVehicle.currentStepIndex + 1)) / selectedVehicle.steps.length}
+                        className="text-blue-500 transition-all duration-1000"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-xl font-black text-white leading-none">{Math.round(((selectedVehicle.currentStepIndex + 1) / selectedVehicle.steps.length) * 100)}%</span>
+                      <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest mt-1">Done</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h5 className="text-sm font-black text-white uppercase tracking-widest mb-1">Tiến độ hiện tại</h5>
+                    <p className="text-xs text-slate-400 font-medium">Xe đang ở bước: <span className="text-blue-400 font-bold uppercase">{selectedVehicle.steps[selectedVehicle.currentStepIndex]?.name}</span></p>
+                    <div className="flex items-center gap-4 mt-3">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">{selectedVehicle.currentStepIndex} Hoàn tất</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-slate-700" />
+                        <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">{selectedVehicle.steps.length - selectedVehicle.currentStepIndex - 1} Còn lại</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="space-y-12 relative">
                   {/* Vertical Line with Gradient */}
                   <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-blue-500 via-emerald-500 to-slate-800" />
 
                   {selectedVehicle.steps.map((step, index) => (
-                    <div key={step.id} className="relative flex gap-8 group/step">
+                    <div key={`step-detail-${step.id}`} className="relative flex gap-8 group/step">
                       <div className={`relative z-10 w-10 h-10 rounded-2xl flex items-center justify-center border-2 transition-all duration-500 ${
                         step.status === 'completed' ? 'bg-emerald-500 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]' :
                         step.status === 'in-progress' ? 'bg-blue-600 border-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.4)] animate-pulse' :

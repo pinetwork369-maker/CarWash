@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Plus, Trash2, Edit2, Save, X, Car, User, Clock, CheckCircle2, Timer, Circle, ChevronRight, ChevronDown, Phone, Briefcase, DollarSign, Image as ImageIcon, MessageSquare } from 'lucide-react';
 import { VehicleTracking, TrackingStep, TrackingStatus, VehicleStatus } from './types';
+import { Service } from '../../types';
+import toast from 'react-hot-toast';
 
 interface TrackingManagementProps {
   trackingData: VehicleTracking[];
   setTrackingData: React.Dispatch<React.SetStateAction<VehicleTracking[]>>;
+  services: Service[];
+  onStepComplete?: (vehicle: VehicleTracking, step: TrackingStep) => void;
 }
 
-export const TrackingManagement: React.FC<TrackingManagementProps> = ({ trackingData, setTrackingData }) => {
+export const TrackingManagement: React.FC<TrackingManagementProps> = ({ trackingData, setTrackingData, services, onStepComplete }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -18,6 +22,7 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
     customerPhone: '',
     carModel: '',
     technicianName: '',
+    serviceId: '',
     serviceType: '',
     totalAmount: 0,
     status: 'waiting',
@@ -42,6 +47,7 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
     setTrackingData([newRecord, ...trackingData]);
     setIsAdding(false);
     resetForm();
+    toast.success('Đã thêm xe mới vào danh sách theo dõi!');
   };
 
   const handleUpdateRecord = (id: string, updates: Partial<VehicleTracking>) => {
@@ -50,9 +56,8 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
   };
 
   const handleDelete = (id: string) => {
-    if (confirm('Bạn có chắc chắn muốn xóa bản ghi này?')) {
-      setTrackingData(trackingData.filter(item => item.id !== id));
-    }
+    setTrackingData(trackingData.filter(item => item.id !== id));
+    toast.success('Đã xóa bản ghi theo dõi!');
   };
 
   const handleUpdateStep = (vehicleId: string, stepId: string, updates: Partial<TrackingStep>) => {
@@ -84,6 +89,14 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
       }
       return vehicle;
     }));
+
+    if (updates.status === 'completed') {
+      const vehicle = trackingData.find(v => v.id === vehicleId);
+      const step = vehicle?.steps.find(s => s.id === stepId);
+      if (vehicle && step && onStepComplete) {
+        onStepComplete(vehicle, { ...step, ...updates });
+      }
+    }
   };
 
   const resetForm = () => {
@@ -110,14 +123,14 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
         <div>
-          <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Quản Lý Tiến Độ Xe</h3>
-          <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">Theo dõi và cập nhật quy trình chăm sóc khách hàng</p>
+          <h3 className="section-title text-3xl">Quản Lý Tiến Độ Xe</h3>
+          <p className="section-subtitle mb-0 mt-1">Theo dõi và cập nhật quy trình chăm sóc khách hàng</p>
         </div>
         <button
           onClick={() => setIsAdding(true)}
-          className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white font-black text-xs uppercase rounded-[20px] hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/20 group"
+          className="btn-primary px-8 py-4 text-xs"
         >
-          <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+          <Plus className="w-5 h-5" />
           Thêm Xe Mới
         </button>
       </div>
@@ -205,13 +218,17 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
             </div>
             <div>
               <label className="block text-[10px] font-black text-slate-500 uppercase mb-2">Loại dịch vụ</label>
-              <input
-                type="text"
-                value={formData.serviceType}
-                onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
+              <select
+                value={formData.serviceId}
+                onChange={(e) => {
+                  const s = services.find(x => x.id === e.target.value);
+                  setFormData({ ...formData, serviceId: e.target.value, serviceType: s?.title || '', totalAmount: parseInt(s?.price.replace(/\D/g, '') || '0') });
+                }}
                 className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 outline-none"
-                placeholder="Phủ Ceramic Pro"
-              />
+              >
+                <option value="">Chọn dịch vụ...</option>
+                {services.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
+              </select>
             </div>
             <div>
               <label className="block text-[10px] font-black text-slate-500 uppercase mb-2">Tổng chi phí (VNĐ)</label>
@@ -250,7 +267,7 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
       {/* List */}
       <div className="space-y-4">
         {trackingData.map((vehicle) => (
-          <div key={vehicle.id} className="bg-slate-900/50 border border-white/5 rounded-3xl overflow-hidden">
+          <div key={`tracking-${vehicle.id}`} className="bg-slate-900/50 border border-white/5 rounded-3xl overflow-hidden">
             <div 
               className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer hover:bg-white/5 transition-colors"
               onClick={() => setExpandedId(expandedId === vehicle.id ? null : vehicle.id)}
@@ -321,7 +338,7 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
                     </div>
                     <div className="space-y-4">
                       {vehicle.steps.map((step) => (
-                        <div key={step.id} className="bg-white/5 rounded-2xl border border-white/5 overflow-hidden">
+                        <div key={`step-${step.id}`} className="bg-white/5 rounded-2xl border border-white/5 overflow-hidden">
                           <div className="p-4 flex items-center justify-between">
                             <div className="flex items-center gap-4">
                               <div className={`w-3 h-3 rounded-full ${
@@ -444,10 +461,9 @@ export const TrackingManagement: React.FC<TrackingManagementProps> = ({ tracking
                       </button>
                       <button 
                         onClick={() => {
-                          if (confirm('Xác nhận hoàn tất toàn bộ quy trình?')) {
-                            const allDone = vehicle.steps.map(s => ({ ...s, status: 'completed' as TrackingStatus, timestamp: new Date().toISOString() }));
-                            handleUpdateRecord(vehicle.id, { steps: allDone, status: 'ready', currentStepIndex: allDone.length - 1 });
-                          }
+                          const allDone = vehicle.steps.map(s => ({ ...s, status: 'completed' as TrackingStatus, timestamp: new Date().toISOString() }));
+                          handleUpdateRecord(vehicle.id, { steps: allDone, status: 'ready', currentStepIndex: allDone.length - 1 });
+                          toast.success('Đã hoàn tất toàn bộ quy trình!');
                         }}
                         className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-[10px] font-black uppercase text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all"
                       >

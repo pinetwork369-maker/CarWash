@@ -4,7 +4,7 @@ export const DEFAULT_NEWS: NewsArticle[] = [
   {
     id: 'news1',
     title: 'Nghệ Thuật Chăm Sóc Xe Tại Nhà: Bí Quyết Giữ Xe Luôn Như Mới',
-    summary: 'Khám phá quy trình chăm sóc xe chuẩn Detailing ngay tại nhà giúp xế cưng luôn bóng bẩy và bền bỉ theo thời gian.',
+    excerpt: 'Khám phá quy trình chăm sóc xe chuẩn Detailing ngay tại nhà giúp xế cưng luôn bóng bẩy và bền bỉ theo thời gian.',
     content: `## Chăm Sóc Xe Tại Nhà: Không Chỉ Là Rửa Xe
 
 Việc chăm sóc xe hơi không chỉ là đưa xe đến các trung tâm detailing chuyên nghiệp mà còn bao gồm cả những thói quen bảo dưỡng hàng ngày tại nhà. Dưới đây là quy trình 5 bước chuẩn chuyên gia:
@@ -29,12 +29,14 @@ Sau khi rửa sạch, hãy sử dụng các loại xịt bảo vệ nhanh (Quick
     author: 'Admin',
     date: '2024-03-20',
     category: 'Kinh nghiệm',
-    tags: ['Bảo dưỡng', 'Chăm sóc xe']
+    tags: ['Bảo dưỡng', 'Chăm sóc xe'],
+    metaKeywords: 'chăm sóc xe tại nhà, rửa xe đúng cách, bí quyết giữ xe mới, XE ĐẸP PRO tips',
+    metaDescription: 'Hướng dẫn chi tiết quy trình 5 bước chăm sóc xe hơi chuyên nghiệp ngay tại nhà giúp xe luôn bền đẹp như mới.'
   },
   {
     id: 'news2',
     title: 'Phủ Ceramic Hay Dán PPF: Cuộc Chiến Bảo Vệ Sơn Xe Toàn Diện',
-    summary: 'Phân tích chuyên sâu giữa hai công nghệ bảo vệ sơn hàng đầu hiện nay để tìm ra giải pháp tối ưu cho xế cưng của bạn.',
+    excerpt: 'Phân tích chuyên sâu giữa hai công nghệ bảo vệ sơn hàng đầu hiện nay để tìm ra giải pháp tối ưu cho xế cưng của bạn.',
     content: `## Lựa Chọn Nào Cho Xế Cưng Của Bạn?
 
 Nhiều chủ xe băn khoăn không biết nên chọn phủ Ceramic hay dán PPF. Thực tế, mỗi phương pháp đều có những ưu điểm vượt trội riêng:
@@ -55,12 +57,14 @@ Nếu bạn ưu tiên độ bóng và dễ vệ sinh, hãy chọn **Ceramic**. N
     author: 'Chuyên gia Detailing',
     date: '2024-04-05',
     category: 'Tư vấn',
-    tags: ['Ceramic', 'PPF', 'Bảo vệ sơn']
+    tags: ['Ceramic', 'PPF', 'Bảo vệ sơn'],
+    metaKeywords: 'phủ ceramic, dán PPF, bảo vệ sơn xe, so sánh ceramic và PPF, XE ĐẸP PRO tư vấn',
+    metaDescription: 'So sánh chi tiết ưu nhược điểm của phủ Ceramic và dán phim bảo vệ sơn PPF để bạn có lựa chọn phù hợp nhất cho xế yêu.'
   },
   {
     id: 'news3',
     title: 'Vệ Sinh Khoang Máy: Tại Sao Đây Là "Trái Tim" Của Quy Trình Bảo Dưỡng?',
-    summary: 'Khoang máy sạch sẽ không chỉ mang lại vẻ đẹp thẩm mỹ mà còn là yếu tố then chốt giúp động cơ vận hành bền bỉ và an toàn.',
+    excerpt: 'Khoang máy sạch sẽ không chỉ mang lại vẻ đẹp thẩm mỹ mà còn là yếu tố then chốt giúp động cơ vận hành bền bỉ và an toàn.',
     content: `## Khoang Máy - Nơi Cần Được Quan Tâm Đặc Biệt
 
 Khoang máy thường bị lãng quên vì nó nằm dưới nắp capo, nhưng việc vệ sinh định kỳ mang lại những lợi ích sống còn:
@@ -82,6 +86,8 @@ Một chiếc xe có khoang máy được chăm sóc kỹ lưỡng luôn có gi�
     author: 'Kỹ thuật viên',
     date: '2024-05-12',
     category: 'Kỹ thuật',
-    tags: ['Khoang máy', 'Bảo dưỡng']
+    tags: ['Khoang máy', 'Bảo dưỡng'],
+    metaKeywords: 'vệ sinh khoang máy, bảo dưỡng động cơ, chống chuột ô tô, XE ĐẸP PRO kỹ thuật',
+    metaDescription: 'Tại sao cần vệ sinh khoang máy định kỳ? Khám phá những lợi ích bất ngờ và quy trình vệ sinh an toàn cho động cơ xe hơi.'
   }
 ];

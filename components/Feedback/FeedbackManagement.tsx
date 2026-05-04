@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Star, Trash2, Search, Filter, User, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { Review, Service } from '../../types';
+import toast from 'react-hot-toast';
 
 interface FeedbackManagementProps {
   reviews: Review[];
@@ -14,9 +15,8 @@ export const FeedbackManagement: React.FC<FeedbackManagementProps> = ({ reviews,
   const [filterRating, setFilterRating] = useState<number | 'all'>('all');
 
   const handleDelete = (id: string) => {
-    if (window.confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
-      setReviews(prev => prev.filter(r => r.id !== id));
-    }
+    setReviews(prev => prev.filter(r => r.id !== id));
+    toast.success('Đã xóa đánh giá!');
   };
 
   const filteredReviews = reviews.filter(review => {
@@ -30,8 +30,8 @@ export const FeedbackManagement: React.FC<FeedbackManagementProps> = ({ reviews,
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
-          <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Quản Lý Đánh Giá</h3>
-          <p className="text-slate-500 text-sm font-medium">Xem và quản lý phản hồi từ khách hàng.</p>
+          <h3 className="section-title text-2xl">Quản Lý Đánh Giá</h3>
+          <p className="section-subtitle mb-0">Xem và quản lý phản hồi từ khách hàng.</p>
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export const FeedbackManagement: React.FC<FeedbackManagementProps> = ({ reviews,
         {filteredReviews.length > 0 ? (
           filteredReviews.map((review) => (
             <motion.div
-              key={review.id}
+              key={`review-mgmt-${review.id}`}
               layout
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

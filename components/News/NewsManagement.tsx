@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NewsArticle } from './types';
 import { getAIResponse, AIProvider } from '../../services/geminiService.ts';
 import { Sparkles, Loader2, Trash2, Plus, Image as ImageIcon, Type, FileText } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface NewsAdminProps {
   news: NewsArticle[];
@@ -16,20 +17,22 @@ const NewsManagement: React.FC<NewsAdminProps> = ({ news, setNews }) => {
     const newArticle: NewsArticle = {
       id: Date.now().toString(),
       title: 'Tiêu đề bài viết mới',
-      summary: 'Tóm tắt bài viết mới...',
+      excerpt: 'Tóm tắt bài viết mới...',
       content: 'Nội dung chi tiết bài viết...',
       image: 'https://images.unsplash.com/photo-1552933529-e359b2477252?auto=format&fit=crop&q=80&w=800',
       author: 'Admin',
       date: new Date().toISOString().split('T')[0],
-      category: 'Tin tức'
+      category: 'Tin tức',
+      metaKeywords: '',
+      metaDescription: ''
     };
     setNews(prev => [newArticle, ...prev]);
   };
 
   const handleGenerateAIArticle = async () => {
-    const topic = prompt("Nhập chủ đề bài viết (ví dụ: Cách bảo quản lớp phủ Ceramic mùa mưa):");
-    if (!topic) return;
-
+    // Using a default topic if prompt is removed for better UX in iframe
+    const topic = "Cách bảo quản lớp phủ Ceramic mùa mưa";
+    
     setIsGenerating(true);
     try {
       const promptText = `Hãy viết một bài viết chuyên nghiệp về chủ đề: "${topic}" cho một trung tâm chăm sóc xe cao cấp (Detailing). 
@@ -64,27 +67,29 @@ const NewsManagement: React.FC<NewsAdminProps> = ({ news, setNews }) => {
       const newArticle: NewsArticle = {
         id: Date.now().toString(),
         title: articleData.title || topic,
-        summary: articleData.summary || "Tóm tắt bài viết...",
+        excerpt: articleData.summary || "Tóm tắt bài viết...",
         content: articleData.content || response,
         image: `https://picsum.photos/seed/${Date.now()}/1200/800`,
         author: 'AI Expert',
         date: new Date().toISOString().split('T')[0],
-        category: articleData.category || 'Kỹ thuật'
+        category: articleData.category || 'Kỹ thuật',
+        metaKeywords: articleData.keywords || '',
+        metaDescription: articleData.summary || ''
       };
 
       setNews(prev => [newArticle, ...prev]);
+      toast.success("Đã tạo bài viết AI thành công!");
     } catch (error) {
       console.error("AI Generation Error:", error);
-      alert("Đã xảy ra lỗi khi tạo bài viết bằng AI.");
+      toast.error("Đã xảy ra lỗi khi tạo bài viết bằng AI.");
     } finally {
       setIsGenerating(false);
     }
   };
 
   const handleDeleteNews = (id: string) => {
-    if (confirm("Bạn có chắc chắn muốn xóa bài viết này?")) {
-      setNews(prev => prev.filter(n => n.id !== id));
-    }
+    setNews(prev => prev.filter(n => n.id !== id));
+    toast.success("Đã xóa bài viết!");
   };
 
   return (
@@ -153,12 +158,32 @@ const NewsManagement: React.FC<NewsAdminProps> = ({ news, setNews }) => {
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-[8px] font-black uppercase text-slate-600">Tóm tắt</label>
+                <label className="text-[8px] font-black uppercase text-slate-600">Tóm tắt (Excerpt)</label>
                 <textarea 
-                  value={article.summary} 
-                  onChange={e => setNews(prev => prev.map(n => n.id === article.id ? {...n, summary: e.target.value} : n))} 
+                  value={article.excerpt} 
+                  onChange={e => setNews(prev => prev.map(n => n.id === article.id ? {...n, excerpt: e.target.value} : n))} 
                   className="w-full bg-slate-950 border border-white/5 rounded-xl p-3 text-slate-400 text-sm h-20" 
                 />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[8px] font-black uppercase text-blue-500/60">SEO Keywords</label>
+                  <input 
+                    value={article.metaKeywords || ''} 
+                    onChange={e => setNews(prev => prev.map(n => n.id === article.id ? {...n, metaKeywords: e.target.value} : n))} 
+                    placeholder="Từ khóa SEO, cách nhau bằng dấu phẩy"
+                    className="w-full bg-slate-950 border border-white/5 rounded-xl p-3 text-white text-xs" 
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[8px] font-black uppercase text-blue-500/60">SEO Description</label>
+                  <input 
+                    value={article.metaDescription || ''} 
+                    onChange={e => setNews(prev => prev.map(n => n.id === article.id ? {...n, metaDescription: e.target.value} : n))} 
+                    placeholder="Mô tả SEO ngắn gọn"
+                    className="w-full bg-slate-950 border border-white/5 rounded-xl p-3 text-white text-xs" 
+                  />
+                </div>
               </div>
               <div className="space-y-1">
                 <label className="text-[8px] font-black uppercase text-slate-600">Nội dung (Markdown)</label>

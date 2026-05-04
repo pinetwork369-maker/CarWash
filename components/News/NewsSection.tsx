@@ -100,7 +100,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData, t,
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12">
           {/* Featured Article */}
           {news.length > 0 && (
             <motion.div 
@@ -108,7 +108,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData, t,
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               onClick={() => setSelectedArticle(news[0])}
-              className="lg:col-span-2 group cursor-pointer relative rounded-[48px] overflow-hidden border border-white/10 h-[400px] sm:h-[600px]"
+              className="lg:col-span-2 group cursor-pointer relative rounded-[32px] sm:rounded-[48px] overflow-hidden border border-white/10 h-[450px] sm:h-[600px]"
             >
               <img 
                 src={news[0].image} 
@@ -116,29 +116,29 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData, t,
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12">
-                <span className="bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full mb-6 inline-block">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-12">
+                <span className="bg-blue-600 text-white text-[8px] sm:text-[10px] font-black uppercase tracking-widest px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 inline-block">
                   {t('featured_article')} • {news[0].category}
                 </span>
-                <h3 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tighter mb-4 leading-none group-hover:text-blue-400 transition-colors">
+                <h3 className="text-2xl sm:text-5xl font-black text-white uppercase tracking-tighter mb-3 sm:mb-4 leading-[1.1] sm:leading-none group-hover:text-blue-400 transition-colors line-clamp-3 sm:line-clamp-none">
                   {news[0].title}
                 </h3>
-                <p className="text-slate-300 text-sm sm:text-lg max-w-2xl line-clamp-2 mb-8 font-medium opacity-80">
-                  {news[0].summary}
+                <p className="text-slate-300 text-xs sm:text-lg max-w-2xl line-clamp-2 mb-6 sm:mb-8 font-medium opacity-80">
+                  {news[0].excerpt}
                 </p>
-                <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-widest text-white/60">
-                  <span className="flex items-center gap-2"><User className="w-4 h-4 text-blue-500" /> {news[0].author}</span>
-                  <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-blue-500" /> {news[0].date}</span>
+                <div className="flex items-center gap-4 sm:gap-6 text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-white/60">
+                  <span className="flex items-center gap-2"><User className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" /> {news[0].author}</span>
+                  <span className="flex items-center gap-2"><Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" /> {news[0].date}</span>
                 </div>
               </div>
             </motion.div>
           )}
 
-          {/* Side List */}
-          <div className="space-y-8">
+          {/* Side List - Improved for tablets */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
             <AnimatePresence mode="popLayout">
-              {news.slice(1, visibleCount).map((article, idx) => (
+              {(news || []).slice(1, visibleCount).map((article, idx) => (
                 <NewsCard 
                   key={article.id}
                   article={article}
@@ -152,7 +152,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData, t,
             {news.length > visibleCount && (
               <button 
                 onClick={handleLoadMore}
-                className="w-full py-4 rounded-2xl border border-white/5 hover:bg-white/5 text-[10px] font-black uppercase tracking-widest text-slate-400 transition-all flex items-center justify-center gap-2 group"
+                className="md:col-span-2 lg:col-span-1 w-full py-4 rounded-2xl border border-white/5 hover:bg-white/5 text-[10px] font-black uppercase tracking-widest text-slate-400 transition-all flex items-center justify-center gap-2 group"
               >
                 {t('load_more_news')}
                 <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
