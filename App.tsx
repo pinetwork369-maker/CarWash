@@ -83,6 +83,7 @@ const googleProvider = new GoogleAuthProvider();
 
 declare global {
   interface Window {
+    Pi: any;
     aistudio: {
       hasSelectedApiKey: () => Promise<boolean>;
       openSelectKey: () => Promise<void>;
@@ -13443,6 +13444,85 @@ const App: React.FC = () => {
     const saved = localStorage.getItem('dungcar_lang_v1');
     return (saved as 'vi' | 'en') || 'vi';
   });
+
+  useEffect(() => {
+    let piInitialized = false;
+
+    const initPi = async () => {
+      if (typeof window !== 'undefined' && window.Pi) {
+        try {
+          console.log('Pi SDK object detected. Initializing...');
+          
+          // Initialize Pi SDK
+          try {
+            window.Pi.init({ version: "2.0", sandbox: false });
+            piInitialized = true;
+            console.log('Pi.init called successfully with sandbox: false');
+          } catch (initErr) {
+            console.warn('Pi.init failed (sandbox: false), trying sandbox: true...', initErr);
+            window.Pi.init({ version: "2.0", sandbox: true });
+            piInitialized = true;
+          }
+          
+          // Wait for SDK state to stabilize
+          await new Promise(resolve => setTimeout(resolve, 300));
+
+          const onIncompletePaymentFound = (payment: any) => {
+            console.log('Pi Incomplete Payment Found:', payment);
+            // In a real app, you'd complete the payment on your backend here
+          };
+
+          // Authenticate
+          const scopes = ['username', 'payments'];
+          console.log('Calling Pi.authenticate...');
+          const authResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+          console.log('Pi Authentication Success:', authResult);
+          
+          if (authResult.user) {
+             toast.success(`Chào mừng ${authResult.user.username} từ Pi Network!`, {
+               icon: '🥧',
+               style: {
+                 borderRadius: '20px',
+                 background: '#1e293b',
+                 color: '#fff',
+                 border: '1px solid rgba(255,255,255,0.1)'
+               }
+             });
+          }
+        } catch (err: any) {
+          console.error('Pi Operation Error:', err);
+          
+          // Final fallback - sometimes the SDK just needs one more try after a fail
+          if (err?.message?.includes('not initialized')) {
+            console.log('Attempting emergency SDK re-init and auth...');
+            try {
+              window.Pi.init({ version: "2.0", sandbox: true });
+              await new Promise(resolve => setTimeout(resolve, 500));
+              const finalResult = await window.Pi.authenticate(['username', 'payments'], (p: any) => console.log(p));
+              console.log('Pi Final Fallback Success:', finalResult);
+            } catch (finalErr) {
+              console.error('Pi SDK failed all initialization attempts:', finalErr);
+            }
+          }
+        }
+      }
+    };
+
+    // Polling is more reliable than a fixed timeout
+    let attempts = 0;
+    const piCheckInterval = setInterval(() => {
+      attempts++;
+      if (window.Pi) {
+        clearInterval(piCheckInterval);
+        initPi();
+      } else if (attempts > 20) { // Stop after 10 seconds
+        clearInterval(piCheckInterval);
+        console.warn('Pi SDK failed to load after 10 seconds');
+      }
+    }, 500);
+
+    return () => clearInterval(piCheckInterval);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('dungcar_theme_v1', theme);
