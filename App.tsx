@@ -20,7 +20,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation, u
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ChevronLeft, ArrowUp, ArrowDown, Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera as CameraIcon, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SearchSettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper, Bot, Boxes, Gift, BarChart3, FileCheck, AlertTriangle, ClipboardCheck, Printer, Loader2, Diamond, Armchair, Disc, Waves, Split, ImagePlus
+  MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ChevronLeft, ArrowUp, ArrowDown, Play, Pause, Volume2, VolumeX,  Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera as CameraIcon, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud as CloudIcon, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SearchSettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon2, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper, Bot, Boxes, Gift, BarChart3, FileCheck, AlertTriangle, ClipboardCheck, Printer, Loader2, Diamond, Armchair, Disc, Waves, Split, ImagePlus, Brush, Camera
 } from 'lucide-react';
 import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS, DEFAULT_NEWS, DEFAULT_INVENTORY, DEFAULT_E_CERTIFICATES, DEFAULT_EXPENSES } from './constants.tsx';
 import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage, NewsArticle, AppNotification, InventoryItem, ECertificate, LoyaltyConfig, Expense, Staff, MaintenanceReminder, CarInspection, InspectionPoint, SubscriptionPackage, Expert, BeforeAfterImage, AutomationSettings, ServiceProposal } from './types.ts';
@@ -70,6 +70,16 @@ import { getAIResponse, editImageWithAI, generateImageWithAI, generateVideoWithA
 import { GoogleGenAI } from "@google/genai";
 import ReactMarkdown from 'react-markdown';
 import { Toaster, toast } from 'react-hot-toast';
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, User as FirebaseUser } from 'firebase/auth';
+import { getFirestore, doc, onSnapshot, setDoc, collection } from 'firebase/firestore';
+import firebaseConfig from './firebase-applet-config.json';
+
+// Firebase Initialization
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 declare global {
   interface Window {
@@ -81,6 +91,7 @@ declare global {
 }
 
 import LazyImage from './components/LazyImage';
+import { GenericContentModal } from './components/GenericContentModal.tsx';
 
 // --- Security Utilities ---
 
@@ -3740,7 +3751,7 @@ const AdminDashboardModal: React.FC<{
                                   <img src={siteConfig.logoUrl} alt="Logo Preview" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
                                 ) : (
                                   <div className="w-full h-full bg-gradient-to-br from-blue-600 to-emerald-600 flex items-center justify-center font-black text-white text-xs">
-                                    {siteConfig.siteName.charAt(0)}
+                                    {siteConfig?.siteName?.charAt(0) || 'D'}
                                   </div>
                                 )}
                               </div>
@@ -8783,13 +8794,13 @@ const SidebarMenu: React.FC<{
   onStaffClick: () => void;
   onPaymentClick: () => void;
   onReset: () => void;
+  onSidebarAction: (id: string) => void;
   scrollToSection: (id: string) => void;
   cart: DetailingPackage[];
   onOpenCart: () => void;
-}> = ({ isOpen, onClose, isEditMode, siteConfig, onAdminClick, onAddRecord, onOpenDashboard, onStaffClick, onPaymentClick, onReset, scrollToSection, cart, onOpenCart }) => {
+}> = ({ isOpen, onClose, isEditMode, siteConfig, onAdminClick, onAddRecord, onOpenDashboard, onStaffClick, onPaymentClick, onReset, onSidebarAction, scrollToSection, cart, onOpenCart }) => {
   const handleNav = (id: string) => {
-    scrollToSection(id);
-    onClose();
+    onSidebarAction(id);
   };
 
   return (
@@ -8808,7 +8819,7 @@ const SidebarMenu: React.FC<{
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 left-0 h-full w-[280px] sm:w-[320px] bg-slate-950 border-r border-white/5 z-[160] shadow-2xl flex flex-col"
+            className="fixed top-0 left-0 h-full w-[320px] sm:w-[400px] bg-slate-950 border-r border-white/5 z-[160] shadow-2xl flex flex-col"
           >
             <div className="p-8 border-b border-white/5 flex justify-between items-center bg-slate-900/50">
               <div className="flex items-center gap-3">
@@ -8821,7 +8832,7 @@ const SidebarMenu: React.FC<{
                   />
                 ) : (
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-emerald-600 rounded-lg flex items-center justify-center font-black text-white text-sm">
-                    {siteConfig.siteName.charAt(0)}
+                    {siteConfig?.siteName?.charAt(0) || 'D'}
                   </div>
                 )}
                 <div className="font-black text-2xl tracking-tighter text-white">
@@ -8830,53 +8841,151 @@ const SidebarMenu: React.FC<{
               </div>
               <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">✕</button>
             </div>
-            <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
-              <nav className="space-y-2">
-                <button onClick={() => { window.scrollTo({top: 0, behavior: 'smooth'}); onClose(); }} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🏠 Trang Chủ</button>
-                <button onClick={() => { onOpenCart(); onClose(); }} className="w-full text-left p-4 rounded-2xl bg-blue-600/10 hover:bg-blue-600/20 border border-blue-500/20 transition-all font-bold text-blue-400 flex items-center justify-between group">
-                  <span className="flex items-center gap-3">🛒 Giỏ Hàng Dịch Vụ</span>
+            <div className="flex-1 overflow-y-auto custom-scrollbar text-slate-300">
+              {/* Quick Actions */}
+              <div className="p-6 pb-4">
+                <button 
+                  onClick={() => { onOpenCart(); onClose(); }} 
+                  className="w-full p-6 rounded-[32px] bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white transition-all shadow-2xl shadow-blue-900/40 flex items-center justify-between group active:scale-[0.98] border border-white/10"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-white/20 rounded-2xl group-hover:scale-110 transition-transform text-white backdrop-blur-md">
+                      <ShoppingCart className="w-6 h-6" />
+                    </div>
+                    <span className="font-black uppercase text-xs tracking-[0.2em]">Giỏ Hàng Dịch Vụ</span>
+                  </div>
                   {cart.length > 0 && (
-                    <span className="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full">{cart.length}</span>
+                    <span className="bg-white text-blue-600 text-[10px] font-black w-7 h-7 rounded-full shadow-lg flex items-center justify-center animate-pulse">
+                      {cart.length}
+                    </span>
                   )}
                 </button>
-                <button onClick={() => { onPaymentClick(); onClose(); }} className="w-full text-left p-4 rounded-2xl bg-pink-600/10 hover:bg-pink-600/20 border border-pink-500/20 transition-all font-bold text-pink-400 flex items-center gap-3 group">
-                  💳 Thanh Toán (MoMo/NH)
-                </button>
-                <button onClick={() => handleNav('tracking')} className="w-full text-left p-4 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-white/5 transition-all font-bold text-slate-300 flex items-center justify-between group">
-                  <span className="flex items-center gap-3">⏱️ Theo Dõi Xe</span>
-                  <span className="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">Live</span>
-                </button>
-                <button onClick={() => handleNav('promotions')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🎁 Khuyến Mãi</button>
-                <button onClick={() => handleNav('services')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🛠️ Dịch Vụ</button>
-                <button onClick={() => handleNav('packages')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">📦 Bảng Giá Gói</button>
-                <button onClick={() => handleNav('window-tinting')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🕶️ Dán Phim</button>
-                <button onClick={() => handleNav('wrap-ppf')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🎨 Wrap & PPF</button>
-                <button onClick={() => handleNav('tuning')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🏎️ Độ Xe</button>
-                <button onClick={() => handleNav('premium')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">💎 Giải Pháp Cao Cấp</button>
-                <button onClick={() => handleNav('ai-advisor')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🤖 Cố Vấn AI</button>
-                <button onClick={() => handleNav('news')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">📰 Tin Tức</button>
-                <button onClick={() => handleNav('gallery')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">🖼️ Thư Viện</button>
-                <button onClick={() => handleNav('reviews')} className="w-full text-left p-4 rounded-2xl hover:bg-slate-900 transition-all font-bold text-slate-300 flex items-center gap-3">⭐ Đánh Giá</button>
-                <button onClick={() => { onStaffClick(); onClose(); }} className="w-full text-left p-4 rounded-2xl bg-emerald-600/10 hover:bg-emerald-600/20 border border-emerald-500/20 transition-all font-bold text-emerald-400 flex items-center justify-between group">
-                  <span className="flex items-center gap-3">📋 Phiếu Kiểm Tra Xe</span>
-                  <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">Staff</span>
-                </button>
-              </nav>
-              
-              <div className="pt-10 border-t border-white/5 mt-6 space-y-4">
-                <h4 className="text-[10px] font-black text-slate-600 uppercase tracking-widest px-4 mb-2">Hệ Thống Quản Trị</h4>
-                {isEditMode ? (
-                  <div className="space-y-3">
-                    <div className="bg-blue-600/10 border border-blue-500/20 p-4 rounded-2xl">
-                      <p className="text-[10px] text-blue-400 font-black uppercase mb-3">Chế độ quản trị viên</p>
-                      <button onClick={onOpenDashboard} className="w-full text-left p-3 rounded-xl bg-blue-600 text-white font-bold flex items-center gap-3 text-xs mb-2 shadow-lg shadow-blue-900/20 active:scale-95 transition-all">⚙️ Dashboard Tổng</button>
-                      <button onClick={onAddRecord} className="w-full text-left p-3 rounded-xl bg-slate-800 text-white border border-white/5 font-bold flex items-center gap-3 text-xs mb-2 active:scale-95 transition-all">👤 Quản Lý Khách Hàng</button>
-                    </div>
-                    <button onClick={() => { onAdminClick(); onClose(); }} className="w-full text-center p-4 rounded-2xl bg-slate-900 text-slate-500 font-black text-xs uppercase tracking-widest border border-white/10 hover:text-white transition-all">Đăng Xuất Admin</button>
+              </div>
+
+              {/* Navigation Categories */}
+              <div className="p-6 pt-2 space-y-8">
+                {/* Main Discovery */}
+                <section>
+                  <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4 px-4">Khám Phá Dịch Vụ</h3>
+                  <div className="grid grid-cols-1 gap-1">
+                    {[
+                      { id: 'promotions', label: 'Khuyến Mãi', icon: <Tag className="w-4 h-4" />, color: 'text-rose-500' },
+                      { id: 'services', label: 'Dịch Vụ Standard', icon: <Layers className="w-4 h-4" />, color: 'text-blue-500' },
+                      { id: 'packages', label: 'Gói Chăm Sóc', icon: <Package className="w-4 h-4" />, color: 'text-emerald-500' },
+                      { id: 'premium', label: 'Giải Pháp Premium', icon: <Diamond className="w-4 h-4" />, color: 'text-amber-500' },
+                    ].map((item) => (
+                      <button 
+                        key={item.id}
+                        onClick={() => handleNav(item.id)}
+                        className="w-full flex items-center gap-5 p-5 rounded-[24px] hover:bg-blue-600/10 transition-all group text-left border border-transparent hover:border-blue-500/20"
+                      >
+                        <div className={`p-3 rounded-2xl bg-white/5 group-hover:bg-blue-600/20 group-hover:scale-110 transition-all duration-500 ${item.color}`}>
+                          {React.cloneElement(item.icon as any, { className: 'w-6 h-6' })}
+                        </div>
+                        <span className="font-black text-slate-100 text-lg group-hover:text-blue-400 transition-colors uppercase tracking-tight">{item.label}</span>
+                        <ChevronRight className="w-5 h-5 ml-auto text-slate-700 group-hover:text-blue-500 group-hover:translate-x-2 transition-all" />
+                      </button>
+                    ))}
                   </div>
-                ) : (
-                  <button onClick={() => { onAdminClick(); onClose(); }} className="w-full text-left p-4 rounded-2xl bg-slate-900/50 hover:bg-slate-900 border border-white/10 text-slate-300 font-bold flex items-center gap-3 transition-all active:scale-95">🔐 Đăng Nhập Admin</button>
-                )}
+                </section>
+
+                {/* Technical & Specialties */}
+                <section>
+                  <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4 px-4">Chuyên Sâu & Độ Xe</h3>
+                  <div className="grid grid-cols-1 gap-1">
+                    {[
+                      { id: 'window-tinting', label: 'Dán Phim Cách Nhiệt', icon: <Sun className="w-4 h-4" /> },
+                      { id: 'wrap-ppf', label: 'Wrap & PPF Bảo Vệ', icon: <Shield className="w-4 h-4" /> },
+                      { id: 'tuning', label: 'Nâng Cấp & Độ Xe', icon: <Cpu className="w-4 h-4" /> },
+                      { id: 'ai-advisor', label: 'Trợ Lý AI Advisor', icon: <Bot className="w-4 h-4" />, color: 'text-blue-400' },
+                    ].map((item) => (
+                      <button 
+                        key={item.id}
+                        onClick={() => handleNav(item.id)}
+                        className="w-full flex items-center gap-5 p-5 rounded-[24px] hover:bg-blue-600/10 transition-all group text-left border border-transparent hover:border-blue-500/20"
+                      >
+                        <div className={`p-3 rounded-2xl bg-white/5 group-hover:bg-blue-600/20 group-hover:scale-110 transition-all duration-500 ${item.color || 'text-slate-400'}`}>
+                          {React.cloneElement(item.icon as any, { className: 'w-6 h-6' })}
+                        </div>
+                        <span className="font-black text-slate-100 text-lg group-hover:text-blue-400 transition-colors uppercase tracking-tight">{item.label}</span>
+                        <ChevronRight className="w-5 h-5 ml-auto text-slate-700 group-hover:text-blue-500 group-hover:translate-x-2 transition-all" />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Management & Tools */}
+                <section>
+                  <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4 px-4">Quản Lý & Theo Dõi</h3>
+                  <div className="grid grid-cols-1 gap-1">
+                    {[
+                      { id: 'tracking', label: 'Theo Dõi Trạng Thái', icon: <Timer className="w-4 h-4" /> },
+                      { id: 'news', label: 'Tin Tức & Ưu Đãi', icon: <Newspaper className="w-4 h-4" /> },
+                      { id: 'gallery', label: 'Thư Viện Ảnh', icon: <ImageIcon className="w-4 h-4" /> },
+                      { id: 'reviews', label: 'Đánh Giá Khách Hàng', icon: <MessageSquare className="w-4 h-4" /> },
+                    ].map((item) => (
+                      <button 
+                        key={item.id}
+                        onClick={() => handleNav(item.id)}
+                        className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group text-left border border-transparent hover:border-white/5"
+                      >
+                        <div className="p-2 rounded-xl bg-white/5 group-hover:scale-110 transition-transform text-slate-400">
+                          {item.icon}
+                        </div>
+                        <span className="font-bold text-slate-300 text-sm group-hover:text-white transition-colors">{item.label}</span>
+                        <ChevronRight className="w-3.5 h-3.5 ml-auto text-slate-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Footer Controls */}
+                <section className="pt-4 border-t border-white/5">
+                  <div className="flex flex-col gap-2">
+                    {isEditMode ? (
+                      <div className="p-4 rounded-[32px] bg-blue-600/5 border border-blue-500/20 mb-4">
+                        <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4 px-2">CMS Controls</p>
+                        <div className="grid grid-cols-1 gap-2">
+                          <button onClick={onOpenDashboard} className="w-full flex items-center gap-3 p-3 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-lg active:scale-95 transition-all">
+                            <Settings className="w-4 h-4" /> Dashboard Tổng
+                          </button>
+                          <button onClick={onAddRecord} className="w-full flex items-center gap-3 p-3 rounded-xl bg-slate-800 text-white border border-white/5 font-bold text-xs active:scale-95 transition-all">
+                            <UserIcon className="w-4 h-4" /> Quản Lý Khách Hàng
+                          </button>
+                        </div>
+                      </div>
+                    ) : null}
+
+                    <button 
+                      onClick={() => { onStaffClick(); onClose(); }}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-900 transition-all group text-left"
+                    >
+                      <div className="p-2 rounded-xl bg-white/5 text-slate-400 group-hover:text-white transition-colors">
+                        <Shield className="w-4 h-4" />
+                      </div>
+                      <span className="font-bold text-slate-400 text-xs">Cổng nội bộ Staff</span>
+                    </button>
+
+                    <button 
+                      onClick={() => { onReset(); onClose(); }}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-red-500/10 hover:text-red-500 transition-all group text-left"
+                    >
+                      <div className="p-2 rounded-xl bg-white/5 text-slate-500 group-hover:text-red-500 transition-colors">
+                        <RefreshCw className="w-4 h-4" />
+                      </div>
+                      <span className="font-bold text-slate-500 text-xs group-hover:text-red-500">Khôi phục mặc định</span>
+                    </button>
+                    
+                    {isEditMode && (
+                      <button 
+                        onClick={() => { onAdminClick(); onClose(); }}
+                        className="w-full text-center p-4 rounded-2xl bg-white text-slate-950 font-black text-[10px] uppercase tracking-[0.2em] mt-4 shadow-xl active:scale-95 transition-all"
+                      >
+                        Đăng Xuất Admin
+                      </button>
+                    )}
+                  </div>
+                </section>
               </div>
             </div>
           </motion.div>
@@ -8969,7 +9078,7 @@ const AdminLoginModal: React.FC<{
 
 const translations = {
   vi: {
-    hero_subtitle: "Nghệ Thuật Chăm Sóc Xe",
+    hero_subtitle: "Trung Tâm Chăm Sóc Xe Chuyên Nghiệp",
     hero_title: "XE ĐẸP PRO",
     hero_description: "Trung tâm Detailing & Chăm sóc xe hơi chuyên nghiệp hàng đầu Hà Nội. Chúng tôi mang đến sự hoàn hảo cho xế yêu của bạn.",
     book_now: "Đặt Lịch Ngay",
@@ -9466,87 +9575,90 @@ const translations = {
 
 // CustomerPortal has been moved to its own file.
 
-const TenStepProcess: React.FC = () => {
+const TenStepProcess: React.FC<{t: any}> = ({ t }) => {
+  const [activeTab, setActiveTab] = useState(0);
+  
   const steps = [
-    {
-      title: "Tiếp nhận & Kiểm tra",
-      desc: "Kiểm tra tình trạng xe, ghi nhận các vết xước và yêu cầu của khách hàng.",
-      icon: <ClipboardCheck className="w-6 h-6" />
-    },
-    {
-      title: "Vệ sinh bánh xe & Gầm",
-      desc: "Làm sạch sâu mâm, lốp, hốc bánh và gầm xe bằng dung dịch chuyên dụng.",
-      icon: <Disc className="w-6 h-6" />
-    },
-    {
-      title: "Rửa xe 3 bước tiêu chuẩn",
-      desc: "Loại bỏ bụi bẩn bề mặt bằng phương pháp 2 xô và găng tay lông cừu.",
-      icon: <Waves className="w-6 h-6" />
-    },
-    {
-      title: "Tẩy chất bẩn chuyên sâu",
-      desc: "Sử dụng đất sét (Clay bar) và dung dịch tẩy nhựa đường, mạt sắt.",
-      icon: <Eraser className="w-6 h-6" />
-    },
-    {
-      title: "Che chắn & Bảo vệ",
-      desc: "Băng bó các chi tiết nhựa, cao su và kính trước khi hiệu chỉnh sơn.",
-      icon: <ShieldAlert className="w-6 h-6" />
-    },
-    {
-      title: "Hiệu chỉnh bề mặt sơn",
-      desc: "Đánh bóng 3 bước để loại bỏ vết xước và phục hồi độ bóng gương tuyệt đối.",
-      icon: <Sparkles className="w-6 h-6" />
-    },
-    {
-      title: "Vệ sinh chi tiết ngoại thất",
-      desc: "Làm sạch khe kẽ, logo, lưới tản nhiệt và các chi tiết nhỏ.",
-      icon: <Search className="w-6 h-6" />
-    },
-    {
-      title: "Chăm sóc nội thất",
-      desc: "Hút bụi, lau chùi và dưỡng các bề mặt da, nhựa bên trong xe.",
-      icon: <Armchair className="w-6 h-6" />
-    },
-    {
-      title: "Phủ bảo vệ bề mặt",
-      desc: "Phủ Ceramic hoặc Wax cao cấp để bảo vệ lớp sơn vừa được phục hồi.",
-      icon: <ShieldCheck className="w-6 h-6" />
-    },
-    {
-      title: "Kiểm tra cuối & Bàn giao",
-      desc: "Kiểm tra chất lượng dưới ánh đèn chuyên dụng và bàn giao xe.",
-      icon: <Key className="w-6 h-6" />
-    }
+    { title: 'Kiểm tra & Ghi hình', icon: <CameraIcon className="w-6 h-6" />, desc: 'Ghi nhận tình trạng xe ban đầu chi tiết bằng camera 4K.' },
+    { title: 'Rửa ủ bọt tuyết', icon: <DropletsIcon className="w-6 h-6" />, desc: 'Làm mềm vết bẩn bằng bọt tuyết trung tính PH.' },
+    { title: 'Tẩy ố & Nhựa đường', icon: <TargetIcon className="w-6 h-6" />, desc: 'Xử lý các vết bẩn cứng đầu bằng hóa chất chuyên dụng.' },
+    { title: 'Tẩy sắt & Bay màu', icon: <ZapIcon className="w-6 h-6" />, desc: 'Dùng dung dịch tẩy mạt sắt bám trên bề mặt sơn.' },
+    { title: 'Đất sét (Claying)', icon: <Layers className="w-4 h-4" />, desc: 'Làm mịn bề mặt triệt để bằng đất sét detailing.' },
+    { title: 'Đo độ dày sơn', icon: <ActivityIcon className="w-6 h-6" />, desc: 'Dùng thiết bị điện tử đo độ dày sơn trước khi đánh bóng.' },
+    { title: 'Đánh bóng 3 bước', icon: <Star className="w-6 h-6" />, desc: 'Hiệu chỉnh bề mặt sơn theo chuẩn quốc tế.' },
+    { title: 'Làm sạch sâu khe kẽ', icon: <Brush className="w-6 h-6" />, desc: 'Vệ sinh chi tiết các góc khuất bằng cọ chuyên dụng.' },
+    { title: 'Phủ Bảo Vệ', icon: <Shield className="w-6 h-6" />, desc: 'Phủ Ceramic hoặc Nano bảo vệ lớp sơn hoàn hảo.' },
+    { title: 'Kiểm tra cuối & Bàn giao', icon: <CheckCircle className="w-6 h-6" />, desc: 'Nghiệm thu dưới ánh sáng chuyên dụng trước khi giao xe.' },
   ];
 
   return (
-    <div className="mt-24 sm:mt-32 max-w-7xl mx-auto px-4">
-      <div className="text-center mb-16">
-        <h3 className="text-3xl sm:text-5xl font-black text-white uppercase mb-4 tracking-tight">Quy Trình Chăm Sóc Xe 10 Bước</h3>
-        <p className="text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto">Quy trình chuẩn quốc tế tại XE ĐẸP PRO đảm bảo xế yêu của bạn được chăm sóc tỉ mỉ nhất.</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-        {steps.map((step, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
-            className="relative p-6 rounded-[32px] bg-slate-900/40 border border-white/5 hover:border-blue-500/30 transition-all group"
-          >
-            <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-black text-sm shadow-lg z-10">
-              {idx + 1}
-            </div>
-            <div className="w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform">
-              {step.icon}
-            </div>
-            <h4 className="text-white font-black uppercase text-sm mb-3 tracking-tight leading-tight">{step.title}</h4>
-            <p className="text-slate-500 text-xs leading-relaxed">{step.desc}</p>
-          </motion.div>
-        ))}
+    <div className="mt-32 p-8 sm:p-12 rounded-[40px] bg-slate-900/30 border border-white/5 backdrop-blur-xl">
+      <div className="flex flex-col lg:flex-row gap-12 sm:gap-20">
+        <div className="lg:w-1/3">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-6">
+            <Settings className="w-4 h-4 text-blue-500" />
+            <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">Quy trình 10 bước</span>
+          </div>
+          <h3 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-8">
+            Tiêu chuẩn <span className="text-blue-500">World Class</span>
+          </h3>
+          <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium">
+            Chúng tôi tuân thủ nghiêm ngặt quy trình detailing chuyên nghiệp để đảm bảo mọi chiếc xe đều đạt đến trạng thái hoàn hảo nhất.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {steps.map((_, idx) => (
+              <button 
+                key={idx}
+                onClick={() => setActiveTab(idx)}
+                className={`w-10 h-10 rounded-xl flex items-center justify-center font-black transition-all ${activeTab === idx ? 'bg-blue-600 text-white' : 'bg-white/5 text-slate-500 hover:bg-white/10'}`}
+              >
+                {idx + 1}
+              </button>
+            ))}
+          </div>
+        </div>
+        
+        <div className="lg:w-2/3">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="h-full flex flex-col justify-center bg-slate-950/50 p-8 sm:p-12 rounded-[32px] border border-white/5 relative group overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-12 opacity-5 scale-150 group-hover:scale-110 transition-transform duration-1000">
+                {steps[activeTab].icon}
+              </div>
+              <div className="flex items-center gap-6 mb-8">
+                <div className="w-16 h-16 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-500">
+                  {steps[activeTab].icon}
+                </div>
+                <div>
+                  <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] mb-1 block">Bước 0{activeTab + 1}</span>
+                  <h4 className="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">{steps[activeTab].title}</h4>
+                </div>
+              </div>
+              <p className="text-slate-400 text-lg sm:text-2xl leading-relaxed mb-10 max-w-xl font-light">
+                {steps[activeTab].desc}
+              </p>
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => setActiveTab(prev => (prev > 0 ? prev - 1 : 9))}
+                  className="p-4 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-all active:scale-95"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button 
+                  onClick={() => setActiveTab(prev => (prev < 9 ? prev + 1 : 0))}
+                  className="flex-1 p-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase text-[10px] tracking-widest shadow-xl shadow-blue-900/20 active:scale-95 transition-all"
+                >
+                  Tiếp theo
+                </button>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -9569,6 +9681,7 @@ const HomePage: React.FC<any> = ({
   reminders, setReminders,
   expenses, setExpenses,
   experts, setExperts,
+  user, handleLogin, handleLogout,
   cart, addToCart, removeFromCart, clearCart,
   language, setLanguage,
   theme, setTheme,
@@ -9687,6 +9800,17 @@ const HomePage: React.FC<any> = ({
   const [selectedServiceForModal, setSelectedServiceForModal] = useState<Service | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [preSelectedSubService, setPreSelectedSubService] = useState<string | undefined>(undefined);
+
+  // Auto-CMS Authentication for Firebase Admins
+  useEffect(() => {
+    if (user && user.email === 'pinetwork369@gmail.com') {
+      setIsDesignAuthenticated(true);
+      setIsAccountingAuthenticated(true);
+      setIsSuperAdminAuthenticated(true);
+      setCurrentUserRole('admin');
+      setIsEditMode(true);
+    }
+  }, [user, setIsDesignAuthenticated, setIsAccountingAuthenticated, setIsSuperAdminAuthenticated, setCurrentUserRole, setIsEditMode]);
   
   const { id } = useParams();
   const location = useLocation();
@@ -9889,6 +10013,38 @@ const HomePage: React.FC<any> = ({
 
   const [isAiServiceModalOpen, setIsAiServiceModalOpen] = useState(false);
   const [isAiAdvisorOpen, setIsAiAdvisorOpen] = useState(false);
+  const [isPromotionsModalOpen, setIsPromotionsModalOpen] = useState(false);
+  const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [isReviewsModalOpen, setIsReviewsModalOpen] = useState(false);
+  const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
+  const [isServicesModalOpen, setIsServicesModalOpen] = useState(false);
+  const [isPackagesModalOpen, setIsPackagesModalOpen] = useState(false);
+  const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
+  const [isWindowTintingModalOpen, setIsWindowTintingModalOpen] = useState(false);
+  const [isWrapPpfModalOpen, setIsWrapPpfModalOpen] = useState(false);
+  const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);
+
+  const handleSidebarAction = (id: string) => {
+    setIsSidebarOpen(false);
+    switch(id) {
+      case 'promotions': setIsPromotionsModalOpen(true); break;
+      case 'news': setIsNewsModalOpen(true); break;
+      case 'gallery': setIsGalleryModalOpen(true); break;
+      case 'reviews': setIsReviewsModalOpen(true); break;
+      case 'tracking': setIsTrackingModalOpen(true); break;
+      case 'ai-advisor': setIsAiAdvisorOpen(true); break;
+      case 'ai-analyzer': setIsAiAnalyzerOpen(true); break;
+      case 'services': setIsServicesModalOpen(true); break;
+      case 'packages': setIsPackagesModalOpen(true); break;
+      case 'premium': setIsPremiumModalOpen(true); break;
+      case 'window-tinting': setIsWindowTintingModalOpen(true); break;
+      case 'wrap-ppf': setIsWrapPpfModalOpen(true); break;
+      case 'tuning': setIsTuningModalOpen(true); break;
+      default: scrollToSection(id);
+    }
+  };
+
   const [selectedServiceForAi, setSelectedServiceForAi] = useState<Service | null>(null);
 
   const handleOpenAiServiceChat = (service: Service) => {
@@ -10117,7 +10273,7 @@ const HomePage: React.FC<any> = ({
                   />
                 ) : (
                   <div className={`bg-gradient-to-br from-blue-600 to-emerald-600 rounded-xl flex items-center justify-center font-black text-white shadow-lg shadow-blue-900/20 group-hover:scale-110 transition-all duration-500 ${isScrolled ? 'w-10 h-10 text-xl' : 'w-16 h-16 text-3xl'}`}>
-                    {siteConfig.siteName.charAt(0)}
+                    {siteConfig?.siteName?.charAt(0) || 'D'}
                   </div>
                 )}
                 
@@ -10164,14 +10320,8 @@ const HomePage: React.FC<any> = ({
                 {[
                   { id: 'promotions', label: t('promotions') },
                   { id: 'services', label: t('services') },
-                  { id: 'packages', label: t('packages') },
-                  { id: 'window-tinting', label: 'Dán Phim' },
-                  { id: 'wrap-ppf', label: 'Wrap & PPF' },
-                  { id: 'tuning', label: 'Độ Xe' },
+                  { id: 'premium', label: 'Giải Pháp Premium' },
                   { id: 'ai-advisor', label: t('ai_advisor') },
-                  { id: 'news', label: t('news') },
-                  { id: 'gallery', label: t('gallery') },
-                  { id: 'reviews', label: t('reviews') }
                 ].map((item) => (
                   <button 
                     key={item.id}
@@ -10230,22 +10380,15 @@ const HomePage: React.FC<any> = ({
                 </a>
               </div>
 
-              {!isSuperAdminAuthenticated && !isDesignAuthenticated && !isAccountingAuthenticated && (
-                <button 
-                  onClick={() => setIsLoginModalOpen(true)}
-                  className="p-3 bg-white/5 hover:bg-white/10 text-slate-500 hover:text-white rounded-xl transition-all border border-white/5 active:scale-95"
-                  title="Đăng nhập quản trị"
-                >
-                  <Lock className="w-4 h-4" />
-                </button>
-              )}
-
+              {/* Booking Button */}
               <button 
                 onClick={() => setIsBookingModalOpen(true)}
-                className="relative group overflow-hidden bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 active:shadow-inner"
+                className={`flex items-center gap-1.5 px-3 py-2 sm:px-8 sm:py-3.5 rounded-xl text-[9px] sm:text-[11px] font-black uppercase tracking-widest transition-all shadow-xl active:scale-95 z-10 ${
+                  isScrolled ? 'bg-blue-600 text-white shadow-blue-900/40' : 'bg-white/10 text-white backdrop-blur-md border border-white/10 hover:bg-white/20'
+                }`}
               >
-                <span className="relative z-10">{t('book_now')}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span>{t('book_now')}</span>
               </button>
             </div>
           </div>
@@ -10281,6 +10424,7 @@ const HomePage: React.FC<any> = ({
           localStorage.clear();
           window.location.reload();
         }}
+        onSidebarAction={handleSidebarAction}
         scrollToSection={scrollToSection}
         cart={cart}
         onOpenCart={() => setShowNotifications(true)}
@@ -10379,7 +10523,7 @@ const HomePage: React.FC<any> = ({
                     onSave={v => setSiteConfig({...siteConfig, heroTitle: v})}
                     multiline 
                     label="Tiêu đề chính của trang chủ (Hero Title)"
-                    className="hero-title-highlight text-6xl sm:text-9xl lg:text-[10rem] font-black uppercase tracking-[ -0.05em] mb-4 leading-[0.75]"
+                    className="hero-title-highlight text-5xl sm:text-9xl lg:text-[13rem] font-black uppercase tracking-[-0.04em] mb-4 leading-[0.8] whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20 select-none drop-shadow-[0_20px_100px_rgba(59,130,246,0.8)] filter drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
                   />
                 </motion.div>
               </div>
@@ -10880,7 +11024,7 @@ const HomePage: React.FC<any> = ({
               </motion.div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 auto-rows-auto sm:auto-rows-[550px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-auto sm:auto-rows-[450px]">
               {(services || [])
                 .filter(s => {
                   const matchesCategory = serviceCategory === 'all' || s.category === serviceCategory;
@@ -10889,9 +11033,6 @@ const HomePage: React.FC<any> = ({
                   return matchesCategory && matchesSearch;
                 })
                 .map((s, idx) => {
-                  // Bento Grid Logic: First item and every 5th item spans 2 columns on large screens
-                  const isLarge = idx === 0 || idx === 4;
-                  
                   return (
                     <motion.div 
                       initial={{ opacity: 0, y: 30 }}
@@ -10899,9 +11040,7 @@ const HomePage: React.FC<any> = ({
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.1 }}
                       key={s.id} 
-                      className={`group relative bg-white/[0.02] backdrop-blur-2xl border border-white/5 rounded-[40px] sm:rounded-[80px] overflow-hidden hover:border-blue-500/40 hover:shadow-[0_40px_100px_rgba(0,0,0,0.8)] transition-all duration-1000 flex flex-col ${
-                        isLarge ? 'lg:col-span-2' : 'lg:col-span-1'
-                      }`}
+                      className="group relative bg-white/[0.02] backdrop-blur-2xl border border-white/5 rounded-[40px] overflow-hidden hover:border-blue-500/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 flex flex-col"
                     >
                       <div className="relative h-full overflow-hidden">
                         <EditableImage 
@@ -10910,40 +11049,23 @@ const HomePage: React.FC<any> = ({
                           isDesignAuthenticated={isDesignAuthenticated}
                           onUpload={base64 => setServices((services || []).map(ser => ser.id === s.id ? {...ser, image: base64} : ser))}
                           alt={s.title}
-                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                          className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
                         />
                         
-                        {/* Interactive Overlay (Before/After vibe) */}
-                        <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-px h-full bg-white/30 relative">
-                              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
-                                <Zap className="w-5 h-5 text-white animate-pulse" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {['ppf', 'wrap', 'tuning', 'underbody'].includes(s.id) && (
-                          <div className="absolute top-8 right-8 z-20">
-                            <div className="bg-emerald-500 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-xl animate-pulse">{t('new_service')}</div>
-                          </div>
-                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
                         
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-                        
-                        <div className="absolute inset-0 p-8 sm:p-16 flex flex-col justify-end">
-                          <div className="flex justify-between items-end mb-6 sm:mb-8">
-                            <div className="bg-white/5 backdrop-blur-2xl p-4 sm:p-7 rounded-[28px] sm:rounded-[48px] border border-white/10 shadow-2xl">
+                        <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                          <div className="flex justify-between items-center mb-4">
+                            <div className="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
                               <EditableText 
                                 text={s.icon} 
                                 isEditMode={isEditMode} 
                                 isDesignAuthenticated={isDesignAuthenticated}
                                 onSave={v => setServices((services || []).map(ser => ser.id === s.id ? {...ser, icon: v} : ser))}
-                                className="text-3xl sm:text-4xl"
+                                className="text-xl"
                               />
                             </div>
-                            <div className="bg-white/5 backdrop-blur-2xl border border-white/10 text-blue-400 px-8 py-4 rounded-2xl sm:rounded-3xl font-mono font-bold text-sm sm:text-xl shadow-2xl">
+                            <div className="text-blue-400 font-mono font-black text-sm">
                               <EditableText 
                                 text={s.price} 
                                 isEditMode={isEditMode} 
@@ -10954,53 +11076,43 @@ const HomePage: React.FC<any> = ({
                           </div>
 
                           <div className="relative">
-                            {/* Decorative Number */}
-                            <div className="absolute -top-6 sm:-top-10 right-0 text-5xl sm:text-9xl font-black text-white/10 pointer-events-none select-none italic">
-                              0{idx + 1}
-                            </div>
-
-                            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-6 group/title">
-                              <span className="text-lg sm:text-2xl group-hover/title:scale-110 transition-transform duration-500">{s.icon}</span>
-                              <EditableText 
-                                tag="h3" 
-                                text={s.title} 
-                                isEditMode={isEditMode} 
-                                isDesignAuthenticated={isDesignAuthenticated}
-                                onSave={v => setServices((services || []).map(ser => ser.id === s.id ? {...ser, title: v} : ser))}
-                                className="text-xl sm:text-4xl font-black text-white uppercase tracking-tighter leading-tight group-hover:text-blue-500 transition-colors duration-500"
-                              />
-                            </div>
+                            <EditableText 
+                              tag="h3" 
+                              text={s.title} 
+                              isEditMode={isEditMode} 
+                              isDesignAuthenticated={isDesignAuthenticated}
+                              onSave={v => setServices((services || []).map(ser => ser.id === s.id ? {...ser, title: v} : ser))}
+                              className="text-xl font-black text-white uppercase tracking-tight leading-tight mb-3 group-hover:text-blue-500 transition-colors"
+                            />
                             
-                            <div className="max-h-20 sm:max-h-0 group-hover:max-h-60 overflow-hidden transition-all duration-1000 ease-in-out">
+                            <div className="max-h-12 overflow-hidden mb-6">
                               <EditableText 
                                 text={s.description} 
                                 isEditMode={isEditMode} 
                                 isDesignAuthenticated={isDesignAuthenticated}
                                 onSave={v => setServices((services || []).map(ser => ser.id === s.id ? {...ser, description: v} : ser))}
                                 multiline
-                                className="text-slate-400 text-xs sm:text-lg leading-relaxed font-light mb-6 sm:mb-8 opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-1000 line-clamp-2 sm:line-clamp-none"
+                                className="text-slate-400 text-[10px] leading-relaxed font-medium line-clamp-2"
                               />
                             </div>
 
-                            <div className="flex items-center justify-between pt-6 sm:pt-8 border-t border-white/5">
-                              <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
-                                <motion.button 
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  onClick={() => setSelectedServiceForModal(s)}
-                                  className="btn-primary py-2.5 sm:py-3 px-5 sm:px-8 flex-1 sm:flex-none text-[10px] sm:text-xs font-black uppercase tracking-widest"
-                                >
-                                  {t('view_details')}
-                                </motion.button>
-                                <motion.button 
-                                  whileHover={{ scale: 1.1, rotate: 10 }}
-                                  whileTap={{ scale: 0.9 }}
-                                  onClick={() => handleOpenAiServiceChat(s)}
-                                  className="btn-secondary py-2.5 sm:py-3 px-5 sm:px-6 text-blue-500"
-                                >
-                                  <Sparkles className="w-4 h-4" />
-                                </motion.button>
-                              </div>
+                            <div className="flex items-center gap-3">
+                              <motion.button 
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setSelectedServiceForModal(s)}
+                                className="bg-blue-600 text-white py-2.5 px-6 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg active:scale-95 transition-all"
+                              >
+                                {t('view_details')}
+                              </motion.button>
+                              <motion.button 
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => handleOpenAiServiceChat(s)}
+                                className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-blue-500"
+                              >
+                                <Sparkles className="w-4 h-4" />
+                              </motion.button>
                             </div>
                           </div>
                         </div>
@@ -11016,140 +11128,105 @@ const HomePage: React.FC<any> = ({
           <div className="divider-premium"></div>
         </div>
 
-        {/* Why Choose Us Section */}
-        <section className="py-24 bg-slate-900/50 relative overflow-hidden">
+        {/* Consolidated Trust & Experts Section */}
+        <section id="experts" className="py-24 bg-slate-900/30 relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-6"
-                >
-                  <ShieldCheck className="w-4 h-4 text-blue-500" />
-                  <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">Tại sao chọn chúng tôi?</span>
-                </motion.div>
-                <h2 className="section-title text-5xl mb-8 leading-none">
-                  Sự Khác Biệt Tại <span className="text-blue-500">XE ĐẸP PRO</span>
-                </h2>
-                <p className="text-slate-400 text-lg mb-12 max-w-xl leading-relaxed">
-                  Chúng tôi không chỉ chăm sóc xe, chúng tôi kiến tạo những tác phẩm nghệ thuật trên bánh xe. Với quy trình Detailing chuẩn quốc tế và đội ngũ chuyên gia tận tâm.
-                </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+              {/* Left Side: Why Choose Us (4 cols) */}
+              <div className="lg:col-span-5 space-y-12">
+                <div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-6"
+                  >
+                    <ShieldCheck className="w-4 h-4 text-blue-500" />
+                    <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">Sự Khác Biệt</span>
+                  </motion.div>
+                  <h2 className="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6">
+                    Tại sao chọn <span className="text-blue-500">Chúng Tôi?</span>
+                  </h2>
+                  <p className="text-slate-400 text-sm leading-relaxed max-w-lg mb-10">
+                    Chúng tôi kiến tạo những tác phẩm nghệ thuật trên bánh xe với quy trình Detailing chuẩn quốc tế.
+                  </p>
+                </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
-                    { title: 'Công Nghệ Hiện Đại', desc: 'Sử dụng các thiết bị và hóa chất cao cấp nhất từ Đức và Mỹ.', icon: '⚡' },
-                    { title: 'Chuyên Gia Tận Tâm', desc: 'Đội ngũ kỹ thuật viên được đào tạo bài bản, giàu kinh nghiệm.', icon: '👨‍🔧' },
-                    { title: 'Bảo Hành Dài Hạn', desc: 'Cam kết chất lượng với chế độ bảo hành điện tử minh bạch.', icon: '📜' },
-                    { title: 'Dịch Vụ Tận Nơi', desc: 'Hỗ trợ giao nhận xe tại nhà, tiết kiệm thời gian cho khách hàng.', icon: '🚚' }
+                    { title: 'Công Nghệ', icon: '⚡' },
+                    { title: 'Chuyên Gia', icon: '👨‍🔧' },
+                    { title: 'Bảo Hành', icon: '📜' },
+                    { title: 'Dịch Vụ', icon: '🚚' }
                   ].map((item, i) => (
-                    <div key={i} className="group">
-                      <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-500">{item.icon}</div>
-                      <h4 className="text-white font-black uppercase tracking-tight mb-2">{item.title}</h4>
-                      <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-                    </div>
+                    <motion.div 
+                      key={i}
+                      whileHover={{ x: 5 }}
+                      className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-4 group"
+                    >
+                      <div className="text-2xl group-hover:scale-110 transition-transform">{item.icon}</div>
+                      <h4 className="text-white font-black uppercase text-[10px] tracking-widest">{item.title}</h4>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
-              
-              <div className="relative group">
-                <div className="absolute -inset-4 bg-gradient-to-br from-blue-600/20 to-emerald-600/20 rounded-[60px] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                <div className="relative rounded-[60px] overflow-hidden border border-white/10 shadow-2xl">
-                  <img 
+
+                <div className="relative rounded-[40px] overflow-hidden border border-white/10 aspect-video group">
+                   <img 
                     src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&q=80&w=1200" 
-                    alt="Detailing Process" 
+                    alt="Detailing" 
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
-                  <div className="absolute bottom-12 left-12 right-12">
-                    <div className="flex items-center gap-6">
-                      <div className="w-20 h-20 rounded-3xl bg-blue-600 flex items-center justify-center text-white text-3xl font-black shadow-2xl">10+</div>
-                      <div>
-                        <p className="text-white font-black text-2xl uppercase tracking-tighter">Năm Kinh Nghiệm</p>
-                        <p className="text-slate-400 text-sm font-bold uppercase tracking-widest">Trong ngành Detailing</p>
-                      </div>
-                    </div>
+                  <div className="absolute bottom-6 left-6 flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white text-xl font-black">10+</div>
+                    <span className="text-white font-black text-xs uppercase tracking-tighter">Năm Kinh Nghiệm</span>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Technician Spotlight Section */}
-        {/* Experts Section */}
-        <section id="experts" className="py-32 sm:py-48 bg-transparent relative overflow-hidden">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-20 sm:mb-32">
-              <div className="max-w-2xl">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="inline-flex items-center gap-4 px-6 py-2 rounded-full bg-blue-600/5 border border-blue-500/10 mb-8"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                  <EditableText 
-                    text={siteConfig.expertsSubtitle} 
-                    isEditMode={isEditMode} 
-                    isDesignAuthenticated={isDesignAuthenticated}
-                    onSave={v => setSiteConfig({...siteConfig, expertsSubtitle: v})}
-                    label="Tiêu đề phụ cho mục Chuyên gia"
-                    className="section-subtitle mb-0"
-                  />
-                </motion.div>
-                <EditableText 
-                  tag="h2"
-                  text={siteConfig.expertsTitle} 
-                  isEditMode={isEditMode} 
-                  isDesignAuthenticated={isDesignAuthenticated}
-                  onSave={v => setSiteConfig({...siteConfig, expertsTitle: v})}
-                  label="Tiêu đề chính cho mục Chuyên gia"
-                  className="section-title text-5xl md:text-8xl leading-[0.85]"
-                />
+              {/* Right Side: Experts (8 cols) */}
+              <div className="lg:col-span-7">
+                <div className="flex flex-col sm:flex-row justify-between items-end gap-6 mb-12">
+                   <div className="max-w-md">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/10 border border-blue-500/10 mb-4 items-center">
+                      <div className="w-1 h-1 rounded-full bg-blue-500"></div>
+                      <span className="text-[8px] font-black uppercase tracking-widest text-blue-500">Đội Ngũ Chuyên Gia</span>
+                    </div>
+                    <h2 className="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-4">Master <span className="text-blue-500">Detailers</span></h2>
+                  </div>
+                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">3 Thành viên chủ chốt</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  {(experts || []).map((tech, idx) => (
+                    <motion.div
+                      key={idx}
+                      whileHover={{ y: -5 }}
+                      className="group relative"
+                    >
+                      <div className="aspect-[4/5] rounded-[32px] overflow-hidden relative mb-6 border border-white/10 shadow-2xl">
+                        <img src={tech.img} alt={tech.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" loading="lazy" referrerPolicy="no-referrer" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90 group-hover:opacity-40 transition-opacity" />
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <p className="text-[8px] font-black text-blue-500 uppercase tracking-widest mb-1">{tech.role}</p>
+                          <h4 className="text-lg font-black text-white uppercase tracking-tight leading-none">{tech.name}</h4>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between px-2">
+                        <div className="flex flex-col">
+                          <span className="text-[7px] font-black text-slate-600 uppercase tracking-widest mb-1">KN</span>
+                          <span className="text-xs font-bold text-white font-mono">{tech.exp}</span>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <span className="text-[7px] font-black text-slate-600 uppercase tracking-widest mb-1">CERT</span>
+                          <span className="text-xs font-bold text-blue-500 font-mono italic">{tech.cert}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-              <motion.p 
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-slate-400 font-light max-w-sm text-lg leading-relaxed"
-              >
-                Mỗi kỹ thuật viên tại Dũng Car Detailing đều được đào tạo bài bản và sở hữu các chứng chỉ quốc tế về chăm sóc xe chuyên nghiệp.
-              </motion.p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-16">
-              {(experts || []).map((tech, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group relative"
-                >
-                  <div className="aspect-[3/4] rounded-[60px] overflow-hidden relative mb-10 shadow-[0_40px_80px_rgba(0,0,0,0.6)] border border-white/5">
-                    <img src={tech.img} alt={tech.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" loading="lazy" referrerPolicy="no-referrer" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-40 transition-opacity" />
-                    <div className="absolute bottom-10 left-10 right-10">
-                      <p className="section-subtitle text-blue-500 mb-2">{tech.role}</p>
-                      <h4 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tighter leading-none">{tech.name}</h4>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between px-8">
-                    <div className="flex flex-col">
-                      <span className="label-premium mb-1">Kinh nghiệm</span>
-                      <span className="text-lg font-bold text-white font-mono">{tech.exp}</span>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <span className="label-premium mb-1">Chứng chỉ</span>
-                      <span className="text-lg font-bold text-blue-500 font-mono">{tech.cert}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
             </div>
           </div>
         </section>
@@ -11264,7 +11341,7 @@ const HomePage: React.FC<any> = ({
                 </motion.div>
               ))}
             </div>
-            <TenStepProcess />
+            <TenStepProcess t={t} />
           </div>
         </section>
 
@@ -12473,7 +12550,7 @@ const HomePage: React.FC<any> = ({
                   />
                 ) : (
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-emerald-600 rounded-2xl flex items-center justify-center font-black text-white text-3xl shadow-lg shadow-blue-900/20">
-                    {siteConfig.siteName.charAt(0)}
+                    {siteConfig?.siteName?.charAt(0) || 'D'}
                   </div>
                 )}
                 <h3 className="text-lg font-black text-white uppercase tracking-tighter">
@@ -12787,6 +12864,9 @@ const HomePage: React.FC<any> = ({
         isPrivacyMode={isPrivacyMode}
         onTogglePrivacy={togglePrivacyMode}
         notificationsCount={notifications.filter(n => !n.isRead).length}
+        cloudUser={user}
+        onCloudLogin={handleLogin}
+        onCloudLogout={handleLogout}
       />
 
       <AnimatePresence>
@@ -12799,6 +12879,392 @@ const HomePage: React.FC<any> = ({
           />
         )}
       </AnimatePresence>
+
+      {/* Generic Modals for Sidebar Actions */}
+      <GenericContentModal 
+        isOpen={isPromotionsModalOpen} 
+        onClose={() => setIsPromotionsModalOpen(false)} 
+        title="Chương Trình Khuyến Mãi"
+      >
+        <PromotionsSection 
+          siteConfig={siteConfig} 
+          isEditMode={false} 
+          isDesignAuthenticated={false} 
+          setSiteConfig={setSiteConfig} 
+        />
+      </GenericContentModal>
+
+      <GenericContentModal 
+        isOpen={isNewsModalOpen} 
+        onClose={() => setIsNewsModalOpen(false)} 
+        title="Tin Tức & Hoạt Động"
+      >
+        <NewsSection 
+          siteConfig={siteConfig} 
+          isEditMode={false} 
+          setSiteConfig={setSiteConfig}
+          selectedArticle={selectedArticle}
+          setSelectedArticle={setSelectedArticle}
+        />
+      </GenericContentModal>
+
+      <GenericContentModal 
+        isOpen={isGalleryModalOpen} 
+        onClose={() => setIsGalleryModalOpen(false)} 
+        title="Thư Viện Ảnh"
+      >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {(gallery || []).map((img, idx) => (
+            <div key={img.id} className="aspect-square rounded-3xl overflow-hidden border border-white/5 shadow-xl">
+              <img src={img.url} alt={img.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            </div>
+          ))}
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal 
+        isOpen={isReviewsModalOpen} 
+        onClose={() => setIsReviewsModalOpen(false)} 
+        title="Đánh Giá Khách Hàng"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {(reviews || []).map((rev, idx) => (
+            <div key={rev.id} className="p-8 rounded-[32px] bg-slate-900/50 border border-white/5 space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-500 font-black">
+                  {(rev.name || 'H').charAt(0)}
+                </div>
+                <div>
+                  <h4 className="text-white font-black uppercase text-xs">{rev.name}</h4>
+                  <div className="flex text-amber-500">
+                    {[1,2,3,4,5].map(s => <Star key={s} className={`w-3 h-3 ${s <= rev.rating ? 'fill-current' : 'opacity-20'}`} />)}
+                  </div>
+                </div>
+              </div>
+              <p className="text-slate-400 text-sm leading-relaxed italic">"{rev.comment}"</p>
+            </div>
+          ))}
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal
+        isOpen={isServicesModalOpen}
+        onClose={() => setIsServicesModalOpen(false)}
+        title={siteConfig.servicesTitle}
+      >
+        <div className="space-y-12 pb-24">
+          <div className="flex flex-col sm:flex-row gap-6 w-full max-w-4xl mx-auto mb-16">
+            <div className="relative flex-1 group">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-focus-within:text-blue-500 transition-colors" />
+              <input 
+                type="text" 
+                placeholder={t('search_placeholder')}
+                value={serviceSearch}
+                onChange={(e) => setServiceSearch(e.target.value)}
+                className="w-full bg-white/[0.03] border border-white/5 rounded-3xl py-5 pl-16 pr-8 text-white text-base focus:outline-none focus:border-blue-500/50 transition-all backdrop-blur-md"
+              />
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-4 sm:pb-0 custom-scrollbar">
+              {['all', 'exterior', 'interior', 'protection', 'tuning'].map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setServiceCategory(cat)}
+                  className={`px-8 py-5 rounded-3xl text-[11px] font-black uppercase tracking-[0.2em] transition-all whitespace-nowrap border ${
+                    serviceCategory === cat 
+                    ? 'bg-blue-600 text-white border-blue-500 shadow-[0_10px_30px_rgba(59,130,246,0.3)]' 
+                    : 'bg-white/5 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  {t(`cat_${cat}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {(services || [])
+              .filter(s => {
+                const matchesCategory = serviceCategory === 'all' || s.category === serviceCategory;
+                const matchesSearch = s.title.toLowerCase().includes(serviceSearch.toLowerCase()) || 
+                                    s.description.toLowerCase().includes(serviceSearch.toLowerCase());
+                return matchesCategory && matchesSearch;
+              })
+              .map((s, idx) => (
+                <motion.div 
+                  key={s.id}
+                  layout
+                  className="group relative bg-white/[0.02] backdrop-blur-2xl border border-white/5 rounded-[40px] overflow-hidden hover:border-blue-500/40 transition-all duration-700 flex flex-col min-h-[400px]"
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <img src={s.image} alt={s.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" referrerPolicy="no-referrer" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
+                    <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
+                      <span className="text-xl">{s.icon}</span>
+                    </div>
+                  </div>
+                  <div className="p-8 flex-1 flex flex-col">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-black text-white uppercase tracking-tight leading-tight group-hover:text-blue-500 transition-colors">{s.title}</h3>
+                      <div className="text-blue-400 font-mono font-black text-sm">{s.price}</div>
+                    </div>
+                    <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-1 line-clamp-3">{s.description}</p>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button 
+                        onClick={() => { setSelectedServiceForModal(s); setIsBookingModalOpen(true); }}
+                        className="flex-1 py-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase text-[10px] tracking-[0.2em] transition-all shadow-lg shadow-blue-900/40 active:scale-95"
+                      >
+                        {t('book_now')}
+                      </button>
+                      <button 
+                        onClick={() => setSelectedServiceForModal(s)}
+                        className="flex-1 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/5 font-black uppercase text-[10px] tracking-[0.2em] transition-all active:scale-95"
+                      >
+                        {t('see_details')}
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+          </div>
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal
+        isOpen={isPackagesModalOpen}
+        onClose={() => setIsPackagesModalOpen(false)}
+        title={t('comprehensive_care_package')}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-24">
+          {(siteConfig.packages || []).map((pkg, idx) => (
+            <div
+              key={pkg.id}
+              className={`relative p-8 rounded-[40px] border transition-all duration-500 flex flex-col ${
+                pkg.isPopular 
+                ? 'bg-blue-600/15 border-blue-500/50 shadow-2xl scale-105 z-10' 
+                : 'bg-slate-900/40 border-white/5'
+              }`}
+            >
+              {pkg.isPopular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl">
+                  {t('most_popular')}
+                </div>
+              )}
+              <div className="mb-8">
+                <h3 className="text-2xl font-black text-white uppercase mb-2 tracking-tight">{pkg.title}</h3>
+                <p className="text-slate-400 text-xs leading-relaxed h-12 overflow-hidden">{pkg.description}</p>
+              </div>
+              <div className="mb-8">
+                <div className="text-4xl font-black text-white mb-1">{pkg.price}</div>
+                <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+                  <Clock className="w-3 h-3" />
+                  {t('execution_time')}: {pkg.duration}
+                </div>
+              </div>
+              <div className="flex-1 space-y-4 mb-10">
+                {(pkg.features || []).map((feature, fIdx) => (
+                  <div key={fIdx} className="flex items-start gap-3">
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${pkg.isPopular ? 'bg-blue-500/20' : 'bg-emerald-500/20'}`}>
+                      <Check className={`w-3 h-3 ${pkg.isPopular ? 'text-blue-500' : 'text-emerald-500'}`} />
+                    </div>
+                    <span className="text-slate-300 text-sm font-medium">{feature}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-4">
+                <button 
+                  onClick={() => { setSelectedPackageForModal(pkg); setIsBookingModalOpen(true); }}
+                  className={`w-full py-5 rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] transition-all active:scale-95 ${
+                    pkg.isPopular ? 'bg-blue-600 text-white shadow-xl shadow-blue-900/40' : 'bg-white text-slate-950'
+                  }`}
+                >
+                  {t('book_now_package')}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal
+        isOpen={isPremiumModalOpen}
+        onClose={() => setIsPremiumModalOpen(false)}
+        title={siteConfig.premiumTitle}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-24">
+          {(premiumSolutions || []).map((sol, idx) => (
+            <div key={sol.id} className="group relative bg-slate-900/60 border border-white/5 rounded-[40px] overflow-hidden hover:border-amber-500/30 transition-all duration-700">
+              <div className="h-64 overflow-hidden">
+                <img src={sol.image} alt={sol.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" referrerPolicy="no-referrer" />
+              </div>
+              <div className="p-10">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-500">
+                    <Diamond className="w-6 h-6" />
+                  </div>
+                  <div className="text-amber-500 font-mono font-black">{sol.price}</div>
+                </div>
+                <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-4 group-hover:text-amber-500 transition-colors">{sol.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-8">{sol.description}</p>
+                <button 
+                  onClick={() => {
+                    setAiInput(`Tôi muốn được tư vấn chuyên sâu về giải pháp Premium: "${sol.title}". ${sol.description}`);
+                    setIsAiServiceModalOpen(true);
+                  }}
+                  className="w-full py-5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-black uppercase text-[10px] tracking-[0.2em] transition-all shadow-xl shadow-amber-900/20 active:scale-95 flex items-center justify-center gap-3"
+                >
+                  <Bot className="w-4 h-4" /> {t('ai_expert_consult')}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal
+        isOpen={isWindowTintingModalOpen}
+        onClose={() => setIsWindowTintingModalOpen(false)}
+        title="Dán Phim Cách Nhiệt 3M Crystal"
+      >
+        <div className="max-w-4xl mx-auto space-y-12 pb-24">
+          <div className="p-10 rounded-[40px] bg-slate-900/80 border border-white/5 space-y-8">
+            <div className="flex flex-col sm:flex-row items-center gap-8">
+              <div className="w-24 h-24 rounded-3xl bg-blue-600/10 flex items-center justify-center text-blue-500 shrink-0">
+                <Sun className="w-12 h-12" />
+              </div>
+              <div className="space-y-4 text-center sm:text-left">
+                <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Công Nghệ Phim 3M Quang Học</h3>
+                <p className="text-slate-400 leading-relaxed italic">Giải pháp tối ưu cho sự thoải mái và riêng tư tuyệt đối bên trong khoang cabin.</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                { label: "Cản tia hồng ngoại (IR)", value: "97%" },
+                { label: "Cản tia cực tím (UV)", value: "99.9%" },
+                { label: "Số lớp phim quang học", value: "200+" },
+                { label: "Bảo hành điện tử", value: "10 Năm" }
+              ].map((stat, i) => (
+                <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/5 flex flex-col justify-center">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{stat.label}</div>
+                  <div className="text-2xl font-black text-white">{stat.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+             <button onClick={() => { setIsBookingModalOpen(true); setIsWindowTintingModalOpen(false); }} className="p-8 rounded-[32px] bg-blue-600 text-white font-black uppercase text-xs tracking-widest shadow-xl hover:bg-blue-500 transition-all active:scale-95">Đặt Lịch Dán Phim Ngay</button>
+             <button onClick={() => { setIsAiAdvisorOpen(true); setIsWindowTintingModalOpen(false); }} className="p-8 rounded-[32px] bg-white/5 text-white border border-white/10 font-black uppercase text-xs tracking-widest hover:bg-white/10 transition-all active:scale-95">Tư Vấn Thông Số Với AI</button>
+          </div>
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal
+        isOpen={isWrapPpfModalOpen}
+        onClose={() => setIsWrapPpfModalOpen(false)}
+        title="Wrap Đổi Màu & Phủ PPF Bảo Vệ"
+      >
+        <div className="max-w-4xl mx-auto space-y-12 pb-24">
+          <div className="aspect-video rounded-[40px] overflow-hidden relative group">
+            <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&q=80&w=1200" alt="PPF Protection" className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" referrerPolicy="no-referrer" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+            <div className="absolute bottom-10 left-10 right-10">
+              <div className="inline-block px-6 py-2 rounded-full bg-blue-600 text-white font-black text-[10px] uppercase tracking-widest mb-4">Ultimate Protection</div>
+              <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Áo Giáp Tàng Hình Cho Xe</h3>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <h4 className="text-xl font-black text-white uppercase tracking-tight flex items-center gap-3">
+                 <Shield className="w-5 h-5 text-blue-500" /> PPF (Paint Protection Film)
+              </h4>
+              <ul className="space-y-4">
+                {[
+                  "Tự chữa lành vết xước răm (Self-healing)",
+                  "Chống đá văng, va chạm nhẹ",
+                  "Khả năng kháng nước, kháng ố (Hydrophobic)",
+                  "Giữ độ bóng gương lên đến 7 năm"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-slate-400 text-sm">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-6">
+              <h4 className="text-xl font-black text-white uppercase tracking-tight flex items-center gap-3">
+                 <Palette className="w-5 h-5 text-purple-500" /> Wrap Color Change
+              </h4>
+              <ul className="space-y-4">
+                {[
+                  "Hơn 300+ màu sắc xu hướng từ Teckwrap, 3M, Avery Denisson",
+                  "Thời gian hoàn thiện nhanh chóng (2-3 ngày)",
+                  "Dễ dàng tháo bỏ, không ảnh hưởng sơn zin",
+                  "Được thi công bởi nghệ nhân Wrap hàng đầu"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-slate-400 text-sm">
+                    <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal
+        isOpen={isTuningModalOpen}
+        onClose={() => setIsTuningModalOpen(false)}
+        title="Nâng Cấp & Cá Nhân Hóa Xe"
+      >
+        <div className="max-w-4xl mx-auto pb-24 space-y-12">
+          <div className="p-12 rounded-[48px] bg-gradient-to-br from-slate-900 to-slate-950 border border-white/5">
+             <div className="flex flex-col gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                   {[
+                     { icon: <Cpu className="w-6 h-6" />, label: "Hiệu năng", val: "Performance Tuning" },
+                     { icon: <Disc className="w-6 h-6" />, label: "Ngoại thất", val: "Body Kits & Rims" },
+                     { icon: <Music className="w-6 h-6" />, label: "Âm thanh", val: "Hi-End Audio System" }
+                   ].map((item, i) => (
+                     <div key={i} className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 space-y-4 text-center">
+                        <div className="mx-auto w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-500">{item.icon}</div>
+                        <div>
+                          <div className="text-[10px] font-black uppercase text-slate-500 mb-1">{item.label}</div>
+                          <div className="text-white font-bold text-xs">{item.val}</div>
+                        </div>
+                     </div>
+                   ))}
+                </div>
+                <p className="text-slate-400 text-center leading-relaxed max-w-2xl mx-auto italic">
+                  Chúng tôi không chỉ độ xe; chúng tôi kiến tạo những tác phẩm nghệ thuật di động mang đậm cá tính riêng của chủ sở hữu.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                   <button onClick={() => { setIsAiAdvisorOpen(true); setIsTuningModalOpen(false); }} className="px-12 py-5 rounded-3xl bg-blue-600 text-white font-black uppercase text-xs tracking-widest shadow-xl active:scale-95 transition-all">Lên Bản Vẽ Với AI Advisor</button>
+                </div>
+             </div>
+          </div>
+        </div>
+      </GenericContentModal>
+
+      <GenericContentModal 
+        isOpen={isTrackingModalOpen} 
+        onClose={() => setIsTrackingModalOpen(false)} 
+        title="Theo Dõi Trạng Thái Dịch Vụ"
+      >
+        <div className="max-w-4xl mx-auto">
+           <CustomerPortalComponent 
+             customerRecords={customerRecords}
+             certificates={eCertificates}
+             inspections={inspections}
+             loyaltyConfig={siteConfig.loyaltyConfig || DEFAULT_SITE_CONFIG.loyaltyConfig!}
+             siteConfig={siteConfig}
+             setSiteConfig={setSiteConfig}
+             handlePayment={handlePayment}
+             scrollToSection={scrollToSection}
+             t={t}
+           />
+        </div>
+      </GenericContentModal>
 
       <AdminDashboardModal 
         isOpen={isDashboardOpen} 
@@ -12952,7 +13418,7 @@ const HomePage: React.FC<any> = ({
         )}
       </AnimatePresence>
       <AiVehicleAnalyzer isOpen={isAiAnalyzerOpen} onClose={() => setIsAiAnalyzerOpen(false)} addToCart={addToCart} t={t} />
-      <LiveBookingTicker />
+      {/* <LiveBookingTicker /> */}
       <StickyContactBar 
         siteConfig={siteConfig} 
         onInspectionClick={() => {
@@ -13006,6 +13472,12 @@ const App: React.FC = () => {
         }
         if (parsed.accountingLockPassword === "132416118" || parsed.accountingLockPassword === "025099010538" || parsed.accountingLockPassword === "0588896699" || parsed.accountingLockPassword === "") {
           parsed.accountingLockPassword = DEFAULT_SITE_CONFIG.accountingLockPassword;
+        }
+        if (parsed.heroTitle === "XE ĐẸP PRO - ĐẲNG CẤP CHUYÊN NGHIỆP") {
+          parsed.heroTitle = "XE ĐẸP PRO";
+        }
+        if (parsed.heroSubtitle === "Nghệ Thuật Chăm Sóc Xe") {
+          parsed.heroSubtitle = "Trung Tâm Chăm Sóc Xe Chuyên Nghiệp";
         }
         return { 
           ...DEFAULT_SITE_CONFIG, 
@@ -13074,6 +13546,122 @@ const App: React.FC = () => {
     const saved = localStorage.getItem('dungcar_experts_v12');
     return saved ? JSON.parse(saved) : (DEFAULT_SITE_CONFIG.experts || []);
   });
+
+  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const [isFirebaseLoading, setIsFirebaseLoading] = useState(true);
+
+  // Firebase Auth State
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      setIsFirebaseLoading(false);
+      if (u) {
+        toast.success(`Đã đăng nhập: ${u.email}`);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogin = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error("Login failed:", error);
+      toast.error("Đăng nhập thất bại!");
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      toast.success("Đã đăng xuất");
+    } catch (error) {
+      toast.error("Lỗi đăng xuất!");
+    }
+  };
+
+  // Generic Sync Hook
+  const useFirestoreSync = (
+    collectionName: string, 
+    data: any, 
+    setData: (val: any) => void, 
+    isList: boolean = true,
+    docId: string = 'main'
+  ) => {
+    useEffect(() => {
+      if (!user) return;
+
+      const unsubscribe = isList 
+        ? onSnapshot(collection(db, collectionName), (snapshot) => {
+            const listData = snapshot.docs.map(d => ({ ...d.data(), id: d.id }));
+            if (listData.length > 0) {
+              setData(listData);
+            }
+          }, (err) => {
+            console.error(`Snapshot error for ${collectionName}:`, err);
+          })
+        : onSnapshot(doc(db, collectionName, docId), (snapshot) => {
+            const docData = snapshot.data();
+            if (docData) {
+              console.log(`Cloud data received for ${collectionName}:`, docData.siteName || docId);
+              setData(docData);
+            }
+          }, (err) => {
+            console.error(`Snapshot error for ${collectionName}:`, err);
+          });
+
+      return () => unsubscribe();
+    }, [user, collectionName, isList, docId]);
+
+    useEffect(() => {
+      if (!user) return;
+      
+      const syncToFirebase = async () => {
+        try {
+          if (isList) {
+            // For lists, we sync each item. 
+            // In a real production app, we would use a more sophisticated diffing algorithm.
+            if (Array.isArray(data)) {
+              for (const item of data) {
+                if (item && item.id) {
+                  await setDoc(doc(db, collectionName, item.id), item, { merge: true });
+                }
+              }
+            }
+          } else {
+            // For single docs (like config), we sync the whole object
+            await setDoc(doc(db, collectionName, docId), data, { merge: true });
+          }
+        } catch (e) {
+          console.error(`Sync error for ${collectionName}:`, e);
+          // Don't show toast on every error to avoid spamming, but log it
+        }
+      };
+
+      const timeoutId = setTimeout(syncToFirebase, 1000); // Faster sync
+      return () => clearTimeout(timeoutId);
+    }, [user, data, collectionName, isList, docId]);
+  };
+
+  // Sync SiteConfig
+  useFirestoreSync('config', siteConfig, setSiteConfig, false, 'main');
+  
+  // Sync Collections
+  useFirestoreSync('customerRecords', customerRecords, setCustomerRecords);
+  useFirestoreSync('gallery', gallery, setGallery);
+  useFirestoreSync('services', services, setServices);
+  useFirestoreSync('appointments', siteConfig.appointments || [], (val) => setSiteConfig(prev => ({ ...prev, appointments: val })));
+  useFirestoreSync('inventory', inventory, setInventory);
+  useFirestoreSync('staff', staff, setStaff);
+  useFirestoreSync('expenses', expenses, setExpenses);
+  useFirestoreSync('experts', experts, setExperts);
+  useFirestoreSync('premiumSolutions', premiumSolutions, setPremiumSolutions);
+  useFirestoreSync('aiVideoHistory', aiVideoHistory, setAiVideoHistory);
+  useFirestoreSync('trackingData', trackingData, setTrackingData);
+  useFirestoreSync('reviews', reviews, setReviews);
+  useFirestoreSync('eCertificates', eCertificates, setECertificates);
+  useFirestoreSync('inspections', inspections, setInspections);
+  useFirestoreSync('reminders', reminders, setReminders);
 
   const [cart, setCart] = useState<DetailingPackage[]>(() => {
     const saved = localStorage.getItem('dungcar_cart_v12');
@@ -13193,6 +13781,7 @@ const App: React.FC = () => {
     reminders, setReminders,
     expenses, setExpenses,
     experts, setExperts,
+    user, handleLogin, handleLogout,
     cart, addToCart, removeFromCart, clearCart,
     language, setLanguage,
     theme, setTheme,
@@ -13208,6 +13797,7 @@ const App: React.FC = () => {
         <Route path="/portal" element={<CustomerPortalComponent customerRecords={customerRecords} certificates={eCertificates} inspections={inspections} loyaltyConfig={siteConfig.loyaltyConfig || DEFAULT_SITE_CONFIG.loyaltyConfig!} siteConfig={siteConfig} setSiteConfig={setSiteConfig} handlePayment={handlePayment} scrollToSection={scrollToSection} t={t} />} />
         <Route path="*" element={<HomePage {...homeProps} />} />
       </Routes>
+
     </Router>
   );
 };

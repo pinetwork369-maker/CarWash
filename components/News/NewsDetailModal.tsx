@@ -88,7 +88,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                 <div className="mt-12 sm:mt-20 pt-8 sm:pt-12 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-8 sm:gap-10">
                   <div className="flex items-center gap-4 sm:gap-6">
                     <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-black text-xl sm:text-2xl shadow-xl">
-                      {article.author.charAt(0)}
+                      {article.author?.charAt(0) || 'A'}
                     </div>
                     <div>
                       <p className="text-[8px] sm:text-[10px] font-black uppercase text-slate-500 tracking-widest mb-0.5 sm:mb-1">{t('written_by')}</p>

@@ -24,7 +24,8 @@ import {
   BarChart,
   Calendar,
   ClipboardCheck,
-  Package
+  Package,
+  Cloud
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
@@ -39,6 +40,9 @@ interface AdminControlCenterProps {
   isPrivacyMode: boolean;
   onTogglePrivacy: () => void;
   notificationsCount?: number;
+  cloudUser?: any;
+  onCloudLogin?: () => void;
+  onCloudLogout?: () => void;
 }
 
 export const AdminControlCenter: React.FC<AdminControlCenterProps> = ({
@@ -51,7 +55,10 @@ export const AdminControlCenter: React.FC<AdminControlCenterProps> = ({
   onOpenTab,
   isPrivacyMode,
   onTogglePrivacy,
-  notificationsCount = 0
+  notificationsCount = 0,
+  cloudUser,
+  onCloudLogin,
+  onCloudLogout
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -155,20 +162,44 @@ export const AdminControlCenter: React.FC<AdminControlCenterProps> = ({
             </div>
 
             {/* Footer Actions */}
-            <div className="p-4 mt-2 border-t border-white/5 flex gap-2">
-              <button 
-                onClick={() => { setIsDashboardOpen(true); setIsOpen(false); }}
-                className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-[9px] font-black uppercase tracking-widest transition-all shadow-lg shadow-blue-600/20"
-              >
-                Mở Admin Panel
-              </button>
-              <button 
-                onClick={onLogout}
-                className="p-3 bg-white/5 hover:bg-red-500 hover:text-white text-slate-500 rounded-xl transition-all"
-                title="Đăng xuất"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
+            <div className="p-4 mt-2 border-t border-white/5 flex flex-col gap-2">
+              {cloudUser ? (
+                <div className="flex items-center justify-between p-2 rounded-xl bg-green-500/10 border border-green-500/20 mb-1">
+                  <div className="flex items-center gap-2 overflow-hidden">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse flex-shrink-0" />
+                    <span className="text-[8px] text-slate-300 truncate lowercase font-medium">{cloudUser.email}</span>
+                  </div>
+                  <button 
+                    onClick={onCloudLogout}
+                    className="text-[8px] text-red-500 font-bold hover:underline"
+                  >
+                    Ngắt đồng bộ
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={onCloudLogin}
+                  className="flex items-center justify-center gap-2 w-full py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-[9px] font-bold uppercase tracking-widest transition-all mb-1 border border-white/5"
+                >
+                  <Cloud className="w-3.5 h-3.5 text-blue-500" />
+                  Bật đồng bộ Cloud (Mobile)
+                </button>
+              )}
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => { setIsDashboardOpen(true); setIsOpen(false); }}
+                  className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-[9px] font-black uppercase tracking-widest transition-all shadow-lg shadow-blue-600/20"
+                >
+                  Mở Admin Panel
+                </button>
+                <button 
+                  onClick={onLogout}
+                  className="p-3 bg-white/5 hover:bg-red-500 hover:text-white text-slate-500 rounded-xl transition-all"
+                  title="Đăng xuất"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

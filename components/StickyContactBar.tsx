@@ -50,6 +50,21 @@ const StickyContactBar: React.FC<StickyContactBarProps> = ({ siteConfig, onInspe
 
       {/* Mobile Sticky Bar */}
       <div className="fixed bottom-0 left-0 right-0 z-[150] md:hidden p-3 pointer-events-none">
+        {/* Mobile Scroll to Top */}
+        <AnimatePresence>
+          {isVisible && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.5, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.5, y: 20 }}
+              onClick={scrollToTop}
+              className="absolute -top-16 right-4 w-12 h-12 bg-blue-600/90 backdrop-blur-md text-white rounded-2xl flex items-center justify-center shadow-2xl border border-white/20 pointer-events-auto active:scale-90 transition-all"
+            >
+              <ChevronUp className="w-6 h-6" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+
         <motion.div 
           initial={{ y: 100 }}
           animate={{ y: 0 }}

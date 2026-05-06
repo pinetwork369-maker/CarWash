@@ -169,7 +169,7 @@ export const DEFAULT_SUBSCRIPTIONS: SubscriptionPackage[] = [
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
   siteName: "XE ĐẸP PRO",
-  heroTitle: "XE ĐẸP PRO - ĐẲNG CẤP CHUYÊN NGHIỆP",
+  heroTitle: "XE ĐẸP PRO",
   heroSubtitle: "Trung Tâm Chăm Sóc Xe Chuyên Nghiệp",
   heroDescription: "Khám phá đỉnh cao nghệ thuật chăm sóc xe với công nghệ Detailing chuẩn quốc tế. Chuyên sâu Phủ Ceramic Diamond 9H, Dán PPF tự phục hồi và các giải pháp bảo vệ toàn diện, mang lại vẻ đẹp vĩnh cửu cho xế yêu của bạn.",
   heroImage: "https://images.unsplash.com/photo-1603584173870-7f394833ec96?auto=format&fit=crop&q=80&w=2069",

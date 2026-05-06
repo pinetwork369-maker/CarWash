@@ -1,0 +1,130 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Primitive Definition
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'pinetwork369@gmail.com' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+      );
+    }
+
+    function isStaff() {
+      return isSignedIn() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager', 'staff']
+      );
+    }
+
+    // Site Config
+    match /config/{configId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Collections
+    match /customerRecords/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /gallery/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /services/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /appointments/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /inventory/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /staff/{id} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin() && isValidId(id);
+    }
+
+    match /expenses/{id} {
+      allow read: if isStaff();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /premiumSolutions/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /aiVideoHistory/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /trackingData/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /reviews/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /eCertificates/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /inspections/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /reminders/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /experts/{id} {
+      allow read: if isSignedIn();
+      allow write: if isStaff() && isValidId(id);
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAdmin();
+    }
+  }
+}

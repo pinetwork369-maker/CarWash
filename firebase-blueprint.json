@@ -1,0 +1,166 @@
+{
+  "entities": {
+    "SiteConfig": {
+      "title": "Site Configuration",
+      "description": "Global configuration for the application",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "heroTitle": { "type": "string" },
+        "heroDescription": { "type": "string" },
+        "heroImage": { "type": "string" }
+      }
+    },
+    "CustomerRecord": {
+      "title": "Customer Record",
+      "description": "Information about a customer and their service history",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "phone": { "type": "string" },
+        "licensePlate": { "type": "string" }
+      },
+      "required": ["id", "customerName", "phone"]
+    },
+    "GalleryImage": {
+      "title": "Gallery Image",
+      "description": "An image or video in the gallery",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "url": { "type": "string" },
+        "title": { "type": "string" }
+      }
+    },
+    "Service": {
+      "title": "Service",
+      "description": "A service offered by the business",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "price": { "type": "string" }
+      }
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "A scheduled service appointment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "date": { "type": "string" }
+      }
+    },
+    "InventoryItem": {
+      "title": "Inventory Item",
+      "description": "An item in the shop's inventory",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "quantity": { "type": "number" }
+      }
+    },
+    "Staff": {
+      "title": "Staff",
+      "description": "Business staff member",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Business expense",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "amount": { "type": "number" },
+        "title": { "type": "string" }
+      }
+    },
+    "Expert": {
+      "title": "Expert",
+      "description": "Company expert",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "config": {
+      "schema": "SiteConfig",
+      "description": "Global application settings"
+    },
+    "customerRecords": {
+      "schema": "CustomerRecord",
+      "description": "Customer database"
+    },
+    "gallery": {
+      "schema": "GalleryImage",
+      "description": "Gallery assets"
+    },
+    "services": {
+      "schema": "Service",
+      "description": "Available services"
+    },
+    "appointments": {
+      "schema": "Appointment",
+      "description": "Booking records"
+    },
+    "inventory": {
+      "schema": "InventoryItem",
+      "description": "Inventory stock"
+    },
+    "staff": {
+      "schema": "Staff",
+      "description": "Employee records"
+    },
+    "expenses": {
+      "schema": "Expense",
+      "description": "Financial expenses"
+    },
+    "premiumSolutions": {
+      "schema": "object",
+      "description": "Premium Detailing Solutions"
+    },
+    "aiVideoHistory": {
+      "schema": "object",
+      "description": "History of AI generated videos"
+    },
+    "trackingData": {
+      "schema": "object",
+      "description": "Vehicle tracking and status data"
+    },
+    "reviews": {
+      "schema": "object",
+      "description": "Customer reviews and feedback"
+    },
+    "eCertificates": {
+      "schema": "object",
+      "description": "Electronic certificates issued"
+    },
+    "inspections": {
+      "schema": "object",
+      "description": "Vehicle inspection records"
+    },
+    "reminders": {
+      "schema": "object",
+      "description": "Service and maintenance reminders"
+    },
+    "experts": {
+      "schema": "Expert",
+      "description": "List of company experts"
+    },
+    "users": {
+      "schema": "Staff",
+      "description": "Authenticated users and their roles"
+    }
+  }
+}
