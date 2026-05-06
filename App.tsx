@@ -13457,53 +13457,33 @@ const App: React.FC = () => {
           try {
             window.Pi.init({ version: "2.0", sandbox: false });
             piInitialized = true;
-            console.log('Pi.init called successfully with sandbox: false');
           } catch (initErr) {
-            console.warn('Pi.init failed (sandbox: false), trying sandbox: true...', initErr);
             window.Pi.init({ version: "2.0", sandbox: true });
             piInitialized = true;
           }
           
-          // Wait for SDK state to stabilize
           await new Promise(resolve => setTimeout(resolve, 300));
 
-          const onIncompletePaymentFound = (payment: any) => {
-            console.log('Pi Incomplete Payment Found:', payment);
-            // In a real app, you'd complete the payment on your backend here
-          };
+          // Requested Pi Authentication Snippet
+          window.Pi.authenticate(['username'], function(auth: any) {
+            console.log("User authenticated:", auth);
+            if (auth.user) {
+              toast.success(`Chào mừng ${auth.user.username} từ Pi Network!`, {
+                icon: '🥧',
+                style: {
+                  borderRadius: '20px',
+                  background: '#1e293b',
+                  color: '#fff',
+                  border: '1px solid rgba(255,255,255,0.1)'
+                }
+              });
+            }
+          }, function(error: any) {
+            console.error("Auth error:", error);
+          });
 
-          // Authenticate
-          const scopes = ['username', 'payments'];
-          console.log('Calling Pi.authenticate...');
-          const authResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
-          console.log('Pi Authentication Success:', authResult);
-          
-          if (authResult.user) {
-             toast.success(`Chào mừng ${authResult.user.username} từ Pi Network!`, {
-               icon: '🥧',
-               style: {
-                 borderRadius: '20px',
-                 background: '#1e293b',
-                 color: '#fff',
-                 border: '1px solid rgba(255,255,255,0.1)'
-               }
-             });
-          }
         } catch (err: any) {
           console.error('Pi Operation Error:', err);
-          
-          // Final fallback - sometimes the SDK just needs one more try after a fail
-          if (err?.message?.includes('not initialized')) {
-            console.log('Attempting emergency SDK re-init and auth...');
-            try {
-              window.Pi.init({ version: "2.0", sandbox: true });
-              await new Promise(resolve => setTimeout(resolve, 500));
-              const finalResult = await window.Pi.authenticate(['username', 'payments'], (p: any) => console.log(p));
-              console.log('Pi Final Fallback Success:', finalResult);
-            } catch (finalErr) {
-              console.error('Pi SDK failed all initialization attempts:', finalErr);
-            }
-          }
         }
       }
     };
