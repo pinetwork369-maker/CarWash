@@ -412,6 +412,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
     { id: 'exp-2', name: 'Trần Minh Đức', role: 'Ceramic Specialist', exp: '7 Năm', cert: 'Gtechniq Accredited', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800' },
     { id: 'exp-3', name: 'Lê Quốc Huy', role: 'Interior Expert', exp: '5 Năm', cert: 'Leather Repair Pro', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800' },
   ],
+  vipPrograms: [],
   seoKeywords: 'detailing chuyên nghiệp, phủ ceramic diamond 9H, dán PPF Hà Nội, AI Detailing Advisor, tư vấn chăm sóc xe AI, bảo vệ xe theo thời tiết, xe đẹp pro, chăm sóc xe hơi cao cấp Long Biên, đánh bóng ô tô Hà Nội, vệ sinh nội thất ô tô, dán phim cách nhiệt 3M, bảo vệ sơn xe, detailing uy tín hà nội, xe dep pro long bien, chăm sóc xe hơi hà nội, phủ ceramic ô tô, dán ppf ô tô hà nội, wrap đổi màu xe hơi, vệ sinh khoang máy ô tô, đánh bóng kính ô tô, cách âm chống ồn ô tô, phục hồi mâm xe AI',
   seoDescription: 'XE ĐẸP PRO - Hệ thống Detailing 4.0 hàng đầu Hà Nội. Tích hợp công nghệ AI cố vấn dịch vụ, WeatherGuard Advisor bảo vệ xe theo mùa. Chuyên sâu Phủ Ceramic, Dán PPF, Wrap đổi màu. Kỹ thuật viên Master Detailer, trang thiết bị hiện đại tại Long Biên. Nâng tầm đẳng cấp xế yêu của bạn.',
   googleVerificationCode: 'qf8156WuX4TgFxq_CV1cG3fZsBMEilbxB9LEwe2_oC4',
@@ -421,7 +422,9 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
     { id: 'wp-2', title: 'BMW M4 - Gloss Nardo Gray', img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800', color: 'Gloss Nardo Gray' },
     { id: 'wp-3', title: 'Mercedes AMG - Matte Deep Black', img: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800', color: 'Matte Deep Black' },
     { id: 'wp-4', title: 'Audi RS6 - Gloss Miami Blue', img: 'https://images.unsplash.com/photo-1603584173870-7f3ca99a4741?auto=format&fit=crop&q=80&w=800', color: 'Gloss Miami Blue' },
-  ]
+  ],
+  tintProjects: [],
+  tuningProjects: [],
 };
 
 export const DECAL_COLORS: DecalColor[] = [
@@ -711,6 +714,7 @@ export const DEFAULT_NEWS: NewsArticle[] = [
   {
     id: 'news1',
     title: '5 Mẹo Giữ Lớp Sơn Xe Luôn Bóng Như Mới',
+    slug: '5-meo-giu-lop-son-xe-luon-bong-nhu-moi',
     excerpt: 'Lớp sơn xe là bộ phận dễ bị tổn thương nhất bởi các tác động từ môi trường. Hãy cùng XE ĐẸP PRO tìm hiểu cách bảo vệ nó.',
     content: 'Nội dung chi tiết về các mẹo chăm sóc sơn xe...',
     image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=800',
@@ -723,6 +727,7 @@ export const DEFAULT_NEWS: NewsArticle[] = [
   {
     id: 'news2',
     title: 'Khai Trương Cơ Sở Mới Tại Long Biên',
+    slug: 'khai-truong-co-so-moi-tai-long-bien',
     excerpt: 'XE ĐẸP PRO chính thức khai trương cơ sở mới với quy mô hiện đại hơn, phục vụ quý khách hàng tốt hơn.',
     content: 'Nội dung chi tiết về sự kiện khai trương...',
     image: 'https://images.unsplash.com/photo-1562141961-b5d185666062?auto=format&fit=crop&q=80&w=800',
@@ -735,6 +740,7 @@ export const DEFAULT_NEWS: NewsArticle[] = [
   {
     id: 'news3',
     title: 'Ưu Đãi Đặc Biệt: Phủ Ceramic Tặng Vệ Sinh Nội Thất',
+    slug: 'uu-dai-dac-biet-phu-ceramic-tang-ve-sinh-noi-that',
     excerpt: 'Chương trình khuyến mãi lớn nhất trong tháng dành cho khách hàng sử dụng dịch vụ phủ Ceramic Diamond.',
     content: 'Nội dung chi tiết về chương trình khuyến mãi...',
     image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800',
@@ -747,6 +753,7 @@ export const DEFAULT_NEWS: NewsArticle[] = [
   {
     id: 'news4',
     title: 'Bảo Vệ Sơn Xe Dưới Nắng Gắt Mùa Hè',
+    slug: 'bao-ve-son-xe-duoi-nang-gat-mua-he',
     excerpt: 'Nắng gắt và tia UV là kẻ thù số 1 của lớp sơn xe. Hãy cùng tìm hiểu các giải pháp bảo vệ tối ưu nhất.',
     content: 'Tia UV không chỉ làm xỉn màu sơn mà còn khiến các chi tiết nhựa nhanh bị giòn gãy. Phủ Ceramic hoặc dán PPF là những lựa chọn hàng đầu để bảo vệ xế yêu...',
     image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',

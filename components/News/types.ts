@@ -9,6 +9,6 @@ export interface NewsArticle {
   date: string;
   category: string;
   tags?: string[];
-  metaKeywords?: string;
+  metaKeywords?: string[] | string;
   metaDescription?: string;
 }

@@ -42,7 +42,7 @@ service cloud.firestore {
 
     // Site Config
     match /config/{configId} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
@@ -53,12 +53,12 @@ service cloud.firestore {
     }
 
     match /gallery/{id} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isStaff() && isValidId(id);
     }
 
     match /services/{id} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isStaff() && isValidId(id);
     }
 
@@ -73,7 +73,7 @@ service cloud.firestore {
     }
 
     match /staff/{id} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isAdmin() && isValidId(id);
     }
 
@@ -83,7 +83,7 @@ service cloud.firestore {
     }
 
     match /premiumSolutions/{id} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isStaff() && isValidId(id);
     }
 
@@ -98,7 +98,7 @@ service cloud.firestore {
     }
 
     match /reviews/{id} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isStaff() && isValidId(id);
     }
 
@@ -118,7 +118,7 @@ service cloud.firestore {
     }
 
     match /experts/{id} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isStaff() && isValidId(id);
     }
 

@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { 
   BarChart as ReBarChart, 
   Bar, 
@@ -20,10 +20,10 @@ import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation, u
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car, Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ChevronLeft, ArrowUp, ArrowDown, Play, Pause, Volume2, VolumeX,  Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera as CameraIcon, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud as CloudIcon, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SearchSettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon2, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper, Bot, Boxes, Gift, BarChart3, FileCheck, AlertTriangle, ClipboardCheck, Printer, Loader2, Diamond, Armchair, Disc, Waves, Split, ImagePlus, Brush, Camera
+  MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car,  Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ChevronLeft, ArrowUp, ArrowDown, Play, Pause, Volume2, VolumeX,  Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera as CameraIcon, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud as CloudIcon, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SearchSettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon2, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper, Bot, Boxes, Gift, BarChart3, FileCheck, AlertTriangle, ClipboardCheck, Printer, Loader2, Diamond, Armchair, Disc, Waves, Split, ImagePlus, Brush, Camera, Crown
 } from 'lucide-react';
 import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS, DEFAULT_NEWS, DEFAULT_INVENTORY, DEFAULT_E_CERTIFICATES, DEFAULT_EXPENSES } from './constants.tsx';
-import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage, NewsArticle, AppNotification, InventoryItem, ECertificate, LoyaltyConfig, Expense, Staff, MaintenanceReminder, CarInspection, InspectionPoint, SubscriptionPackage, Expert, BeforeAfterImage, AutomationSettings, ServiceProposal } from './types.ts';
+import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage, NewsArticle, AppNotification, InventoryItem, ECertificate, LoyaltyConfig, Expense, Staff, MaintenanceReminder, CarInspection, InspectionPoint, SubscriptionPackage, Expert, BeforeAfterImage, AutomationSettings, ServiceProposal, VIPProgram } from './types.ts';
 import ProposalManagement from './components/Proposal/ProposalManagement';
 import { TrackingStep } from './components/Tracking';
 
@@ -65,7 +65,7 @@ import InnovationLab from './components/InnovationLab';
 import { Review } from './types.ts';
 import { DEFAULT_REVIEWS } from './constants.tsx';
 import { GalleryUploadManager } from './components/Gallery/GalleryUploadManager';
-import WrapProjectManager from './components/Gallery/WrapProjectManager';
+import ProjectManager from './components/Gallery/ProjectManager';
 import { getAIResponse, editImageWithAI, generateImageWithAI, generateVideoWithAI, getMaintenanceAdvice, AIProvider } from './services/geminiService.ts';
 import { GoogleGenAI } from "@google/genai";
 import ReactMarkdown from 'react-markdown';
@@ -103,11 +103,70 @@ export const maskPhone = (phone: string) => {
   return `${p.substring(0, 3)}****${p.substring(p.length - 3)}`;
 };
 
+export const generateSlug = (text: string) => {
+  if (!text) return '';
+  return text
+    .toLowerCase()
+    .normalize('NFD') // Chuẩn hóa Unicode để tách dấu
+    .replace(/[\u0300-\u036f]/g, '') // Xóa dấu
+    .replace(/[đĐ]/g, 'd') // Chuyển đ -> d
+    .replace(/([^0-9a-z-\s])/g, '') // Xóa các ký tự đặc biệt
+    .replace(/(\s+)/g, '-') // Thay khoảng trắng bằng dấu -
+    .replace(/-+/g, '-') // Xóa dấu - liên tiếp
+    .replace(/^-+|-+$/g, ''); // Xóa dấu - ở đầu và cuối
+};
+
 export const maskName = (name: string) => {
   if (!name) return '';
   const parts = name.split(' ');
   if (parts.length < 2) return name;
   return `${parts[0]} *** ${parts[parts.length - 1]}`;
+};
+
+export const parsePriceForSort = (priceStr: string, isDescending: boolean): number => {
+  if (!priceStr) return isDescending ? -1 : Infinity;
+  // Xóa tất cả ký tự không phải số
+  const digits = priceStr.replace(/\D/g, '');
+  if (!digits) {
+    // Nếu không có số (e.g. "Liên hệ", "Liên hệ báo giá"), xếp ở cuối cùng trong cả 2 trường hợp tăng/giảm dần
+    return isDescending ? -1 : Infinity;
+  }
+  return parseInt(digits, 10);
+};
+
+export const filterAndSortServices = (
+  servicesList: Service[],
+  category: string,
+  search: string,
+  sortBy: string
+): Service[] => {
+  let result = [...(servicesList || [])];
+
+  // 1. Lọc theo danh mục và từ khóa
+  result = result.filter(s => {
+    const matchesCategory = category === 'all' || s.category === category;
+    const matchesSearch = s.title.toLowerCase().includes(search.toLowerCase()) || 
+                          s.description.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  // 2. Sắp xếp
+  if (sortBy !== 'default') {
+    result.sort((a, b) => {
+      if (sortBy === 'name-asc') {
+        return a.title.localeCompare(b.title, 'vi', { sensitivity: 'base' });
+      } else if (sortBy === 'name-desc') {
+        return b.title.localeCompare(a.title, 'vi', { sensitivity: 'base' });
+      } else if (sortBy === 'price-asc') {
+        return parsePriceForSort(a.price, false) - parsePriceForSort(b.price, false);
+      } else if (sortBy === 'price-desc') {
+        return parsePriceForSort(b.price, true) - parsePriceForSort(a.price, true);
+      }
+      return 0;
+    });
+  }
+
+  return result;
 };
 
 const formatCurrency = (amount: number) => {
@@ -1036,6 +1095,7 @@ const NewsSection: React.FC<{
   selectedArticle: NewsArticle | null;
   setSelectedArticle: (article: NewsArticle | null) => void;
 }> = ({ siteConfig, isEditMode, isDesignAuthenticated, setSiteConfig, selectedArticle, setSelectedArticle }) => {
+  const navigate = useNavigate();
   return (
     <section id="news" className="py-24 relative overflow-hidden bg-slate-950">
       <div className="container mx-auto px-4 relative z-10">
@@ -1075,10 +1135,35 @@ const NewsSection: React.FC<{
               transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -10 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setSelectedArticle(article)}
+              onClick={() => {
+                const slug = article.slug || generateSlug(article.title);
+                navigate(`/news/${slug}`);
+              }}
               className="group cursor-pointer"
             >
               <div className="relative h-[250px] rounded-[32px] overflow-hidden mb-6 border border-white/5">
+                {idx === 0 && showNewBadge && (
+                  <div 
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute top-4 left-4 z-20 flex items-center gap-1 bg-red-600 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-[0_0_12px_rgba(220,38,38,0.85)] border border-red-500/20"
+                  >
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                    </span>
+                    <span>Mới</span>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowNewBadge(false);
+                        localStorage.setItem('hide_new_badge_car_detailing', 'true');
+                      }}
+                      className="ml-1 hover:text-red-200 transition-colors cursor-pointer"
+                    >
+                      <X className="w-2.5 h-2.5" />
+                    </button>
+                  </div>
+                )}
                 <img 
                   src={article.image} 
                   alt={article.title} 
@@ -1086,7 +1171,7 @@ const NewsSection: React.FC<{
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
-                <div className="absolute top-4 left-4">
+                <div className={`absolute top-4 transition-all duration-300 ${idx === 0 && showNewBadge ? 'left-[72px]' : 'left-4'}`}>
                   <span className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest ${
                     article.category === 'promotion' ? 'bg-red-600 text-white' : 
                     article.category === 'tip' ? 'bg-blue-600 text-white' : 'bg-emerald-600 text-white'
@@ -1591,7 +1676,7 @@ const AdminDashboardModal: React.FC<{
   notifications: AppNotification[];
   t: (key: string) => string;
 }> = ({ isOpen, onClose, siteConfig, setSiteConfig, gallery, setGallery, services, setServices, premiumSolutions, setPremiumSolutions, customerRecords, setCustomerRecords, initialTab = 'home', maintenancePreFill, isSelectingHeroVideo, setIsSelectingHeroVideo, isSelectingAiVideo, setIsSelectingAiVideo, aiVideoHistory, setAiVideoHistory, isDesignAuthenticated, setIsDesignAuthenticated, designPasswordInput, setDesignPasswordInput, showDesignLock, setShowDesignLock, handleDesignLogin, isAccountingAuthenticated, setIsAccountingAuthenticated, accountingPasswordInput, setAccountingPasswordInput, showAccountingLock, setShowAccountingLock, handleAccountingLogin, isInspectionAuthenticated, setIsInspectionAuthenticated, inspectionPasswordInput, setInspectionPasswordInput, showInspectionLock, setShowInspectionLock, handleInspectionLogin, trackingData, setTrackingData, reviews, setReviews, inventory, setInventory, eCertificates, setECertificates, expenses, setExpenses, staff, setStaff, reminders, setReminders, inspections, setInspections, isPrivacyMode, setIsPrivacyMode, togglePrivacyMode, currentUserRole, setCurrentUserRole, auditLogs, setAuditLogs, addAuditLog, formatPrivateValue, isEditMode, setIsEditMode, scrollToSection, isDirectInspectionMode, onOpenNotifications, notifications, t, experts, setExperts }) => {
-  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback' | 'news' | 'ui-design' | 'inventory' | 'loyalty' | 'reports' | 'ecerts' | 'expenses' | 'staff' | 'reminders' | 'inspections' | 'security' | 'automation' | 'accounting' | 'transformations' | 'proposals' | 'wrap-manager'>(initialTab as any);
+  const [activeTab, setActiveTab] = useState<'home' | 'services' | 'premium' | 'gallery' | 'customers' | 'promotions' | 'config' | 'ai-creative' | 'maintenance' | 'appointments' | 'packages' | 'tracking' | 'feedback' | 'news' | 'ui-design' | 'inventory' | 'loyalty' | 'reports' | 'ecerts' | 'expenses' | 'staff' | 'reminders' | 'inspections' | 'security' | 'automation' | 'accounting' | 'transformations' | 'proposals' | 'wrap-manager' | 'tint-manager' | 'tuning-manager' | 'vip'>(initialTab as any);
   const [pendingTab, setPendingTab] = useState<any>(null);
   const [servicePage, setServicePage] = useState(1);
   const [premiumPage, setPremiumPage] = useState(1);
@@ -1794,6 +1879,7 @@ const AdminDashboardModal: React.FC<{
   const [appointmentFilterStatus, setAppointmentFilterStatus] = useState<'all' | 'pending' | 'confirmed' | 'completed' | 'cancelled'>('all');
   const [appointmentViewMode, setAppointmentViewMode] = useState<'list' | 'calendar'>('calendar');
   const [calendarDate, setCalendarDate] = useState(new Date());
+  const [selectedCalendarDay, setSelectedCalendarDay] = useState<string>(new Date().toISOString().split('T')[0]);
   const [isAddingAppointment, setIsAddingAppointment] = useState(false);
   const [editingAppointmentId, setEditingAppointmentId] = useState<string | null>(null);
   const [appointmentForm, setAppointmentForm] = useState<Partial<Appointment>>({
@@ -1822,6 +1908,12 @@ const AdminDashboardModal: React.FC<{
   const [editingInspectionId, setEditingInspectionId] = useState<string | null>(null);
   const [inspectionForm, setInspectionForm] = useState<Partial<CarInspection>>({
     customerId: '', licensePlate: '', phone: '', technicianId: '', date: new Date().toISOString().split('T')[0], points: [], checklist: {}, notes: '', status: 'draft'
+  });
+
+  const [isAddingVIPProgram, setIsAddingVIPProgram] = useState(false);
+  const [editingVIPProgramId, setEditingVIPProgramId] = useState<string | null>(null);
+  const [vipProgramForm, setVipProgramForm] = useState<Partial<VIPProgram>>({
+    name: '', description: '', minUsage: 1, discountRate: 5, status: 'active'
   });
 
   // const [isAuthenticated, setIsAuthenticated] = useState(true); // Removed redundant login state
@@ -1928,46 +2020,57 @@ const AdminDashboardModal: React.FC<{
 
   if (!isOpen) return null;
 
-  const businessTabs = [
-    { id: 'home', label: t('admin_tab_overview'), icon: <Home className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'appointments', label: t('admin_tab_appointments'), icon: <Calendar className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'customers', label: t('admin_tab_customers'), icon: <Users className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'inventory', label: t('admin_tab_inventory'), icon: <Boxes className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'loyalty', label: t('admin_tab_loyalty'), icon: <Gift className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'accounting', label: 'Kế Toán', icon: <Wallet className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'reports', label: t('admin_tab_reports'), icon: <BarChart3 className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'expenses', label: t('admin_tab_expenses'), icon: <Receipt className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'staff', label: 'Nhân Sự', icon: <Users className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'reminders', label: 'Nhắc Hẹn', icon: <Bell className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'proposals', label: 'Báo Giá & Đề Xuất', icon: <FileText className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
+  const operationTabs = [
+    { id: 'home', label: t('admin_tab_overview'), icon: <Home className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'appointments', label: t('admin_tab_appointments'), icon: <Calendar className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'customers', label: t('admin_tab_customers'), icon: <Users className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'staff', label: 'Quản Lý Nhân Sự', icon: <Users className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'accounting', label: 'Sổ Cái Kế Toán', icon: <Wallet className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'expenses', label: 'Quản Lý Chi Phí', icon: <Receipt className="w-5 h-5" />, roles: ['admin', 'manager'] },
     { id: 'inspections', label: 'Phiếu Kiểm Tra Xe', icon: <Clipboard className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'automation', label: 'Tự Động Hóa', icon: <Zap className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'security', label: 'Bảo Mật', icon: <ShieldCheck className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'ecerts', label: t('admin_tab_ecerts'), icon: <FileCheck className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'tracking', label: t('admin_tab_tracking'), icon: <Timer className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'feedback', label: t('admin_tab_feedback'), icon: <MessageSquare className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'maintenance', label: t('admin_tab_ai_advice'), icon: <Cpu className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
+    { id: 'reminders', label: 'Nhắc Lịch Hẹn', icon: <Bell className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'proposals', label: 'Báo Giá & Đề Xuất', icon: <FileText className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'reports', label: 'Báo Cáo Thống Kê', icon: <BarChart3 className="w-5 h-5" />, roles: ['admin', 'manager'] },
   ];
 
-  const designTabs = [
-    { id: 'services', label: t('admin_tab_services'), icon: <Briefcase className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'packages', label: t('admin_tab_packages'), icon: <Package className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'premium', label: t('admin_tab_premium'), icon: <ShieldCheck className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'promotions', label: t('admin_tab_promotions'), icon: <Tag className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'news', label: t('admin_tab_news'), icon: <Newspaper className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'gallery', label: t('admin_tab_gallery'), icon: <ImageIcon className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'wrap-manager', label: 'Dự án Wrap', icon: <CameraIcon className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'ui-design', label: t('admin_tab_ui_design'), icon: <Palette className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'ai-creative', label: t('admin_tab_ai_creative'), icon: <Sparkles className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
-    { id: 'config', label: t('admin_tab_config'), icon: <Settings2 className="w-5 h-5" />, roles: ['admin', 'manager', 'staff'] },
+  const contentTabs = [
+    { id: 'services', label: 'Danh Mục Dịch Vụ', icon: <Briefcase className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'packages', label: 'Gói Chăm Sóc Xe', icon: <Package className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'premium', label: 'Giải Pháp Luxury', icon: <ShieldCheck className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'vip', label: 'Ưu Đãi VIP', icon: <Crown className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'promotions', label: 'Chương Trình Khuyến Mãi', icon: <Tag className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'news', label: 'Tin Tức & Blog', icon: <Newspaper className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'gallery', label: 'Thư Viện Ảnh Chung', icon: <ImageIcon className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'feedback', label: 'Phản Hồi Khách Hàng', icon: <MessageSquare className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'loyalty', label: 'Hệ Thống Tích Điểm', icon: <Gift className="w-5 h-5" />, roles: ['admin', 'manager'] },
   ];
 
-  const filteredBusinessTabs = businessTabs.filter(tab => tab.roles.includes(currentUserRole));
-  const filteredDesignTabs = designTabs.filter(tab => tab.roles.includes(currentUserRole));
+  const technicalTabs = [
+    { id: 'wrap-manager', label: 'Dự Án Wrap & PPF', icon: <CameraIcon className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'tint-manager', label: 'Dự Án Phim Cách Nhiệt', icon: <Sun className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'tuning-manager', label: 'Dự Án Nâng Cấp Xe', icon: <Wrench className="w-5 h-5" />, roles: ['admin', 'manager'] },
+  ];
+
+  const systemTabs = [
+    { id: 'config', label: 'Cấu Hình Website', icon: <Settings2 className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'ui-design', label: 'Giao Diện (UI)', icon: <Palette className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'automation', label: 'Tự Động Hóa (Zalo)', icon: <Zap className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'security', label: 'Bảo Mật & Phân Quyền', icon: <ShieldCheck className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'tracking', label: 'Theo Dõi Tiến Độ', icon: <Timer className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'inventory', label: 'Quản Lý Kho Vật Tư', icon: <Boxes className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'maintenance', label: 'AI Tư Vấn Kỹ Thuật', icon: <Cpu className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'ai-creative', label: 'AI Media Lab', icon: <Sparkles className="w-5 h-5" />, roles: ['admin', 'manager'] },
+    { id: 'ecerts', label: 'Chứng Chỉ Điện Tử', icon: <FileCheck className="w-5 h-5" />, roles: ['admin', 'manager'] },
+  ];
+
+  const filteredOperationTabs = operationTabs.filter(tab => tab.roles.includes(currentUserRole));
+  const filteredContentTabs = contentTabs.filter(tab => tab.roles.includes(currentUserRole));
+  const filteredTechnicalTabs = technicalTabs.filter(tab => tab.roles.includes(currentUserRole));
+  const filteredSystemTabs = systemTabs.filter(tab => tab.roles.includes(currentUserRole));
 
   const handleTabClick = (tabId: any) => {
-    const isDesignTab = designTabs.some(t => t.id === tabId);
-    const isAccountingTab = businessTabs.some(t => t.id === tabId);
+    const isDesignTab = [...contentTabs, ...systemTabs].some(t => t.id === tabId);
+    const isAccountingTab = [...operationTabs, ...technicalTabs].some(t => t.id === tabId);
     const isInspectionTab = tabId === 'inspections';
     
     const isAccountingLockEnabled = siteConfig.enableAccountingLock !== false && siteConfig.accountingLockSettings?.[tabId as string] === true;
@@ -2102,6 +2205,41 @@ const AdminDashboardModal: React.FC<{
       setIsGeneratingVideo(false);
       setGenerationStatus('');
     }
+  };
+
+  const handleDeleteVIPProgram = (id: string) => {
+    setSiteConfig(prev => ({
+      ...prev,
+      vipPrograms: (prev.vipPrograms || []).filter(p => p.id !== id)
+    }));
+    toast.success("Đã xóa chương trình VIP!");
+  };
+
+  const handleSaveVIPProgram = () => {
+    if (!vipProgramForm.name || !vipProgramForm.description) {
+      return toast.error("Vui lòng nhập đầy đủ thông tin!");
+    }
+    
+    if (editingVIPProgramId) {
+      setSiteConfig(prev => ({
+        ...prev,
+        vipPrograms: (prev.vipPrograms || []).map(p => p.id === editingVIPProgramId ? { ...p, ...vipProgramForm as VIPProgram } : p)
+      }));
+      toast.success("Đã cập nhật chương trình VIP!");
+    } else {
+      const newProgram: VIPProgram = {
+        ...vipProgramForm as VIPProgram,
+        id: `vip-${Date.now()}`
+      };
+      setSiteConfig(prev => ({
+        ...prev,
+        vipPrograms: [newProgram, ...(prev.vipPrograms || [])]
+      }));
+      toast.success("Đã thêm chương trình VIP mới!");
+    }
+    setIsAddingVIPProgram(false);
+    setEditingVIPProgramId(null);
+    setVipProgramForm({ name: '', description: '', minUsage: 1, discountRate: 5, status: 'active' });
   };
 
   const handleStepComplete = (vehicle: VehicleTracking, step: TrackingStep) => {
@@ -2585,19 +2723,20 @@ const AdminDashboardModal: React.FC<{
               </div>
 
               <div className="flex-1 overflow-x-auto md:overflow-y-auto p-2 md:p-4 flex md:flex-col gap-1 md:space-y-1 custom-scrollbar scrollbar-hide bg-slate-950 md:bg-transparent border-b md:border-b-0 border-white/5">
+                {/* Operations Section */}
                 <div className="px-4 py-2 hidden md:block">
-                  <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Kế Toán & Vận Hành</p>
+                  <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Vận Hành & Nhân Sự</p>
                 </div>
-                {filteredBusinessTabs.filter(t => !adminTabSearch || t.label.toLowerCase().includes(adminTabSearch.toLowerCase())).map(tab => {
+                {filteredOperationTabs.filter(t => !adminTabSearch || t.label.toLowerCase().includes(adminTabSearch.toLowerCase())).map(tab => {
                   const unreadCount = tab.id === 'appointments' 
                     ? (siteConfig.appointments?.filter(a => a.isRead === false).length || 0)
                     : 0;
                   
                   return (
                     <button
-                      key={`nav-biz-${tab.id}`}
+                      key={`nav-oper-${tab.id}`}
                       onClick={() => handleTabClick(tab.id as any)}
-                      className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-xs font-black uppercase tracking-widest transition-all group shrink-0 ${
+                      className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-sm font-black uppercase tracking-widest transition-all group shrink-0 ${
                         activeTab === tab.id 
                           ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
                           : 'text-slate-500 hover:text-white hover:bg-white/5'
@@ -2617,26 +2756,77 @@ const AdminDashboardModal: React.FC<{
                 })}
 
                 <div className="w-px h-8 bg-white/5 mx-2 md:w-full md:h-px md:my-4 shrink-0" />
+
+                {/* Technical Section */}
+                <div className="px-4 py-2 hidden md:block mt-4 border-t border-white/5 pt-4">
+                  <p className="text-[9px] font-black text-emerald-600/70 uppercase tracking-[0.2em] flex items-center gap-2">
+                    <Wrench className="w-3 h-3" /> Kỹ Thuật Chuyên Sâu
+                  </p>
+                </div>
+                {filteredTechnicalTabs.filter(t => !adminTabSearch || t.label.toLowerCase().includes(adminTabSearch.toLowerCase())).map(tab => (
+                  <button
+                    key={`nav-tech-${tab.id}`}
+                    onClick={() => handleTabClick(tab.id as any)}
+                    className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-sm font-black uppercase tracking-widest transition-all group shrink-0 ${
+                      activeTab === tab.id 
+                        ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20' 
+                        : 'text-slate-500 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-emerald-500'} transition-colors`}>
+                      {tab.icon}
+                    </span>
+                    <span className="md:inline">{tab.label}</span>
+                  </button>
+                ))}
+
+                <div className="w-px h-8 bg-white/5 mx-2 md:w-full md:h-px md:my-4 shrink-0" />
                 
+                {/* Content Section (3-bar menu items) */}
                 <div className="px-4 py-2 hidden md:block mt-4 border-t border-white/5 pt-4">
                   <p className="text-[9px] font-black text-amber-600/70 uppercase tracking-[0.2em] flex items-center gap-2">
-                    <Shield className="w-3 h-3" /> Nội Dung & Hiển Thị
+                    <Crown className="w-3 h-3" /> Nội Dung Website
                   </p>
                 </div>
                 {[
                   { id: 'transformations', label: 'So sánh Trước Sau', icon: <Split className="w-4 h-4" /> },
-                  ...filteredDesignTabs
+                  ...filteredContentTabs
                 ].filter(t => !adminTabSearch || t.label.toLowerCase().includes(adminTabSearch.toLowerCase())).map(tab => (
                   <button
-                    key={`nav-design-${tab.id}`}
+                    key={`nav-cont-${tab.id}`}
                     onClick={() => handleTabClick(tab.id as any)}
-                    className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-xs font-black uppercase tracking-widest transition-all group shrink-0 ${
+                    className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-sm font-black uppercase tracking-widest transition-all group shrink-0 ${
                       activeTab === tab.id 
                         ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/20' 
                         : 'text-slate-500 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-amber-500'} transition-colors`}>
+                      {tab.icon}
+                    </span>
+                    <span className="md:inline">{tab.label}</span>
+                  </button>
+                ))}
+
+                <div className="w-px h-8 bg-white/5 mx-2 md:w-full md:h-px md:my-4 shrink-0" />
+
+                {/* System Section */}
+                <div className="px-4 py-2 hidden md:block mt-4 border-t border-white/5 pt-4">
+                  <p className="text-[9px] font-black text-purple-600/70 uppercase tracking-[0.2em] flex items-center gap-2">
+                    <Settings className="w-3 h-3" /> Hệ Thống & Cấu Hình
+                  </p>
+                </div>
+                {filteredSystemTabs.filter(t => !adminTabSearch || t.label.toLowerCase().includes(adminTabSearch.toLowerCase())).map(tab => (
+                  <button
+                    key={`nav-sys-${tab.id}`}
+                    onClick={() => handleTabClick(tab.id as any)}
+                    className={`relative whitespace-nowrap flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-sm font-black uppercase tracking-widest transition-all group shrink-0 ${
+                      activeTab === tab.id 
+                        ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/20' 
+                        : 'text-slate-500 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span className={`${activeTab === tab.id ? 'text-white' : 'text-slate-600 group-hover:text-purple-500'} transition-colors`}>
                       {tab.icon}
                     </span>
                     <span className="md:inline">{tab.label}</span>
@@ -2665,10 +2855,10 @@ const AdminDashboardModal: React.FC<{
                   </div>
                   <div>
                     <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-tighter">
-                      {[...businessTabs, ...designTabs].find(t => t.id === activeTab)?.label}
+                      {[...operationTabs, ...technicalTabs, ...contentTabs, ...systemTabs, {id: 'transformations', label: 'So sánh Trước Sau'}].find(t => t.id === activeTab)?.label}
                     </h3>
                     <p className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">
-                      Quản lý hệ thống / {[...businessTabs, ...designTabs].find(t => t.id === activeTab)?.label}
+                      Quản lý hệ thống / {[...operationTabs, ...technicalTabs, ...contentTabs, ...systemTabs, {id: 'transformations', label: 'So sánh Trước Sau'}].find(t => t.id === activeTab)?.label}
                     </p>
                   </div>
                 </div>
@@ -2705,7 +2895,7 @@ const AdminDashboardModal: React.FC<{
                   <Home className="w-3 h-3" />
                   <span>Admin</span>
                   <ChevronRight className="w-3 h-3" />
-                  <span className="text-blue-500">{[...businessTabs, ...designTabs, {id: 'transformations', label: 'So sánh'}].find(t => t.id === activeTab)?.label}</span>
+                  <span className="text-blue-500">{[...operationTabs, ...technicalTabs, ...contentTabs, ...systemTabs, {id: 'transformations', label: 'So sánh'}].find(t => t.id === activeTab)?.label}</span>
                 </div>
 
                 <AnimatePresence>
@@ -2741,10 +2931,10 @@ const AdminDashboardModal: React.FC<{
                             Xác Nhận
                           </button>
                           <button 
-                            onClick={() => setShowAccountingLock(false)}
+                            onClick={onClose}
                             className="px-6 bg-slate-800 text-slate-400 rounded-xl font-black uppercase tracking-widest text-[10px] hover:text-white transition-all"
                           >
-                            Hủy
+                            Hủy & Thoát
                           </button>
                         </div>
                       </div>
@@ -2782,10 +2972,10 @@ const AdminDashboardModal: React.FC<{
                             Xác Nhận
                           </button>
                           <button 
-                            onClick={() => setShowInspectionLock(false)}
+                            onClick={onClose}
                             className="px-6 bg-slate-800 text-slate-400 rounded-xl font-black uppercase tracking-widest text-[10px] hover:text-white transition-all"
                           >
-                            Hủy
+                            Hủy & Thoát
                           </button>
                         </div>
                       </div>
@@ -2823,10 +3013,10 @@ const AdminDashboardModal: React.FC<{
                             Xác Nhận
                           </button>
                           <button 
-                            onClick={() => setShowDesignLock(false)}
+                            onClick={onClose}
                             className="px-6 bg-slate-800 text-slate-400 rounded-xl font-black uppercase tracking-widest text-[10px] hover:text-white transition-all"
                           >
-                            Hủy
+                            Hủy & Thoát
                           </button>
                         </div>
                       </div>
@@ -3646,6 +3836,176 @@ const AdminDashboardModal: React.FC<{
                     </div>
                   </div>
                 )}
+                 {activeTab === 'vip' && (
+                  <div className="space-y-8">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Quản Lý VIP</h3>
+                        <p className="text-slate-500 text-[10px] md:text-[11px] font-black uppercase tracking-widest mt-1">Cấu hình các chương trình khách hàng đặc biệt</p>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          setIsAddingVIPProgram(true);
+                          setEditingVIPProgramId(null);
+                          setVipProgramForm({ id: `VIP-${Date.now().toString().slice(-4)}`, name: '', description: '', minUsage: 1, discountRate: 5, status: 'active' });
+                        }}
+                        className="px-6 py-3 bg-blue-600 text-white rounded-xl font-black uppercase text-[10px] tracking-widest shadow-xl shadow-blue-600/20 hover:bg-blue-500 transition-all flex items-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" /> Thêm Gói VIP
+                      </button>
+                    </div>
+
+                    {isAddingVIPProgram && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-slate-900/50 border border-white/10 p-8 rounded-[32px] space-y-6 mb-8"
+                      >
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="text-sm font-black text-white uppercase tracking-widest">
+                            {editingVIPProgramId ? 'Sửa Gói VIP' : 'Thêm Gói VIP Mới'}
+                          </h4>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">ID Gói</label>
+                            <input 
+                              value={vipProgramForm.id}
+                              onChange={e => setVipProgramForm(prev => ({ ...prev, id: e.target.value }))}
+                              disabled={!!editingVIPProgramId}
+                              className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm outline-none focus:border-blue-500 transition-all disabled:opacity-50"
+                              placeholder="VD: VIP-001"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Tên Gói VIP</label>
+                            <input 
+                              value={vipProgramForm.name}
+                              onChange={e => setVipProgramForm(prev => ({ ...prev, name: e.target.value }))}
+                              className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm outline-none focus:border-blue-500 transition-all"
+                              placeholder="VD: VIP Silver, VIP Gold, Diamond..."
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Số Lượt Sử Dụng Tối Thiểu</label>
+                            <input 
+                              type="number"
+                              value={vipProgramForm.minUsage}
+                              onChange={e => setVipProgramForm(prev => ({ ...prev, minUsage: parseInt(e.target.value) || 0 }))}
+                              className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm outline-none focus:border-blue-500 transition-all"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Tỷ Lệ Giảm Giá (%)</label>
+                            <input 
+                              type="number"
+                              value={vipProgramForm.discountRate}
+                              onChange={e => setVipProgramForm(prev => ({ ...prev, discountRate: parseInt(e.target.value) || 0 }))}
+                              className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm outline-none focus:border-blue-500 transition-all"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Trạng Thái</label>
+                            <select 
+                              value={vipProgramForm.status}
+                              onChange={e => setVipProgramForm(prev => ({ ...prev, status: e.target.value as any }))}
+                              className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm outline-none focus:border-blue-500 transition-all"
+                            >
+                              <option value="active">Đang kích hoạt</option>
+                              <option value="inactive">Tạm ngưng</option>
+                            </select>
+                          </div>
+                          <div className="md:col-span-1 border-white/0" />
+                          <div className="md:col-span-2 space-y-2">
+                            <label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Mô Tả Đặc Quyền</label>
+                            <textarea 
+                              value={vipProgramForm.description}
+                              onChange={e => setVipProgramForm(prev => ({ ...prev, description: e.target.value }))}
+                              className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-sm outline-none focus:border-blue-500 transition-all h-24 resize-none"
+                              placeholder="Mô tả các ưu đãi dành riêng cho cấp độ này..."
+                            />
+                          </div>
+                        </div>
+                        <div className="flex gap-4 pt-4">
+                          <button 
+                            onClick={handleSaveVIPProgram}
+                            className="flex-1 bg-blue-600 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-blue-500 transition-all"
+                          >
+                            Lưu Gói VIP
+                          </button>
+                          <button 
+                            onClick={() => setIsAddingVIPProgram(false)}
+                            className="px-8 bg-slate-800 text-slate-400 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:text-white transition-all"
+                          >
+                            Hủy
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {(siteConfig.vipPrograms || []).length > 0 ? (siteConfig.vipPrograms || []).map(program => (
+                        <div key={program.id} className="bg-slate-900/50 border border-white/5 p-8 rounded-[32px] group hover:border-blue-500/30 transition-all relative overflow-hidden">
+                          <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-all">
+                            <Crown className={`w-8 h-8 ${program.status === 'active' ? 'text-amber-500' : 'text-slate-700'}`} />
+                          </div>
+                          
+                          <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <span className={`w-2 h-2 rounded-full ${program.status === 'active' ? 'bg-emerald-500' : 'bg-slate-500'}`} />
+                                <h4 className="text-lg font-black text-white uppercase tracking-tighter">{program.name}</h4>
+                              </div>
+                              <span className="text-[10px] font-mono text-slate-600 font-bold">{program.id}</span>
+                            </div>
+                            
+                            <p className="text-slate-400 text-xs mb-6 line-clamp-3 leading-relaxed">{program.description}</p>
+                            
+                            <div className="grid grid-cols-2 gap-4 mb-8">
+                              <div className="p-3 bg-slate-950/50 rounded-2xl border border-white/5">
+                                <p className="text-[8px] text-slate-500 font-black uppercase tracking-widest mb-1">Số lượt tối thiểu</p>
+                                <p className="text-sm font-black text-white">{program.minUsage} Lượt</p>
+                              </div>
+                              <div className="p-3 bg-blue-600/5 rounded-2xl border border-blue-500/10 text-blue-500">
+                                <p className="text-[8px] text-blue-500/60 font-black uppercase tracking-widest mb-1">Chiết khấu</p>
+                                <p className="text-sm font-black">-{program.discountRate}%</p>
+                              </div>
+                            </div>
+
+                            <div className="flex gap-2">
+                              <button 
+                                onClick={() => {
+                                  setEditingVIPProgramId(program.id);
+                                  setVipProgramForm(program);
+                                  setIsAddingVIPProgram(true);
+                                }}
+                                className="flex-1 bg-slate-800 text-slate-400 py-3 rounded-xl font-black uppercase tracking-widest text-[9px] hover:bg-slate-700 hover:text-white transition-all flex items-center justify-center gap-2"
+                              >
+                                <Edit2 className="w-3 h-3" /> Sửa
+                              </button>
+                              <button 
+                                onClick={() => handleDeleteVIPProgram(program.id)}
+                                className="bg-red-950/20 text-red-500 px-4 py-3 rounded-xl font-black uppercase tracking-widest text-[9px] hover:bg-red-600 hover:text-white transition-all flex items-center justify-center"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )) : (
+                        <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-[40px]">
+                          <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] mb-4">Chưa có chương trình VIP nào</p>
+                          <button 
+                            onClick={() => setIsAddingVIPProgram(true)}
+                            className="px-6 py-3 bg-blue-600/10 text-blue-500 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-600 hover:text-white transition-all"
+                          >
+                            Tạo ngay gói đầu tiên
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
                 {activeTab === 'config' && (
                   <div className="space-y-8 max-w-5xl">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
@@ -4154,7 +4514,15 @@ const AdminDashboardModal: React.FC<{
                   onSearchChange={setFilterText}
                   currentSort={sortConfig}
                   onSortChange={setSortConfig}
+                  currentCategory={filterCategory}
+                  onCategoryChange={setFilterCategory}
                   onClear={() => { setFilterText(''); setFilterCategory('all'); }}
+                  categories={[
+                    { value: 'exterior', label: 'Ngoại thất' },
+                    { value: 'interior', label: 'Nội thất' },
+                    { value: 'protection', label: 'Bảo vệ' },
+                    { value: 'tuning', label: 'Độ xe / Nâng cấp' },
+                  ]}
                   sortOptions={[
                     { key: 'title', order: 'asc', label: 'Tên A-Z' },
                     { key: 'title', order: 'desc', label: 'Tên Z-A' },
@@ -4166,7 +4534,7 @@ const AdminDashboardModal: React.FC<{
 
                 <div className="grid grid-cols-1 gap-4">
                   {(() => {
-                    const filtered = getFilteredAndSorted(services, ['title', 'description', 'price']);
+                    const filtered = getFilteredAndSorted(services, ['title', 'description', 'price'], 'category');
                     const totalItems = filtered.length;
                     const totalPages = Math.ceil(totalItems / SERVICES_PER_PAGE);
                     const paginated = filtered.slice((servicePage - 1) * SERVICES_PER_PAGE, servicePage * SERVICES_PER_PAGE);
@@ -4758,9 +5126,35 @@ const AdminDashboardModal: React.FC<{
             )}
 
             {activeTab === 'wrap-manager' && (
-              <WrapProjectManager 
+              <ProjectManager 
+                title="Quản Lý Dự Án Wrap & PPF"
+                typeLabel="Loại Wrap"
+                colorLabel="Màu Sắc/Mã Phim"
+                idPrefix="wp"
                 projects={siteConfig.wrapProjects || []} 
                 onUpdate={(projects) => setSiteConfig({...siteConfig, wrapProjects: projects})} 
+              />
+            )}
+
+            {activeTab === 'tint-manager' && (
+              <ProjectManager 
+                title="Quản Lý Dự Án Phim Cách Nhiệt"
+                typeLabel="Dòng Phim"
+                colorLabel="Độ Xuyên Sáng"
+                idPrefix="tp"
+                projects={siteConfig.tintProjects || []} 
+                onUpdate={(projects) => setSiteConfig({...siteConfig, tintProjects: projects})} 
+              />
+            )}
+
+            {activeTab === 'tuning-manager' && (
+              <ProjectManager 
+                title="Quản Lý Dự Án Nâng Cấp Xe"
+                typeLabel="Hạng Mục"
+                colorLabel="Chi Tiết Nâng Cấp"
+                idPrefix="tn"
+                projects={siteConfig.tuningProjects || []} 
+                onUpdate={(projects) => setSiteConfig({...siteConfig, tuningProjects: projects})} 
               />
             )}
 
@@ -6179,7 +6573,8 @@ const AdminDashboardModal: React.FC<{
                           </div>
                         </div>
 
-                        <div className="bg-slate-900/20 border border-white/5 rounded-[40px] overflow-hidden shadow-2xl backdrop-blur-xl">
+                        {/* Desktop Calendar Grid */}
+                        <div className="hidden md:block bg-slate-900/20 border border-white/5 rounded-[40px] overflow-hidden shadow-2xl backdrop-blur-xl">
                           <div className="grid grid-cols-7 border-b border-white/5 bg-slate-900/50">
                             {['CN', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'].map(d => (
                               <div key={d} className="py-4 text-center text-[10px] font-black text-slate-500 uppercase tracking-widest">{d}</div>
@@ -6261,6 +6656,164 @@ const AdminDashboardModal: React.FC<{
                                   </div>
                                 );
                               });
+                            })()}
+                          </div>
+                        </div>
+
+                        {/* Mobile Compact Calendar Picker & Daily List */}
+                        <div className="md:hidden block space-y-6">
+                          <div className="bg-slate-900/40 border border-white/5 rounded-[32px] p-4 shadow-xl">
+                            <div className="grid grid-cols-7 text-center text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">
+                              {['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'].map(d => <div key={d}>{d}</div>)}
+                            </div>
+                            <div className="grid grid-cols-7 gap-y-2">
+                              {(() => {
+                                const days = [];
+                                const year = calendarDate.getFullYear();
+                                const month = calendarDate.getMonth();
+                                const firstDay = new Date(year, month, 1).getDay();
+                                const lastDate = new Date(year, month + 1, 0).getDate();
+                                const prevLastDate = new Date(year, month, 0).getDate();
+                                
+                                for (let i = firstDay - 1; i >= 0; i--) {
+                                  days.push({ day: prevLastDate - i, month: month - 1, current: false });
+                                }
+                                for (let i = 1; i <= lastDate; i++) {
+                                  days.push({ day: i, month: month, current: true });
+                                }
+                                const remaining = 42 - days.length;
+                                for (let i = 1; i <= remaining; i++) {
+                                  days.push({ day: i, month: month + 1, current: false });
+                                }
+
+                                return days.map((d, index) => {
+                                  let finalYear = year;
+                                  let finalMonth = d.month;
+                                  if (d.month < 0) {
+                                    finalMonth = 11;
+                                    finalYear = year - 1;
+                                  } else if (d.month > 11) {
+                                    finalMonth = 0;
+                                    finalYear = year + 1;
+                                  }
+                                  const dateStr = `${finalYear}-${String(finalMonth + 1).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
+                                  const isSelected = selectedCalendarDay === dateStr;
+                                  const isToday = new Date().toISOString().split('T')[0] === dateStr && d.current;
+                                  const dayApps = (siteConfig.appointments || []).filter(a => a.date === dateStr);
+
+                                  return (
+                                    <button
+                                      key={index}
+                                      type="button"
+                                      onClick={() => setSelectedCalendarDay(dateStr)}
+                                      className={`aspect-square flex flex-col items-center justify-center relative rounded-full transition-all cursor-pointer ${
+                                        !d.current ? 'opacity-25' : ''
+                                      } ${
+                                        isSelected 
+                                          ? 'bg-blue-600 text-white font-black scale-105 shadow-lg shadow-blue-500/20' 
+                                          : isToday 
+                                            ? 'bg-blue-600/10 text-blue-400 font-extrabold border border-blue-500/30' 
+                                            : 'hover:bg-white/5 text-slate-300 font-bold'
+                                      }`}
+                                    >
+                                      <span className="text-xs">{d.day}</span>
+                                      {dayApps.length > 0 && (
+                                        <span className={`absolute bottom-1 w-1.5 h-1.5 rounded-full ${
+                                          isSelected ? 'bg-white' : 'bg-blue-500'
+                                        }`}></span>
+                                      )}
+                                    </button>
+                                  );
+                                });
+                              })()}
+                            </div>
+                          </div>
+
+                          {/* Selected Day's Appointments Timeline for Mobile */}
+                          <div className="space-y-4">
+                            <div className="flex items-center justify-between px-1">
+                              <h5 className="text-[10px] font-black uppercase text-slate-400 tracking-widest flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                Ngày {selectedCalendarDay ? new Intl.DateTimeFormat('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(new Date(selectedCalendarDay)) : ''}
+                              </h5>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setIsAddingAppointment(true);
+                                  setEditingAppointmentId(null);
+                                  setAppointmentForm({ customerName: '', phone: '', carModel: '', serviceId: '', date: selectedCalendarDay, time: '09:00', status: 'pending', note: '' });
+                                }}
+                                className="text-[10px] font-black text-blue-500 uppercase tracking-widest hover:text-white transition-colors flex items-center gap-1 cursor-pointer bg-blue-500/10 px-3 py-1.5 rounded-xl border border-blue-500/20"
+                              >
+                                <Plus className="w-3.5 h-3.5" /> Thêm nhanh
+                              </button>
+                            </div>
+
+                            {(() => {
+                              const dayApps = (siteConfig.appointments || []).filter(a => a.date === selectedCalendarDay);
+                              if (dayApps.length === 0) {
+                                return (
+                                  <div className="bg-slate-900/35 border border-white/5 rounded-[32px] p-8 text-center text-slate-500">
+                                    <Clock className="w-8 h-8 text-slate-600 mx-auto mb-2 opacity-55" />
+                                    <p className="text-xs font-bold text-slate-400">Không có lịch hẹn ngày này</p>
+                                    <p className="text-[9px] text-slate-500 mt-1 uppercase tracking-wider">Tạo lịch nhanh bằng nút bên trên</p>
+                                  </div>
+                                );
+                              }
+
+                              return (
+                                <div className="space-y-3">
+                                  {dayApps.map(app => (
+                                    <div 
+                                      key={app.id} 
+                                      className="bg-slate-900/60 border border-white/5 rounded-3xl p-4 flex items-center justify-between gap-4 transition-all hover:bg-slate-900"
+                                    >
+                                      <div className="flex-1 min-w-0 space-y-1">
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                          <span className="font-mono text-[10px] font-bold text-white bg-slate-950 px-2 py-0.5 rounded-lg border border-white/5">{app.time}</span>
+                                          <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1.5 rounded-xl border ${
+                                            app.status === 'confirmed' ? 'bg-emerald-600/10 text-emerald-400 border-emerald-500/20' : 
+                                            app.status === 'completed' ? 'bg-blue-600/10 text-blue-400 border-blue-500/20' :
+                                            app.status === 'cancelled' ? 'bg-red-600/10 text-red-400 border-red-500/20' :
+                                            'bg-amber-600/10 text-amber-400 border-amber-500/20'
+                                          }`}>
+                                            {app.status === 'confirmed' ? 'Đã duyệt' : 
+                                             app.status === 'completed' ? 'Xong' : 
+                                             app.status === 'cancelled' ? 'Đã hủy' : 'Chờ duyệt'}
+                                          </span>
+                                        </div>
+                                        <div className="text-sm font-extrabold text-white truncate">{app.customerName}</div>
+                                        <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                                          <Car className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
+                                          <span className="truncate">{app.carModel}</span>
+                                        </div>
+                                        {app.phone && (
+                                          <div className="text-[10px] text-slate-500 font-bold tracking-wider">SĐT: {app.phone}</div>
+                                        )}
+                                      </div>
+                                      
+                                      <div className="flex items-center gap-1.5">
+                                        <button 
+                                          onClick={() => { setIsAddingAppointment(true); setEditingAppointmentId(app.id); setAppointmentForm(app); }}
+                                          className="w-9 h-9 rounded-2xl bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                                        >
+                                          <Edit2 className="w-4 h-4" />
+                                        </button>
+                                        <button 
+                                          onClick={() => {
+                                            const updatedApps = (siteConfig.appointments || []).filter(a => a.id !== app.id);
+                                            setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
+                                            toast.success('Đã xóa lịch hẹn!');
+                                          }}
+                                          className="w-9 h-9 rounded-2xl bg-slate-800 text-slate-400 hover:text-red-400 flex items-center justify-center transition-all cursor-pointer"
+                                        >
+                                          <Trash2 className="w-4 h-4" />
+                                        </button>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              );
                             })()}
                           </div>
                         </div>
@@ -6375,6 +6928,10 @@ const AdminDashboardModal: React.FC<{
                               <option value="cancelled">Đã hủy</option>
                             </select>
                           </div>
+                          <div className="space-y-2 md:col-span-2 lg:col-span-3">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Ghi chú</label>
+                            <textarea value={appointmentForm.note} onChange={e => setAppointmentForm({...appointmentForm, note: e.target.value})} placeholder="VD: Khách phủ thêm ceramic, xe cực bẩn..." rows={3} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none resize-none" />
+                          </div>
                         </div>
                         <div className="flex gap-4 pt-10">
                           <button 
@@ -6394,46 +6951,133 @@ const AdminDashboardModal: React.FC<{
                         </div>
                       </motion.div>
                     ) : (
-                      <div className="overflow-x-auto rounded-[40px] border border-white/5 shadow-2xl overflow-hidden bg-slate-900/20">
-                        <table className="w-full text-left min-w-[1000px]">
-                          <thead>
-                            <tr className="bg-slate-900/50 border-b border-white/5 text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                              <th className="px-8 py-6">Thời gian hẹn</th>
-                              <th className="px-8 py-6">Khách hàng</th>
-                              <th className="px-8 py-6">Phương tiện</th>
-                              <th className="px-8 py-6">Trạng thái</th>
-                              <th className="px-8 py-6 text-center">Thao tác</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-white/5">
-                            {(siteConfig.appointments || [])
+                      <>
+                        {/* Desktop View Table */}
+                        <div className="hidden md:block overflow-x-auto rounded-[40px] border border-white/5 shadow-2xl overflow-hidden bg-slate-900/20">
+                          <table className="w-full text-left min-w-[1000px]">
+                            <thead>
+                              <tr className="bg-slate-950/40 border-b border-white/5 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                                <th className="px-8 py-6">Thời gian hẹn</th>
+                                <th className="px-8 py-6">Khách hàng</th>
+                                <th className="px-8 py-6">Phương tiện</th>
+                                <th className="px-8 py-6">Trạng thái</th>
+                                <th className="px-8 py-6 text-center">Thao tác</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5">
+                              {(siteConfig.appointments || [])
+                                .filter(a => {
+                                  const matchesStatus = appointmentFilterStatus === 'all' || a.status === appointmentFilterStatus;
+                                  const matchesSearch = a.customerName.toLowerCase().includes(appointmentSearchQuery.toLowerCase()) || 
+                                                       a.phone.includes(appointmentSearchQuery) ||
+                                                       a.carModel.toLowerCase().includes(appointmentSearchQuery.toLowerCase());
+                                  return matchesStatus && matchesSearch;
+                                })
+                                .map(app => (
+                                <tr key={app.id} className="hover:bg-blue-600/5 transition-colors group">
+                                  <td className="px-8 py-6">
+                                    <div className="font-black text-white text-sm">{app.date}</div>
+                                    <div className="text-[10px] text-blue-500 font-bold tracking-widest mt-0.5">{app.time}</div>
+                                  </td>
+                                  <td className="px-8 py-6">
+                                    <div className="flex items-center gap-2">
+                                      <div className="font-black text-white text-sm">{app.customerName}</div>
+                                      {app.isRead === false && (
+                                        <span className="bg-red-600 text-white text-[8px] font-black px-1.5 py-0.5 rounded-md animate-pulse uppercase">Mới</span>
+                                      )}
+                                    </div>
+                                    <div className="text-[10px] text-slate-500 font-bold tracking-widest mt-0.5">{app.phone}</div>
+                                  </td>
+                                  <td className="px-8 py-6">
+                                    <div className="text-xs font-bold text-slate-300">{app.carModel}</div>
+                                    {app.subServiceTitle && <div className="text-[10px] text-emerald-500 font-bold mt-1 uppercase tracking-widest">{app.subServiceTitle}</div>}
+                                  </td>
+                                  <td className="px-8 py-6">
+                                    <select 
+                                      value={app.status}
+                                      onChange={(e) => {
+                                        const newStatus = e.target.value as any;
+                                        const updatedApps = (siteConfig.appointments || []).map(a => 
+                                          a.id === app.id ? { ...a, status: newStatus } : a
+                                        );
+                                        setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
+                                        toast.success(`Đã cập nhật trạng thái: ${newStatus === 'confirmed' ? 'Đã xác nhận' : newStatus === 'completed' ? 'Hoàn thành' : 'Chờ duyệt'}`);
+                                      }}
+                                      className={`text-[9px] font-black uppercase px-3 py-1.5 rounded-xl outline-none transition-all cursor-pointer border border-transparent hover:border-white/10 ${
+                                        app.status === 'confirmed' ? 'bg-emerald-600/20 text-emerald-400' : 
+                                        app.status === 'completed' ? 'bg-blue-600/20 text-blue-400' :
+                                        app.status === 'cancelled' ? 'bg-red-600/20 text-red-400' :
+                                        'bg-amber-600/20 text-amber-400'
+                                      }`}
+                                    >
+                                      <option value="pending" className="bg-slate-900 text-white">Chờ duyệt</option>
+                                      <option value="confirmed" className="bg-slate-900 text-white">Đã xác nhận</option>
+                                      <option value="completed" className="bg-slate-900 text-white">Hoàn thành</option>
+                                      <option value="cancelled" className="bg-slate-900 text-white">Đã hủy</option>
+                                    </select>
+                                  </td>
+                                  <td className="px-8 py-6 text-center">
+                                    <div className="flex justify-center gap-2">
+                                      <button 
+                                        onClick={() => { setIsAddingAppointment(true); setEditingAppointmentId(app.id); setAppointmentForm(app); }}
+                                        className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
+                                      >
+                                        <Edit2 className="w-4 h-4" />
+                                      </button>
+                                      <button 
+                                        onClick={() => {
+                                          const updatedApps = (siteConfig.appointments || []).filter(a => a.id !== app.id);
+                                          setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
+                                          toast.success('Đã xóa lịch hẹn!');
+                                        }}
+                                        className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
+                                      >
+                                        <Trash2 className="w-4 h-4" />
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {/* Mobile View Cards */}
+                        <div className="md:hidden space-y-4">
+                          {(() => {
+                            const filteredApps = (siteConfig.appointments || [])
                               .filter(a => {
                                 const matchesStatus = appointmentFilterStatus === 'all' || a.status === appointmentFilterStatus;
                                 const matchesSearch = a.customerName.toLowerCase().includes(appointmentSearchQuery.toLowerCase()) || 
                                                      a.phone.includes(appointmentSearchQuery) ||
                                                      a.carModel.toLowerCase().includes(appointmentSearchQuery.toLowerCase());
                                 return matchesStatus && matchesSearch;
-                              })
-                              .map(app => (
-                              <tr key={app.id} className="hover:bg-blue-600/5 transition-colors group">
-                                <td className="px-8 py-6">
-                                  <div className="font-black text-white text-sm">{app.date}</div>
-                                  <div className="text-[10px] text-blue-500 font-bold tracking-widest mt-0.5">{app.time}</div>
-                                </td>
-                                <td className="px-8 py-6">
-                                  <div className="flex items-center gap-2">
-                                    <div className="font-black text-white text-sm">{app.customerName}</div>
-                                    {app.isRead === false && (
-                                      <span className="bg-red-600 text-white text-[8px] font-black px-1.5 py-0.5 rounded-md animate-pulse uppercase">Mới</span>
-                                    )}
+                              });
+
+                            if (filteredApps.length === 0) {
+                              return (
+                                <div className="bg-slate-900/35 border border-white/5 rounded-[32px] p-12 text-center text-slate-500">
+                                  <Search className="w-10 h-10 text-slate-600 mx-auto mb-3 opacity-60" />
+                                  <p className="text-xs font-bold text-slate-400">Không tìm thấy lịch hẹn nào</p>
+                                  <p className="text-[10px] text-slate-500 mt-1 uppercase tracking-wider">Hãy thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+                                </div>
+                              );
+                            }
+
+                            return filteredApps.map(app => (
+                              <div 
+                                key={app.id}
+                                className="bg-slate-900/55 border border-white/5 rounded-[28px] p-5 space-y-4 transition-all hover:border-white/10"
+                              >
+                                {/* Time & Status Badges */}
+                                <div className="flex items-center justify-between gap-2 flex-wrap">
+                                  <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold text-slate-400">
+                                    <Calendar className="w-3.5 h-3.5 text-blue-500" />
+                                    <span>{app.date}</span>
+                                    <span className="text-slate-700 font-normal">|</span>
+                                    <span className="text-white">{app.time}</span>
                                   </div>
-                                  <div className="text-[10px] text-slate-500 font-bold tracking-widest mt-0.5">{app.phone}</div>
-                                </td>
-                                <td className="px-8 py-6">
-                                  <div className="text-xs font-bold text-slate-300">{app.carModel}</div>
-                                  {app.subServiceTitle && <div className="text-[10px] text-emerald-500 font-bold mt-1 uppercase tracking-widest">{app.subServiceTitle}</div>}
-                                </td>
-                                <td className="px-8 py-6">
+                                  
                                   <select 
                                     value={app.status}
                                     onChange={(e) => {
@@ -6444,49 +7088,85 @@ const AdminDashboardModal: React.FC<{
                                       setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
                                       toast.success(`Đã cập nhật trạng thái: ${newStatus === 'confirmed' ? 'Đã xác nhận' : newStatus === 'completed' ? 'Hoàn thành' : 'Chờ duyệt'}`);
                                     }}
-                                    className={`text-[9px] font-black uppercase px-3 py-1.5 rounded-xl outline-none transition-all cursor-pointer border border-transparent hover:border-white/10 ${
-                                      app.status === 'confirmed' ? 'bg-emerald-600/20 text-emerald-400' : 
-                                      app.status === 'completed' ? 'bg-blue-600/20 text-blue-400' :
-                                      app.status === 'cancelled' ? 'bg-red-600/20 text-red-400' :
-                                      'bg-amber-600/20 text-amber-400'
+                                    className={`text-[9px] font-black uppercase px-2.5 py-1.5 rounded-xl outline-none transition-all cursor-pointer border border-transparent ${
+                                      app.status === 'confirmed' ? 'bg-emerald-600/20 text-emerald-400 border-emerald-500/10' : 
+                                      app.status === 'completed' ? 'bg-blue-600/20 text-blue-400 border-blue-500/10' :
+                                      app.status === 'cancelled' ? 'bg-red-600/20 text-red-400 border-red-500/10' :
+                                      'bg-amber-600/20 text-amber-400 border-amber-500/10'
                                     }`}
                                   >
                                     <option value="pending" className="bg-slate-900 text-white">Chờ duyệt</option>
-                                    <option value="confirmed" className="bg-slate-900 text-white">Đã xác nhận</option>
-                                    <option value="completed" className="bg-slate-900 text-white">Hoàn thành</option>
+                                    <option value="confirmed" className="bg-slate-900 text-white">Đã duyệt</option>
+                                    <option value="completed" className="bg-slate-900 text-white">Xong</option>
                                     <option value="cancelled" className="bg-slate-900 text-white">Đã hủy</option>
                                   </select>
-                                </td>
-                                <td className="px-8 py-6 text-center">
-                                  <div className="flex justify-center gap-2">
-                                    <button 
-                                      onClick={() => { setIsAddingAppointment(true); setEditingAppointmentId(app.id); setAppointmentForm(app); }}
-                                      className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
-                                    >
-                                      <Edit2 className="w-4 h-4" />
-                                    </button>
-                                    <button 
-                                      onClick={() => {
-                                        const updatedApps = (siteConfig.appointments || []).filter(a => a.id !== app.id);
-                                        setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
-                                        toast.success('Đã xóa lịch hẹn!');
-                                      }}
-                                      className="w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center shadow-lg"
-                                    >
-                                      <Trash2 className="w-4 h-4" />
-                                    </button>
+                                </div>
+
+                                {/* Customer details */}
+                                <div className="border-t border-b border-white/[0.03] py-3.5 space-y-2">
+                                  <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                      <div className="flex items-center gap-2">
+                                        <h4 className="text-sm font-black text-white">{app.customerName}</h4>
+                                        {app.isRead === false && (
+                                          <span className="bg-red-600 text-white text-[7px] font-black px-1.5 py-0.5 rounded-md animate-pulse uppercase tracking-wider">Mới</span>
+                                        )}
+                                      </div>
+                                      
+                                      {app.phone && (
+                                        <a 
+                                          href={`tel:${app.phone}`}
+                                          className="text-[11px] text-blue-400 font-extrabold hover:underline mt-0.5 inline-flex items-center gap-1"
+                                        >
+                                          <Phone className="w-3 h-3" /> {app.phone}
+                                        </a>
+                                      )}
+                                    </div>
+                                    
+                                    <div className="text-right">
+                                      <div className="text-xs font-bold text-slate-200 uppercase tracking-wide">{app.carModel}</div>
+                                      {app.subServiceTitle && (
+                                        <div className="text-[9px] text-emerald-500 font-bold mt-0.5 uppercase tracking-wider bg-emerald-500/5 px-2 py-0.5 rounded-lg border border-emerald-500/10 inline-block">{app.subServiceTitle}</div>
+                                      )}
+                                    </div>
                                   </div>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
+                                  {app.note && (
+                                    <div className="text-[10px] text-slate-500 italic bg-white/[0.01] p-2.5 rounded-xl border border-white/5 mt-2">
+                                      Ghi chú: {app.note}
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Actions in line */}
+                                <div className="flex justify-end gap-2 pt-1">
+                                  <button 
+                                    onClick={() => { setIsAddingAppointment(true); setEditingAppointmentId(app.id); setAppointmentForm(app); }}
+                                    className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 text-slate-350 hover:bg-slate-700 font-bold uppercase tracking-wider text-[10px] transition-all cursor-pointer"
+                                  >
+                                    <Edit2 className="w-3.5 h-3.5" /> Sửa lịch
+                                  </button>
+                                  <button 
+                                    onClick={() => {
+                                      const updatedApps = (siteConfig.appointments || []).filter(a => a.id !== app.id);
+                                      setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
+                                      toast.success('Đã xóa lịch hẹn!');
+                                    }}
+                                    className="px-3.5 py-2.5 rounded-xl bg-red-600/10 border border-red-500/20 text-red-400 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center cursor-pointer"
+                                    aria-label="Xóa"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </>
                     )}
                   </>
-                )}
-              </div>
-            )}
+                  )}
+                </div>
+              )}
 
                 {activeTab === 'customers' && (
                   <div className="space-y-8">
@@ -8562,6 +9242,188 @@ const AdminDashboardModal: React.FC<{
   );
 };
 
+const calculateDiagnostics = (form: Partial<NewsArticle>) => {
+  const title = form.title || '';
+  const content = form.content || '';
+  const excerpt = form.excerpt || '';
+  const slug = form.slug || '';
+  const metaTitle = form.metaTitle || '';
+  const metaDescription = form.metaDescription || '';
+  const metaKeywords = form.metaKeywords;
+  const imageAlt = form.imageAlt || '';
+
+  // 1. Stats calculation
+  const words = content.trim().split(/\s+/).filter(w => w.length > 0);
+  const wordsCount = words.length;
+
+  const sentences = content.split(/[.!?\n]+/).map(s => s.trim()).filter(s => s.length > 0);
+  const sentenceCount = sentences.length || 1;
+  const avgSentenceLength = wordsCount > 0 ? Math.round(wordsCount / sentenceCount) : 0;
+
+  // Keyword occurrences
+  const keywordList = Array.isArray(metaKeywords)
+    ? metaKeywords.map(k => k.trim().toLowerCase()).filter(k => k.length > 0)
+    : (typeof metaKeywords === 'string' && metaKeywords
+        ? metaKeywords.split(',').map(k => k.trim().toLowerCase()).filter(k => k.length > 0)
+        : []);
+  
+  let keywordMatches = 0;
+  if (keywordList.length > 0 && wordsCount > 0) {
+    const lowercaseContent = content.toLowerCase();
+    keywordList.forEach(kw => {
+      try {
+        const escapedKw = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`\\b${escapedKw}\\b`, 'gi');
+        const matches = lowercaseContent.match(regex);
+        if (matches) {
+          keywordMatches += matches.length;
+        } else {
+          let pos = lowercaseContent.indexOf(kw);
+          while (pos !== -1) {
+            keywordMatches++;
+            pos = lowercaseContent.indexOf(kw, pos + kw.length);
+          }
+        }
+      } catch (e) {
+        let pos = lowercaseContent.indexOf(kw);
+        while (pos !== -1) {
+          keywordMatches++;
+          pos = lowercaseContent.indexOf(kw, pos + kw.length);
+        }
+      }
+    });
+  }
+  const keywordDensity = wordsCount > 0 ? (keywordMatches / wordsCount) * 100 : 0;
+
+  // 2. Readability Score & Feedback
+  let readabilityScore = 100;
+  const readabilityFeedback: string[] = [];
+
+  if (wordsCount === 0) {
+    readabilityScore = 0;
+    readabilityFeedback.push('⚠️ Vui lòng nhập nội dung bài viết để bắt đầu đánh giá độ dễ đọc.');
+  } else {
+    if (wordsCount < 150) {
+      readabilityScore -= 20;
+      readabilityFeedback.push('⚠️ Nội dung quá ngắn (dưới 150 từ). Hãy mở rộng bài viết hơn.');
+    } else if (wordsCount >= 150 && wordsCount < 400) {
+      readabilityFeedback.push('ℹ️ Độ dài văn bản ở mức trung bình. Có thể bổ sung thêm chi tiết.');
+    } else {
+      readabilityFeedback.push('✅ Độ dài tuyệt vời (>400 từ), rất có chiều sâu cho độc giả.');
+    }
+
+    if (avgSentenceLength > 22) {
+      const penalty = Math.min(35, (avgSentenceLength - 22) * 2.5);
+      readabilityScore -= penalty;
+      readabilityFeedback.push(`⚠️ Câu dài trung bình ${avgSentenceLength} từ. Hãy chia câu ngắn gọn hơn (<22 từ) để lôi cuốn hơn.`);
+    } else if (avgSentenceLength < 8) {
+      readabilityScore -= 10;
+      readabilityFeedback.push(`⚠️ Các câu văn quá ngắn (trung bình ${avgSentenceLength} từ). Sử dụng câu dài ghép thích hợp giúp câu từ mượt mà hơn.`);
+    } else {
+      readabilityFeedback.push('✅ Độ dài câu trung bình cân bằng tốt (8 - 22 từ), dễ tiếp thu.');
+    }
+
+    const paragraphs = content.split('\n\n').filter(p => p.trim().length > 0);
+    if (paragraphs.length > 0) {
+      let longParagraph = false;
+      paragraphs.forEach(p => {
+        if (p.split(/\s+/).length > 90) {
+          longParagraph = true;
+        }
+      });
+      if (longParagraph) {
+        readabilityScore -= 15;
+        readabilityFeedback.push('⚠️ Có đoạn văn quá dài (trên 90 từ). Hãy gỡ phím Enter để ngăn cách thành các đoạn nhỏ hơn.');
+      }
+    }
+  }
+  readabilityScore = Math.max(0, Math.min(100, Math.round(readabilityScore)));
+
+  // 3. SEO Score & Feedback
+  let seoScore = 0;
+  const seoFeedback: string[] = [];
+
+  if (metaTitle) {
+    if (metaTitle.length >= 40 && metaTitle.length <= 60) {
+      seoScore += 15;
+      seoFeedback.push('✅ Tiêu đề SEO (Meta Title) có độ dài lý tưởng (40 - 60 ký tự).');
+    } else {
+      seoScore += 8;
+      seoFeedback.push(`⚠️ Tiêu đề SEO hiện dài ${metaTitle.length} ký tự. Nên điều chỉnh về khoảng 40 - 60 ký tự.`);
+    }
+  } else {
+    seoFeedback.push('❌ Chưa có Tiêu đề SEO (Meta Title).');
+  }
+
+  if (metaDescription) {
+    if (metaDescription.length >= 100 && metaDescription.length <= 160) {
+      seoScore += 15;
+      seoFeedback.push('✅ Mô tả SEO (Meta Description) hoàn hảo (100 - 160 ký tự).');
+    } else {
+      seoScore += 8;
+      seoFeedback.push(`⚠️ Mô tả SEO dài ${metaDescription.length} ký tự. Hãy điều chỉnh tối ưu về 100 - 160 ký tự.`);
+    }
+  } else {
+    seoFeedback.push('❌ Thiếu Mô tả SEO (Meta Description).');
+  }
+
+  if (imageAlt) {
+    seoScore += 15;
+    seoFeedback.push('✅ Đã nhập mô tả ảnh thay thế (Alt text), Google dễ ghi nhận hình ảnh.');
+  } else {
+    seoFeedback.push('❌ Thiếu Alt text cho hình ảnh bìa.');
+  }
+
+  if (slug) {
+    seoScore += 10;
+    seoFeedback.push('✅ Đã tạo đường dẫn thân thiện (slug).');
+  } else {
+    seoFeedback.push('❌ Chưa cấu hình URL Slug.');
+  }
+
+  if (keywordList.length === 0) {
+    seoFeedback.push('❌ Chưa nhập từ khóa SEO nào trong tab SEO.');
+  } else {
+    const hasKeywordInTitle = keywordList.some(kw => title.toLowerCase().includes(kw));
+    if (hasKeywordInTitle) {
+      seoScore += 15;
+      seoFeedback.push('✅ Từ khóa mục tiêu nằm trong tiêu đề bài viết.');
+    } else {
+      seoFeedback.push('⚠️ Từ khóa SEO chưa có trong tiêu đề. Hãy lồng ghép từ khóa vào tiêu đề bài viết.');
+    }
+
+    if (wordsCount > 0) {
+      if (keywordDensity === 0) {
+        seoFeedback.push('❌ Từ khóa SEO mục tiêu không có mặt trong nội dung.');
+      } else if (keywordDensity < 1.0) {
+        seoScore += 10;
+        seoFeedback.push(`⚠️ Mật độ từ khóa hiện là ${keywordDensity.toFixed(1)}% (mức thấp). Nên phân bổ lặp lại từ khóa thêm.`);
+      } else if (keywordDensity >= 1.0 && keywordDensity <= 3.5) {
+        seoScore += 30;
+        seoFeedback.push(`✅ Mật độ từ khóa tối ưu: ${keywordDensity.toFixed(1)}% (mức tiêu chuẩn 1.0% - 3.5%).`);
+      } else {
+        seoScore += 10;
+        seoFeedback.push(`⚠️ Mật độ từ khóa quá đậm đặc: ${keywordDensity.toFixed(1)}% (nhồi nhét từ khóa). Có thể bị Google phạt.`);
+      }
+    }
+  }
+
+  seoScore = Math.max(0, Math.min(100, Math.round(seoScore)));
+
+  return {
+    readabilityScore,
+    seoScore,
+    readabilityFeedback,
+    seoFeedback,
+    stats: {
+      wordsCount,
+      sentenceCount,
+      avgSentenceLength,
+      keywordDensity
+    }
+  };
+};
+
 const NewsManagement: React.FC<{
   news: NewsArticle[];
   setNews: (news: NewsArticle[]) => void;
@@ -8570,9 +9432,126 @@ const NewsManagement: React.FC<{
   const [isAiGenerating, setIsAiGenerating] = useState(false);
   const [aiPrompt, setAiPrompt] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [activeFormTab, setActiveFormTab] = useState<'content' | 'seo'>('content');
+  const [tagInput, setTagInput] = useState('');
   const [form, setForm] = useState<Partial<NewsArticle>>({
-    title: '', excerpt: '', content: '', image: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0]
+    title: '', slug: '', excerpt: '', content: '', image: '', imageAlt: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0],
+    metaTitle: '', metaDescription: '', metaKeywords: [] as string[]
   });
+
+  const diagnostics = useMemo(() => calculateDiagnostics(form), [form]);
+
+  const renderFeedbackItem = (text: string, index: number) => {
+    let Icon = Info;
+    let iconColor = 'text-blue-400 bg-blue-400/10';
+    let cleanText = text;
+
+    if (text.startsWith('✅')) {
+      Icon = CheckCircle2;
+      iconColor = 'text-emerald-400 bg-emerald-400/10';
+      cleanText = text.substring(1).trim();
+    } else if (text.startsWith('⚠️')) {
+      Icon = AlertTriangle;
+      iconColor = 'text-yellow-400 bg-yellow-400/10';
+      cleanText = text.substring(1).trim();
+    } else if (text.startsWith('❌')) {
+      Icon = XCircle;
+      iconColor = 'text-rose-400 bg-rose-400/10';
+      cleanText = text.substring(1).trim();
+    } else if (text.startsWith('ℹ️')) {
+      Icon = Info;
+      iconColor = 'text-blue-400 bg-blue-400/10';
+      cleanText = text.substring(2).trim();
+    }
+
+    return (
+      <div key={index} className="flex gap-3 text-xs leading-relaxed text-slate-300 items-start">
+        <div className={`p-1 rounded-lg shrink-0 w-5 h-5 flex items-center justify-center mt-0.5 ${iconColor}`}>
+          <Icon className="w-3.5 h-3.5" />
+        </div>
+        <span>{cleanText}</span>
+      </div>
+    );
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error("Ảnh quá lớn, vui lòng chọn ảnh dưới 2MB");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setForm({ ...form, image: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleGenerateSEO = async () => {
+    if (!form.title || !form.content) return toast.error("Vui lòng nhập tiêu đề và nội dung để tạo SEO!");
+    
+    const hasKey = await window.aistudio.hasSelectedApiKey();
+    if (!hasKey) {
+      await window.aistudio.openSelectKey();
+      return;
+    }
+
+    setIsAiGenerating(true);
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+      const prompt = `Bạn là chuyên gia SEO cho trung tâm chăm sóc xe. Dựa trên bài viết:
+      Tiêu đề: ${form.title}
+      Nội dung: ${form.content.substring(0, 1000)}...
+      
+      Hãy tạo các thuộc tính SEO để đẩy bài viết lên TOP 1 Google:
+      1. metaTitle: Tối ưu 60 ký tự, chứa từ khóa chính, hấp dẫn.
+      2. metaDescription: Tối ưu 160 ký tự, tóm tắt bài viết, lời kêu gọi hành động.
+      3. metaKeywords: 10 từ khóa liên quan, cách nhau dấu phẩy.
+      4. imageAlt: Mô tả ảnh cho người khiếm thị và Google (alt text).
+      
+      QUAN TRỌNG: Chỉ trả về JSON.`;
+
+      const response = await ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        contents: prompt,
+        config: { responseMimeType: "application/json" }
+      });
+
+      const result = JSON.parse(response.text || "{}");
+      const rawKeywords = result.metaKeywords || 'detailing, xe dep pro, cham soc xe';
+      const keywordsArr = typeof rawKeywords === 'string'
+        ? rawKeywords.split(',').map((k: string) => k.trim()).filter((k: string) => k.length > 0)
+        : (Array.isArray(rawKeywords) ? rawKeywords : []);
+
+      setForm({
+        ...form,
+        metaTitle: result.metaTitle || `${form.title} | XE ĐẸP PRO`,
+        metaDescription: result.metaDescription || form.excerpt,
+        metaKeywords: keywordsArr,
+        imageAlt: result.imageAlt || form.title
+      });
+      toast.success("Đã tối ưu SEO hoàn tất!");
+      setActiveFormTab('seo');
+    } catch (error: any) {
+      toast.error("Lỗi AI SEO: " + error.message);
+    } finally {
+      setIsAiGenerating(false);
+    }
+  };
+
+  const handleTitleChange = (title: string) => {
+    const currentSlug = form.slug || '';
+    const autoSlug = generateSlug(form.title || '');
+    
+    // Nếu slug trống hoặc đang khớp với slug tự động từ tiêu đề cũ, thì cập nhật slug mới
+    if (!currentSlug || currentSlug === autoSlug) {
+      setForm({ ...form, title, slug: generateSlug(title) });
+    } else {
+      setForm({ ...form, title });
+    }
+  };
 
   const handleAiGenerate = async () => {
     if (!aiPrompt) return toast.error("Vui lòng nhập mô tả bài viết!");
@@ -8606,13 +9585,18 @@ const NewsManagement: React.FC<{
 
       const result = JSON.parse(response.text || "{}");
       if (result.title && result.content) {
+        const title = result.title;
         setForm({
           ...form,
-          title: result.title,
+          title,
+          slug: generateSlug(title),
           excerpt: result.excerpt || '',
           content: result.content,
           category: result.category || 'news',
-          image: 'https://images.unsplash.com/photo-1599256621730-535171e28e50?auto=format&fit=crop&q=80&w=800' // Default image
+          image: result.image || 'https://images.unsplash.com/photo-1599256621730-535171e28e50?auto=format&fit=crop&q=80&w=800',
+          metaTitle: result.title,
+          metaDescription: result.excerpt,
+          metaKeywords: [result.category || 'news', 'ceramic', 'ppf', 'detailing'],
         });
         setIsAdding(true);
         setAiPrompt('');
@@ -8628,14 +9612,24 @@ const NewsManagement: React.FC<{
   const handleSave = () => {
     if (!form.title || !form.content) return toast.error("Vui lòng nhập tiêu đề và nội dung!");
     
+    const finalSlug = form.slug || generateSlug(form.title);
+    const finalArticle = { 
+      ...form as NewsArticle, 
+      id: editingId || Date.now().toString(),
+      slug: finalSlug 
+    };
+
     if (editingId) {
-      setNews((news || []).map(n => n.id === editingId ? { ...n, ...form as NewsArticle } : n));
+      setNews((news || []).map(n => n.id === editingId ? finalArticle : n));
     } else {
-      setNews([{ ...form as NewsArticle, id: Date.now().toString() }, ...(news || [])]);
+      setNews([finalArticle, ...(news || [])]);
     }
     setIsAdding(false);
     setEditingId(null);
-    setForm({ title: '', excerpt: '', content: '', image: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0] });
+    setForm({ 
+      title: '', slug: '', excerpt: '', content: '', image: '', imageAlt: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0],
+      metaTitle: '', metaDescription: '', metaKeywords: [] as string[]
+    });
   };
 
   return (
@@ -8665,7 +9659,14 @@ const NewsManagement: React.FC<{
             </button>
           </div>
           <button 
-            onClick={() => setIsAdding(true)}
+            onClick={() => {
+              setForm({ 
+                title: '', slug: '', excerpt: '', content: '', image: '', imageAlt: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0],
+                metaTitle: '', metaDescription: '', metaKeywords: [] as string[]
+              });
+              setEditingId(null);
+              setIsAdding(true);
+            }}
             className="btn-primary px-6 py-3 text-[10px]"
           >
             <Plus className="w-4 h-4" /> Thêm Bài Viết
@@ -8679,63 +9680,369 @@ const NewsManagement: React.FC<{
           animate={{ opacity: 1, y: 0 }}
           className="bg-slate-900/50 border border-white/10 p-8 rounded-[32px] space-y-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tiêu đề bài viết</label>
-              <input 
-                value={form.title}
-                onChange={e => setForm({...form, title: e.target.value})}
-                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
-              />
+          {/* Form Tabs */}
+          <div className="flex gap-2 p-1 bg-slate-950 rounded-2xl w-fit">
+            <button 
+              onClick={() => setActiveFormTab('content')}
+              className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeFormTab === 'content' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-white'}`}
+            >
+              Nội Dung Chính
+            </button>
+            <button 
+              onClick={() => setActiveFormTab('seo')}
+              className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${activeFormTab === 'seo' ? 'bg-emerald-600 text-white' : 'text-slate-500 hover:text-white'}`}
+            >
+              Cấu Hình SEO <Zap className="w-3 h-3" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Cột trái: Form nhập liệu nội dung hoặc SEO */}
+            <div className="lg:col-span-8 space-y-6">
+              {activeFormTab === 'content' ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tiêu đề bài viết</label>
+                    <input 
+                      value={form.title}
+                      onChange={e => handleTitleChange(e.target.value)}
+                      placeholder="Nhập tiêu đề bài viết..."
+                      className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">URL Slug (Tự động tạo)</label>
+                    <input 
+                      value={form.slug}
+                      onChange={e => setForm({...form, slug: e.target.value})}
+                      placeholder="url-bai-viet-tu-dong"
+                      className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500 font-mono text-xs"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Phân loại</label>
+                    <select 
+                      value={form.category}
+                      onChange={e => setForm({...form, category: e.target.value as any})}
+                      className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+                    >
+                      <option value="tip">Mẹo chăm sóc xe</option>
+                      <option value="news">Tin tức dịch vụ</option>
+                      <option value="promotion">Khuyến mãi</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tác giả</label>
+                    <input 
+                      value={form.author}
+                      onChange={e => setForm({...form, author: e.target.value})}
+                      className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mô tả ngắn (Excerpt)</label>
+                    <textarea 
+                      value={form.excerpt}
+                      onChange={e => setForm({...form, excerpt: e.target.value})}
+                      className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-20 outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Nội dung chi tiết (Markdown)</label>
+                    <textarea 
+                      value={form.content}
+                      onChange={e => setForm({...form, content: e.target.value})}
+                      className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-60 outline-none focus:border-blue-500 font-mono text-sm"
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">Ảnh bìa bài viết</label>
+                    <div className="flex gap-4 items-start">
+                      <div className="flex-1 space-y-4">
+                        <input 
+                          value={form.image}
+                          onChange={e => setForm({...form, image: e.target.value})}
+                          placeholder="Nhập URL ảnh hoặc tải lên từ máy tính..."
+                          className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+                        />
+                        <div className="flex items-center gap-4">
+                          <label className="flex-1 cursor-pointer group">
+                            <div className="flex items-center justify-center gap-2 p-4 bg-slate-800 border-2 border-dashed border-white/10 rounded-xl hover:border-blue-500/50 hover:bg-slate-800/80 transition-all">
+                              <Upload className="w-5 h-5 text-slate-400 group-hover:text-blue-500" />
+                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-white">Tải ảnh từ máy tính</span>
+                            </div>
+                            <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                          </label>
+                          {form.image && (
+                            <button 
+                              onClick={() => setForm({...form, image: ''})}
+                              className="p-4 bg-red-500/10 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"
+                            >
+                              <Trash2 className="w-5 h-5" />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                      {form.image && (
+                        <div className="w-48 aspect-video rounded-xl overflow-hidden border border-white/10">
+                          <img src={form.image} alt="Preview" className="w-full h-full object-cover" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-6 max-w-4xl">
+                  <div className="flex items-center justify-between p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl mb-6">
+                    <div className="flex items-center gap-3">
+                      <Zap className="w-5 h-5 text-emerald-500" />
+                      <p className="text-[10px] font-black text-emerald-500 uppercase tracking-widest">Sử dụng AI để tối ưu bài viết lên TOP 1 Google</p>
+                    </div>
+                    <button 
+                      onClick={handleGenerateSEO}
+                      disabled={isAiGenerating}
+                      className="px-6 py-2 bg-emerald-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-500 transition-all disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {isAiGenerating ? <Loader2 className="w-3 h-3 animate-spin" /> : 'Tối ưu ngay'}
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-6">
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Bộ từ khóa SEO (Tags)</label>
+                      
+                      {/* Render current tags */}
+                      <div className="flex flex-wrap gap-2 p-3 bg-slate-950/45 border border-white/5 rounded-2xl min-h-[56px] items-center">
+                        {(() => {
+                          const currentTags = Array.isArray(form.metaKeywords)
+                            ? form.metaKeywords
+                            : (form.metaKeywords && typeof form.metaKeywords === 'string'
+                                ? form.metaKeywords.split(',').map(t => t.trim()).filter(Boolean)
+                                : []);
+
+                          if (currentTags.length === 0) {
+                            return <span className="text-slate-500 text-xs italic px-2">Chưa có từ khóa nào. Hãy thêm ở ô bên dưới...</span>;
+                          }
+
+                          return currentTags.map((tag, tagIdx) => (
+                            <div key={tagIdx} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono text-xs rounded-xl transition-all hover:bg-blue-500/20">
+                              <span>{tag}</span>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const updatedTags = currentTags.filter((_, idx) => idx !== tagIdx);
+                                  setForm({ ...form, metaKeywords: updatedTags });
+                                }}
+                                className="text-blue-400/50 hover:text-red-400 p-0.5 rounded transition-all"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            </div>
+                          ));
+                        })()}
+                      </div>
+
+                      {/* Add new tag input control */}
+                      <div className="flex gap-2">
+                        <div className="relative flex-1">
+                          <input 
+                            type="text"
+                            placeholder="Nhập từ khóa và nhấn Enter hoặc phẩy (,)..."
+                            value={tagInput}
+                            onChange={e => setTagInput(e.target.value)}
+                            onKeyDown={e => {
+                              if (e.key === 'Enter' || e.key === ',') {
+                                e.preventDefault();
+                                const cleanInput = tagInput.trim().replace(/,+/g, '');
+                                if (cleanInput) {
+                                  const currentTags = Array.isArray(form.metaKeywords)
+                                    ? form.metaKeywords
+                                    : (form.metaKeywords && typeof form.metaKeywords === 'string'
+                                        ? form.metaKeywords.split(',').map(t => t.trim()).filter(Boolean)
+                                        : []);
+                                  if (!currentTags.includes(cleanInput)) {
+                                    setForm({ ...form, metaKeywords: [...currentTags, cleanInput] });
+                                  }
+                                  setTagInput('');
+                                }
+                              }
+                            }}
+                            className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white text-xs outline-none focus:border-blue-500 font-mono"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const cleanInput = tagInput.trim().replace(/,+/g, '');
+                            if (cleanInput) {
+                              const currentTags = Array.isArray(form.metaKeywords)
+                                ? form.metaKeywords
+                                : (form.metaKeywords && typeof form.metaKeywords === 'string'
+                                    ? form.metaKeywords.split(',').map(t => t.trim()).filter(Boolean)
+                                    : []);
+                              if (!currentTags.includes(cleanInput)) {
+                                setForm({ ...form, metaKeywords: [...currentTags, cleanInput] });
+                              }
+                              setTagInput('');
+                            }
+                          }}
+                          className="px-6 py-4 bg-slate-800 text-slate-350 hover:bg-slate-700 hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all"
+                        >
+                          Thêm
+                        </button>
+                      </div>
+                      <p className="text-[8px] text-slate-500 italic px-1">Nhập từ khóa đơn lẻ hoặc nhập nhiều từ cách nhau bằng dấu phẩy. Giúp Google nhận diện bài viết.</p>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tiêu đề SEO (Meta Title)</label>
+                      <input 
+                        value={form.metaTitle}
+                        onChange={e => setForm({...form, metaTitle: e.target.value})}
+                        placeholder="Mặc định sẽ lấy tiêu đề bài viết | Tên Trung Tâm"
+                        className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+                      />
+                      <div className="flex justify-between items-center px-1">
+                        <p className="text-[8px] text-slate-500 italic">Hiển thị trực tiếp trên kết quả tìm kiếm Google.</p>
+                        <span className={`text-[8px] font-bold ${(form.metaTitle?.length || 0) > 60 ? 'text-red-500' : 'text-slate-500'}`}>{form.metaTitle?.length || 0}/60</span>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mô tả SEO (Meta Description)</label>
+                      <textarea 
+                        value={form.metaDescription}
+                        onChange={e => setForm({...form, metaDescription: e.target.value})}
+                        placeholder="Tóm tắt ngắn gọn bài viết một cách lôi cuốn..."
+                        className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-24 outline-none focus:border-blue-500 resize-none"
+                      />
+                      <div className="flex justify-between items-center px-1">
+                        <p className="text-[8px] text-slate-500 italic">Đoạn text nhỏ dưới tiêu đề trên Google.</p>
+                        <span className={`text-[8px] font-bold ${(form.metaDescription?.length || 0) > 160 ? 'text-red-500' : 'text-slate-500'}`}>{form.metaDescription?.length || 0}/160</span>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mô tả ảnh bìa (Image Alt Text)</label>
+                      <input 
+                        value={form.imageAlt}
+                        onChange={e => setForm({...form, imageAlt: e.target.value})}
+                        placeholder="Mô tả nội dung bức ảnh..."
+                        className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
+                      />
+                      <p className="text-[8px] text-slate-500 italic px-1">Giúp Google Images index ảnh của bạn.</p>
+                    </div>
+                  </div>
+
+                  {/* Google Result Preview */}
+                  <div className="mt-8 p-6 bg-white rounded-2xl space-y-2 border border-blue-500/20 shadow-xl shadow-blue-500/5">
+                    <p className="text-[10px] text-[#202124] mb-1">Xem trước kết quả trên Google:</p>
+                    <div className="text-[12px] text-[#202124] flex items-center gap-1.5 break-all">
+                      <span>xedeppro.com</span>
+                      <ChevronRight className="w-2 h-2 text-[#70757a]" />
+                      <span className="text-[#70757a]">{form.slug || 'url-slug'}</span>
+                    </div>
+                    <h3 className="text-[18px] text-[#1a0dab] font-normal hover:underline cursor-pointer leading-tight mb-1">
+                      {form.metaTitle || form.title || 'Tiêu đề bài viết xuất hiện tại đây...'}
+                    </h3>
+                    <p className="text-[14px] text-[#4d5156] leading-snug line-clamp-2">
+                      {form.metaDescription || form.excerpt || 'Đoạn mô tả SEO bài viết sẽ hiện ra ở đây để thu hút khách hàng click vào trang web của bạn...'}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Phân loại</label>
-              <select 
-                value={form.category}
-                onChange={e => setForm({...form, category: e.target.value as any})}
-                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
-              >
-                <option value="tip">Mẹo chăm sóc xe</option>
-                <option value="news">Tin tức dịch vụ</option>
-                <option value="promotion">Khuyến mãi</option>
-              </select>
-            </div>
-            <div className="space-y-2 md:col-span-2">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mô tả ngắn (Excerpt)</label>
-              <textarea 
-                value={form.excerpt}
-                onChange={e => setForm({...form, excerpt: e.target.value})}
-                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-20 outline-none focus:border-blue-500"
-              />
-            </div>
-            <div className="space-y-2 md:col-span-2">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Nội dung chi tiết (Markdown)</label>
-              <textarea 
-                value={form.content}
-                onChange={e => setForm({...form, content: e.target.value})}
-                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white h-60 outline-none focus:border-blue-500 font-mono text-sm"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">URL Ảnh bìa</label>
-              <input 
-                value={form.image}
-                onChange={e => setForm({...form, image: e.target.value})}
-                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tác giả</label>
-              <input 
-                value={form.author}
-                onChange={e => setForm({...form, author: e.target.value})}
-                className="w-full bg-slate-950 border border-white/10 rounded-xl p-4 text-white outline-none focus:border-blue-500"
-              />
+
+            {/* Cột phải: Bảng chẩn đoán Đo Lường & Sức Khỏe SEO / Dễ đọc */}
+            <div className="lg:col-span-4 space-y-6">
+              <div className="bg-slate-950/45 border border-white/5 rounded-[24px] p-6 space-y-6 h-fit sticky top-6">
+                <div>
+                  <h4 className="text-xs font-black text-white uppercase tracking-widest flex items-center gap-2">
+                    <Activity className="w-5 h-5 text-blue-500" /> Bảng Chẩn Đoán Bài Viết
+                  </h4>
+                  <p className="text-[9px] text-slate-500 mt-1">Cập nhật tự động theo thời gian thực</p>
+                </div>
+
+                {/* Thanh tiến trình điểm số */}
+                <div className="space-y-4 pt-2 border-t border-white/5">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Độ dễ đọc (Readability)</span>
+                      <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${
+                        diagnostics.readabilityScore >= 80 ? 'text-emerald-400 bg-emerald-500/10' : diagnostics.readabilityScore >= 50 ? 'text-yellow-400 bg-yellow-500/10' : 'text-red-400 bg-red-500/10'
+                      }`}>{diagnostics.readabilityScore}/100</span>
+                    </div>
+                    <div className="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                      <div 
+                        className={`h-1.5 rounded-full transition-all duration-500 ${
+                          diagnostics.readabilityScore >= 80 ? 'bg-emerald-500' : diagnostics.readabilityScore >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}
+                        style={{ width: `${diagnostics.readabilityScore}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Sức khỏe SEO (SEO Health)</span>
+                      <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${
+                        diagnostics.seoScore >= 80 ? 'text-emerald-400 bg-emerald-500/10' : diagnostics.seoScore >= 50 ? 'text-yellow-400 bg-yellow-500/10' : 'text-red-400 bg-red-500/10'
+                      }`}>{diagnostics.seoScore}/100</span>
+                    </div>
+                    <div className="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                      <div 
+                        className={`h-1.5 rounded-full transition-all duration-500 ${
+                          diagnostics.seoScore >= 80 ? 'bg-emerald-500' : diagnostics.seoScore >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}
+                        style={{ width: `${diagnostics.seoScore}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Metric cụ thể */}
+                <div className="p-4 bg-slate-950/80 border border-white/5 rounded-2xl grid grid-cols-2 gap-4 text-center">
+                  <div className="space-y-1">
+                    <div className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Tổng số từ</div>
+                    <div className="text-base font-black text-white">{diagnostics.stats.wordsCount}</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Tổng số câu</div>
+                    <div className="text-base font-black text-white">{diagnostics.stats.sentenceCount}</div>
+                  </div>
+                  <div className="col-span-2 pt-2 border-t border-white/5 flex justify-between px-1">
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Từ / Câu trung bình</span>
+                    <span className="text-xs font-black text-white">{diagnostics.stats.avgSentenceLength} từ</span>
+                  </div>
+                  <div className="col-span-2 pt-1 flex justify-between px-1">
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Mật độ Từ Khóa SEO</span>
+                    <span className="text-xs font-black text-white">{diagnostics.stats.keywordDensity.toFixed(1)}%</span>
+                  </div>
+                </div>
+
+                {/* Danh sách phản hồi và khuyến cáo */}
+                <div className="space-y-3 pt-3 border-t border-white/5">
+                  <div className="text-[9px] font-black uppercase tracking-widest text-[#71717a]">Gợi ý tối ưu</div>
+                  <div className="space-y-3 max-h-[220px] overflow-y-auto pr-1 scrollbar-hide">
+                    {diagnostics.readabilityFeedback.map((text, idx) => renderFeedbackItem(text, idx))}
+                    {diagnostics.seoFeedback.map((text, idx) => renderFeedbackItem(text, idx))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex gap-4 pt-4">
             <button onClick={handleSave} className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-black uppercase tracking-widest hover:bg-blue-500 transition-all">Lưu Bài Viết</button>
-            <button onClick={() => { setIsAdding(false); setEditingId(null); }} className="px-8 bg-slate-800 text-slate-400 rounded-xl font-black uppercase tracking-widest hover:text-white transition-all">Hủy</button>
+            <button 
+              onClick={() => { 
+                setIsAdding(false); 
+                setEditingId(null); 
+                setForm({ 
+                  title: '', slug: '', excerpt: '', content: '', image: '', imageAlt: '', category: 'tip', author: 'Admin', date: new Date().toISOString().split('T')[0],
+                  metaTitle: '', metaDescription: '', metaKeywords: [] as string[]
+                });
+              }} 
+              className="px-8 bg-slate-800 text-slate-400 rounded-xl font-black uppercase tracking-widest hover:text-white transition-all"
+            >
+              Hủy
+            </button>
           </div>
         </motion.div>
       ) : (
@@ -8756,7 +10063,15 @@ const NewsManagement: React.FC<{
                   <div className="flex gap-2">
                     <button 
                       onClick={() => {
-                        setForm(article);
+                        const keywordsArr = Array.isArray(article.metaKeywords)
+                          ? article.metaKeywords
+                          : (article.metaKeywords && typeof article.metaKeywords === 'string'
+                              ? article.metaKeywords.split(',').map(k => k.trim()).filter(Boolean)
+                              : []);
+                        setForm({
+                          ...article,
+                          metaKeywords: keywordsArr
+                        });
                         setEditingId(article.id);
                         setIsAdding(true);
                       }}
@@ -8788,6 +10103,7 @@ const SidebarMenu: React.FC<{
   isOpen: boolean; 
   onClose: () => void; 
   isEditMode: boolean;
+  currentUserRole: UserRole;
   siteConfig: SiteConfig;
   onAdminClick: () => void;
   onAddRecord: () => void;
@@ -8799,7 +10115,7 @@ const SidebarMenu: React.FC<{
   scrollToSection: (id: string) => void;
   cart: DetailingPackage[];
   onOpenCart: () => void;
-}> = ({ isOpen, onClose, isEditMode, siteConfig, onAdminClick, onAddRecord, onOpenDashboard, onStaffClick, onPaymentClick, onReset, onSidebarAction, scrollToSection, cart, onOpenCart }) => {
+}> = ({ isOpen, onClose, isEditMode, currentUserRole, siteConfig, onAdminClick, onAddRecord, onOpenDashboard, onStaffClick, onPaymentClick, onReset, onSidebarAction, scrollToSection, cart, onOpenCart }) => {
   const handleNav = (id: string) => {
     onSidebarAction(id);
   };
@@ -8807,190 +10123,310 @@ const SidebarMenu: React.FC<{
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
+        <div className="fixed inset-0 z-[600] overflow-hidden">
+          {/* Backdrop Blur */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150]" 
+            className="fixed inset-0 bg-slate-950/95 backdrop-blur-2xl px-4" 
             onClick={onClose}
           />
+          
           <motion.div 
-            initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 left-0 h-full w-[320px] sm:w-[400px] bg-slate-950 border-r border-white/5 z-[160] shadow-2xl flex flex-col"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative h-full w-full flex flex-col"
           >
-            <div className="p-8 border-b border-white/5 flex justify-between items-center bg-slate-900/50">
-              <div className="flex items-center gap-3">
-                {siteConfig.logoUrl ? (
-                  <img 
-                    src={siteConfig.logoUrl} 
-                    alt="Logo" 
-                    className="w-8 h-8 object-contain"
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-emerald-600 rounded-lg flex items-center justify-center font-black text-white text-sm">
-                    {siteConfig?.siteName?.charAt(0) || 'D'}
-                  </div>
-                )}
-                <div className="font-black text-2xl tracking-tighter text-white">
-                  {siteConfig.siteName.split(' ')[0]} <span className="text-blue-500">{siteConfig.siteName.split(' ')[1] || ''}</span>
-                </div>
-              </div>
-              <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">✕</button>
-            </div>
-            <div className="flex-1 overflow-y-auto custom-scrollbar text-slate-300">
-              {/* Quick Actions */}
-              <div className="p-6 pb-4">
-                <button 
-                  onClick={() => { onOpenCart(); onClose(); }} 
-                  className="w-full p-6 rounded-[32px] bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white transition-all shadow-2xl shadow-blue-900/40 flex items-center justify-between group active:scale-[0.98] border border-white/10"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 bg-white/20 rounded-2xl group-hover:scale-110 transition-transform text-white backdrop-blur-md">
-                      <ShoppingCart className="w-6 h-6" />
+            {/* Top Bar */}
+            <div className="p-8 sm:p-12 flex justify-between items-center bg-transparent relative z-10 w-full">
+              <div className="flex items-center gap-6">
+                <Link to="/" onClick={onClose} className="flex items-center gap-4 group">
+                  {siteConfig.logoUrl ? (
+                    <img src={siteConfig.logoUrl} alt="Logo" className="w-12 h-12 object-contain group-hover:scale-110 transition-transform" />
+                  ) : (
+                    <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center font-black text-white text-xl">
+                      {siteConfig?.siteName?.charAt(0) || 'D'}
                     </div>
-                    <span className="font-black uppercase text-xs tracking-[0.2em]">Giỏ Hàng Dịch Vụ</span>
-                  </div>
-                  {cart.length > 0 && (
-                    <span className="bg-white text-blue-600 text-[10px] font-black w-7 h-7 rounded-full shadow-lg flex items-center justify-center animate-pulse">
-                      {cart.length}
-                    </span>
                   )}
-                </button>
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
+                    {siteConfig.siteName}
+                  </h3>
+                </Link>
               </div>
+              
+              <button 
+                onClick={onClose}
+                className="w-14 h-14 rounded-2xl bg-white/5 hover:bg-red-600 flex items-center justify-center text-white transition-all active:scale-90 border border-white/10 group"
+              >
+                <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-500" />
+              </button>
+            </div>
 
-              {/* Navigation Categories */}
-              <div className="p-6 pt-2 space-y-8">
-                {/* Main Discovery */}
-                <section>
-                  <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4 px-4">Khám Phá Dịch Vụ</h3>
-                  <div className="grid grid-cols-1 gap-1">
-                    {[
-                      { id: 'promotions', label: 'Khuyến Mãi', icon: <Tag className="w-4 h-4" />, color: 'text-rose-500' },
-                      { id: 'services', label: 'Dịch Vụ Standard', icon: <Layers className="w-4 h-4" />, color: 'text-blue-500' },
-                      { id: 'packages', label: 'Gói Chăm Sóc', icon: <Package className="w-4 h-4" />, color: 'text-emerald-500' },
-                      { id: 'premium', label: 'Giải Pháp Premium', icon: <Diamond className="w-4 h-4" />, color: 'text-amber-500' },
-                    ].map((item) => (
-                      <button 
-                        key={item.id}
-                        onClick={() => handleNav(item.id)}
-                        className="w-full flex items-center gap-5 p-5 rounded-[24px] hover:bg-blue-600/10 transition-all group text-left border border-transparent hover:border-blue-500/20"
-                      >
-                        <div className={`p-3 rounded-2xl bg-white/5 group-hover:bg-blue-600/20 group-hover:scale-110 transition-all duration-500 ${item.color}`}>
-                          {React.cloneElement(item.icon as any, { className: 'w-6 h-6' })}
-                        </div>
-                        <span className="font-black text-slate-100 text-lg group-hover:text-blue-400 transition-colors uppercase tracking-tight">{item.label}</span>
-                        <ChevronRight className="w-5 h-5 ml-auto text-slate-700 group-hover:text-blue-500 group-hover:translate-x-2 transition-all" />
-                      </button>
-                    ))}
-                  </div>
-                </section>
+            {/* Main Content Scroll Area */}
+            <div className="flex-1 overflow-y-auto custom-scrollbar">
+              <div className="container mx-auto px-6 py-8 md:py-24 max-w-7xl">
+                {/* Mobile Quick Actions */}
+                <div className="lg:hidden grid grid-cols-2 gap-3 mb-12">
+                  <button 
+                    onClick={() => { onOpenCart(); onClose(); }}
+                    className="flex flex-col items-center justify-center p-6 rounded-[24px] bg-blue-600/10 border border-blue-500/20 text-blue-500 gap-2"
+                  >
+                    <ShoppingCart className="w-6 h-6" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-center">Giỏ hàng ({cart.length})</span>
+                  </button>
+                  <button 
+                    onClick={() => { onStaffClick(); onClose(); }}
+                    className="flex flex-col items-center justify-center p-6 rounded-[24px] bg-emerald-600/10 border border-emerald-500/20 text-emerald-500 gap-2"
+                  >
+                    <Shield className="w-6 h-6" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-center">Cổng Staff</span>
+                  </button>
+                </div>
 
-                {/* Technical & Specialties */}
-                <section>
-                  <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4 px-4">Chuyên Sâu & Độ Xe</h3>
-                  <div className="grid grid-cols-1 gap-1">
-                    {[
-                      { id: 'window-tinting', label: 'Dán Phim Cách Nhiệt', icon: <Sun className="w-4 h-4" /> },
-                      { id: 'wrap-ppf', label: 'Wrap & PPF Bảo Vệ', icon: <Shield className="w-4 h-4" /> },
-                      { id: 'tuning', label: 'Nâng Cấp & Độ Xe', icon: <Cpu className="w-4 h-4" /> },
-                      { id: 'ai-advisor', label: 'Trợ Lý AI Advisor', icon: <Bot className="w-4 h-4" />, color: 'text-blue-400' },
-                    ].map((item) => (
-                      <button 
-                        key={item.id}
-                        onClick={() => handleNav(item.id)}
-                        className="w-full flex items-center gap-5 p-5 rounded-[24px] hover:bg-blue-600/10 transition-all group text-left border border-transparent hover:border-blue-500/20"
-                      >
-                        <div className={`p-3 rounded-2xl bg-white/5 group-hover:bg-blue-600/20 group-hover:scale-110 transition-all duration-500 ${item.color || 'text-slate-400'}`}>
-                          {React.cloneElement(item.icon as any, { className: 'w-6 h-6' })}
-                        </div>
-                        <span className="font-black text-slate-100 text-lg group-hover:text-blue-400 transition-colors uppercase tracking-tight">{item.label}</span>
-                        <ChevronRight className="w-5 h-5 ml-auto text-slate-700 group-hover:text-blue-500 group-hover:translate-x-2 transition-all" />
-                      </button>
-                    ))}
-                  </div>
-                </section>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                  {/* Left Column: Big Nav */}
+                  <div className="space-y-12 md:space-y-16">
+                    <div className="space-y-4">
+                      <p className="text-[11px] font-bold text-blue-500 uppercase tracking-[0.4em] mb-4">Main Menu</p>
+                      <nav className="flex flex-col gap-3 md:gap-5">
+                        {[
+                          { id: 'promotions', label: 'Khuyến Mãi Siêu Cấp' },
+                          { id: 'vip', label: 'Chương Trình VIP' },
+                          { id: 'services', label: 'Dịch Vụ Tiêu Chuẩn' },
+                          { id: 'packages', label: 'Gói Chăm Sóc Xe' },
+                          { id: 'premium', label: 'Giải Pháp Luxury' },
+                          { id: 'tracking', label: 'Tracking Xe Online' }
+                        ].filter(() => !(isEditMode && currentUserRole === 'staff')).map((item, idx) => (
+                          <motion.button
+                            key={item.id}
+                            initial={{ x: -20, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 + idx * 0.05 }}
+                            onClick={() => handleNav(item.id)}
+                            className="text-left group flex items-center gap-4 md:gap-6 py-3.5 cursor-pointer"
+                          >
+                            <span className="text-slate-500 text-xs sm:text-sm font-medium italic group-hover:text-blue-400 transition-colors">0{idx + 1}</span>
+                            <span className="text-base sm:text-lg md:text-xl font-semibold text-slate-100 group-hover:text-blue-400 transition-all group-hover:translate-x-2 tracking-wide leading-relaxed">
+                              {item.label}
+                            </span>
+                          </motion.button>
+                        ))}
+                      </nav>
+                    </div>
 
-                {/* Management & Tools */}
-                <section>
-                  <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4 px-4">Quản Lý & Theo Dõi</h3>
-                  <div className="grid grid-cols-1 gap-1">
-                    {[
-                      { id: 'tracking', label: 'Theo Dõi Trạng Thái', icon: <Timer className="w-4 h-4" /> },
-                      { id: 'news', label: 'Tin Tức & Ưu Đãi', icon: <Newspaper className="w-4 h-4" /> },
-                      { id: 'gallery', label: 'Thư Viện Ảnh', icon: <ImageIcon className="w-4 h-4" /> },
-                      { id: 'reviews', label: 'Đánh Giá Khách Hàng', icon: <MessageSquare className="w-4 h-4" /> },
-                    ].map((item) => (
-                      <button 
-                        key={item.id}
-                        onClick={() => handleNav(item.id)}
-                        className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group text-left border border-transparent hover:border-white/5"
-                      >
-                        <div className="p-2 rounded-xl bg-white/5 group-hover:scale-110 transition-transform text-slate-400">
-                          {item.icon}
-                        </div>
-                        <span className="font-bold text-slate-300 text-sm group-hover:text-white transition-colors">{item.label}</span>
-                        <ChevronRight className="w-3.5 h-3.5 ml-auto text-slate-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
-                      </button>
-                    ))}
-                  </div>
-                </section>
-
-                {/* Footer Controls */}
-                <section className="pt-4 border-t border-white/5">
-                  <div className="flex flex-col gap-2">
-                    {isEditMode ? (
-                      <div className="p-4 rounded-[32px] bg-blue-600/5 border border-blue-500/20 mb-4">
-                        <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4 px-2">CMS Controls</p>
-                        <div className="grid grid-cols-1 gap-2">
-                          <button onClick={onOpenDashboard} className="w-full flex items-center gap-3 p-3 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-lg active:scale-95 transition-all">
-                            <Settings className="w-4 h-4" /> Dashboard Tổng
+                    {/* Admin Section - Always visible but functional based on authentication */}
+                    <div className="space-y-8 pt-10 border-t border-white/10">
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs md:text-sm font-black text-emerald-500 uppercase tracking-[0.5em]">Hệ Thống Quản Trị</p>
+                        {!isEditMode && (
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-white/10">
+                            <Lock className="w-3 h-3 text-slate-600" />
+                            <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Bảo Mật</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <button 
+                          onClick={() => { 
+                            if (isEditMode && (currentUserRole === 'admin' || currentUserRole === 'manager')) { onOpenDashboard(); onClose(); }
+                            else { onAdminClick(); }
+                          }}
+                          className={`flex items-center justify-between gap-4 p-6 rounded-3xl font-black uppercase text-xs tracking-widest shadow-2xl transition-all active:scale-95 border ${
+                            isEditMode && (currentUserRole === 'admin' || currentUserRole === 'manager') 
+                            ? 'bg-blue-600 text-white border-blue-500 shadow-blue-900/40 hover:bg-blue-500' 
+                            : 'bg-slate-900/60 text-slate-400 border-white/5 hover:border-blue-500/50 hover:text-white'
+                          }`}
+                        >
+                          <div className="flex items-center gap-4">
+                            <Settings className="w-6 h-6" />
+                            <span>Quản Trị Admin</span>
+                          </div>
+                          <ArrowRight className="w-4 h-4 opacity-50" />
+                        </button>
+                        <button 
+                          onClick={() => { 
+                            if (isEditMode && currentUserRole === 'staff') { onOpenDashboard(); onClose(); }
+                            else { onStaffClick(); onClose(); }
+                          }}
+                          className={`flex items-center justify-between gap-4 p-6 rounded-3xl font-black uppercase text-xs tracking-widest shadow-2xl border transition-all active:scale-95 ${
+                            isEditMode && currentUserRole === 'staff' 
+                            ? 'bg-emerald-600 text-white border-emerald-500 shadow-emerald-900/40 hover:bg-emerald-500' 
+                            : 'bg-slate-900/60 text-slate-400 border-white/5 hover:border-emerald-500/50 hover:text-white'
+                          }`}
+                        >
+                          <div className="flex items-center gap-4">
+                            <Shield className="w-6 h-6" />
+                            <span>Cổng Nhân Viên</span>
+                          </div>
+                          <ArrowRight className="w-4 h-4 opacity-50" />
+                        </button>
+                        {isEditMode && currentUserRole === 'admin' && (
+                          <button 
+                            onClick={() => { onReset(); onClose(); }}
+                            className="flex items-center gap-4 p-5 rounded-2xl bg-red-600/10 text-red-500 font-black uppercase text-[10px] tracking-widest border border-red-500/20 hover:bg-red-600/20 transition-all active:scale-95 sm:col-span-2"
+                          >
+                            <RefreshCw className="w-5 h-5" /> Reset Dữ Liệu
                           </button>
-                          <button onClick={onAddRecord} className="w-full flex items-center gap-3 p-3 rounded-xl bg-slate-800 text-white border border-white/5 font-bold text-xs active:scale-95 transition-all">
-                            <UserIcon className="w-4 h-4" /> Quản Lý Khách Hàng
-                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Secondary Links */}
+                    <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
+                      <div className="space-y-4">
+                        <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Kỹ Thuật</p>
+                        <div className="flex flex-col gap-3">
+                          <button onClick={() => handleNav('window-tinting')} className="text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider text-left py-1 cursor-pointer">Phim Cách Nhiệt</button>
+                          <button onClick={() => handleNav('wrap-ppf')} className="text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider text-left py-1 cursor-pointer">Wrap & PPF</button>
+                          <button onClick={() => handleNav('tuning')} className="text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider text-left py-1 cursor-pointer">Nâng Cấp Xe</button>
                         </div>
                       </div>
-                    ) : null}
-
-                    <button 
-                      onClick={() => { onStaffClick(); onClose(); }}
-                      className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-900 transition-all group text-left"
-                    >
-                      <div className="p-2 rounded-xl bg-white/5 text-slate-400 group-hover:text-white transition-colors">
-                        <Shield className="w-4 h-4" />
+                      <div className="space-y-4">
+                        <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Khám Phá</p>
+                        <div className="flex flex-col gap-3">
+                          <button onClick={() => handleNav('news')} className="text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider text-left py-1 cursor-pointer">Tin Tức</button>
+                          <button onClick={() => handleNav('gallery')} className="text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider text-left py-1 cursor-pointer">Thư Viện Ảnh</button>
+                          <button onClick={() => handleNav('reviews')} className="text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider text-left py-1 cursor-pointer">Đánh Giá</button>
+                        </div>
                       </div>
-                      <span className="font-bold text-slate-400 text-xs">Cổng nội bộ Staff</span>
-                    </button>
+                    </div>
 
-                    <button 
-                      onClick={() => { onReset(); onClose(); }}
-                      className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-red-500/10 hover:text-red-500 transition-all group text-left"
-                    >
-                      <div className="p-2 rounded-xl bg-white/5 text-slate-500 group-hover:text-red-500 transition-colors">
-                        <RefreshCw className="w-4 h-4" />
+                    {/* Quick Login for Admins - Hidden when already logged in */}
+                    {!isEditMode && (
+                      <div className="pt-8">
+                        <button 
+                          onClick={() => { onAdminClick(); onClose(); }}
+                          className="flex items-center gap-3 text-slate-600 hover:text-emerald-500 transition-colors"
+                        >
+                          <Lock className="w-4 h-4" />
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em]">Hệ Thống Quản Trị</span>
+                        </button>
                       </div>
-                      <span className="font-bold text-slate-500 text-xs group-hover:text-red-500">Khôi phục mặc định</span>
-                    </button>
-                    
-                    {isEditMode && (
-                      <button 
-                        onClick={() => { onAdminClick(); onClose(); }}
-                        className="w-full text-center p-4 rounded-2xl bg-white text-slate-950 font-black text-[10px] uppercase tracking-[0.2em] mt-4 shadow-xl active:scale-95 transition-all"
-                      >
-                        Đăng Xuất Admin
-                      </button>
                     )}
                   </div>
-                </section>
+
+                  {/* Right Column: High Impact Content */}
+                  <div className="hidden lg:block space-y-12">
+                    {/* Featured Promo Card */}
+                    <div className="p-10 rounded-[48px] bg-blue-600 relative overflow-hidden group/card shadow-2xl shadow-blue-900/40">
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[100px] rounded-full group-hover/card:scale-150 transition-transform duration-[2000ms]"></div>
+                      <div className="relative z-10 space-y-8">
+                        <div>
+                          <p className="text-white/60 font-black text-[10px] uppercase tracking-[0.3em] mb-4">Gói dịch vụ nổi bật</p>
+                          <h4 className="text-4xl font-black text-white leading-tight uppercase tracking-tighter">Ceramic Pro <br/> Diamond Shield</h4>
+                        </div>
+                        <p className="text-white/80 text-lg leading-relaxed italic">"Bảo vệ bề mặt sơn với công nghệ nano đa lớp, tạo độ bóng gương hoàn hảo và chống tia UV tuyệt đối."</p>
+                        <button 
+                          onClick={() => handleNav('services')}
+                          className="bg-white text-blue-600 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl hover:scale-105 transition-all"
+                        >
+                          Khám phá chi tiết
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Stats or Info */}
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="p-8 rounded-[40px] bg-white/[0.03] border border-white/10 flex flex-col justify-between h-48 group hover:bg-white/[0.05] transition-all">
+                        <div className="w-10 h-10 bg-emerald-600/20 text-emerald-500 rounded-xl flex items-center justify-center font-bold">10k+</div>
+                        <div>
+                          <p className="text-white font-black text-lg">Khách Hàng</p>
+                          <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">Đã trải nghiệm dịch vụ</p>
+                        </div>
+                      </div>
+                      <div className="p-8 rounded-[40px] bg-white/[0.03] border border-white/10 flex flex-col justify-between h-48 group hover:bg-white/[0.05] transition-all">
+                        <div className="w-10 h-10 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center font-bold">5★</div>
+                        <div>
+                          <p className="text-white font-black text-lg">Xếp Hạng</p>
+                          <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">Trung bình đánh giá</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick Access Buttons */}
+                    <div className="grid grid-cols-1 gap-4 pt-10">
+                       <button 
+                         onClick={() => { onOpenCart(); onClose(); }}
+                         className="flex items-center justify-between p-6 rounded-3xl bg-slate-900 border border-white/10 hover:border-blue-500 transition-all group"
+                       >
+                         <div className="flex items-center gap-4">
+                           <div className="p-3 bg-blue-600/10 text-blue-500 rounded-2xl group-hover:bg-blue-600 group-hover:text-white transition-all">
+                             <ShoppingCart className="w-6 h-6" />
+                           </div>
+                           <div>
+                             <p className="text-white font-black uppercase text-xs tracking-tight">Giỏ hàng của bạn</p>
+                             <p className="text-slate-500 text-[10px] font-bold">{cart.length} sản phẩm đang chờ</p>
+                           </div>
+                         </div>
+                         <ArrowRight className="w-6 h-6 text-slate-700 group-hover:text-blue-500 group-hover:translate-x-2 transition-all" />
+                       </button>
+
+                       <button 
+                         onClick={() => { onStaffClick(); onClose(); }}
+                         className="flex items-center justify-between p-6 rounded-3xl bg-slate-900 border border-white/10 hover:border-emerald-500 transition-all group"
+                       >
+                         <div className="flex items-center gap-4">
+                           <div className="p-3 bg-emerald-600/10 text-emerald-500 rounded-2xl group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                             <Shield className="w-6 h-6" />
+                           </div>
+                           <div>
+                             <p className="text-white font-black uppercase text-xs tracking-tight">Cổng nội bộ Staff</p>
+                             <p className="text-slate-500 text-[10px] font-bold">Dành cho nhân viên xưởng</p>
+                           </div>
+                         </div>
+                         <ArrowRight className="w-6 h-6 text-slate-700 group-hover:text-emerald-500 group-hover:translate-x-2 transition-all" />
+                       </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* Bottom Info Bar */}
+            <div className="p-8 sm:p-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 bg-slate-950/50 backdrop-blur-md">
+              <div className="flex items-center gap-8">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-blue-500" />
+                  <span className="text-white font-black text-sm">{siteConfig.contactPhone}</span>
+                </div>
+                <div className="hidden sm:flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-blue-500" />
+                  <span className="text-white font-black text-sm">{siteConfig.contactEmail}</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-6">
+                {[
+                  { icon: <Facebook className="w-5 h-5" />, url: siteConfig.facebookUrl },
+                  { icon: <Instagram className="w-5 h-5" />, url: siteConfig.instagramUrl },
+                  { icon: <Youtube className="w-5 h-5" />, url: siteConfig.youtubeUrl }
+                ].filter(s => s.url).map((social, i) => (
+                  <a 
+                    key={i}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/5 hover:bg-blue-600 rounded-2xl text-slate-400 hover:text-white transition-all transform hover:-translate-y-1 shadow-xl"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+
+              {isEditMode && (
+                <button 
+                  onClick={() => { onAdminClick(); onClose(); }}
+                  className="px-10 py-4 bg-white text-slate-950 font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-2xl active:scale-95 transition-all"
+                >
+                  Đăng Xuất Admin
+                </button>
+              )}
+            </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );
@@ -9022,17 +10458,23 @@ const AdminLoginModal: React.FC<{
     const accountantPass = (siteConfig.accountingLockPassword || '132416118').trim();
     const defaultAccountantPass = (DEFAULT_SITE_CONFIG.accountingLockPassword || '132416118').trim();
 
+    const inspectionPass = (siteConfig.inspectionPassword || '789').trim();
+    const defaultInspectionPass = (DEFAULT_SITE_CONFIG.inspectionPassword || '789').trim();
+
     console.log('Login attempt:', {
       input: normalizedInput,
       adminPass,
       defaultAdminPass,
-      accountantPass
+      accountantPass,
+      inspectionPass
     });
 
     if (normalizedInput === accountantPass || normalizedInput === defaultAccountantPass) {
       onSuccess('manager');
     } else if (normalizedInput === adminPass || normalizedInput === defaultAdminPass) {
       onSuccess('admin');
+    } else if (normalizedInput === inspectionPass || normalizedInput === defaultInspectionPass) {
+      onSuccess('staff');
     } else {
       toast.error(t('admin_wrong_password') || 'Mật khẩu không chính xác');
       setInput('');
@@ -9042,7 +10484,7 @@ const AdminLoginModal: React.FC<{
   return (
     <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl">
       <div className="bg-slate-900 border border-white/10 p-8 rounded-[40px] w-full max-w-sm shadow-3xl">
-        <h3 className="text-xl font-black text-white text-center mb-6 uppercase tracking-widest">{siteConfig.siteName || 'XE ĐẸP PRO'} ADMIN</h3>
+        <h3 className="text-xl font-black text-white text-center mb-6 uppercase tracking-widest">{siteConfig.siteName || 'XE ĐẸP PRO'} ACCESS</h3>
         <input 
           type="password" 
           autoFocus 
@@ -9059,17 +10501,17 @@ const AdminLoginModal: React.FC<{
         
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
-          <div className="relative flex justify-center text-[8px] uppercase font-black tracking-widest"><span className="bg-slate-900 px-4 text-slate-600">Hoặc</span></div>
+          <div className="relative flex justify-center text-[8px] uppercase font-black tracking-widest"><span className="bg-slate-900 px-4 text-slate-600 tracking-[0.2em]">Xác minh danh tính</span></div>
         </div>
 
+        <p className="text-[10px] text-slate-500 text-center italic mb-4">Vui lòng nhập mật khẩu để truy cập hệ thống.</p>
+        
         <button 
-          onClick={() => onSuccess('staff')}
-          className="w-full bg-slate-800/50 border border-white/5 p-4 rounded-2xl font-black uppercase tracking-widest text-slate-400 hover:bg-slate-800 hover:text-white transition-all active:scale-95 text-xs"
+          onClick={onClose} 
+          className="w-full py-4 rounded-2xl border border-white/5 text-slate-500 text-[10px] uppercase font-black tracking-[0.2em] hover:bg-white/5 hover:text-white transition-all"
         >
-          Truy cập nhanh cho Nhân viên
+          {t('admin_cancel')} & Thoát
         </button>
-
-        <button onClick={onClose} className="w-full mt-4 text-slate-500 text-xs uppercase font-bold tracking-widest hover:text-white transition-colors">{t('admin_cancel')}</button>
       </div>
     </div>
   );
@@ -9688,6 +11130,7 @@ const HomePage: React.FC<any> = ({
   theme, setTheme,
   handlePayment, scrollToSection, t
 }) => {
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -9761,6 +11204,7 @@ const HomePage: React.FC<any> = ({
   const [isSelectingHeroVideo, setIsSelectingHeroVideo] = useState(false);
   const [isSelectingAiVideo, setIsSelectingAiVideo] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [showNewBadge, setShowNewBadge] = useState(() => localStorage.getItem('hide_new_badge_car_detailing') !== 'true');
 
   // Command Palette Items
   const commandPaletteItems = [
@@ -9798,6 +11242,7 @@ const HomePage: React.FC<any> = ({
   const [isAdminSearchOpen, setIsAdminSearchOpen] = useState(false);
   const [serviceCategory, setServiceCategory] = useState<string>('all');
   const [serviceSearch, setServiceSearch] = useState<string>('');
+  const [serviceSortBy, setServiceSortBy] = useState<string>('default');
   const [selectedServiceForModal, setSelectedServiceForModal] = useState<Service | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [preSelectedSubService, setPreSelectedSubService] = useState<string | undefined>(undefined);
@@ -9987,7 +11432,7 @@ const HomePage: React.FC<any> = ({
         const service = (services || []).find(s => s.id === id);
         if (service) setSelectedServiceForModal(service);
       } else if (location.pathname.startsWith('/news/')) {
-        const article = (siteConfig.news || []).find(a => a.id === id);
+        const article = (siteConfig.news || []).find(a => a.id === id || a.slug === id);
         if (article) setSelectedArticle(article);
       }
     }
@@ -10186,12 +11631,14 @@ const HomePage: React.FC<any> = ({
         `}
       </style>
       <SEO 
-        title={selectedArticle ? selectedArticle.title : selectedServiceForModal ? selectedServiceForModal.title : siteConfig.heroTitle}
+        title={selectedArticle ? (selectedArticle.metaTitle || selectedArticle.title) : selectedServiceForModal ? selectedServiceForModal.title : siteConfig.heroTitle}
         description={selectedArticle ? (selectedArticle.metaDescription || selectedArticle.excerpt) : selectedServiceForModal ? (selectedServiceForModal.seoDescription || selectedServiceForModal.description) : undefined}
         canonical={location.pathname}
         ogImage={selectedArticle ? selectedArticle.image : selectedServiceForModal ? selectedServiceForModal.image : undefined}
         ogType={selectedArticle ? 'article' : 'website'}
         keywords={selectedArticle ? (selectedArticle.metaKeywords || `${selectedArticle.category}, news, xe dep auto`) : selectedServiceForModal ? (selectedServiceForModal.seoKeywords || `${selectedServiceForModal.category}, service, car care`) : undefined}
+        imageAlt={selectedArticle?.imageAlt}
+        articleData={selectedArticle}
         siteConfig={siteConfig}
       />
       <Toaster position="top-right" containerStyle={{ zIndex: 9999 }} />
@@ -10255,13 +11702,13 @@ const HomePage: React.FC<any> = ({
             <div className="flex items-center gap-4 sm:gap-8 logo-container">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
-                className={`p-2.5 rounded-2xl transition-all flex flex-col gap-1.5 active:scale-90 group ${
+                className={`p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl transition-all flex flex-col gap-1 sm:gap-1.5 active:scale-90 group ${
                   isScrolled ? 'bg-slate-800/50 hover:bg-slate-800' : 'bg-white/5 hover:bg-white/10'
                 }`}
               >
-                <div className="w-5 h-0.5 bg-blue-500 rounded-full group-hover:w-6 transition-all"></div>
-                <div className="w-6 h-0.5 bg-blue-500 rounded-full"></div>
-                <div className="w-4 h-0.5 bg-blue-500 rounded-full group-hover:w-6 transition-all"></div>
+                <div className="w-4 sm:w-5 h-0.5 bg-blue-500 rounded-full group-hover:w-6 transition-all"></div>
+                <div className="w-5 sm:w-6 h-0.5 bg-blue-500 rounded-full"></div>
+                <div className="w-3 sm:w-4 h-0.5 bg-blue-500 rounded-full group-hover:w-6 transition-all"></div>
               </button>
               
               <Link to="/" className="group flex items-center gap-3 relative">
@@ -10321,6 +11768,8 @@ const HomePage: React.FC<any> = ({
                 {[
                   { id: 'promotions', label: t('promotions') },
                   { id: 'services', label: t('services') },
+                  { id: 'membership', label: 'Hội Viên' },
+                  { id: 'weather-care', label: 'Bảo Vệ AI' },
                   { id: 'premium', label: 'Giải Pháp Premium' },
                   { id: 'ai-advisor', label: t('ai_advisor') },
                 ].map((item) => (
@@ -10384,7 +11833,7 @@ const HomePage: React.FC<any> = ({
               {/* Booking Button */}
               <button 
                 onClick={() => setIsBookingModalOpen(true)}
-                className={`flex items-center gap-1.5 px-3 py-2 sm:px-8 sm:py-3.5 rounded-xl text-[9px] sm:text-[11px] font-black uppercase tracking-widest transition-all shadow-xl active:scale-95 z-10 ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-8 sm:py-3.5 rounded-xl text-[8px] sm:text-[11px] font-black uppercase tracking-widest transition-all shadow-xl active:scale-95 z-10 ${
                   isScrolled ? 'bg-blue-600 text-white shadow-blue-900/40' : 'bg-white/10 text-white backdrop-blur-md border border-white/10 hover:bg-white/20'
                 }`}
               >
@@ -10400,6 +11849,7 @@ const HomePage: React.FC<any> = ({
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)} 
         isEditMode={isEditMode}
+        currentUserRole={currentUserRole}
         siteConfig={siteConfig}
         onAdminClick={() => {
           if (isEditMode) {
@@ -10411,15 +11861,24 @@ const HomePage: React.FC<any> = ({
             setIsLoginModalOpen(true);
           }
         }}
-        onAddRecord={handleAddCustomer}
-        onOpenDashboard={() => { setDashboardInitialTab('home'); setIsDashboardOpen(true); setIsSidebarOpen(false); }}
+        onAddRecord={() => {
+          if (isDesignAuthenticated) {
+            handleAddCustomer();
+          } else {
+            setIsLoginModalOpen(true);
+          }
+        }}
+        onOpenDashboard={() => { 
+          if (isDesignAuthenticated) {
+            setDashboardInitialTab('home'); 
+            setIsDashboardOpen(true); 
+            setIsSidebarOpen(false); 
+          } else {
+            setIsLoginModalOpen(true);
+          }
+        }}
         onStaffClick={() => {
-          setCurrentUserRole('staff');
-          setIsEditMode(true);
-          setDashboardInitialTab('inspections');
-          setIsDirectInspectionMode(true);
-          setIsDashboardOpen(true);
-          setIsSidebarOpen(false);
+          setIsLoginModalOpen(true);
         }}
         onReset={() => {
           localStorage.clear();
@@ -10524,7 +11983,7 @@ const HomePage: React.FC<any> = ({
                     onSave={v => setSiteConfig({...siteConfig, heroTitle: v})}
                     multiline 
                     label="Tiêu đề chính của trang chủ (Hero Title)"
-                    className="hero-title-highlight text-5xl sm:text-9xl lg:text-[13rem] font-black uppercase tracking-[-0.04em] mb-4 leading-[0.8] whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20 select-none drop-shadow-[0_20px_100px_rgba(59,130,246,0.8)] filter drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                    className="hero-title-highlight text-3xl sm:text-9xl lg:text-[13rem] font-black uppercase tracking-[-0.04em] mb-4 leading-[0.8] whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20 select-none drop-shadow-[0_20px_100px_rgba(59,130,246,0.8)] filter drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
                   />
                 </motion.div>
               </div>
@@ -10553,13 +12012,13 @@ const HomePage: React.FC<any> = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="flex flex-col sm:flex-row gap-4 sm:gap-6"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-6"
               >
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsBookingModalOpen(true)}
-                  className="group relative bg-blue-600 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest shadow-2xl shadow-blue-900/40 transition-all hover:shadow-blue-600/50 active:shadow-inner overflow-hidden"
+                  className="group relative bg-blue-600 text-white px-8 py-4 sm:px-12 sm:py-5 rounded-2xl text-[10px] sm:text-sm font-black uppercase tracking-widest shadow-2xl shadow-blue-900/40 transition-all hover:shadow-blue-600/50 active:shadow-inner overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {t('book_now')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -10570,7 +12029,7 @@ const HomePage: React.FC<any> = ({
                   whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection('services')}
-                  className="bg-slate-900 hover:bg-slate-800 text-white border border-white/10 px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all active:scale-95"
+                  className="bg-slate-900 hover:bg-slate-800 text-white border border-white/10 px-8 py-4 sm:px-12 sm:py-5 rounded-2xl text-[10px] sm:text-sm font-black uppercase tracking-widest transition-all active:scale-95"
                 >
                   {t('explore_services')}
                 </motion.button>
@@ -10578,7 +12037,7 @@ const HomePage: React.FC<any> = ({
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsAiAdvisorOpen(true)}
-                  className="bg-blue-600/10 hover:bg-blue-600/20 text-blue-500 border border-blue-500/20 px-8 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all active:scale-95 flex items-center gap-3"
+                  className="bg-blue-600/10 hover:bg-blue-600/20 text-blue-500 border border-blue-500/20 px-6 py-4 sm:px-8 sm:py-5 rounded-2xl text-[10px] sm:text-sm font-black uppercase tracking-widest transition-all active:scale-95 flex items-center gap-3"
                 >
                   <Bot className="w-4 h-4" /> AI Advisor
                 </motion.button>
@@ -10995,44 +12454,69 @@ const HomePage: React.FC<any> = ({
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col sm:flex-row gap-6 w-full max-w-4xl"
+                className="flex flex-col gap-6 w-full max-w-4xl"
               >
-                <div className="relative flex-1 group">
-                  <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-focus-within:text-blue-500 transition-colors" />
-                  <input 
-                    type="text" 
-                    placeholder={t('search_placeholder')}
-                    value={serviceSearch}
-                    onChange={(e) => setServiceSearch(e.target.value)}
-                    className="w-full bg-white/[0.03] border border-white/5 rounded-3xl py-5 pl-16 pr-8 text-white text-base focus:outline-none focus:border-blue-500/50 transition-all backdrop-blur-md"
-                  />
+                <div className="flex flex-col sm:flex-row gap-6 w-full">
+                  <div className="relative flex-1 group">
+                    <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-focus-within:text-blue-500 transition-colors" />
+                    <input 
+                      type="text" 
+                      placeholder={t('search_placeholder')}
+                      value={serviceSearch}
+                      onChange={(e) => setServiceSearch(e.target.value)}
+                      className="w-full bg-white/[0.03] border border-white/5 rounded-3xl py-5 pl-16 pr-8 text-white text-base focus:outline-none focus:border-blue-500/50 transition-all backdrop-blur-md"
+                    />
+                  </div>
+                  <div className="flex gap-3 overflow-x-auto pb-4 sm:pb-0 custom-scrollbar">
+                    {['all', 'exterior', 'interior', 'protection', 'tuning'].map(cat => (
+                      <button
+                        key={cat}
+                        onClick={() => setServiceCategory(cat)}
+                        className={`px-8 py-5 rounded-3xl text-[11px] font-black uppercase tracking-[0.2em] transition-all whitespace-nowrap border ${
+                          serviceCategory === cat 
+                          ? 'bg-blue-600 text-white border-blue-500 shadow-[0_10px_30px_rgba(59,130,246,0.3)]' 
+                          : 'bg-white/5 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'
+                        }`}
+                      >
+                        {t(`cat_${cat}`)}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex gap-3 overflow-x-auto pb-4 sm:pb-0 custom-scrollbar">
-                  {['all', 'exterior', 'interior', 'protection', 'tuning'].map(cat => (
-                    <button
-                      key={cat}
-                      onClick={() => setServiceCategory(cat)}
-                      className={`px-8 py-5 rounded-3xl text-[11px] font-black uppercase tracking-[0.2em] transition-all whitespace-nowrap border ${
-                        serviceCategory === cat 
-                        ? 'bg-blue-600 text-white border-blue-500 shadow-[0_10px_30px_rgba(59,130,246,0.3)]' 
-                        : 'bg-white/5 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'
-                      }`}
-                    >
-                      {t(`cat_${cat}`)}
-                    </button>
-                  ))}
+
+                {/* Sắp xếp (Sorting Options) */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 w-full bg-white/[0.01] border border-white/5 rounded-3xl p-4 sm:p-5">
+                  <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest shrink-0">
+                    <Sliders className="w-4 h-4 text-blue-500" />
+                    <span>Sắp xếp theo:</span>
+                  </div>
+                  <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full custom-scrollbar scrollbar-hide">
+                    {[
+                      { value: 'default', label: 'Mặc định' },
+                      { value: 'name-asc', label: 'Tên A → Z' },
+                      { value: 'name-desc', label: 'Tên Z → A' },
+                      { value: 'price-asc', label: 'Giá từ Thấp đến Cao' },
+                      { value: 'price-desc', label: 'Giá từ Cao đến Thấp' }
+                    ].map(opt => (
+                      <button
+                        key={opt.value}
+                        onClick={() => setServiceSortBy(opt.value)}
+                        className={`px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border ${
+                          serviceSortBy === opt.value
+                            ? 'bg-blue-600 text-white border-blue-500 shadow-[0_5px_15px_rgba(59,130,246,0.3)]'
+                            : 'bg-white/5 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-auto sm:auto-rows-[450px]">
-              {(services || [])
-                .filter(s => {
-                  const matchesCategory = serviceCategory === 'all' || s.category === serviceCategory;
-                  const matchesSearch = s.title.toLowerCase().includes(serviceSearch.toLowerCase()) || 
-                                      s.description.toLowerCase().includes(serviceSearch.toLowerCase());
-                  return matchesCategory && matchesSearch;
-                })
+              {filterAndSortServices(services || [], serviceCategory, serviceSearch, serviceSortBy)
                 .map((s, idx) => {
                   return (
                     <motion.div 
@@ -11485,6 +12969,144 @@ const HomePage: React.FC<any> = ({
                   </div>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* NEW PROPOSAL: Loyalty/Membership Program Section */}
+        <section id="membership" className="py-24 sm:py-32 bg-transparent relative overflow-hidden">
+          <div className="container mx-auto px-4 relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center text-center mb-16 sm:mb-24"
+            >
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
+                <Crown className="w-4 h-4 text-yellow-500" />
+                <span className="text-[10px] font-black text-yellow-500 uppercase tracking-widest">Đề Xuất Mới: Đặc Quyền Hội Viên</span>
+              </div>
+              <h2 className="text-4xl sm:text-7xl font-black text-white uppercase tracking-tighter leading-tight mb-6">
+                Nâng Tầm Trải Nghiệm <br/> <span className="text-yellow-500">Thành Viên VIP</span>
+              </h2>
+              <p className="text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto font-medium">
+                Tham gia chương trình hội viên của XE ĐẸP PRO để nhận ưu đãi lên đến 20% và các đặc quyền chăm sóc xe không giới hạn.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              {(siteConfig.loyaltyConfig?.tiers || []).map((tier, idx) => (
+                <motion.div
+                  key={tier.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  whileHover={{ y: -10 }}
+                  className="group relative p-8 rounded-[40px] border border-white/5 bg-white/[0.02] backdrop-blur-3xl overflow-hidden"
+                >
+                  {/* Glass Card Effect */}
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-30" style={{ color: tier.color }}></div>
+                  
+                  <div className="mb-8 relative">
+                    <div className="w-16 h-16 rounded-3xl flex items-center justify-center text-3xl mb-6 shadow-2xl relative z-10" style={{ backgroundColor: `${tier.color}20`, border: `1px solid ${tier.color}40`, color: tier.color }}>
+                      {idx === 0 ? <Zap className="w-8 h-8" /> : idx === 1 ? <Shield className="w-8 h-8" /> : idx === 2 ? <Star className="w-8 h-8" /> : <Diamond className="w-8 h-8" />}
+                    </div>
+                    <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2">{tier.name}</h3>
+                    <div className="text-[10px] font-black uppercase tracking-widest opacity-60" style={{ color: tier.color }}>
+                      Từ {tier.minPoints.toLocaleString()} điểm
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 mb-10">
+                    {tier.perks.map((perk, pIdx) => (
+                      <div key={pIdx} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-white/5">
+                          <Check className="w-3 h-3 text-white/40" />
+                        </div>
+                        <span className="text-slate-300 text-[11px] font-medium leading-relaxed">{perk}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button 
+                    className="w-full py-4 rounded-2xl font-black uppercase text-[9px] tracking-widest transition-all border border-white/10 hover:bg-white text-white hover:text-slate-950"
+                  >
+                    Đăng ký ngay
+                  </button>
+
+                  {/* Decorative Background Icon */}
+                  <div className="absolute -bottom-10 -right-10 opacity-[0.03] rotate-12 transition-transform group-hover:rotate-0 duration-700" style={{ color: tier.color }}>
+                     {idx === 0 ? <Zap className="w-48 h-48" /> : idx === 1 ? <Shield className="w-48 h-48" /> : idx === 2 ? <Star className="w-48 h-48" /> : <Diamond className="w-48 h-48" />}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="container mx-auto px-4">
+          <div className="divider-premium"></div>
+        </div>
+
+        {/* NEW PROPOSAL: AI WeatherCare Advisor Section */}
+        <section id="weather-care" className="py-24 sm:py-32 bg-slate-950 relative overflow-hidden">
+          <div className="absolute inset-0 bg-blue-600/5 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]"></div>
+          
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/5 rounded-[64px] p-8 sm:p-24 overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
+                <img 
+                  src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200" 
+                  alt="Protection" 
+                  className="w-full h-full object-cover opacity-20 [mask-image:linear-gradient(to_right,transparent,black)]"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              <div className="max-w-2xl relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-8">
+                    <CloudLightning className="w-4 h-4 text-blue-500" />
+                    <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">WeatherGuard Advisor (Bản thử nghiệm)</span>
+                  </div>
+                  <h2 className="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter leading-tight mb-8">
+                    Bảo vệ xe theo <br/> <span className="text-blue-500">Thời Tiết 4.0</span>
+                  </h2>
+                  <p className="text-slate-400 text-sm sm:text-lg mb-12 leading-relaxed">
+                    Hệ thống AI của chúng tôi phân tích dữ liệu thời tiết thực tế tại Hà Nội để đề xuất các dịch vụ bảo vệ phù hợp nhất. Ví dụ: Chống tia UV cực cao khi nắng gắt hoặc Tẩy ố kính khi mùa mưa sắp tới.
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                     <div className="p-6 rounded-3xl bg-blue-600/10 border border-blue-500/30">
+                        <div className="flex items-center gap-4 mb-4">
+                          <Sun className="w-6 h-6 text-yellow-500" />
+                          <span className="text-white font-black uppercase text-xs">Mùa Hè Nắng Gắt</span>
+                        </div>
+                        <p className="text-slate-400 text-[10px] leading-relaxed">Đề xuất: Dán phim cách nhiệt 3M Crystalline & Phủ Ceramic Pearl để chống tia UV và nhiệt độ cao.</p>
+                     </div>
+                     <div className="p-6 rounded-3xl bg-emerald-600/10 border border-emerald-500/30">
+                        <div className="flex items-center gap-4 mb-4">
+                          <CloudRain className="w-6 h-6 text-emerald-500" />
+                          <span className="text-white font-black uppercase text-xs">Mùa Mưa Ẩm Thấp</span>
+                        </div>
+                        <p className="text-slate-400 text-[10px] leading-relaxed">Đề xuất: Phủ Nano Kính lái & Vệ sinh khoang máy Dry Steam để tránh ẩm mốc và rỉ sét.</p>
+                     </div>
+                  </div>
+
+                  <button 
+                    onClick={() => setIsAiAdvisorOpen(true)}
+                    className="bg-blue-600 hover:bg-blue-500 text-white font-black uppercase text-xs tracking-widest px-12 py-6 rounded-3xl shadow-[0_20px_50px_rgba(37,99,235,0.3)] transition-all flex items-center gap-4 group"
+                  >
+                    Hỏi AI về tình hình bảo vệ xe
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                  </button>
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
@@ -12764,11 +14386,20 @@ const HomePage: React.FC<any> = ({
 
       <AdminLoginModal 
         isOpen={isLoginModalOpen} 
-        onClose={() => setIsLoginModalOpen(false)} 
+        onClose={() => {
+          setIsLoginModalOpen(false);
+          setIsSidebarOpen(false);
+        }} 
         onSuccess={(role) => {
-          setCurrentUserRole(role);
+          setCurrentUserRole(role as any);
           setIsEditMode(true); 
           setIsLoginModalOpen(false);
+          setIsSidebarOpen(false);
+          if (role === 'staff') {
+            setDashboardInitialTab('inspections');
+            setIsDirectInspectionMode(true);
+            setIsDashboardOpen(true);
+          }
           toast.success(`Đăng nhập thành công với quyền ${role === 'admin' ? 'Quản trị viên' : role === 'manager' ? 'Kế toán' : 'Nhân viên'}`);
         }} 
         siteConfig={siteConfig}
@@ -12953,43 +14584,68 @@ const HomePage: React.FC<any> = ({
         onClose={() => setIsServicesModalOpen(false)}
         title={siteConfig.servicesTitle}
       >
-        <div className="space-y-12 pb-24">
-          <div className="flex flex-col sm:flex-row gap-6 w-full max-w-4xl mx-auto mb-16">
-            <div className="relative flex-1 group">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-focus-within:text-blue-500 transition-colors" />
-              <input 
-                type="text" 
-                placeholder={t('search_placeholder')}
-                value={serviceSearch}
-                onChange={(e) => setServiceSearch(e.target.value)}
-                className="w-full bg-white/[0.03] border border-white/5 rounded-3xl py-5 pl-16 pr-8 text-white text-base focus:outline-none focus:border-blue-500/50 transition-all backdrop-blur-md"
-              />
+        <div className="space-y-8 pb-24">
+          <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto mb-12">
+            <div className="flex flex-col sm:flex-row gap-6 w-full">
+              <div className="relative flex-1 group">
+                <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-focus-within:text-blue-500 transition-colors" />
+                <input 
+                  type="text" 
+                  placeholder={t('search_placeholder')}
+                  value={serviceSearch}
+                  onChange={(e) => setServiceSearch(e.target.value)}
+                  className="w-full bg-white/[0.03] border border-white/5 rounded-3xl py-5 pl-16 pr-8 text-white text-base focus:outline-none focus:border-blue-500/50 transition-all backdrop-blur-md"
+                />
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-4 sm:pb-0 custom-scrollbar">
+                {['all', 'exterior', 'interior', 'protection', 'tuning'].map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => setServiceCategory(cat)}
+                    className={`px-8 py-5 rounded-3xl text-[11px] font-black uppercase tracking-[0.2em] transition-all whitespace-nowrap border ${
+                      serviceCategory === cat 
+                      ? 'bg-blue-600 text-white border-blue-500 shadow-[0_10px_30px_rgba(59,130,246,0.3)]' 
+                      : 'bg-white/5 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'
+                    }`}
+                  >
+                    {t(`cat_${cat}`)}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex gap-3 overflow-x-auto pb-4 sm:pb-0 custom-scrollbar">
-              {['all', 'exterior', 'interior', 'protection', 'tuning'].map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setServiceCategory(cat)}
-                  className={`px-8 py-5 rounded-3xl text-[11px] font-black uppercase tracking-[0.2em] transition-all whitespace-nowrap border ${
-                    serviceCategory === cat 
-                    ? 'bg-blue-600 text-white border-blue-500 shadow-[0_10px_30px_rgba(59,130,246,0.3)]' 
-                    : 'bg-white/5 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'
-                  }`}
-                >
-                  {t(`cat_${cat}`)}
-                </button>
-              ))}
+
+            {/* Sắp xếp trong Modal */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 w-full bg-white/[0.01] border border-white/5 rounded-3xl p-4 sm:p-5">
+              <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest shrink-0">
+                <Sliders className="w-4 h-4 text-blue-500" />
+                <span>Sắp xếp theo:</span>
+              </div>
+              <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full custom-scrollbar scrollbar-hide">
+                {[
+                  { value: 'default', label: 'Mặc định' },
+                  { value: 'name-asc', label: 'Tên A → Z' },
+                  { value: 'name-desc', label: 'Tên Z → A' },
+                  { value: 'price-asc', label: 'Giá từ Thấp đến Cao' },
+                  { value: 'price-desc', label: 'Giá từ Cao đến Thấp' }
+                ].map(opt => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setServiceSortBy(opt.value)}
+                    className={`px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border ${
+                      serviceSortBy === opt.value
+                        ? 'bg-blue-600 text-white border-blue-500 shadow-[0_5px_15px_rgba(59,130,246,0.3)]'
+                        : 'bg-white/5 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(services || [])
-              .filter(s => {
-                const matchesCategory = serviceCategory === 'all' || s.category === serviceCategory;
-                const matchesSearch = s.title.toLowerCase().includes(serviceSearch.toLowerCase()) || 
-                                    s.description.toLowerCase().includes(serviceSearch.toLowerCase());
-                return matchesCategory && matchesSearch;
-              })
+            {filterAndSortServices(services || [], serviceCategory, serviceSearch, serviceSortBy)
               .map((s, idx) => (
                 <motion.div 
                   key={s.id}
@@ -13446,44 +15102,54 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
-    let piInitialized = false;
+    let initInProgress = false;
 
     const initPi = async () => {
-      if (typeof window !== 'undefined' && window.Pi) {
+      if (typeof window !== 'undefined' && window.Pi && !initInProgress) {
+        initInProgress = true;
         try {
           console.log('Pi SDK object detected. Initializing...');
           
-          // Initialize Pi SDK
-          try {
-            window.Pi.init({ version: "2.0", sandbox: false });
-            piInitialized = true;
-          } catch (initErr) {
-            window.Pi.init({ version: "2.0", sandbox: true });
-            piInitialized = true;
-          }
-          
-          await new Promise(resolve => setTimeout(resolve, 300));
-
-          // Requested Pi Authentication Snippet
-          window.Pi.authenticate(['username'], function(auth: any) {
-            console.log("User authenticated:", auth);
-            if (auth.user) {
-              toast.success(`Chào mừng ${auth.user.username} từ Pi Network!`, {
-                icon: '🥧',
-                style: {
-                  borderRadius: '20px',
-                  background: '#1e293b',
-                  color: '#fff',
-                  border: '1px solid rgba(255,255,255,0.1)'
-                }
-              });
+          // Initialize Pi SDK wrapper with retry
+          const initSdk = async (sandbox: boolean) => {
+            try {
+              await window.Pi.init({ version: "2.0", sandbox });
+              return true;
+            } catch (e) {
+              return false;
             }
-          }, function(error: any) {
-            console.error("Auth error:", error);
-          });
+          };
+
+          const success = await initSdk(false) || await initSdk(true);
+          
+          if (success) {
+            console.log('Pi SDK Initialized successfully');
+            // Wait a bit for the SDK to internalize fully
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Requested Pi Authentication Snippet
+            window.Pi.authenticate(['username'], function(auth: any) {
+              console.log("User authenticated:", auth);
+              if (auth.user) {
+                toast.success(`Chào mừng ${auth.user.username} từ Pi Network!`, {
+                  icon: '🥧',
+                  style: {
+                    borderRadius: '20px',
+                    background: '#1e293b',
+                    color: '#fff',
+                    border: '1px solid rgba(255,255,255,0.1)'
+                  }
+                });
+              }
+            }, function(error: any) {
+              console.error("Auth error:", error);
+            });
+          }
 
         } catch (err: any) {
           console.error('Pi Operation Error:', err);
+        } finally {
+          initInProgress = false;
         }
       }
     };
@@ -13641,15 +15307,18 @@ const App: React.FC = () => {
   };
 
   // Generic Sync Hook
+  // Generic Sync Hook
   const useFirestoreSync = (
     collectionName: string, 
     data: any, 
     setData: (val: any) => void, 
     isList: boolean = true,
-    docId: string = 'main'
+    docId: string = 'main',
+    isPublic: boolean = false
   ) => {
     useEffect(() => {
-      if (!user) return;
+      // Nếu không phải public và chưa đăng nhập thì không đồng bộ
+      if (!isPublic && !user) return;
 
       const unsubscribe = isList 
         ? onSnapshot(collection(db, collectionName), (snapshot) => {
@@ -13671,7 +15340,7 @@ const App: React.FC = () => {
           });
 
       return () => unsubscribe();
-    }, [user, collectionName, isList, docId]);
+    }, [user, collectionName, isList, docId, isPublic]);
 
     useEffect(() => {
       if (!user) return;
@@ -13703,22 +15372,22 @@ const App: React.FC = () => {
     }, [user, data, collectionName, isList, docId]);
   };
 
-  // Sync SiteConfig
-  useFirestoreSync('config', siteConfig, setSiteConfig, false, 'main');
+  // Sync SiteConfig (Public)
+  useFirestoreSync('config', siteConfig, setSiteConfig, false, 'main', true);
   
   // Sync Collections
   useFirestoreSync('customerRecords', customerRecords, setCustomerRecords);
-  useFirestoreSync('gallery', gallery, setGallery);
-  useFirestoreSync('services', services, setServices);
+  useFirestoreSync('gallery', gallery, setGallery, true, 'main', true); // Public
+  useFirestoreSync('services', services, setServices, true, 'main', true); // Public
   useFirestoreSync('appointments', siteConfig.appointments || [], (val) => setSiteConfig(prev => ({ ...prev, appointments: val })));
   useFirestoreSync('inventory', inventory, setInventory);
-  useFirestoreSync('staff', staff, setStaff);
+  useFirestoreSync('staff', staff, setStaff, true, 'main', true); // Public
   useFirestoreSync('expenses', expenses, setExpenses);
-  useFirestoreSync('experts', experts, setExperts);
-  useFirestoreSync('premiumSolutions', premiumSolutions, setPremiumSolutions);
+  useFirestoreSync('experts', experts, setExperts, true, 'main', true); // Public
+  useFirestoreSync('premiumSolutions', premiumSolutions, setPremiumSolutions, true, 'main', true); // Public
   useFirestoreSync('aiVideoHistory', aiVideoHistory, setAiVideoHistory);
   useFirestoreSync('trackingData', trackingData, setTrackingData);
-  useFirestoreSync('reviews', reviews, setReviews);
+  useFirestoreSync('reviews', reviews, setReviews, true, 'main', true); // Public
   useFirestoreSync('eCertificates', eCertificates, setECertificates);
   useFirestoreSync('inspections', inspections, setInspections);
   useFirestoreSync('reminders', reminders, setReminders);

@@ -8,7 +8,9 @@ interface SEOProps {
   canonical?: string;
   ogImage?: string;
   ogType?: string;
-  keywords?: string;
+  keywords?: string[] | string;
+  imageAlt?: string;
+  articleData?: any;
   siteConfig?: SiteConfig;
 }
 
@@ -19,6 +21,8 @@ const SEO: React.FC<SEOProps> = ({
   ogImage, 
   ogType = 'website',
   keywords,
+  imageAlt,
+  articleData,
   siteConfig
 }) => {
   const siteName = siteConfig?.siteName || "XE ĐẸP PRO";
@@ -30,7 +34,8 @@ const SEO: React.FC<SEOProps> = ({
   const defaultDescription = siteConfig?.seoDescription || "XE ĐẸP PRO - Trung tâm Detailing 4.0 hàng đầu Hà Nội. Tích hợp công nghệ AI cố vấn dịch vụ, bảo vệ xe theo thời tiết. Chuyên sâu Phủ Ceramic 9H, Dán PPF, Wrap đổi màu & Chăm sóc xe toàn diện chuyên nghiệp.";
   const metaDescription = description || defaultDescription;
   const defaultKeywords = siteConfig?.seoKeywords || "detailing chuyên nghiệp, phủ ceramic diamond 9H, dán PPF Hà Nội, AI Detailing Advisor, tư vấn chăm sóc xe AI, bảo vệ xe theo thời tiết, xe đẹp pro, chăm sóc xe hơi cao cấp Long Biên, đánh bóng ô tô Hà Nội, vệ sinh nội thất ô tô, dán phim cách nhiệt 3M, bảo vệ sơn xe, detailing uy tín hà nội, xe dep pro long bien, chăm sóc xe hơi hà nội, phủ ceramic ô tô, dán ppf ô tô hà nội, wrap đổi màu xe hơi, vệ sinh khoang máy ô tô, đánh bóng kính ô tô, cách âm chống ồn ô tô, phục hồi mâm xe AI";
-  const metaKeywords = keywords ? `${keywords}, ${defaultKeywords}` : defaultKeywords;
+  const keywordsStr = Array.isArray(keywords) ? keywords.join(', ') : keywords;
+  const metaKeywords = keywordsStr ? `${keywordsStr}, ${defaultKeywords}` : defaultKeywords;
   const url = window.location.origin;
   const fullUrl = canonical ? `${url}${canonical}` : url;
   const defaultOgImage = siteConfig?.heroImage || "https://images.unsplash.com/photo-1603584173870-7f394833ec96?auto=format&fit=crop&q=80&w=2069";
@@ -51,7 +56,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:description" content={metaDescription} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:image" content={ogImage || defaultOgImage} />
-      <meta property="og:image:alt" content={fullTitle} />
+      <meta property="og:image:alt" content={imageAlt || fullTitle} />
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content="XE ĐẸP PRO" />
 
@@ -61,7 +66,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={ogImage || defaultOgImage} />
 
-      {/* Structured Data */}
+      {/* Structured Data - General */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
@@ -92,6 +97,25 @@ const SEO: React.FC<SEOProps> = ({
           ]
         })}
       </script>
+
+      {/* Structured Data - Article */}
+      {ogType === 'article' && articleData && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": fullTitle,
+            "image": [ogImage || defaultOgImage],
+            "datePublished": articleData.date,
+            "dateModified": articleData.date,
+            "author": [{
+              "@type": "Person",
+              "name": articleData.author || "XE ĐẸP PRO",
+              "url": url
+            }]
+          })}
+        </script>
+      )}
     </Helmet>
   );
 };

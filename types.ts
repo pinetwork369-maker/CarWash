@@ -251,14 +251,17 @@ export interface DetailingPackage {
 export interface NewsArticle {
   id: string;
   title: string;
+  slug: string;
   excerpt: string;
   content: string;
   image: string;
+  imageAlt?: string;
   date: string;
   category: 'tip' | 'news' | 'promotion';
   author: string;
-  metaKeywords?: string;
+  metaKeywords?: string[] | string;
   metaDescription?: string;
+  metaTitle?: string;
 }
 
 export interface AppNotification {
@@ -374,6 +377,15 @@ export interface ServiceProposal {
   totalPrice: number;
 }
 
+export interface VIPProgram {
+  id: string;
+  name: string;
+  description: string;
+  minUsage: number;
+  discountRate: number;
+  status: 'active' | 'inactive';
+}
+
 export interface SiteConfig {
   siteName: string;
   heroTitle: string;
@@ -442,6 +454,8 @@ export interface SiteConfig {
   accountingLockSettings?: Record<string, boolean>; // Bật/tắt khóa cho từng mục
   designLockSettings?: Record<string, boolean>; // Bật/tắt khóa cho từng mục thiết kế
   wrapProjects?: WrapProject[];
+  tintProjects?: WrapProject[];
+  tuningProjects?: WrapProject[];
   logoUrl?: string;
   facebookUrl?: string;
   youtubeUrl?: string;
@@ -463,6 +477,7 @@ export interface SiteConfig {
   subscriptions?: SubscriptionPackage[];
   experts?: Expert[];
   proposals?: ServiceProposal[];
+  vipPrograms?: VIPProgram[];
   seoKeywords?: string;
   seoDescription?: string;
   googleVerificationCode?: string;

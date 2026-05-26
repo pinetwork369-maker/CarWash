@@ -70,6 +70,18 @@ const StickyContactBar: React.FC<StickyContactBarProps> = ({ siteConfig, onInspe
           animate={{ y: 0 }}
           className="bg-slate-900/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl flex items-center justify-around p-1 pointer-events-auto"
         >
+          <motion.button 
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={scrollToTop}
+            className="flex flex-col items-center gap-0.5 p-2 text-slate-400 hover:text-blue-500 transition-colors"
+          >
+            <div className="w-8 h-8 rounded-xl bg-blue-600/10 flex items-center justify-center">
+              <ChevronUp className="w-4 h-4 text-blue-500" />
+            </div>
+            <span className="text-[8px] font-black uppercase tracking-widest">Đầu trang</span>
+          </motion.button>
+
           <motion.a 
             whileHover={{ scale: 1.1, y: -2 }}
             whileTap={{ scale: 0.9 }}

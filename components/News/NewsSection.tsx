@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, User } from 'lucide-react';
+import { Calendar, User, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { NewsArticle } from './types';
 import { NewsCard } from './NewsCard';
@@ -19,6 +19,13 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData, t,
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleTracking | null>(null);
   const [visibleCount, setVisibleCount] = useState(4);
+  const [showNewIndicator, setShowNewIndicator] = useState(() => {
+    try {
+      return localStorage.getItem('hide_featured_new_indicator') !== 'true';
+    } catch {
+      return true;
+    }
+  });
 
   const handleLoadMore = () => {
     setVisibleCount(prev => prev + 3);
@@ -110,6 +117,39 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ news, trackingData, t,
               onClick={() => setSelectedArticle(news[0])}
               className="lg:col-span-2 group cursor-pointer relative rounded-[32px] sm:rounded-[48px] overflow-hidden border border-white/10 h-[450px] sm:h-[600px]"
             >
+              <AnimatePresence>
+                {showNewIndicator && (
+                  <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    onClick={(e) => e.stopPropagation()} 
+                    className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30 flex items-center gap-1.5 bg-red-600/95 backdrop-blur-md border border-white/10 text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg transition-transform duration-300 hover:scale-105"
+                  >
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                    </span>
+                    <span>{language === 'vi' ? 'MỚI' : 'NEW'}</span>
+                    <button 
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        try {
+                          localStorage.setItem('hide_featured_new_indicator', 'true');
+                        } catch (err) {
+                          console.error(err);
+                        }
+                        setShowNewIndicator(false);
+                      }}
+                      className="ml-1 border-l border-white/20 pl-1 text-white/70 hover:text-white transition-colors cursor-pointer"
+                      aria-label="Tắt"
+                    >
+                      <X className="w-2.5 h-2.5" />
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <img 
                 src={news[0].image} 
                 alt={news[0].title}

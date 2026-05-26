@@ -4,12 +4,23 @@ import { Plus, Trash2, Edit2, Save, X, Camera as CameraIcon, Palette, ExternalLi
 import { WrapProject } from '../../types';
 import { toast } from 'react-hot-toast';
 
-interface WrapProjectManagerProps {
+interface ProjectManagerProps {
   projects: WrapProject[];
   onUpdate: (projects: WrapProject[]) => void;
+  title: string;
+  typeLabel?: string;
+  colorLabel?: string;
+  idPrefix?: string;
 }
 
-const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpdate }) => {
+const ProjectManager: React.FC<ProjectManagerProps> = ({ 
+  projects, 
+  onUpdate, 
+  title, 
+  typeLabel = "Dự Án",
+  colorLabel = "Màu Sắc / Mã Màu",
+  idPrefix = "prj"
+}) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [newProject, setNewProject] = useState<Partial<WrapProject>>({
     title: '',
@@ -73,10 +84,10 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
     }
 
     const project: WrapProject = {
-      id: `wp-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+      id: `${idPrefix}-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
       title: newProject.title,
       img: newProject.img,
-      color: newProject.color || 'Custom Wrap',
+      color: newProject.color || 'Custom',
       date: new Date().toISOString(),
       objectPosition: '50% 50%'
     };
@@ -85,10 +96,10 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
       onUpdate([...projects, project]);
       setNewProject({ title: '', img: '', color: '' });
       setShowAddForm(false);
-      toast.success('Đã lưu dự án mới thành công!');
+      toast.success(`Đã lưu ${typeLabel} mới thành công!`);
     } catch (error) {
       console.error('Error adding project:', error);
-      toast.error('Không thể lưu dự án. Có thể do ảnh quá lớn hoặc bộ nhớ đầy.');
+      toast.error('Không thể lưu. Có thể do ảnh quá lớn hoặc bộ nhớ đầy.');
     }
   };
 
@@ -105,17 +116,17 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
       <div className="flex justify-between items-center bg-slate-900/50 p-6 rounded-[24px] border border-white/5">
         <div>
           <h3 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-            <CameraIcon className="w-5 h-5 text-blue-500" /> Quản Lý Dự Án Thực Tế (Wrap)
+            <CameraIcon className="w-5 h-5 text-blue-500" /> {title}
           </h3>
           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">
-            Chỉnh sửa bộ sưu tập xe đã thi công tại trung tâm
+            Chỉnh sửa bộ sưu tập các {typeLabel.toLowerCase()} đã thi công tại trung tâm
           </p>
         </div>
         <button 
           onClick={() => setShowAddForm(!showAddForm)}
           className="px-6 py-3 bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 transition-all shadow-lg shadow-blue-600/20 flex items-center gap-2"
         >
-          <Plus className="w-4 h-4" /> {showAddForm ? 'Hủy' : 'Thêm Dự Án'}
+          <Plus className="w-4 h-4" /> {showAddForm ? 'Hủy' : `Thêm ${typeLabel}`}
         </button>
       </div>
 
@@ -129,7 +140,7 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
           >
             <div className="space-y-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-2">Tên Xe / Dự Án</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-2">Tên Xe / {typeLabel}</label>
                 <input 
                   type="text"
                   value={newProject.title}
@@ -139,19 +150,19 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-2">Màu Sắc / Mã Màu</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-2">{colorLabel}</label>
                 <input 
                   type="text"
                   value={newProject.color}
                   onChange={e => setNewProject({...newProject, color: e.target.value})}
-                  placeholder="Ví dụ: Matte Black"
+                  placeholder="Ví dụ: Matte Black / Film X70"
                   className="w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3 text-white text-sm focus:border-blue-500 transition-all outline-none"
                 />
               </div>
             </div>
 
             <div className="space-y-4">
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-2">Hình Ảnh Dự Án</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-2">Hình Ảnh</label>
               <div className="flex gap-4">
                 <div className="flex-1 relative group/upload">
                   <input 
@@ -193,7 +204,7 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
                 onClick={handleAdd}
                 className="w-full h-[52px] bg-blue-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 transition-all shadow-lg"
               >
-                Lưu Dự Án Mới
+                Lưu {typeLabel} Mới
               </button>
             </div>
           </motion.div>
@@ -230,7 +241,7 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
               {editingId === project.id ? (
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1 px-1">Tên Dự Án</label>
+                    <label className="block text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1 px-1">Tên {typeLabel}</label>
                     <input 
                       type="text"
                       value={project.title}
@@ -239,7 +250,7 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
                     />
                   </div>
                   <div>
-                    <label className="block text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1 px-1">Màu Sắc</label>
+                    <label className="block text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1 px-1">{colorLabel}</label>
                     <input 
                       type="text"
                       value={project.color}
@@ -329,7 +340,7 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
         {projects.length === 0 && (
           <div className="col-span-full py-20 flex flex-col items-center justify-center border-2 border-dashed border-white/5 rounded-[40px] text-slate-500">
             <ImageIcon className="w-12 h-12 mb-4 opacity-20" />
-            <p className="text-[10px] font-bold uppercase tracking-widest">Chưa có dự án nào được thêm</p>
+            <p className="text-[10px] font-bold uppercase tracking-widest">Chưa có {typeLabel.toLowerCase()} nào được thêm</p>
           </div>
         )}
       </div>
@@ -337,4 +348,4 @@ const WrapProjectManager: React.FC<WrapProjectManagerProps> = ({ projects, onUpd
   );
 };
 
-export default WrapProjectManager;
+export default ProjectManager;
