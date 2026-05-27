@@ -38,17 +38,16 @@ interface AuditLog {
   timestamp: string;
 }
 
-import { AdminControlCenter } from './components/AdminControlCenter';
+const AdminControlCenter = React.lazy(() => import('./components/AdminControlCenter').then(module => ({ default: module.AdminControlCenter })));
 import { CommandPalette } from './components/CommandPalette';
 import { TrackingSection, TrackingManagement, VehicleTracking, DEFAULT_TRACKING } from './components/Tracking';
 import { InventoryManagement } from './components/Inventory/InventoryManagement';
 import { SubscriptionsSection } from './components/SubscriptionsSection';
 import { FeedbackSection, FeedbackManagement } from './components/Feedback';
-import VisualCarInspection from './components/VisualCarInspection';
-import CustomerPortalComponent from './components/CustomerPortal';
-import InventoryScanner from './components/InventoryScanner';
+const VisualCarInspection = React.lazy(() => import('./components/VisualCarInspection'));
+const CustomerPortalComponent = React.lazy(() => import('./components/CustomerPortal'));
 import BeforeAfterSlider from './components/BeforeAfterSlider';
-import BookingModal from './components/BookingModal';
+const BookingModal = React.lazy(() => import('./components/BookingModal'));
 import ServiceDetailsModal from './components/ServiceDetailsModal';
 import LiveBookingTicker from './components/LiveBookingTicker';
 import AiServiceChatModal from './components/AiServiceChatModal';
@@ -8490,14 +8489,16 @@ const AdminDashboardModal: React.FC<{
 
                               <div className="space-y-4">
                                 <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Sơ đồ kiểm tra ngoại thất</label>
-                                <VisualCarInspection 
-                                  points={inspectionForm.points || []}
-                                  onChange={(points) => setInspectionForm(prev => ({ ...prev, points }))}
-                                  checklist={inspectionForm.checklist || {}}
-                                  onChecklistChange={(checklist) => setInspectionForm(prev => ({ ...prev, checklist }))}
-                                  images={inspectionForm.images || {}}
-                                  onImagesChange={(images) => setInspectionForm(prev => ({ ...prev, images }))}
-                                />
+                                <React.Suspense fallback={<div className="p-8 text-center text-slate-500 text-xs">Đang tải mô hình xe ngoại thất...</div>}>
+                                  <VisualCarInspection 
+                                    points={inspectionForm.points || []}
+                                    onChange={(points) => setInspectionForm(prev => ({ ...prev, points }))}
+                                    checklist={inspectionForm.checklist || {}}
+                                    onChecklistChange={(checklist) => setInspectionForm(prev => ({ ...prev, checklist }))}
+                                    images={inspectionForm.images || {}}
+                                    onImagesChange={(images) => setInspectionForm(prev => ({ ...prev, images }))}
+                                  />
+                                </React.Suspense>
                               </div>
                             </div>
 
@@ -14428,17 +14429,19 @@ const HomePage: React.FC<any> = ({
         siteConfig={siteConfig}
         cart={cart}
       />
-      <BookingModal 
-        isOpen={isBookingModalOpen} 
-        onClose={() => { setIsBookingModalOpen(false); setPreSelectedSubService(undefined); }} 
-        services={services}
-        siteConfig={siteConfig}
-        setSiteConfig={setSiteConfig}
-        handlePayment={handlePayment}
-        preSelectedSubService={preSelectedSubService}
-        onAddNotification={addNotification}
-        scrollToSection={scrollToSection}
-      />
+      <React.Suspense fallback={null}>
+        <BookingModal 
+          isOpen={isBookingModalOpen} 
+          onClose={() => { setIsBookingModalOpen(false); setPreSelectedSubService(undefined); }} 
+          services={services}
+          siteConfig={siteConfig}
+          setSiteConfig={setSiteConfig}
+          handlePayment={handlePayment}
+          preSelectedSubService={preSelectedSubService}
+          onAddNotification={addNotification}
+          scrollToSection={scrollToSection}
+        />
+      </React.Suspense>
       <ShareModal 
         isOpen={isShareModalOpen} 
         onClose={() => setIsShareModalOpen(false)} 
@@ -14490,21 +14493,23 @@ const HomePage: React.FC<any> = ({
           setIsAiAdvisorOpen(false);
         }}
       />
-      <AdminControlCenter 
-        isEditMode={isEditMode}
-        setIsEditMode={setIsEditMode}
-        isDashboardOpen={isDashboardOpen}
-        setIsDashboardOpen={setIsDashboardOpen}
-        isAuthenticated={isSuperAdminAuthenticated || isDesignAuthenticated || isAccountingAuthenticated || isInspectionAuthenticated}
-        onLogout={handleAdminLogout}
-        onOpenTab={handleOpenAdminTab}
-        isPrivacyMode={isPrivacyMode}
-        onTogglePrivacy={togglePrivacyMode}
-        notificationsCount={notifications.filter(n => !n.isRead).length}
-        cloudUser={user}
-        onCloudLogin={handleLogin}
-        onCloudLogout={handleLogout}
-      />
+      <React.Suspense fallback={null}>
+        <AdminControlCenter 
+          isEditMode={isEditMode}
+          setIsEditMode={setIsEditMode}
+          isDashboardOpen={isDashboardOpen}
+          setIsDashboardOpen={setIsDashboardOpen}
+          isAuthenticated={isSuperAdminAuthenticated || isDesignAuthenticated || isAccountingAuthenticated || isInspectionAuthenticated}
+          onLogout={handleAdminLogout}
+          onOpenTab={handleOpenAdminTab}
+          isPrivacyMode={isPrivacyMode}
+          onTogglePrivacy={togglePrivacyMode}
+          notificationsCount={notifications.filter(n => !n.isRead).length}
+          cloudUser={user}
+          onCloudLogin={handleLogin}
+          onCloudLogout={handleLogout}
+        />
+      </React.Suspense>
 
       <AnimatePresence>
         {isCommandPaletteOpen && (
@@ -15530,7 +15535,7 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage {...homeProps} />} />
         <Route path="/services/:id" element={<HomePage {...homeProps} />} />
         <Route path="/news/:id" element={<HomePage {...homeProps} />} />
-        <Route path="/portal" element={<CustomerPortalComponent customerRecords={customerRecords} certificates={eCertificates} inspections={inspections} loyaltyConfig={siteConfig.loyaltyConfig || DEFAULT_SITE_CONFIG.loyaltyConfig!} siteConfig={siteConfig} setSiteConfig={setSiteConfig} handlePayment={handlePayment} scrollToSection={scrollToSection} t={t} />} />
+        <Route path="/portal" element={<React.Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-slate-950"><div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>}><CustomerPortalComponent customerRecords={customerRecords} certificates={eCertificates} inspections={inspections} loyaltyConfig={siteConfig.loyaltyConfig || DEFAULT_SITE_CONFIG.loyaltyConfig!} siteConfig={siteConfig} setSiteConfig={setSiteConfig} handlePayment={handlePayment} scrollToSection={scrollToSection} t={t} /></React.Suspense>} />
         <Route path="*" element={<HomePage {...homeProps} />} />
       </Routes>
 
