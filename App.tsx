@@ -11913,6 +11913,7 @@ const HomePage: React.FC<any> = ({
                 className="w-full h-full object-cover opacity-40 scale-105 group-hover/hero-section:scale-100 transition-transform duration-[3000ms]"
                 referrerPolicy="no-referrer"
                 loading="eager"
+                fetchPriority="high"
               />
             )}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950"></div>
