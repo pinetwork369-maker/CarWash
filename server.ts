@@ -2,6 +2,7 @@ import express from "express";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { WebSocketServer, WebSocket } from "ws";
 import http from "http";
@@ -20,7 +21,8 @@ async function startServer() {
   const server = http.createServer(app);
   const wss = new WebSocketServer({ server });
 
-  app.use(express.json());
+  app.use(express.json({ limit: "50mb" }));
+  app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
   // WebSocket broadcast function
   const broadcast = (data: any) => {
@@ -186,6 +188,59 @@ async function startServer() {
       res.status(500).json({ error: error.message });
     }
   });
+
+  // --- Upload API Endpoint ---
+  // Saves images to local public/uploads directory for persistence and auto-sync with GitHub
+  app.post("/api/upload", async (req, res) => {
+    try {
+      const { filename, base64 } = req.body;
+      if (!base64 || !filename) {
+        return res.status(400).json({ error: "Missing filename or base64 data" });
+      }
+
+      // Ensure public/uploads directory exists
+      const uploadsDir = path.join(process.cwd(), "public", "uploads");
+      if (!fs.existsSync(uploadsDir)) {
+        fs.mkdirSync(uploadsDir, { recursive: true });
+      }
+
+      // Strip data URL prefixes if present
+      const match = base64.match(/^data:([^;]+);base64,(.*)$/);
+      let data = base64;
+      if (match) {
+        data = match[2];
+      }
+
+      // Generate a clean safe unique filename using timestamp
+      const ext = path.extname(filename) || ".jpg";
+      const baseName = path.basename(filename, ext).replace(/[^a-zA-Z0-9_-]/g, "_");
+      const uniqueFilename = `${baseName}_${Date.now()}${ext}`;
+      const filePath = path.join(uploadsDir, uniqueFilename);
+
+      // Write folder / file
+      fs.writeFileSync(filePath, Buffer.from(data, "base64"));
+      console.log(`Uploaded image successfully written locally to: ${filePath}`);
+
+      // Also copy to dist/uploads if dist exists (so the file is immediately available in production static assets)
+      const distUploadsDir = path.join(process.cwd(), "dist", "uploads");
+      if (fs.existsSync(path.join(process.cwd(), "dist"))) {
+        if (!fs.existsSync(distUploadsDir)) {
+          fs.mkdirSync(distUploadsDir, { recursive: true });
+        }
+        fs.copyFileSync(filePath, path.join(distUploadsDir, uniqueFilename));
+      }
+
+      // Return server relative url path
+      const fileUrl = `/uploads/${uniqueFilename}`;
+      res.json({ success: true, url: fileUrl });
+    } catch (error: any) {
+      console.error("Upload API error:", error);
+      res.status(500).json({ error: "Failed to upload file", details: error.message });
+    }
+  });
+
+  // Serve uploads folder statically in all environments
+  app.use("/uploads", express.static(path.join(process.cwd(), "public", "uploads")));
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {

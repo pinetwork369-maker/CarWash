@@ -236,18 +236,44 @@ const fileToBase64 = (file: File, maxWidth = 1200, quality = 0.8): Promise<strin
   });
 };
 
-const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, callback: (base64: string) => void) => {
+const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, callback: (urlOrBase64: string) => void) => {
   const file = e.target.files?.[0];
   if (file) {
     // Check file size (limit to 10MB as we will compress it)
     if (file.size > 10 * 1024 * 1024) {
       toast.error("⚠️ Tệp quá lớn (tối đa 10MB). Hệ thống sẽ tự động nén ảnh để tối ưu tốc độ tải trang.");
     }
-    const toastId = toast.loading("Đang xử lý và nén ảnh...");
+    const toastId = toast.loading("Đang nén và đồng bộ ảnh lên hệ thống...");
     try {
       const base64 = await fileToBase64(file);
-      callback(base64);
-      toast.success("Đã tải ảnh lên và tối ưu dung lượng!", { id: toastId });
+      
+      // Attempt to save file to local server disk for persistence & GitHub synchronization
+      try {
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            filename: file.name,
+            base64: base64
+          })
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.url) {
+            callback(result.url);
+            toast.success("Đã tải lên và đồng bộ ảnh với GitHub thành công!", { id: toastId });
+            return;
+          }
+        }
+        throw new Error("API upload returned unsuccessful state");
+      } catch (uploadErr) {
+        console.warn("Không thể đồng bộ tệp lên server. Đang quay lại lưu Base64:", uploadErr);
+        callback(base64);
+        toast.success("Đã lưu ảnh tạm thời dưới dạng Base64!", { id: toastId });
+      }
     } catch (err) {
       toast.error("Lỗi khi xử lý ảnh!", { id: toastId });
     }
