@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { CustomerRecord, ECertificate, LoyaltyConfig, CarInspection, SiteConfig, AppNotification } from '../types';
+import { CustomerRecord, ECertificate, LoyaltyConfig, CarInspection, SiteConfig, AppNotification, Appointment } from '../types';
 import { 
   Search, Phone, History, Award, ShieldCheck, ChevronRight, Star, 
   Calendar, Car, Gift, CreditCard, ImageIcon, FileCheck, ClipboardCheck, 
-  X, AlertCircle, CheckCircle2, Camera, Smartphone 
+  X, AlertCircle, CheckCircle2, Camera, Smartphone, Edit2, Clock, Check, RefreshCw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import BookingModal from './BookingModal';
+import { toast } from 'react-hot-toast';
 
 interface CustomerPortalProps {
   customerRecords: CustomerRecord[];
@@ -33,11 +34,85 @@ const CustomerPortal: React.FC<CustomerPortalProps> = ({
     history: CustomerRecord[];
     certs: ECertificate[];
     inspections: CarInspection[];
+    appointments: Appointment[];
   } | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [showOffers, setShowOffers] = useState(false);
   const [selectedInspection, setSelectedInspection] = useState<CarInspection | null>(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [editingAppId, setEditingAppId] = useState<string | null>(null);
+  const [editDate, setEditDate] = useState('');
+  const [editTime, setEditTime] = useState('');
+  const [editCarModel, setEditCarModel] = useState('');
+  const [editNote, setEditNote] = useState('');
+
+  const timeSlots = [
+    "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+    "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
+  ];
+
+  const startEditing = (app: Appointment) => {
+    setEditingAppId(app.id);
+    setEditDate(app.date);
+    setEditTime(app.time || '');
+    setEditCarModel(app.carModel || '');
+    setEditNote(app.note || '');
+  };
+
+  const saveAppointmentEdit = (id: string) => {
+    if (!editDate) {
+      toast.error('Vui lòng chọn ngày hẹn');
+      return;
+    }
+    if (!editTime) {
+      toast.error('Vui lòng chọn giờ hẹn');
+      return;
+    }
+
+    setSiteConfig(prev => {
+      const updatedApps = (prev.appointments || []).map(a => {
+        if (a.id === id) {
+          return {
+            ...a,
+            date: editDate,
+            time: editTime,
+            carModel: editCarModel,
+            note: editNote,
+            isRead: false
+          };
+        }
+        return a;
+      });
+
+      return {
+        ...prev,
+        appointments: updatedApps
+      };
+    });
+
+    setResults(prev => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        appointments: prev.appointments.map(a => {
+          if (a.id === id) {
+            return {
+              ...a,
+              date: editDate,
+              time: editTime,
+              carModel: editCarModel,
+              note: editNote,
+              isRead: false
+            };
+          }
+          return a;
+        })
+      };
+    });
+
+    toast.success('Cập nhật lịch hẹn thành công!');
+    setEditingAppId(null);
+  };
 
   const handleSearch = () => {
     if (!phone.trim()) return;
@@ -61,19 +136,26 @@ const CustomerPortal: React.FC<CustomerPortalProps> = ({
         i.phone?.replace(/\s/g, '').includes(cleanSearch) || 
         i.licensePlate.replace(/\s/g, '').toLowerCase().includes(cleanSearch)
       );
+
+      const filteredAppointments = (siteConfig.appointments || []).filter(a => 
+        a.phone.replace(/\s/g, '').includes(cleanSearch) || 
+        (a.carModel && a.carModel.replace(/\s/g, '').toLowerCase().includes(cleanSearch))
+      );
       
-      if (filteredRecords.length > 0 || filteredCerts.length > 0 || filteredInspections.length > 0) {
+      if (filteredRecords.length > 0 || filteredCerts.length > 0 || filteredInspections.length > 0 || filteredAppointments.length > 0) {
         setResults({
           record: filteredRecords[0], // Use first record for points/tier
           history: filteredRecords,
           certs: filteredCerts,
-          inspections: filteredInspections
+          inspections: filteredInspections,
+          appointments: filteredAppointments
         });
       } else {
         setResults({
           history: [],
           certs: [],
-          inspections: []
+          inspections: [],
+          appointments: []
         });
       }
       setIsSearching(false);
@@ -150,7 +232,7 @@ const CustomerPortal: React.FC<CustomerPortalProps> = ({
             exit={{ opacity: 0, y: -20 }}
             className="space-y-12"
           >
-            {results.record || results.certs.length > 0 || results.inspections.length > 0 ? (
+            {results.record || results.certs.length > 0 || results.inspections.length > 0 || (results.appointments && results.appointments.length > 0) ? (
               <>
                 {/* Quick Actions */}
                 <div className="flex flex-wrap gap-4">
@@ -168,6 +250,182 @@ const CustomerPortal: React.FC<CustomerPortalProps> = ({
                     Mua Gói Bảo Hành
                   </button>
                 </div>
+
+                {/* Active Appointments / Bookings Section */}
+                {results.appointments && results.appointments.length > 0 && (
+                  <div className="bg-slate-900 border border-white/10 rounded-[40px] overflow-hidden shadow-xl space-y-6">
+                    <div className="p-8 pb-4 border-b border-white/5 flex items-center justify-between bg-slate-950/50">
+                      <h3 className="text-xl font-black uppercase tracking-tighter flex items-center gap-3">
+                        <Clock className="w-5 h-5 text-blue-500 animate-pulse" />
+                        Lịch Đặt Hẹn Của Bạn
+                      </h3>
+                      <span className="text-[10px] font-black uppercase tracking-widest bg-blue-500/10 text-blue-500 border border-blue-500/25 px-3 py-1 rounded-full">
+                        {results.appointments.length} Lịch hẹn
+                      </span>
+                    </div>
+                    <div className="p-8 pt-2 space-y-6">
+                      {results.appointments.map((app) => {
+                        const service = siteConfig.services?.find(s => s.id === app.serviceId);
+                        const isEditingThis = editingAppId === app.id;
+                        
+                        return (
+                          <div key={app.id} className="bg-slate-950 border border-white/5 rounded-3xl p-6 space-y-4 hover:border-blue-500/30 transition-all">
+                            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                              <div>
+                                <span className="text-[9px] font-mono text-slate-500 uppercase">MÃ HẸN: #{app.id}</span>
+                                <h4 className="text-lg font-black text-white uppercase tracking-tight mt-1">
+                                  {service?.title || 'Dịch vụ lẻ'} 
+                                  {app.subServiceTitle && <span className="text-xs text-blue-400 block sm:inline sm:ml-2">({app.subServiceTitle})</span>}
+                                </h4>
+                              </div>
+                              <div>
+                                <span className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest leading-none ${
+                                  app.status === 'confirmed' ? 'bg-emerald-500 text-white' :
+                                  app.status === 'completed' ? 'bg-blue-600 text-white' :
+                                  app.status === 'cancelled' ? 'bg-slate-800 text-slate-500' :
+                                  'bg-amber-500 text-slate-950'
+                                }`}>
+                                  {app.status === 'confirmed' ? 'Đã xác nhận' :
+                                   app.status === 'completed' ? 'Đã hoàn thành' :
+                                   app.status === 'cancelled' ? 'Đã hủy' :
+                                   'Chờ duyệt'}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-white/5">
+                              <div>
+                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Ngày hẹn</p>
+                                <p className="text-sm font-bold text-slate-300 mt-1">{app.date}</p>
+                              </div>
+                              <div>
+                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Khung giờ</p>
+                                <p className="text-sm font-bold text-slate-300 mt-1">{app.time || 'Chưa chọn'}</p>
+                              </div>
+                              <div>
+                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Xe & Biển số</p>
+                                <p className="text-sm font-bold text-slate-300 mt-1 uppercase">{app.carModel || 'Chưa cung cấp'}</p>
+                              </div>
+                              <div>
+                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Số điện thoại</p>
+                                <p className="text-sm font-bold text-slate-300 mt-1">{app.phone}</p>
+                              </div>
+                            </div>
+
+                            {app.note && (
+                              <div className="bg-white/[0.02] p-4 rounded-2xl border border-white/5">
+                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Ghi chú yêu cầu</p>
+                                <p className="text-xs text-slate-400 italic">"{app.note}"</p>
+                              </div>
+                            )}
+
+                            {/* Controls */}
+                            {!isEditingThis ? (
+                              (app.status === 'pending' || app.status === 'confirmed') && (
+                                <div className="flex justify-end pt-2">
+                                  <button
+                                    onClick={() => startEditing(app)}
+                                    className="bg-amber-600/20 hover:bg-amber-600 text-amber-400 hover:text-white border border-amber-500/25 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2"
+                                  >
+                                    <Edit2 className="w-3.5 h-3.5" /> Thay đổi lịch giờ
+                                  </button>
+                                </div>
+                              )
+                            ) : (
+                              <div className="bg-slate-900 border border-white/10 rounded-3xl p-6 mt-4 space-y-6">
+                                <h5 className="text-xs font-black text-amber-400 uppercase tracking-widest flex items-center gap-2">
+                                  <Edit2 className="w-3.5 h-3.5" /> Chỉnh sửa thông tin lịch hẹn
+                                </h5>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                  <div className="space-y-2">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-widest">Chọn ngày mới</label>
+                                    <input 
+                                      type="date" 
+                                      value={editDate} 
+                                      onChange={(e) => {
+                                        setEditDate(e.target.value);
+                                        setEditTime(''); // Reset selected time when date changes
+                                      }}
+                                      className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-slate-300 text-xs focus:ring-1 focus:ring-blue-500 outline-none placeholder:text-slate-600"
+                                    />
+                                  </div>
+                                  <div className="space-y-2">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-widest">Đời xe / Biển số</label>
+                                    <input 
+                                      type="text" 
+                                      value={editCarModel} 
+                                      onChange={(e) => setEditCarModel(e.target.value)}
+                                      placeholder="VD: Mercedes - 30K-123.45"
+                                      className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-slate-300 text-xs focus:ring-1 focus:ring-blue-500 outline-none"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="space-y-3">
+                                  <div className="flex justify-between items-center">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-widest">Chọn khung giờ vàng (tránh giờ bận)</label>
+                                    {editTime && <span className="bg-blue-600/20 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">Đã chọn: {editTime}</span>}
+                                  </div>
+                                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                                    {timeSlots.map(slot => {
+                                      const isSlotBooked = (siteConfig.appointments || []).some(
+                                        a => a.date === editDate && a.time === slot && a.id !== app.id && a.status !== 'cancelled'
+                                      );
+                                      return (
+                                        <button
+                                          key={slot}
+                                          type="button"
+                                          disabled={isSlotBooked}
+                                          onClick={() => setEditTime(slot)}
+                                          className={`py-2 rounded-xl border text-[10px] font-black transition-all flex flex-col items-center justify-center ${
+                                            isSlotBooked
+                                            ? 'bg-red-950/20 border-red-950/40 text-red-500/30 cursor-not-allowed'
+                                            : editTime === slot 
+                                            ? 'bg-blue-600 border-blue-500 text-white shadow-md' 
+                                            : 'bg-slate-950 border-white/10 text-slate-400 hover:text-white hover:border-white/20'
+                                          }`}
+                                        >
+                                          <span>{slot}</span>
+                                          {isSlotBooked && <span className="text-[6.5px] font-bold text-red-500 leading-none mt-0.5 uppercase">Bận</span>}
+                                        </button>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-widest">Ghi chú thay đổi</label>
+                                  <textarea 
+                                    value={editNote} 
+                                    onChange={(e) => setEditNote(e.target.value)}
+                                    placeholder="Lý do thay đổi hoặc ghi chú mới cho garage..."
+                                    className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-slate-300 text-xs focus:ring-1 focus:ring-blue-500 outline-none h-20 resize-none"
+                                  />
+                                </div>
+
+                                <div className="flex justify-end gap-3 pt-2">
+                                  <button
+                                    onClick={() => setEditingAppId(null)}
+                                    className="bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all"
+                                  >
+                                    Đóng
+                                  </button>
+                                  <button
+                                    onClick={() => saveAppointmentEdit(app.id)}
+                                    className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg shadow-blue-600/20"
+                                  >
+                                    <Check className="w-3.5 h-3.5" /> Lưu Thay Đổi
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
                 {results.record && (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

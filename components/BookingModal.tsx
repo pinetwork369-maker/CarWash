@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, User, Zap, Clock, CheckCircle2, Info, CreditCard, Timer, Check, Calendar, Car, ChevronRight, ArrowRight, Upload, AlertCircle, Loader2 } from 'lucide-react';
+import { X, User, Zap, Clock, CheckCircle2, Info, CreditCard, Timer, Check, Calendar, Car, ChevronRight, ArrowRight, Upload, AlertCircle, Loader2, Edit2 } from 'lucide-react';
 import { Service, SiteConfig, AppNotification, BookingData, Appointment } from '../types';
 import { toast } from 'react-hot-toast';
 
@@ -31,6 +31,7 @@ const BookingModal: React.FC<BookingModalProps> = ({
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [currentAppointmentId, setCurrentAppointmentId] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
   const [formData, setFormData] = useState<BookingData>({
     name: initialName, 
@@ -44,6 +45,14 @@ const BookingModal: React.FC<BookingModalProps> = ({
     time: '', 
     note: ''
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsSubmitted(false);
+      setCurrentAppointmentId(null);
+      setStep(1);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen && !isSubmitted) {
@@ -171,8 +180,10 @@ const BookingModal: React.FC<BookingModalProps> = ({
         });
       }
       
+      const appointmentId = currentAppointmentId || Date.now().toString();
+      
       const newAppointment: Appointment = {
-        id: Date.now().toString(),
+        id: appointmentId,
         customerName: formData.name,
         phone: formData.phone,
         email: formData.email,
@@ -187,20 +198,33 @@ const BookingModal: React.FC<BookingModalProps> = ({
         isRead: false
       };
       
-      setSiteConfig(prev => ({
-        ...prev,
-        appointments: [newAppointment, ...(prev.appointments || [])]
-      }));
+      setSiteConfig(prev => {
+        const existingApps = prev.appointments || [];
+        const hasExisting = existingApps.some(a => a.id === appointmentId);
+        
+        let updatedApps;
+        if (hasExisting) {
+          updatedApps = existingApps.map(a => a.id === appointmentId ? newAppointment : a);
+        } else {
+          updatedApps = [newAppointment, ...existingApps];
+        }
+        
+        return {
+          ...prev,
+          appointments: updatedApps
+        };
+      });
 
       if (onAddNotification) {
         onAddNotification({
-          title: 'Đặt lịch thành công',
-          message: `Lịch hẹn dịch vụ ${fullServiceTitle} vào lúc ${formData.time} ngày ${formData.date} đã được gửi đi.`,
+          title: currentAppointmentId ? 'Cập nhật lịch hẹn thành công' : 'Đặt lịch thành công',
+          message: `Lịch hẹn dịch vụ ${fullServiceTitle} vào lúc ${formData.time} ngày ${formData.date} đã được ${currentAppointmentId ? 'cập nhật' : 'gửi đi'}.`,
           type: 'success'
         });
       }
 
-      toast.success('Đặt lịch thành công!');
+      toast.success(currentAppointmentId ? 'Cập nhật lịch hẹn thành công!' : 'Đặt lịch thành công!');
+      setCurrentAppointmentId(appointmentId);
       setIsSubmitted(true);
       
       localStorage.setItem('last_booking_contact', JSON.stringify({
@@ -447,22 +471,33 @@ const BookingModal: React.FC<BookingModalProps> = ({
                               {formData.time && <span className="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse shadow-lg shadow-blue-600/20">Giờ đã chọn: {formData.time}</span>}
                             </div>
                             <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
-                              {timeSlots.map(slot => (
-                                <motion.button
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  key={slot}
-                                  type="button"
-                                  onClick={() => setFormData({...formData, time: slot})}
-                                  className={`py-4 rounded-2xl border text-xs font-black transition-all ${
-                                    formData.time === slot 
-                                    ? 'bg-blue-600 border-blue-500 text-white shadow-xl shadow-blue-600/30' 
-                                    : 'bg-white/[0.02] border-white/10 text-slate-500 hover:text-white hover:border-white/30'
-                                  }`}
-                                >
-                                  {slot}
-                                </motion.button>
-                              ))}
+                              {timeSlots.map(slot => {
+                                const isBooked = (siteConfig.appointments || []).some(
+                                  app => app.date === formData.date && app.time === slot && app.id !== currentAppointmentId && app.status !== 'cancelled'
+                                );
+                                return (
+                                  <motion.button
+                                    whileHover={isBooked ? {} : { scale: 1.05 }}
+                                    whileTap={isBooked ? {} : { scale: 0.95 }}
+                                    key={slot}
+                                    type="button"
+                                    disabled={isBooked}
+                                    onClick={() => setFormData({...formData, time: slot})}
+                                    className={`py-3.5 rounded-2xl border text-xs font-black transition-all flex flex-col items-center justify-center min-h-[58px] ${
+                                      isBooked
+                                      ? 'bg-red-950/20 border-red-500/20 text-red-500/50 cursor-not-allowed opacity-60'
+                                      : formData.time === slot 
+                                      ? 'bg-blue-600 border-blue-500 text-white shadow-xl shadow-blue-600/30' 
+                                      : 'bg-white/[0.02] border-white/10 text-slate-400 hover:text-white hover:border-white/30'
+                                    }`}
+                                  >
+                                    <span className="leading-none">{slot}</span>
+                                    {isBooked && (
+                                      <span className="text-[7.5px] font-extrabold text-red-500 mt-1 uppercase tracking-wide leading-none">Đã Đặt</span>
+                                    )}
+                                  </motion.button>
+                                );
+                              })}
                             </div>
                           </div>
                         </div>
@@ -641,22 +676,35 @@ const BookingModal: React.FC<BookingModalProps> = ({
                       </div>
                     )}
 
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <button 
-                        onClick={() => {
-                          onClose();
-                          scrollToSection('tracking');
-                        }}
-                        className="flex-1 py-6 bg-white/5 hover:bg-white/10 text-white rounded-3xl font-black uppercase tracking-widest text-[10px] transition-all border border-white/5 flex items-center justify-center gap-3 active:scale-95"
-                      >
-                        <Timer className="w-5 h-5 text-blue-500" /> Theo Dõi Trạng Thái Xe
-                      </button>
-                      <button 
-                        onClick={onClose}
-                        className="flex-1 py-6 bg-blue-600 hover:bg-blue-500 text-white rounded-3xl font-black uppercase tracking-widest text-[10px] transition-all shadow-xl active:scale-95"
-                      >
-                        Quay về trang chủ
-                      </button>
+                    <div className="flex flex-col gap-4">
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button 
+                          onClick={() => {
+                            setIsSubmitted(false);
+                            setStep(2); // Retain data, go back to Step 2 for reschedule/edit info
+                          }}
+                          className="flex-1 py-6 bg-amber-600/20 hover:bg-amber-600 text-amber-300 hover:text-white rounded-3xl font-black uppercase tracking-widest text-[10px] transition-all border border-amber-500/25 flex items-center justify-center gap-3 active:scale-95"
+                        >
+                          <Edit2 className="w-5 h-5" /> Sửa thông tin lịch vừa đặt
+                        </button>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button 
+                          onClick={() => {
+                            onClose();
+                            scrollToSection('tracking');
+                          }}
+                          className="flex-1 py-6 bg-white/5 hover:bg-white/10 text-white rounded-3xl font-black uppercase tracking-widest text-[10px] transition-all border border-white/5 flex items-center justify-center gap-3 active:scale-95"
+                        >
+                          <Timer className="w-5 h-5 text-blue-500" /> Theo Dõi Trạng Thái Xe
+                        </button>
+                        <button 
+                          onClick={onClose}
+                          className="flex-1 py-6 bg-blue-600 hover:bg-blue-500 text-white rounded-3xl font-black uppercase tracking-widest text-[10px] transition-all shadow-xl active:scale-95"
+                        >
+                          Quay về trang chủ
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}
