@@ -2,15 +2,6 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-QQGLFG70H3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-QQGLFG70H3');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="qf8156WuX4TgFxq_CV1cG3fZsBMEilbxB9LEwe2_oC4" />
@@ -41,12 +32,34 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#020617">
     <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1603584173870-7f394833ec96?auto=format&fit=crop&q=80&w=192">
-    <script defer src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Critical Inline Styles (Instant Paint & Avoid FCP Delays) -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        :root {
+            --bg-color: #02040a;
+            --surface-color: #0a0f1a;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #60a5fa;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --accent-glow: rgba(59, 130, 246, 0.3);
+        }
+        html, body {
+            background-color: #02040a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        #root {
+            background-color: #02040a;
+            min-height: 100vh;
         }
         .glass-morphism {
             background: rgba(15, 23, 42, 0.8);
@@ -80,7 +93,10 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+
+    <!-- Async Non-blocking Main Stylesheet Loader -->
+    <link rel="preload" href="/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/index.css"></noscript>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -126,6 +142,18 @@
 </head>
 <body class="bg-slate-950 text-slate-200">
     <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+    <script type="module" src="/index.tsx"></script>
+
+    <!-- Third-Party Scripts & Analytics (Non-blocking & Deferred to End of Body) -->
+    <script defer src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-QQGLFG70H3"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QQGLFG70H3');
+      });
+    </script>
 </body>
 </html>

@@ -1094,7 +1094,9 @@ const NewsSection: React.FC<{
   setSiteConfig: React.Dispatch<React.SetStateAction<SiteConfig>>;
   selectedArticle: NewsArticle | null;
   setSelectedArticle: (article: NewsArticle | null) => void;
-}> = ({ siteConfig, isEditMode, isDesignAuthenticated, setSiteConfig, selectedArticle, setSelectedArticle }) => {
+  showNewBadge: boolean;
+  setShowNewBadge: (show: boolean) => void;
+}> = ({ siteConfig, isEditMode, isDesignAuthenticated, setSiteConfig, selectedArticle, setSelectedArticle, showNewBadge, setShowNewBadge }) => {
   const navigate = useNavigate();
   return (
     <section id="news" className="py-24 relative overflow-hidden bg-slate-950">
@@ -13897,6 +13899,8 @@ const HomePage: React.FC<any> = ({
             setSiteConfig={setSiteConfig}
             selectedArticle={selectedArticle}
             setSelectedArticle={setSelectedArticle}
+            showNewBadge={showNewBadge}
+            setShowNewBadge={setShowNewBadge}
           />
         </LazySection>
 
@@ -14538,6 +14542,8 @@ const HomePage: React.FC<any> = ({
           setSiteConfig={setSiteConfig}
           selectedArticle={selectedArticle}
           setSelectedArticle={setSelectedArticle}
+          showNewBadge={showNewBadge}
+          setShowNewBadge={setShowNewBadge}
         />
       </GenericContentModal>
 
