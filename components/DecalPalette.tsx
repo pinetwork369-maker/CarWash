@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Palette, Filter, Info, Check, ChevronRight, Image as ImageIcon, Camera as CameraIcon } from 'lucide-react';
 import { DecalColor, WrapProject } from '../types';
 import { DECAL_COLORS } from '../constants';
+import { Vehicle3DViewer } from './Vehicle3DViewer';
 
 interface DecalPaletteProps {
   wrapProjects?: WrapProject[];
@@ -56,46 +57,71 @@ const DecalPalette: React.FC<DecalPaletteProps> = ({ wrapProjects = [] }) => {
         </div>
       </div>
 
-      <div className="p-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-        {filteredColors.map((color, idx) => (
-          <motion.div
-            key={color.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.05 }}
-            className={`group cursor-pointer rounded-3xl p-3 border transition-all ${
-              selectedColor?.id === color.id ? 'bg-blue-600/10 border-blue-500/50' : 'bg-slate-950/50 border-white/5 hover:border-white/10'
-            }`}
-            onClick={() => setSelectedColor(color)}
-          >
-            <div 
-              className="aspect-square rounded-2xl mb-3 shadow-inner relative overflow-hidden group-hover:scale-105 transition-transform duration-500"
-              style={{ background: color.hex.startsWith('linear') ? color.hex : color.hex }}
+      {/* Main Spacious Arena for VF3 3D Viewer */}
+      <div className="p-8 border-b border-white/5 flex flex-col items-center justify-center">
+        <div className="w-full max-w-5xl">
+          <Vehicle3DViewer selectedColor={selectedColor} />
+        </div>
+      </div>
+
+      {/* Premium Decal Palette Section (Now beautifully elevated below the customizer, giving VF3 maximum space) */}
+      <div className="p-8 border-b border-white/5 bg-slate-950/20">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+              Bộ sưu tập màu sắc cao cấp (TeckWrap & 3M)
+            </h3>
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">
+              Phối nhanh các hệ màu sơn cao cấp của đối tác hàng đầu thế giới bằng cách nhấn vào ô màu dưới đây
+            </p>
+          </div>
+          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3.5 py-1.5 bg-white/5 border border-white/10 rounded-full shrink-0">
+            Đang hiển thị {filteredColors.length} màu hệ {activeCategory}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 max-h-[380px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+          {filteredColors.map((color, idx) => (
+            <motion.div
+              key={color.id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.02 }}
+              className={`group cursor-pointer rounded-2xl p-2.5 border transition-all ${
+                selectedColor?.id === color.id ? 'bg-blue-600/10 border-blue-500/50 shadow-lg shadow-blue-500/5' : 'bg-slate-950/40 border-white/5 hover:border-white/10'
+              }`}
+              onClick={() => setSelectedColor(color)}
             >
-              {selectedColor?.id === color.id && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[2px]">
-                  <Check className="w-8 h-8 text-white drop-shadow-lg" />
-                </div>
-              )}
-              {/* Glossy Overlay */}
-              {color.category === 'Gloss' && (
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-50" />
-              )}
-              {/* Chrome Overlay */}
-              {color.category === 'Chrome' && (
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/60 via-transparent to-white/40 opacity-70" />
-              )}
-            </div>
-            <div className="px-1 text-center">
-              <p className="text-[9px] font-black text-white uppercase truncate mb-0.5">{color.name}</p>
-              <div className="flex items-center justify-center gap-1.5">
-                <span className="text-[8px] font-bold text-slate-500 tracking-widest">{color.code}</span>
-                <span className="w-1 h-1 bg-slate-700 rounded-full"></span>
-                <span className="text-[8px] font-bold text-blue-500 uppercase">{color.category}</span>
+              <div 
+                className="aspect-square rounded-xl mb-2.5 shadow-inner relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-500"
+                style={{ background: color.hex.startsWith('linear') ? color.hex : color.hex }}
+              >
+                {selectedColor?.id === color.id && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[1px]">
+                    <Check className="w-6 h-6 text-white drop-shadow-md" />
+                  </div>
+                )}
+                {/* Glossy Overlay */}
+                {color.category === 'Gloss' && (
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/15 to-transparent opacity-40" />
+                )}
+                {/* Chrome Overlay */}
+                {color.category === 'Chrome' && (
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-white/20 opacity-55" />
+                )}
               </div>
-            </div>
-          </motion.div>
-        ))}
+              <div className="px-1 text-center">
+                <p className="text-[9px] font-black text-white uppercase truncate mb-0.5">{color.name}</p>
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-[8px] font-bold text-slate-500 tracking-widest">{color.code}</span>
+                  <span className="w-1.5 h-1.5 bg-slate-700/80 rounded-full" />
+                  <span className="text-[7px] font-black text-blue-500 uppercase">{color.category}</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {selectedColor && (

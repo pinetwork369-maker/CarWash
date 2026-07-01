@@ -76,16 +76,16 @@ const SEO: React.FC<SEOProps> = ({
           "priceRange": "$$",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "168 Vũ Đức Thận",
-            "addressLocality": "Long Biên",
+            "streetAddress": "E28 Khu Đồng Dưa",
+            "addressLocality": "Hà Cầu, Hà Đông",
             "addressRegion": "Hà Nội",
             "postalCode": "100000",
             "addressCountry": "VN"
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 21.0597,
-            "longitude": 105.8906
+            "latitude": 20.9652,
+            "longitude": 105.7794
           },
           "url": url,
           "telephone": "0588896699",

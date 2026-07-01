@@ -6,11 +6,19 @@
   --font-serif: "Playfair Display", serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-slate-950: #02040a;
-  --color-slate-900: #0a0f1a;
-  --color-slate-800: #111827;
+  --color-slate-950: #070b14; /* Rich luxury charcoal-blue */
+  --color-slate-900: #0f172a; /* Dark surface */
+  --color-slate-800: #1e293b; /* Medium surface */
+  --color-slate-700: #334155; /* Subtle border/text */
+  --color-slate-600: #475569; /* Gray text */
+  --color-slate-500: #94a3b8; /* Bright gray text (formerly slate-400) for pristine readability */
+  --color-slate-400: #cbd5e1; /* Very light gray text (formerly slate-300) */
+  --color-slate-300: #e2e8f0; /* Ultra-light text/accent */
+  --color-slate-200: #f1f5f9;
+  --color-slate-100: #f8fafc;
   --color-blue-600: #2563eb;
   --color-blue-500: #3b82f6;
+  --color-blue-400: #60a5fa;
 }
 
 @layer base {
@@ -18,14 +26,14 @@
     scroll-behavior: smooth;
   }
   :root {
-    --bg-color: #02040a; /* Deepest black-blue for luxury */
-    --surface-color: #0a0f1a; /* Dark surface */
-    --text-primary: #f8fafc; /* slate-50 */
-    --text-secondary: #94a3b8; /* slate-400 */
-    --accent-primary: #3b82f6; /* Premium Blue */
-    --accent-secondary: #60a5fa; /* Lighter Blue */
-    --border-color: rgba(255, 255, 255, 0.05);
-    --accent-glow: rgba(59, 130, 246, 0.3);
+    --bg-color: #070b14; /* Modern metallic navy-charcoal */
+    --surface-color: #0f172a; /* Beautiful dark surface */
+    --text-primary: #f8fafc; /* Pristine white */
+    --text-secondary: #cbd5e1; /* Beautifully readable slate-300 */
+    --accent-primary: #3b82f6; /* Premium Vibrant Blue */
+    --accent-secondary: #60a5fa; /* Radiant Accent Blue */
+    --border-color: rgba(255, 255, 255, 0.08);
+    --accent-glow: rgba(59, 130, 246, 0.4);
   }
 
   body {

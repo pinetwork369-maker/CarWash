@@ -105,6 +105,15 @@ const BookingModal: React.FC<BookingModalProps> = ({
   };
 
   const nextStep = () => {
+    if (step === 2) {
+      const isOverlapped = (siteConfig.appointments || []).some(
+        app => app.date === formData.date && app.time === formData.time && app.id !== currentAppointmentId && app.status !== 'cancelled'
+      );
+      if (isOverlapped) {
+        toast.error('⚠️ Khung giờ này đã bị trùng lặp với một lịch hẹn khác. Vui lòng chọn khung giờ khác!');
+        return;
+      }
+    }
     if (validateStep(step)) {
       setStep(prev => prev + 1);
     } else {
@@ -116,6 +125,17 @@ const BookingModal: React.FC<BookingModalProps> = ({
 
   const handleSubmit = async () => {
     if (!validateStep(3)) return;
+    
+    // Kiểm tra trùng lặp một lần cuối trước khi lưu
+    const isOverlapped = (siteConfig.appointments || []).some(
+      app => app.date === formData.date && app.time === formData.time && app.id !== currentAppointmentId && app.status !== 'cancelled'
+    );
+    if (isOverlapped) {
+      toast.error('⚠️ Trùng lịch hẹn! Thời gian này đã được đặt trước bởi một khách hàng khác.');
+      setStep(2);
+      return;
+    }
+
     setIsSending(true);
     const service = services.find(s => s.id === formData.serviceId);
     const serviceTitle = service?.title || 'Chưa chọn';
@@ -499,6 +519,20 @@ const BookingModal: React.FC<BookingModalProps> = ({
                                 );
                               })}
                             </div>
+                            {(() => {
+                              const isOverlapped = formData.time && (siteConfig.appointments || []).some(
+                                app => app.date === formData.date && app.time === formData.time && app.id !== currentAppointmentId && app.status !== 'cancelled'
+                              );
+                              if (isOverlapped) {
+                                return (
+                                  <div className="mt-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs flex items-center gap-3">
+                                    <AlertCircle className="w-5 h-5 shrink-0" />
+                                    <span>⚠️ Cảnh báo: Khung giờ {formData.time} ngày {formData.date} đã bị trùng lặp với lịch hẹn khác! Vui lòng chọn khung giờ khác.</span>
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })()}
                           </div>
                         </div>
                       </motion.div>

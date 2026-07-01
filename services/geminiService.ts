@@ -20,7 +20,7 @@ NHIỆM VỤ CỦA BẠN:
 3. HƯỚNG DẪN TỰ CHĂM SÓC: Chia sẻ mẹo rửa xe tại nhà đúng cách (phương pháp 2 xô), cách bảo quản lớp phủ Ceramic/PPF.
 
 4. THÔNG TIN CỬA HÀNG:
-   - Địa chỉ: 168 Vũ Đức Thận, Long Biên, Hà Nội.
+   - Địa chỉ: E28 Khu Đồng Dưa, Hà Cầu, Hà Đông, Hà Nội.
    - Hotline: 091.224.8839 (Zalo).
    - Giờ làm việc: 08:00 - 18:00 hàng ngày.
 

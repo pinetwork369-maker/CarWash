@@ -239,6 +239,26 @@ async function startServer() {
     }
   });
 
+  // --- Admin Data Sync Endpoint ---
+  // Saves current admin configuration data directly to local src/auto_synced_data.json file for persistence and GitHub export
+  app.post("/api/sync-admin-data", async (req, res) => {
+    try {
+      const data = req.body;
+      if (!data) {
+        return res.status(400).json({ error: "No data payload provided" });
+      }
+
+      const backupFilePath = path.join(process.cwd(), "auto_synced_data.json");
+      fs.writeFileSync(backupFilePath, JSON.stringify(data, null, 2), "utf8");
+      console.log(`Successfully synced admin data to local file: ${backupFilePath}`);
+
+      res.json({ success: true, message: "Admin data successfully synced to local codebase files!" });
+    } catch (error: any) {
+      console.error("Admin Sync API error:", error);
+      res.status(500).json({ error: "Failed to sync admin data", details: error.message });
+    }
+  });
+
   // Serve uploads folder statically in all environments
   app.use("/uploads", express.static(path.join(process.cwd(), "public", "uploads")));
 
