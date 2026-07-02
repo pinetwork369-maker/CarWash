@@ -1786,10 +1786,11 @@ const AdminDashboardModal: React.FC<{
   const [isCodebaseDirty, setIsCodebaseDirty] = useState(false);
 
   const isInitialMount = React.useRef(true);
+  const isSyncingInProgress = React.useRef(false);
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
-    } else {
+    } else if (!isSyncingInProgress.current) {
       if (siteConfig) {
         siteConfig.updatedAt = Date.now();
       }
@@ -1828,8 +1829,33 @@ const AdminDashboardModal: React.FC<{
       if (response.ok) {
         const result = await response.json();
         if (result.success) {
+          if (result.cleanedData) {
+            console.log("⚡ Received cleaned data from server with extracted static image paths!");
+            isSyncingInProgress.current = true;
+            if (result.cleanedData.siteConfig) setSiteConfig(result.cleanedData.siteConfig);
+            if (result.cleanedData.customerRecords) setCustomerRecords(result.cleanedData.customerRecords);
+            if (result.cleanedData.gallery) setGallery(result.cleanedData.gallery);
+            if (result.cleanedData.premiumSolutions) setPremiumSolutions(result.cleanedData.premiumSolutions);
+            if (result.cleanedData.services) setServices(result.cleanedData.services);
+            if (result.cleanedData.aiVideoHistory) setAiVideoHistory(result.cleanedData.aiVideoHistory);
+            if (result.cleanedData.trackingData) setTrackingData(result.cleanedData.trackingData);
+            if (result.cleanedData.reviews) setReviews(result.cleanedData.reviews);
+            if (result.cleanedData.inventory) setInventory(result.cleanedData.inventory);
+            if (result.cleanedData.eCertificates) setECertificates(result.cleanedData.eCertificates);
+            if (result.cleanedData.staff) setStaff(result.cleanedData.staff);
+            if (result.cleanedData.inspections) setInspections(result.cleanedData.inspections);
+            if (result.cleanedData.reminders) setReminders(result.cleanedData.reminders);
+            if (result.cleanedData.expenses) setExpenses(result.cleanedData.expenses);
+            if (result.cleanedData.experts) setExperts(result.cleanedData.experts);
+            
+            setTimeout(() => {
+              isSyncingInProgress.current = false;
+              setIsCodebaseDirty(false);
+            }, 150);
+          } else {
+            setIsCodebaseDirty(false);
+          }
           toast.success("Đồng bộ thành công! Các thay đổi đã được lưu trực tiếp vào mã nguồn của bạn. Khi dự án được đồng bộ lên GitHub, các cài đặt này sẽ được bảo lưu trọn vẹn.", { id, duration: 6000 });
-          setIsCodebaseDirty(false);
           addAuditLog("Đồng bộ hệ thống", "Đồng bộ thành công dữ liệu với mã nguồn và GitHub");
           return;
         }
@@ -1884,7 +1910,31 @@ const AdminDashboardModal: React.FC<{
           const result = await response.json();
           if (result.success) {
             console.log("✅ Auto-sync of admin changes to server completed successfully!");
-            setIsCodebaseDirty(false);
+            if (result.cleanedData) {
+              isSyncingInProgress.current = true;
+              if (result.cleanedData.siteConfig) setSiteConfig(result.cleanedData.siteConfig);
+              if (result.cleanedData.customerRecords) setCustomerRecords(result.cleanedData.customerRecords);
+              if (result.cleanedData.gallery) setGallery(result.cleanedData.gallery);
+              if (result.cleanedData.premiumSolutions) setPremiumSolutions(result.cleanedData.premiumSolutions);
+              if (result.cleanedData.services) setServices(result.cleanedData.services);
+              if (result.cleanedData.aiVideoHistory) setAiVideoHistory(result.cleanedData.aiVideoHistory);
+              if (result.cleanedData.trackingData) setTrackingData(result.cleanedData.trackingData);
+              if (result.cleanedData.reviews) setReviews(result.cleanedData.reviews);
+              if (result.cleanedData.inventory) setInventory(result.cleanedData.inventory);
+              if (result.cleanedData.eCertificates) setECertificates(result.cleanedData.eCertificates);
+              if (result.cleanedData.staff) setStaff(result.cleanedData.staff);
+              if (result.cleanedData.inspections) setInspections(result.cleanedData.inspections);
+              if (result.cleanedData.reminders) setReminders(result.cleanedData.reminders);
+              if (result.cleanedData.expenses) setExpenses(result.cleanedData.expenses);
+              if (result.cleanedData.experts) setExperts(result.cleanedData.experts);
+              
+              setTimeout(() => {
+                isSyncingInProgress.current = false;
+                setIsCodebaseDirty(false);
+              }, 150);
+            } else {
+              setIsCodebaseDirty(false);
+            }
           }
         }
       } catch (err) {
@@ -15611,6 +15661,7 @@ const App: React.FC = () => {
   const [cloudConfigTime, setCloudConfigTime] = useState<number>(0);
   const [isCodebaseDirty, setIsCodebaseDirty] = useState(false);
   const isInitialMountParent = React.useRef(true);
+  const isSyncingInProgress = React.useRef(false);
 
   const [currentUserRole, setCurrentUserRole] = useState<UserRole>(() => {
     const saved = localStorage.getItem('dungcar_user_role');
@@ -15833,7 +15884,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (isInitialMountParent.current) {
       isInitialMountParent.current = false;
-    } else {
+    } else if (!isSyncingInProgress.current) {
       setIsCodebaseDirty(true);
     }
   }, [siteConfig, customerRecords, gallery, premiumSolutions, services, aiVideoHistory, trackingData, reviews, inventory, eCertificates, staff, inspections, reminders, expenses, experts]);

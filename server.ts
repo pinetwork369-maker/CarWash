@@ -239,6 +239,82 @@ async function startServer() {
     }
   });
 
+  // --- Helper to recursively extract base64 images and save them as local static files ---
+  function extractAndSaveBase64Images(obj: any): any {
+    if (typeof obj === "string") {
+      if (obj.startsWith("data:image/")) {
+        try {
+          const match = obj.match(/^data:image\/([^;]+);base64,(.*)$/);
+          if (match) {
+            const rawExt = match[1]; // e.g. "jpeg", "png", "webp"
+            let ext = `.${rawExt}`;
+            if (rawExt === "jpeg") ext = ".jpg";
+            
+            const base64Data = match[2];
+            const uploadsDir = path.join(process.cwd(), "public", "uploads");
+            if (!fs.existsSync(uploadsDir)) {
+              fs.mkdirSync(uploadsDir, { recursive: true });
+            }
+            
+            const uniqueFilename = `sync_image_${Date.now()}_${Math.floor(Math.random() * 10000)}${ext}`;
+            const filePath = path.join(uploadsDir, uniqueFilename);
+            
+            fs.writeFileSync(filePath, Buffer.from(base64Data, "base64"));
+            console.log(`[Auto-Sync] Base64 image written to: ${filePath}`);
+            
+            // Copy to dist/uploads if dist folder exists
+            const distUploadsDir = path.join(process.cwd(), "dist", "uploads");
+            if (fs.existsSync(path.join(process.cwd(), "dist"))) {
+              if (!fs.existsSync(distUploadsDir)) {
+                fs.mkdirSync(distUploadsDir, { recursive: true });
+              }
+              fs.copyFileSync(filePath, path.join(distUploadsDir, uniqueFilename));
+            }
+            
+            return `/uploads/${uniqueFilename}`;
+          }
+        } catch (err) {
+          console.error("Failed to convert base64 image in sync:", err);
+        }
+      }
+      return obj;
+    }
+    
+    if (Array.isArray(obj)) {
+      return obj.map(item => extractAndSaveBase64Images(item));
+    }
+    
+    if (obj !== null && typeof obj === "object") {
+      const newObj: any = {};
+      for (const key of Object.keys(obj)) {
+        newObj[key] = extractAndSaveBase64Images(obj[key]);
+      }
+      return newObj;
+    }
+    
+    return obj;
+  }
+
+  // Sweep auto_synced_data.json on server startup to convert any existing base64 strings to clean static files
+  try {
+    const backupFilePath = path.join(process.cwd(), "auto_synced_data.json");
+    if (fs.existsSync(backupFilePath)) {
+      console.log("🔍 Checking auto_synced_data.json for legacy base64 images on startup...");
+      const fileContent = fs.readFileSync(backupFilePath, "utf8");
+      if (fileContent.includes("data:image/")) {
+        console.log("⚡ Found base64 images in auto_synced_data.json! Converting to static files...");
+        const data = JSON.parse(fileContent);
+        const cleanedData = extractAndSaveBase64Images(data);
+        fs.writeFileSync(backupFilePath, JSON.stringify(cleanedData, null, 2), "utf8");
+        console.log("✅ Finished cleaning up auto_synced_data.json on startup!");
+      } else {
+        console.log("✅ auto_synced_data.json is already fully clean (no base64 images found).");
+      }
+    }
+  } catch (err) {
+    console.error("Failed to sweep auto_synced_data.json on startup:", err);
+  }
+
   // --- Admin Data Sync Endpoint ---
   // Saves current admin configuration data directly to local src/auto_synced_data.json file for persistence and GitHub export
   app.post("/api/sync-admin-data", async (req, res) => {
@@ -248,11 +324,19 @@ async function startServer() {
         return res.status(400).json({ error: "No data payload provided" });
       }
 
+      // Automatically clean up and extract all base64 images from the incoming sync body before saving!
+      console.log("⚡ Processing and extracting base64 images from synced data...");
+      const cleanedData = extractAndSaveBase64Images(data);
+
       const backupFilePath = path.join(process.cwd(), "auto_synced_data.json");
-      fs.writeFileSync(backupFilePath, JSON.stringify(data, null, 2), "utf8");
+      fs.writeFileSync(backupFilePath, JSON.stringify(cleanedData, null, 2), "utf8");
       console.log(`Successfully synced admin data to local file: ${backupFilePath}`);
 
-      res.json({ success: true, message: "Admin data successfully synced to local codebase files!" });
+      res.json({ 
+        success: true, 
+        message: "Admin data successfully synced to local codebase files!", 
+        cleanedData 
+      });
     } catch (error: any) {
       console.error("Admin Sync API error:", error);
       res.status(500).json({ error: "Failed to sync admin data", details: error.message });
