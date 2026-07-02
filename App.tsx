@@ -1790,6 +1790,9 @@ const AdminDashboardModal: React.FC<{
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
+      if (siteConfig) {
+        siteConfig.updatedAt = Date.now();
+      }
       setIsCodebaseDirty(true);
     }
   }, [siteConfig, customerRecords, gallery, premiumSolutions, services, aiVideoHistory, trackingData, reviews, inventory, eCertificates, staff, inspections, reminders, expenses, experts]);
@@ -1839,6 +1842,58 @@ const AdminDashboardModal: React.FC<{
       setIsSyncingToCodebase(false);
     }
   };
+
+  // Automatic Background Codebase Sync
+  useEffect(() => {
+    if (!isCodebaseDirty) return;
+
+    const syncTimer = setTimeout(async () => {
+      try {
+        console.log("🛠️ Starting auto-sync of admin changes to server codebase...");
+        
+        const configWithTime = { ...siteConfig };
+        if (!configWithTime.updatedAt) {
+          configWithTime.updatedAt = Date.now();
+        }
+
+        const response = await fetch("/api/sync-admin-data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            siteConfig: configWithTime,
+            customerRecords,
+            gallery,
+            premiumSolutions,
+            services,
+            aiVideoHistory,
+            trackingData,
+            reviews,
+            inventory,
+            eCertificates,
+            staff,
+            inspections,
+            reminders,
+            expenses,
+            experts
+          })
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success) {
+            console.log("✅ Auto-sync of admin changes to server completed successfully!");
+            setIsCodebaseDirty(false);
+          }
+        }
+      } catch (err) {
+        console.error("❌ Auto-sync of admin changes to server failed:", err);
+      }
+    }, 3000); // Debounce 3 seconds
+
+    return () => clearTimeout(syncTimer);
+  }, [isCodebaseDirty, siteConfig, customerRecords, gallery, premiumSolutions, services, aiVideoHistory, trackingData, reviews, inventory, eCertificates, staff, inspections, reminders, expenses, experts]);
 
   useEffect(() => {
     setServicePage(1);
@@ -4203,7 +4258,16 @@ const AdminDashboardModal: React.FC<{
                           <Github className="w-3.5 h-3.5 text-blue-500" />
                           {isSyncingToCodebase ? "Đang đồng bộ..." : "Đồng bộ GitHub"}
                         </button>
-                        <button onClick={() => { toast.success("✅ Cấu hình đã được áp dụng!"); onClose(); }} className="flex-1 sm:flex-none px-6 py-3 rounded-xl md:rounded-2xl bg-blue-600 text-white font-black uppercase text-[9px] md:text-[10px] shadow-xl hover:bg-blue-500 transition-all active:scale-95">Lưu & Áp Dụng</button>
+                        <button 
+                          onClick={async () => { 
+                            await handleSyncToCodebase(); 
+                            onClose(); 
+                          }} 
+                          disabled={isSyncingToCodebase}
+                          className="flex-1 sm:flex-none px-6 py-3 rounded-xl md:rounded-2xl bg-blue-600 text-white font-black uppercase text-[9px] md:text-[10px] shadow-xl hover:bg-blue-500 transition-all active:scale-95 disabled:opacity-50"
+                        >
+                          {isSyncingToCodebase ? "Đang Lưu & Đồng bộ..." : "Lưu & Áp Dụng"}
+                        </button>
                       </div>
                     </div>
 
@@ -4631,6 +4695,92 @@ const AdminDashboardModal: React.FC<{
                             <label className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black tracking-widest group-focus-within:text-emerald-500 transition-colors flex items-center gap-2">Zalo</label>
                             <input value={siteConfig.zaloNumber} onChange={e => updateConfig('zaloNumber', e.target.value)} className="w-full bg-slate-950 border border-white/5 rounded-xl md:rounded-2xl p-4 text-white text-xs" />
                           </div>
+                        </div>
+                      </div>
+
+                      {/* Website Images Management */}
+                      <div className="bg-slate-900/50 p-6 md:p-10 rounded-[24px] md:rounded-[40px] border border-white/5 space-y-6 md:space-y-8 flex flex-col md:col-span-2">
+                        <div className="flex justify-between items-center">
+                          <h4 className="text-[10px] md:text-[11px] font-black uppercase text-blue-500 tracking-[0.2em] flex items-center gap-3">
+                            <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.6)]"></span> Quản Lý Hình Ảnh Website
+                          </h4>
+                          <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[8px] font-black uppercase tracking-widest animate-pulse border border-emerald-500/20">Tự động lưu & đồng bộ</span>
+                        </div>
+                        
+                        <p className="text-slate-400 text-xs leading-relaxed">
+                          Tải lên hình ảnh từ máy tính hoặc dán liên kết URL trực tiếp. Hệ thống tự động tối ưu hóa dung lượng ảnh, lưu trữ đám mây và cập nhật tức thì lên giao diện chính mà không cần tải lại trang.
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {[
+                            { id: 'logoUrl', label: 'Logo thương hiệu', desc: 'Hiển thị trên thanh điều hướng chính, hóa đơn và chân trang.', fallback: siteConfig.logoUrl || (siteConfig?.siteName?.charAt(0) || 'D') },
+                            { id: 'heroImage', label: 'Ảnh nền Trang chủ (Hero Image)', desc: 'Ảnh nền lớn hiển thị ở phần đầu trang chủ.', fallback: 'https://images.unsplash.com/photo-1603584173870-7f394833ec96?auto=format&fit=crop&q=80&w=2069' },
+                            { id: 'aboutImage', label: 'Ảnh phân đoạn Giới thiệu (About Section)', desc: 'Ảnh banner bên cạnh khối đếm số năm kinh nghiệm.', fallback: 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&q=80&w=1200' },
+                            { id: 'featureBefore', label: 'Ảnh so sánh Trước (Before)', desc: 'Ảnh phía trái trong thanh so sánh kéo trượt trước - sau.', fallback: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=1200' },
+                            { id: 'featureAfter', label: 'Ảnh so sánh Sau (After)', desc: 'Ảnh phía phải trong thanh so sánh kéo trượt trước - sau.', fallback: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1200' },
+                            { id: 'weatherCareImage', label: 'Ảnh phân đoạn AI WeatherCare', desc: 'Ảnh mô tả dịch vụ bảo vệ sơn xe theo thời tiết.', fallback: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200' },
+                            { id: 'faqImage', label: 'Ảnh phân đoạn Câu hỏi thường gặp', desc: 'Ảnh minh họa bên cạnh phần danh sách FAQ.', fallback: 'https://images.unsplash.com/photo-1601362840469-51e4d8d59085?auto=format&fit=crop&q=80&w=1200' },
+                            { id: 'ppfImage', label: 'Ảnh phân đoạn Phủ PPF & Đổi Màu', desc: 'Ảnh nền hiển thị chi tiết dịch vụ dán PPF bảo vệ.', fallback: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&q=80&w=1200' },
+                          ].map(imageField => {
+                            const currentValue = (siteConfig as any)[imageField.id] || '';
+                            const finalPreview = currentValue || imageField.fallback;
+                            return (
+                              <div key={imageField.id} className="p-5 rounded-2xl bg-slate-950/60 border border-white/5 space-y-4 hover:border-white/10 transition-all flex flex-col justify-between">
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-black text-white uppercase tracking-wider block">{imageField.label}</span>
+                                  <p className="text-[9px] text-slate-500 italic leading-relaxed">{imageField.desc}</p>
+                                </div>
+                                
+                                <div className="grid grid-cols-3 gap-3 items-center pt-2">
+                                  <div className="col-span-1 aspect-video rounded-xl overflow-hidden bg-slate-900 border border-white/5 relative group flex items-center justify-center">
+                                    {finalPreview.startsWith('http') || finalPreview.startsWith('data:') ? (
+                                      <img 
+                                        src={finalPreview} 
+                                        alt={imageField.label} 
+                                        className="w-full h-full object-cover transition-transform group-hover:scale-110" 
+                                        referrerPolicy="no-referrer"
+                                      />
+                                    ) : (
+                                      <div className="w-full h-full bg-gradient-to-br from-blue-600 to-emerald-600 flex items-center justify-center font-black text-white text-lg">
+                                        {finalPreview}
+                                      </div>
+                                    )}
+                                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all">
+                                      <span className="text-[8px] font-black text-white uppercase tracking-widest">Xem trước</span>
+                                    </div>
+                                  </div>
+
+                                  <div className="col-span-2 space-y-2">
+                                    <div className="flex gap-2">
+                                      <input 
+                                        value={currentValue} 
+                                        onChange={e => updateConfig(imageField.id as any, e.target.value)} 
+                                        placeholder="URL ảnh hoặc tải lên..."
+                                        className="flex-1 bg-slate-950 border border-white/10 rounded-xl p-2.5 text-white text-[10px] outline-none focus:border-emerald-500/40 transition-all"
+                                      />
+                                      <label className="w-9 h-9 bg-emerald-600/10 hover:bg-emerald-600/20 border border-emerald-500/20 rounded-xl flex items-center justify-center cursor-pointer transition-all shrink-0 group/upload">
+                                        <input 
+                                          type="file" 
+                                          onChange={e => handleImageUpload(e, (b) => updateConfig(imageField.id as any, b))} 
+                                          className="hidden" 
+                                          accept="image/*" 
+                                        />
+                                        <Upload className="w-4 h-4 text-emerald-400 group-hover/upload:scale-110 transition-transform" />
+                                      </label>
+                                    </div>
+                                    {currentValue && (
+                                      <button 
+                                        onClick={() => updateConfig(imageField.id as any, '')}
+                                        className="text-[8px] text-red-400 hover:text-red-300 font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
+                                      >
+                                        <Trash className="w-3 h-3" /> Đặt lại mặc định
+                                      </button>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
 
@@ -9847,19 +9997,10 @@ const NewsManagement: React.FC<{
     );
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        toast.error("Ảnh quá lớn, vui lòng chọn ảnh dưới 2MB");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setForm({ ...form, image: reader.result as string });
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleImageUploadLocal = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleImageUpload(e, (urlOrBase64) => {
+      setForm(prev => ({ ...prev, image: urlOrBase64 }));
+    });
   };
 
   const handleGenerateSEO = async () => {
@@ -10144,7 +10285,7 @@ const NewsManagement: React.FC<{
                               <Upload className="w-5 h-5 text-slate-400 group-hover:text-blue-500" />
                               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-white">Tải ảnh từ máy tính</span>
                             </div>
-                            <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                            <input type="file" accept="image/*" className="hidden" onChange={handleImageUploadLocal} />
                           </label>
                           {form.image && (
                             <button 
@@ -13032,7 +13173,7 @@ const HomePage: React.FC<any> = ({
 
                 <div className="relative rounded-[40px] overflow-hidden border border-white/10 aspect-video group">
                    <img 
-                    src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&q=80&w=1200" 
+                    src={siteConfig.aboutImage || "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&q=80&w=1200"} 
                     alt="Detailing" 
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     referrerPolicy="no-referrer"
@@ -13432,7 +13573,7 @@ const HomePage: React.FC<any> = ({
             <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/5 rounded-[64px] p-8 sm:p-24 overflow-hidden relative">
               <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
                 <img 
-                  src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200" 
+                  src={siteConfig.weatherCareImage || "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200"} 
                   alt="Protection" 
                   className="w-full h-full object-cover opacity-20 [mask-image:linear-gradient(to_right,transparent,black)]"
                   referrerPolicy="no-referrer"
@@ -14313,7 +14454,7 @@ const HomePage: React.FC<any> = ({
               <div className="lg:w-1/2 relative">
                 <div className="absolute -inset-10 bg-blue-600/10 rounded-full blur-[120px]"></div>
                 <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-2xl">
-                  <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d59085?auto=format&fit=crop&q=80&w=1200" alt="Car Care" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <img src={siteConfig.faqImage || "https://images.unsplash.com/photo-1601362840469-51e4d8d59085?auto=format&fit=crop&q=80&w=1200"} alt="Car Care" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
                   <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10">
                     <p className="text-white font-bold italic mb-4">"Một chiếc xe sạch không chỉ đẹp, nó còn thể hiện phong cách sống của chủ nhân."</p>
@@ -15196,7 +15337,7 @@ const HomePage: React.FC<any> = ({
       >
         <div className="max-w-4xl mx-auto space-y-12 pb-24">
           <div className="aspect-video rounded-[40px] overflow-hidden relative group">
-            <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&q=80&w=1200" alt="PPF Protection" className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" referrerPolicy="no-referrer" />
+            <img src={siteConfig.ppfImage || "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&q=80&w=1200"} alt="PPF Protection" className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" referrerPolicy="no-referrer" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
             <div className="absolute bottom-10 left-10 right-10">
               <div className="inline-block px-6 py-2 rounded-full bg-blue-600 text-white font-black text-[10px] uppercase tracking-widest mb-4">Ultimate Protection</div>
@@ -15467,6 +15608,10 @@ const HomePage: React.FC<any> = ({
 };
 
 const App: React.FC = () => {
+  const [cloudConfigTime, setCloudConfigTime] = useState<number>(0);
+  const [isCodebaseDirty, setIsCodebaseDirty] = useState(false);
+  const isInitialMountParent = React.useRef(true);
+
   const [currentUserRole, setCurrentUserRole] = useState<UserRole>(() => {
     const saved = localStorage.getItem('dungcar_user_role');
     return (saved as UserRole) || 'staff';
@@ -15685,6 +15830,14 @@ const App: React.FC = () => {
     return saved ? JSON.parse(saved) : (syncedBackup?.experts || DEFAULT_SITE_CONFIG.experts || []);
   });
 
+  useEffect(() => {
+    if (isInitialMountParent.current) {
+      isInitialMountParent.current = false;
+    } else {
+      setIsCodebaseDirty(true);
+    }
+  }, [siteConfig, customerRecords, gallery, premiumSolutions, services, aiVideoHistory, trackingData, reviews, inventory, eCertificates, staff, inspections, reminders, expenses, experts]);
+
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [isFirebaseLoading, setIsFirebaseLoading] = useState(true);
 
@@ -15740,6 +15893,22 @@ const App: React.FC = () => {
         return;
       }
 
+      // Check if we should skip sync for public list collections due to newer local/server codebase backups
+      const localSaved = localStorage.getItem('dungcar_config_v12');
+      let localTime = 0;
+      try {
+        if (localSaved) {
+          localTime = JSON.parse(localSaved).updatedAt || 0;
+        }
+      } catch (_) {}
+      const serverTime = syncedBackup?.siteConfig?.updatedAt || 0;
+      const bestLocalTime = Math.max(localTime, serverTime);
+
+      if (collectionName !== 'config' && bestLocalTime > cloudConfigTime && !user) {
+        console.log(`Skipping snapshot sync for '${collectionName}' (Local/Server backup is newer than cloud config time: ${cloudConfigTime}).`);
+        return;
+      }
+
       const unsubscribe = isList 
         ? onSnapshot(collection(db, collectionName), (snapshot) => {
             const listData = snapshot.docs.map(d => ({ ...d.data(), id: d.id }));
@@ -15750,9 +15919,30 @@ const App: React.FC = () => {
             console.error(`Snapshot error for ${collectionName}:`, err);
           })
         : onSnapshot(doc(db, collectionName, docId), (snapshot) => {
-            const docData = snapshot.data();
+            const docData = snapshot.data() as any;
             if (docData) {
               console.log(`Cloud data received for ${collectionName}:`, docData.siteName || docId);
+              
+              if (collectionName === 'config') {
+                const localSavedObj = localStorage.getItem('dungcar_config_v12');
+                let localTimeVal = 0;
+                try {
+                  if (localSavedObj) {
+                    localTimeVal = JSON.parse(localSavedObj).updatedAt || 0;
+                  }
+                } catch (_) {}
+                
+                const serverTimeVal = syncedBackup?.siteConfig?.updatedAt || 0;
+                const bestLocalTimeVal = Math.max(localTimeVal, serverTimeVal);
+                const cloudTime = docData.updatedAt || 0;
+                
+                setCloudConfigTime(cloudTime);
+
+                if (bestLocalTimeVal > cloudTime) {
+                  console.log("Local or Server configuration is newer than cloud. Skipping cloud override to preserve images/updates.");
+                  return;
+                }
+              }
               setData(docData);
             }
           }, (err) => {
@@ -15760,7 +15950,7 @@ const App: React.FC = () => {
           });
 
       return () => unsubscribe();
-    }, [user, collectionName, isList, docId, isPublic, isDesignAuthenticated, isAccountingAuthenticated, isInspectionAuthenticated, currentUserRole]);
+    }, [user, collectionName, isList, docId, isPublic, isDesignAuthenticated, isAccountingAuthenticated, isInspectionAuthenticated, currentUserRole, cloudConfigTime]);
 
     useEffect(() => {
       if (!user) return;
@@ -15843,7 +16033,11 @@ const App: React.FC = () => {
 
   useEffect(() => {
     try {
-      localStorage.setItem('dungcar_config_v12', JSON.stringify(siteConfig));
+      const configToSave = { ...siteConfig };
+      if (isCodebaseDirty && (!configToSave.updatedAt || configToSave.updatedAt < Date.now() - 5000)) {
+        configToSave.updatedAt = Date.now();
+      }
+      localStorage.setItem('dungcar_config_v12', JSON.stringify(configToSave));
       localStorage.setItem('dungcar_records_v12', JSON.stringify(customerRecords));
       localStorage.setItem('dungcar_gallery_v12', JSON.stringify(gallery));
       localStorage.setItem('dungcar_premium_v12', JSON.stringify(premiumSolutions));

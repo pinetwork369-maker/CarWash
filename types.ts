@@ -457,6 +457,10 @@ export interface SiteConfig {
   tintProjects?: WrapProject[];
   tuningProjects?: WrapProject[];
   logoUrl?: string;
+  aboutImage?: string;
+  weatherCareImage?: string;
+  faqImage?: string;
+  ppfImage?: string;
   facebookUrl?: string;
   youtubeUrl?: string;
   instagramUrl?: string;
@@ -483,6 +487,7 @@ export interface SiteConfig {
   googleVerificationCode?: string;
   themeColor?: string; // Màu chủ đạo (Accent Color)
   secondaryColor?: string; // Màu phụ
+  updatedAt?: number;
 }
 
 export interface Message {
