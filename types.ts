@@ -235,6 +235,7 @@ export interface Appointment {
   isRead?: boolean;
   paymentStatus?: 'unpaid' | 'deposit_paid' | 'fully_paid';
   depositAmount?: number;
+  technicianId?: string;
 }
 
 export interface DetailingPackage {

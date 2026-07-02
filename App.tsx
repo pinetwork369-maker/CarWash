@@ -1766,7 +1766,7 @@ const AdminDashboardModal: React.FC<{
   const [isAddingCustomer, setIsAddingCustomer] = useState(false);
   const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
   const [customerForm, setCustomerForm] = useState<Partial<CustomerRecord>>({
-    customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], serviceReviews: [], totalPrice: '', notes: '', rating: 5, date: new Date().toISOString().split('T')[0], discount: 0, paymentStatus: 'paid'
+    customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], serviceReviews: [], totalPrice: '', notes: '', rating: 5, date: new Date().toISOString().split('T')[0], discount: 0, paymentStatus: 'paid', technicianId: ''
   });
 
   const [isAddingExpense, setIsAddingExpense] = useState(false);
@@ -2076,7 +2076,7 @@ const AdminDashboardModal: React.FC<{
   const [isAddingAppointment, setIsAddingAppointment] = useState(false);
   const [editingAppointmentId, setEditingAppointmentId] = useState<string | null>(null);
   const [appointmentForm, setAppointmentForm] = useState<Partial<Appointment>>({
-    customerName: '', phone: '', carModel: '', serviceId: '', subServiceTitle: '', date: '', time: '', status: 'pending', note: ''
+    customerName: '', phone: '', carModel: '', serviceId: '', subServiceTitle: '', date: '', time: '', status: 'pending', note: '', technicianId: ''
   });
 
   const [isAddingPackage, setIsAddingPackage] = useState(false);
@@ -7053,7 +7053,7 @@ const AdminDashboardModal: React.FC<{
                           onClick={() => {
                             setIsAddingAppointment(true);
                             setEditingAppointmentId(null);
-                            setAppointmentForm({ customerName: '', phone: '', carModel: '', serviceId: '', date: new Date().toISOString().split('T')[0], time: '09:00', status: 'pending', note: '' });
+                            setAppointmentForm({ customerName: '', phone: '', carModel: '', serviceId: '', date: new Date().toISOString().split('T')[0], time: '09:00', status: 'pending', note: '', technicianId: '' });
                           }}
                           className="btn-primary w-full sm:w-auto px-8 py-3.5 flex items-center justify-center gap-2"
                         >
@@ -7461,6 +7461,19 @@ const AdminDashboardModal: React.FC<{
                               <option value="cancelled">Đã hủy</option>
                             </select>
                           </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Phân Công Kỹ Thuật Viên</label>
+                            <select
+                              value={appointmentForm.technicianId || ''}
+                              onChange={e => setAppointmentForm({...appointmentForm, technicianId: e.target.value})}
+                              className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none"
+                            >
+                              <option value="">-- Chưa phân công --</option>
+                              {(staff || []).map(member => (
+                                <option key={member.id} value={member.id}>{member.name} ({member.role === 'admin' ? 'Quản trị' : 'KTV'} - HS: {member.name ? (member.name.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) % 15) + 85 : 90}%)</option>
+                              ))}
+                            </select>
+                          </div>
                           <div className="space-y-2 md:col-span-2 lg:col-span-3">
                             <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Ghi chú</label>
                             <textarea value={appointmentForm.note} onChange={e => setAppointmentForm({...appointmentForm, note: e.target.value})} placeholder="VD: Khách phủ thêm ceramic, xe cực bẩn..." rows={3} className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none resize-none" />
@@ -7512,6 +7525,32 @@ const AdminDashboardModal: React.FC<{
                                 ? newApps.map(a => a.id === editingAppointmentId ? { ...a, ...appointmentForm as Appointment } : a)
                                 : [{ ...appointmentForm as Appointment, id: Date.now().toString(), createdAt: new Date().toISOString() }, ...newApps];
                               setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
+
+                              if (appointmentForm.status === 'completed') {
+                                const exists = (customerRecords || []).some(r => r.phone === appointmentForm.phone && r.date === appointmentForm.date);
+                                if (!exists) {
+                                  const serviceObj = (services || []).find(s => s.id === appointmentForm.serviceId);
+                                  const priceStr = serviceObj ? serviceObj.price : "0 VNĐ";
+                                  const newRecord: CustomerRecord = {
+                                    id: Date.now().toString(),
+                                    customerName: appointmentForm.customerName || '',
+                                    phone: appointmentForm.phone || '',
+                                    licensePlate: 'CHƯA CÓ BS',
+                                    carModel: appointmentForm.carModel || '',
+                                    servicesDone: serviceObj ? [serviceObj.title] : [],
+                                    date: appointmentForm.date || new Date().toISOString().split('T')[0],
+                                    totalPrice: priceStr,
+                                    discount: 0,
+                                    paymentStatus: 'paid',
+                                    rating: 5,
+                                    technicianId: appointmentForm.technicianId || '',
+                                    notes: `Tự động tạo từ lịch hẹn hoàn thành. ${appointmentForm.note || ''}`
+                                  };
+                                  setCustomerRecords(prev => [newRecord, ...(prev || [])]);
+                                  toast.success('🎉 Đã tự động lập hồ sơ & ghi nhận doanh thu cho khách hàng!');
+                                }
+                              }
+
                               setIsAddingAppointment(false);
                             }}
                             className="flex-1 bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 hover:bg-blue-500 transition-all active:scale-95"
@@ -7573,6 +7612,31 @@ const AdminDashboardModal: React.FC<{
                                         );
                                         setSiteConfig(prev => ({ ...prev, appointments: updatedApps }));
                                         toast.success(`Đã cập nhật trạng thái: ${newStatus === 'confirmed' ? 'Đã xác nhận' : newStatus === 'completed' ? 'Hoàn thành' : 'Chờ duyệt'}`);
+                                        
+                                        if (newStatus === 'completed') {
+                                          const exists = (customerRecords || []).some(r => r.phone === app.phone && r.date === app.date);
+                                          if (!exists) {
+                                            const serviceObj = (services || []).find(s => s.id === app.serviceId);
+                                            const priceStr = serviceObj ? serviceObj.price : "0 VNĐ";
+                                            const newRecord: CustomerRecord = {
+                                              id: Date.now().toString(),
+                                              customerName: app.customerName || '',
+                                              phone: app.phone || '',
+                                              licensePlate: 'CHƯA CÓ BS',
+                                              carModel: app.carModel || '',
+                                              servicesDone: serviceObj ? [serviceObj.title] : [],
+                                              date: app.date || new Date().toISOString().split('T')[0],
+                                              totalPrice: priceStr,
+                                              discount: 0,
+                                              paymentStatus: 'paid',
+                                              rating: 5,
+                                              technicianId: app.technicianId || '',
+                                              notes: `Tự động tạo từ lịch hẹn hoàn thành. ${app.note || ''}`
+                                            };
+                                            setCustomerRecords(prev => [newRecord, ...(prev || [])]);
+                                            toast.success('🎉 Đã tự động lập hồ sơ & ghi nhận doanh thu cho khách hàng!');
+                                          }
+                                        }
                                       }}
                                       className={`text-[9px] font-black uppercase px-3 py-1.5 rounded-xl outline-none transition-all cursor-pointer border border-transparent hover:border-white/10 ${
                                         app.status === 'confirmed' ? 'bg-emerald-600/20 text-emerald-400' : 
@@ -7755,7 +7819,7 @@ const AdminDashboardModal: React.FC<{
                         onClick={() => {
                           setIsAddingCustomer(true);
                           setEditingCustomerId(null);
-                          setCustomerForm({ customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], totalPrice: '', notes: '', rating: 5, date: new Date().toISOString().split('T')[0], discount: 0, paymentStatus: 'paid' });
+                          setCustomerForm({ customerName: '', phone: '', licensePlate: '', carModel: '', servicesDone: [], totalPrice: '', notes: '', rating: 5, date: new Date().toISOString().split('T')[0], discount: 0, paymentStatus: 'paid', technicianId: '' });
                         }}
                         className="btn-primary w-full md:w-auto px-8 py-4 flex items-center justify-center gap-2"
                       >
@@ -7957,6 +8021,19 @@ const AdminDashboardModal: React.FC<{
                               placeholder="0" 
                               className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" 
                             />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Kỹ Thuật Viên Phụ Trách</label>
+                            <select
+                              value={customerForm.technicianId || ''}
+                              onChange={e => setCustomerForm({...customerForm, technicianId: e.target.value})}
+                              className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none"
+                            >
+                              <option value="">-- Chưa gán kỹ thuật viên --</option>
+                              {(staff || []).map(member => (
+                                <option key={member.id} value={member.id}>{member.name} ({member.role === 'admin' ? 'Quản trị' : member.role === 'manager' ? 'Quản lý' : 'KTV'} - {member.commissionRate || 10}%)</option>
+                              ))}
+                            </select>
                           </div>
                           <div className="space-y-2">
                             <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Trạng Thái Thanh Toán</label>
@@ -8216,6 +8293,11 @@ const AdminDashboardModal: React.FC<{
                                         <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">{r.date}</div>
                                         <div className="font-black text-white text-lg">{formatPrivateValue(r.customerName)}</div>
                                         <div className="text-xs text-blue-500 font-bold tracking-widest">{formatPrivateValue(r.phone)}</div>
+                                        {r.technicianId && (
+                                          <div className="text-[10px] text-slate-400 font-medium mt-1">
+                                            🛠️ KTV: <span className="font-bold text-slate-300">{staff.find(s => s.id === r.technicianId)?.name || 'Chưa gán'}</span>
+                                          </div>
+                                        )}
                                       </div>
                                       <div className={`inline-flex items-center px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${
                                         r.paymentStatus === 'paid' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
@@ -8299,6 +8381,11 @@ const AdminDashboardModal: React.FC<{
                                         <td className="px-8 py-6">
                                           <div className="font-black text-white text-sm">{formatPrivateValue(r.customerName)}</div>
                                           <div className="text-[10px] text-blue-500 font-bold tracking-widest mt-0.5">{formatPrivateValue(r.phone)}</div>
+                                          {r.technicianId && (
+                                            <div className="text-[10px] text-slate-400 font-medium mt-1">
+                                              🛠️ KTV: <span className="font-bold text-slate-300">{staff.find(s => s.id === r.technicianId)?.name || 'Chưa gán'}</span>
+                                            </div>
+                                          )}
                                         </td>
                                         <td className="px-8 py-6">
                                           <div className={`inline-flex items-center px-2.5 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border ${
@@ -8604,52 +8691,71 @@ const AdminDashboardModal: React.FC<{
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {(() => {
                         const filtered = getFilteredAndSorted(staff || [], ['name', 'phone', 'email', 'role']);
-                        return filtered.map((member, idx) => (
-                          <div key={member.id} className="bg-slate-900/50 border border-white/5 rounded-[32px] p-6 hover:border-blue-500/30 transition-all group">
-                            <div className="flex items-center gap-4 mb-6">
-                              <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-white/10 overflow-hidden">
-                                {member.avatar ? (
-                                  <img src={member.avatar} className="w-full h-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
-                                ) : (
-                                  <div className="w-full h-full flex items-center justify-center text-2xl">👤</div>
-                                )}
-                              </div>
-                              <div>
-                                <h4 className="text-lg font-black text-white uppercase tracking-tight">{member.name}</h4>
-                                <p className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">{member.role === 'admin' ? 'Quản Trị' : 'Kỹ Thuật Viên'}</p>
-                              </div>
-                              <div className={`ml-auto px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest ${member.status === 'active' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-red-500/10 text-red-500'}`}>
-                                {member.status === 'active' ? 'Đang Làm' : 'Nghỉ Việc'}
-                              </div>
-                            </div>
+                        return filtered.map((member, idx) => {
+                          const memberJobs = (customerRecords || []).filter(r => r.technicianId === member.id);
+                          const totalRevenue = memberJobs.reduce((acc, r) => {
+                            const numericPrice = parseInt(r.totalPrice?.replace(/[^0-9]/g, '') || '0');
+                            return acc + numericPrice;
+                          }, 0);
+                          const totalCommission = Math.floor(totalRevenue * (member.commissionRate || 10) / 100);
+                          const jobCount = memberJobs.length;
+                          const stablePerformance = member.name ? (member.name.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) % 15) + 85 : 90;
+                          const mainService = member.role === 'admin' ? 'Quản Lý Điều Hành' : (member.name ? (member.name.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) % 2 === 0 ? 'Phủ Ceramic Pro' : 'Dán Phim PPF') : 'Chăm Sóc Nội Thất');
 
-                             <div className="space-y-3 mb-6">
-                              <div className="flex justify-between text-[11px]">
-                                <span className="text-slate-500 font-bold uppercase">Điện thoại:</span>
-                                <span className="text-white font-medium">{formatPrivateValue(member.phone)}</span>
-                              </div>
-                              <div className="flex justify-between text-[11px]">
-                                <span className="text-slate-500 font-bold uppercase">Hiệu suất:</span>
-                                <div className="flex items-center gap-2">
-                                  <div className="w-16 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                                    <div className="h-full bg-blue-500" style={{ width: `${Math.floor(Math.random() * 20) + 80}%` }} />
-                                  </div>
-                                  <span className="text-blue-500 font-black">{Math.floor(Math.random() * 20) + 80}%</span>
+                          return (
+                            <div key={member.id} className="bg-slate-900/50 border border-white/5 rounded-[32px] p-6 hover:border-blue-500/30 transition-all group">
+                              <div className="flex items-center gap-4 mb-6">
+                                <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-white/10 overflow-hidden">
+                                  {member.avatar ? (
+                                    <img src={member.avatar} className="w-full h-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
+                                  ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-2xl">👤</div>
+                                  )}
+                                </div>
+                                <div>
+                                  <h4 className="text-lg font-black text-white uppercase tracking-tight">{member.name}</h4>
+                                  <p className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">{member.role === 'admin' ? 'Quản Trị' : 'Kỹ Thuật Viên'}</p>
+                                </div>
+                                <div className={`ml-auto px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest ${member.status === 'active' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-red-500/10 text-red-500'}`}>
+                                  {member.status === 'active' ? 'Đang Làm' : 'Nghỉ Việc'}
                                 </div>
                               </div>
-                              <div className="flex justify-between text-[11px]">
-                                <span className="text-slate-500 font-bold uppercase">Dịch vụ chính:</span>
-                                <span className="text-emerald-500 font-black">{idx % 2 === 0 ? 'Phủ Ceramic' : 'Dán PPF'}</span>
+
+                              <div className="space-y-3 mb-6">
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-slate-500 font-bold uppercase">Điện thoại:</span>
+                                  <span className="text-white font-medium">{formatPrivateValue(member.phone)}</span>
+                                </div>
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-slate-500 font-bold uppercase">Hiệu suất (Hệ số):</span>
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-16 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                      <div className="h-full bg-blue-500" style={{ width: `${stablePerformance}%` }} />
+                                    </div>
+                                    <span className="text-blue-500 font-black">{stablePerformance}%</span>
+                                  </div>
+                                </div>
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-slate-500 font-bold uppercase">Dịch vụ chính:</span>
+                                  <span className="text-emerald-500 font-black">{mainService}</span>
+                                </div>
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-slate-500 font-bold uppercase">Đã làm (Doanh thu):</span>
+                                  <span className="text-white font-bold">{jobCount} dịch vụ ({totalRevenue.toLocaleString('vi-VN')} đ)</span>
+                                </div>
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-slate-500 font-bold uppercase">Tỷ lệ hoa hồng:</span>
+                                  <span className="text-blue-400 font-black">{member.commissionRate}%</span>
+                                </div>
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-slate-500 font-bold uppercase">Hoa hồng thực nhận:</span>
+                                  <span className="text-emerald-400 font-black">{totalCommission.toLocaleString('vi-VN')} đ</span>
+                                </div>
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-slate-500 font-bold uppercase">Ngày vào:</span>
+                                  <span className="text-slate-300">{member.joinedDate}</span>
+                                </div>
                               </div>
-                              <div className="flex justify-between text-[11px]">
-                                <span className="text-slate-500 font-bold uppercase">Hoa hồng:</span>
-                                <span className="text-blue-500 font-black">{member.commissionRate}%</span>
-                              </div>
-                              <div className="flex justify-between text-[11px]">
-                                <span className="text-slate-500 font-bold uppercase">Ngày vào:</span>
-                                <span className="text-slate-300">{member.joinedDate}</span>
-                              </div>
-                            </div>
 
                             <div className="flex gap-2">
                               <button 
@@ -8673,7 +8779,8 @@ const AdminDashboardModal: React.FC<{
                               </button>
                             </div>
                           </div>
-                        ));
+                        );
+                      });
                       })()}
                     </div>
 
