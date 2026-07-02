@@ -15789,10 +15789,25 @@ const App: React.FC = () => {
     return (translations[language] as any)[key] || key;
   };
 
+  const useServerBackup = (() => {
+    try {
+      const saved = localStorage.getItem('dungcar_config_v12');
+      if (!saved) return true;
+      const parsed = JSON.parse(saved);
+      const serverTime = syncedBackup?.siteConfig?.updatedAt || 0;
+      const localTime = parsed.updatedAt || 0;
+      if (serverTime > localTime) {
+        console.log(`[Auto-Sync] Server synced backup is newer than local storage (${serverTime} > ${localTime}). Overriding local storage config.`);
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  })();
+
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
     const saved = localStorage.getItem('dungcar_config_v12');
     const fallbackBase = syncedBackup?.siteConfig || DEFAULT_SITE_CONFIG;
-    if (saved) {
+    if (saved && !useServerBackup) {
       try {
         const parsed = JSON.parse(saved);
         // Migrate old default passwords to new ones
@@ -15816,6 +15831,7 @@ const App: React.FC = () => {
         return { 
           ...fallbackBase, 
           ...parsed,
+          logoUrl: parsed.logoUrl || fallbackBase.logoUrl || "",
           news: parsed.news || fallbackBase.news || DEFAULT_NEWS
         };
       } catch (e) {
@@ -15826,59 +15842,59 @@ const App: React.FC = () => {
   });
   const [customerRecords, setCustomerRecords] = useState<CustomerRecord[]>(() => {
     const saved = localStorage.getItem('dungcar_records_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.customerRecords || DEFAULT_CUSTOMER_RECORDS);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.customerRecords || DEFAULT_CUSTOMER_RECORDS);
   });
   const [gallery, setGallery] = useState<GalleryImage[]>(() => {
     const saved = localStorage.getItem('dungcar_gallery_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.gallery || DEFAULT_GALLERY);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.gallery || DEFAULT_GALLERY);
   });
   const [premiumSolutions, setPremiumSolutions] = useState<PremiumSolution[]>(() => {
     const saved = localStorage.getItem('dungcar_premium_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.premiumSolutions || DEFAULT_PREMIUM_SOLUTIONS);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.premiumSolutions || DEFAULT_PREMIUM_SOLUTIONS);
   });
   const [services, setServices] = useState<Service[]>(() => {
     const saved = localStorage.getItem('dungcar_services_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.services || INITIAL_SERVICES);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.services || INITIAL_SERVICES);
   });
   const [aiVideoHistory, setAiVideoHistory] = useState<AiVideoRecord[]>(() => {
     const saved = localStorage.getItem('dungcar_ai_history_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.aiVideoHistory || []);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.aiVideoHistory || []);
   });
   const [trackingData, setTrackingData] = useState<VehicleTracking[]>(() => {
     const saved = localStorage.getItem('dungcar_tracking_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.trackingData || DEFAULT_TRACKING);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.trackingData || DEFAULT_TRACKING);
   });
   const [reviews, setReviews] = useState<Review[]>(() => {
     const saved = localStorage.getItem('dungcar_reviews_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.reviews || DEFAULT_REVIEWS);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.reviews || DEFAULT_REVIEWS);
   });
   const [inventory, setInventory] = useState<InventoryItem[]>(() => {
     const saved = localStorage.getItem('dungcar_inventory_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.inventory || DEFAULT_INVENTORY);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.inventory || DEFAULT_INVENTORY);
   });
   const [eCertificates, setECertificates] = useState<ECertificate[]>(() => {
     const saved = localStorage.getItem('dungcar_ecerts_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.eCertificates || DEFAULT_E_CERTIFICATES);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.eCertificates || DEFAULT_E_CERTIFICATES);
   });
   const [staff, setStaff] = useState<Staff[]>(() => {
     const saved = localStorage.getItem('dungcar_staff_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.staff || DEFAULT_SITE_CONFIG.staff || []);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.staff || DEFAULT_SITE_CONFIG.staff || []);
   });
   const [inspections, setInspections] = useState<CarInspection[]>(() => {
     const saved = localStorage.getItem('dungcar_inspections_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.inspections || []);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.inspections || []);
   });
   const [reminders, setReminders] = useState<MaintenanceReminder[]>(() => {
     const saved = localStorage.getItem('dungcar_reminders_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.reminders || DEFAULT_SITE_CONFIG.reminders || []);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.reminders || DEFAULT_SITE_CONFIG.reminders || []);
   });
   const [expenses, setExpenses] = useState<Expense[]>(() => {
     const saved = localStorage.getItem('dungcar_expenses_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.expenses || DEFAULT_EXPENSES);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.expenses || DEFAULT_EXPENSES);
   });
   const [experts, setExperts] = useState<Expert[]>(() => {
     const saved = localStorage.getItem('dungcar_experts_v12');
-    return saved ? JSON.parse(saved) : (syncedBackup?.experts || DEFAULT_SITE_CONFIG.experts || []);
+    return (saved && !useServerBackup) ? JSON.parse(saved) : (syncedBackup?.experts || DEFAULT_SITE_CONFIG.experts || []);
   });
 
   useEffect(() => {
