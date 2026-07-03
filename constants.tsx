@@ -618,6 +618,7 @@ export const DEFAULT_CUSTOMER_RECORDS: CustomerRecord[] = [
     paymentStatus: 'paid',
     notes: 'Dịch vụ rất tốt, nhân viên nhiệt tình. Phim cách nhiệt dán rất đẹp và mát.',
     rating: 5,
+    loyaltyPoints: 120,
     beforeAfterImages: [
       {
         id: 'ba-1',
@@ -640,7 +641,8 @@ export const DEFAULT_CUSTOMER_RECORDS: CustomerRecord[] = [
     totalPrice: '12.000.000 VNĐ',
     paymentStatus: 'paid',
     notes: 'Xe sau khi phủ Ceramic bóng loáng, nội thất sạch sẽ thơm tho. Rất hài lòng!',
-    rating: 5
+    rating: 5,
+    loyaltyPoints: 450
   },
   {
     id: 'rec-3',
@@ -653,7 +655,8 @@ export const DEFAULT_CUSTOMER_RECORDS: CustomerRecord[] = [
     totalPrice: '85.000.000 VNĐ',
     paymentStatus: 'pending',
     notes: 'Dịch vụ cực kỳ chuyên nghiệp, xe bóng loáng như mới. Đội ngũ kỹ thuật tay nghề cao.',
-    rating: 5
+    rating: 5,
+    loyaltyPoints: 850
   }
 ];
 

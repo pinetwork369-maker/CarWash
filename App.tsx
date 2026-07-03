@@ -1451,17 +1451,24 @@ const ContactSection: React.FC<{
 
               {/* Embedded Map in Contact Section */}
               <div className="rounded-[32px] overflow-hidden border border-white/10 h-64 sm:h-80 shadow-2xl group/map relative mb-6 bg-slate-900">
-                <iframe 
-                  src={siteConfig.mapEmbedUrl} 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer"
-                  title="Bản đồ vị trí"
-                  className="transition-all duration-700"
-                ></iframe>
+                {siteConfig.mapEmbedUrl ? (
+                  <iframe 
+                    src={siteConfig.mapEmbedUrl} 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer"
+                    title="Bản đồ vị trí"
+                    className="transition-all duration-700"
+                  ></iframe>
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center text-slate-500 gap-2">
+                    <MapPin className="w-8 h-8 text-slate-700" />
+                    <span className="text-xs font-bold tracking-wider uppercase text-slate-400">Bản đồ chưa cấu hình</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 pointer-events-none border border-white/5 rounded-[32px]"></div>
               </div>
 
@@ -2175,6 +2182,52 @@ const AdminDashboardModal: React.FC<{
       }));
     }
   }, [isOpen, activeTab, siteConfig.appointments, setSiteConfig]);
+
+  const loyaltyStats = useMemo(() => {
+    const records = customerRecords || [];
+    const totalPoints = records.reduce((sum, c) => sum + (c.loyaltyPoints || 0), 0);
+    const avgPoints = records.length ? Math.round(totalPoints / records.length) : 0;
+    
+    let newCount = 0;
+    let silverCount = 0;
+    let goldCount = 0;
+    let diamondCount = 0;
+    
+    records.forEach(c => {
+      const pts = c.loyaltyPoints || 0;
+      if (pts <= 50) newCount++;
+      else if (pts <= 200) silverCount++;
+      else if (pts <= 500) goldCount++;
+      else diamondCount++;
+    });
+    
+    const chartData = [
+      { name: 'Mới (0-50đ)', count: newCount, color: '#3B82F6' },
+      { name: 'Bạc (51-200đ)', count: silverCount, color: '#94A3B8' },
+      { name: 'Vàng (201-500đ)', count: goldCount, color: '#F59E0B' },
+      { name: 'Kim Cương (>500đ)', count: diamondCount, color: '#10B981' }
+    ];
+
+    const pieData = chartData.filter(d => d.count > 0).map(d => ({
+      name: d.name.split(' ')[0],
+      value: d.count,
+      color: d.color
+    }));
+
+    const totalRedeemValue = totalPoints * (siteConfig.loyaltyConfig?.pointValue || 1000);
+
+    return {
+      totalPoints,
+      avgPoints,
+      newCount,
+      silverCount,
+      goldCount,
+      diamondCount,
+      chartData,
+      pieData,
+      totalRedeemValue
+    };
+  }, [customerRecords, siteConfig.loyaltyConfig]);
 
   useEffect(() => {
     if (isDesignAuthenticated && pendingTab) {
@@ -3697,8 +3750,12 @@ const AdminDashboardModal: React.FC<{
                             <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl group/preview">
                               {siteConfig.heroVideoUrl ? (
                                 <video src={siteConfig.heroVideoUrl} autoPlay muted loop playsInline className="w-full h-full object-cover opacity-50" />
-                              ) : (
+                              ) : siteConfig.heroImage ? (
                                 <img src={siteConfig.heroImage} className="w-full h-full object-cover opacity-50" referrerPolicy="no-referrer" />
+                              ) : (
+                                <div className="w-full h-full bg-slate-950 flex items-center justify-center text-slate-800">
+                                  <ImageIcon className="w-8 h-8" />
+                                </div>
                               )}
                               <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/40 to-slate-950/80 flex flex-col items-center justify-center p-4 text-center">
                                 <p className="text-[8px] text-blue-500 font-black uppercase tracking-[0.3em] mb-2">XE ĐẸP PRO</p>
@@ -5806,6 +5863,177 @@ const AdminDashboardModal: React.FC<{
                       <div>
                         <h3 className="section-title text-2xl">Hệ Thống Tích Điểm</h3>
                         <p className="section-subtitle mt-1">Quản lý điểm thưởng và ưu đãi khách hàng</p>
+                      </div>
+                    </div>
+
+                    {/* Stats Overview */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-3xl flex items-center gap-4 hover:border-blue-500/20 transition-all">
+                        <div className="w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-500 shadow-lg">
+                          <Users className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Khách tích điểm</p>
+                          <p className="text-2xl font-black text-white mt-1">{customerRecords.length}</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-3xl flex items-center gap-4 hover:border-amber-500/20 transition-all">
+                        <div className="w-12 h-12 rounded-2xl bg-amber-600/10 flex items-center justify-center text-amber-500 shadow-lg">
+                          <Award className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Tổng điểm phát hành</p>
+                          <p className="text-2xl font-black text-white mt-1">{loyaltyStats.totalPoints}</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-3xl flex items-center gap-4 hover:border-purple-500/20 transition-all">
+                        <div className="w-12 h-12 rounded-2xl bg-purple-600/10 flex items-center justify-center text-purple-500 shadow-lg">
+                          <Target className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Điểm trung bình</p>
+                          <p className="text-2xl font-black text-white mt-1">{loyaltyStats.avgPoints}</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-900/50 border border-white/5 p-6 rounded-3xl flex items-center gap-4 hover:border-emerald-500/20 transition-all">
+                        <div className="w-12 h-12 rounded-2xl bg-emerald-600/10 flex items-center justify-center text-emerald-500 shadow-lg">
+                          <Wallet className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Giá trị quy đổi tối đa</p>
+                          <p className="text-2xl font-black text-emerald-400 mt-1">{loyaltyStats.totalRedeemValue.toLocaleString('vi-VN')} đ</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Visual Analytics */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      {/* Bar Chart: Customer Distribution */}
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] flex flex-col justify-between">
+                        <div>
+                          <h4 className="text-sm font-black text-white uppercase tracking-widest mb-2 flex items-center gap-2">
+                            <BarChart3 className="w-4 h-4 text-blue-500" /> Phân Phối Điểm Tích Lũy
+                          </h4>
+                          <p className="text-xs text-slate-400 mb-6">Số lượng khách hàng phân bổ theo các mốc điểm tích lũy</p>
+                        </div>
+                        <div className="h-72">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <ReBarChart data={loyaltyStats.chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
+                              <XAxis 
+                                dataKey="name" 
+                                stroke="#94a3b8" 
+                                fontSize={10} 
+                                tickLine={false} 
+                                axisLine={false} 
+                              />
+                              <YAxis 
+                                stroke="#94a3b8" 
+                                fontSize={10} 
+                                tickLine={false} 
+                                axisLine={false} 
+                                allowDecimals={false} 
+                              />
+                              <Tooltip
+                                cursor={{ fill: '#ffffff05' }}
+                                content={({ active, payload }) => {
+                                  if (active && payload && payload.length) {
+                                    const data = payload[0].payload;
+                                    return (
+                                      <div className="bg-slate-950/95 border border-white/10 p-4 rounded-2xl shadow-xl">
+                                        <p className="text-xs font-black text-white uppercase tracking-wider mb-2">{data.name}</p>
+                                        <div className="flex items-center gap-4">
+                                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: data.color }} />
+                                          <p className="text-xs text-slate-400">
+                                            Số khách: <span className="font-black text-white">{data.count}</span> ({customerRecords.length ? Math.round((data.count / customerRecords.length) * 100) : 0}%)
+                                          </p>
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                }}
+                              />
+                              <Bar dataKey="count" radius={[8, 8, 0, 0]}>
+                                {loyaltyStats.chartData.map((entry, index) => (
+                                  <Cell key={`cell-${index}`} fill={entry.color} />
+                                ))}
+                              </Bar>
+                            </ReBarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+
+                      {/* Pie Chart: Tiers Breakdown */}
+                      <div className="bg-slate-900/50 border border-white/5 p-8 rounded-[40px] flex flex-col justify-between">
+                        <div>
+                          <h4 className="text-sm font-black text-white uppercase tracking-widest mb-2 flex items-center gap-2">
+                            <PieChartIcon className="w-4 h-4 text-emerald-500" /> Tỷ Lệ Hạng Khách Hàng
+                          </h4>
+                          <p className="text-xs text-slate-400 mb-6">Tỷ lệ phần trăm các phân khúc khách hàng thân thiết</p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                          <div className="h-60">
+                            {loyaltyStats.pieData.length > 0 ? (
+                              <ResponsiveContainer width="100%" height="100%">
+                                <RePieChart>
+                                  <Pie
+                                    data={loyaltyStats.pieData}
+                                    cx="50%"
+                                    cy="50%"
+                                    innerRadius={60}
+                                    outerRadius={80}
+                                    paddingAngle={4}
+                                    dataKey="value"
+                                  >
+                                    {loyaltyStats.pieData.map((entry, index) => (
+                                      <Cell key={`cell-${index}`} fill={entry.color} />
+                                    ))}
+                                  </Pie>
+                                  <Tooltip
+                                    content={({ active, payload }) => {
+                                      if (active && payload && payload.length) {
+                                        return (
+                                          <div className="bg-slate-950/95 border border-white/10 p-4 rounded-2xl shadow-xl">
+                                            <p className="text-xs font-black text-white uppercase tracking-wider mb-1">{payload[0].name}</p>
+                                            <p className="text-xs text-slate-400">
+                                              Khách hàng: <span className="font-black text-white">{payload[0].value}</span>
+                                            </p>
+                                          </div>
+                                        );
+                                      }
+                                      return null;
+                                    }}
+                                  />
+                                </RePieChart>
+                              </ResponsiveContainer>
+                            ) : (
+                              <div className="h-full flex items-center justify-center text-slate-500 text-xs">Chưa có dữ liệu phân loại</div>
+                            )}
+                          </div>
+                          
+                          {/* Legend / Info */}
+                          <div className="space-y-4">
+                            {loyaltyStats.chartData.map((tier, idx) => {
+                              const pct = customerRecords.length ? Math.round((tier.count / customerRecords.length) * 100) : 0;
+                              return (
+                                <div key={idx} className="flex items-center justify-between p-3 rounded-2xl bg-slate-950/30 border border-white/5">
+                                  <div className="flex items-center gap-2.5">
+                                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: tier.color }} />
+                                    <span className="text-xs font-bold text-slate-300">{tier.name.split(' ')[0]}</span>
+                                  </div>
+                                  <div className="text-right">
+                                    <span className="text-xs font-black text-white">{tier.count} khách</span>
+                                    <span className="text-[10px] text-slate-500 block">{pct}%</span>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -8071,6 +8299,16 @@ const AdminDashboardModal: React.FC<{
                               ))}
                             </div>
                           </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Điểm Tích Lũy</label>
+                            <input 
+                              type="number"
+                              value={customerForm.loyaltyPoints || 0} 
+                              onChange={e => setCustomerForm({...customerForm, loyaltyPoints: parseInt(e.target.value) || 0})} 
+                              placeholder="0" 
+                              className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white font-bold focus:border-blue-500 transition-all outline-none" 
+                            />
+                          </div>
                           <div className="space-y-6 md:col-span-2 lg:col-span-3">
                             <div className="flex items-center justify-between">
                               <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Chọn Dịch Vụ & Tính Tiền</label>
@@ -8237,10 +8475,15 @@ const AdminDashboardModal: React.FC<{
                                 toast.error("Vui lòng nhập tên và SĐT!");
                                 return;
                               }
+                              const numericPrice = parseInt(customerForm.totalPrice?.replace(/[^0-9]/g, '') || '0');
+                              const pointsPer100k = siteConfig.loyaltyConfig?.pointsPer100k || 10;
+                              const calculatedPoints = Math.floor(numericPrice / 100000) * pointsPer100k;
+                              const pointsToSave = customerForm.loyaltyPoints !== undefined && customerForm.loyaltyPoints > 0 ? customerForm.loyaltyPoints : (calculatedPoints || 0);
+
                               if (editingCustomerId) {
-                                setCustomerRecords((customerRecords || []).map(r => r.id === editingCustomerId ? { ...r, ...customerForm as CustomerRecord } : r));
+                                setCustomerRecords((customerRecords || []).map(r => r.id === editingCustomerId ? { ...r, ...customerForm as CustomerRecord, loyaltyPoints: pointsToSave } : r));
                               } else {
-                                setCustomerRecords([{ ...customerForm as CustomerRecord, id: Date.now().toString() }, ...(customerRecords || [])]);
+                                setCustomerRecords([{ ...customerForm as CustomerRecord, id: Date.now().toString(), loyaltyPoints: pointsToSave }, ...(customerRecords || [])]);
                               }
                               setIsAddingCustomer(false);
                             }}
@@ -12604,7 +12847,7 @@ const HomePage: React.FC<any> = ({
                 preload="auto"
                 className="w-full h-full object-cover opacity-40 scale-105 group-hover/hero-section:scale-100 transition-transform duration-[3000ms]"
               />
-            ) : (
+            ) : siteConfig.heroImage ? (
               <img 
                 src={siteConfig.heroImage} 
                 alt="Hero Background"
@@ -12613,6 +12856,10 @@ const HomePage: React.FC<any> = ({
                 loading="eager"
                 fetchPriority="high"
               />
+            ) : (
+              <div className="w-full h-full bg-slate-950 flex items-center justify-center">
+                <div className="w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]"></div>
+              </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950"></div>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>

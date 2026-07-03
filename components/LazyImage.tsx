@@ -50,15 +50,17 @@ const LazyImage: React.FC<LazyImageProps> = ({
         )}
       </AnimatePresence>
 
-      <img
-        src={src}
-        alt={alt}
-        className={`transition-all duration-700 ease-out ${isLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-lg'} ${className}`}
-        loading="lazy"
-        referrerPolicy="no-referrer"
-        onLoad={() => setIsLoaded(true)}
-        {...props}
-      />
+      {src ? (
+        <img
+          src={src}
+          alt={alt}
+          className={`transition-all duration-700 ease-out ${isLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-lg'} ${className}`}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          onLoad={() => setIsLoaded(true)}
+          {...props}
+        />
+      ) : null}
     </div>
   );
 };
