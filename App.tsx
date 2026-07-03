@@ -92,6 +92,7 @@ declare global {
 
 import LazyImage from './components/LazyImage';
 import { GenericContentModal } from './components/GenericContentModal.tsx';
+import LocalSeoLandingPage from './components/LocalSeoLandingPage';
 
 // --- Security Utilities ---
 
@@ -444,7 +445,7 @@ const GalleryPickerModal: React.FC<{
                       onClick={() => { onSelect(img.url); onClose(); }}
                       className="group relative aspect-square rounded-[24px] overflow-hidden border border-white/5 hover:border-blue-500/50 transition-all shadow-xl bg-slate-800"
                     >
-                      <img src={img.url} className="w-full h-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
+                      <img src={img.url} alt={img.title || "Hình ảnh thư viện"} className="w-full h-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
                       <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                       <div className="absolute bottom-3 left-3 right-3 p-2 bg-slate-950/80 backdrop-blur-md rounded-xl invisible group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all">
                         <p className="text-[8px] font-black text-white uppercase truncate">{img.title}</p>
@@ -469,7 +470,7 @@ const GalleryPickerModal: React.FC<{
                       onClick={() => { onSelect(item.url); onClose(); }}
                       className="group relative aspect-square rounded-[24px] overflow-hidden border border-white/5 hover:border-amber-500/50 transition-all shadow-xl bg-slate-800"
                     >
-                      <img src={item.url} className="w-full h-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
+                      <img src={item.url} alt={item.prompt || "Hình ảnh AI"} className="w-full h-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
                       <div className="absolute inset-0 bg-amber-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                       <div className="absolute bottom-3 left-3 right-3 p-2 bg-slate-950/80 backdrop-blur-md rounded-xl invisible group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all">
                         <p className="text-[8px] font-black text-white uppercase truncate">{item.prompt}</p>
@@ -12640,6 +12641,7 @@ const HomePage: React.FC<any> = ({
             <div className="flex items-center gap-4 sm:gap-8 logo-container">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
+                aria-label="Mở menu điều hướng"
                 className={`p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl transition-all flex flex-col gap-1 sm:gap-1.5 active:scale-90 group ${
                   isScrolled ? 'bg-slate-800/50 hover:bg-slate-800' : 'bg-white/5 hover:bg-white/10'
                 }`}
@@ -12833,7 +12835,9 @@ const HomePage: React.FC<any> = ({
       />
 
       <main className="flex-grow pt-24 sm:pt-32">
-        {/* Hero Section */}
+        {!['/phu-ceramic-ha-noi', '/dan-ppf-ha-noi', '/danh-bong-xe-ha-noi', '/rua-xe-detailing-ha-noi', '/dan-phim-cach-nhiet-ha-noi', '/ve-sinh-noi-that-ha-noi', '/hieu-chinh-son-ha-noi', '/khu-mui-noi-that-ha-noi'].includes(location.pathname) ? (
+          <>
+            {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 group/hero-section">
           {/* Background Elements */}
           <div className="absolute inset-0 z-0">
@@ -14942,6 +14946,27 @@ const HomePage: React.FC<any> = ({
           isDesignAuthenticated={isDesignAuthenticated}
           setSiteConfig={setSiteConfig}
         />
+          </>
+        ) : (
+          <LocalSeoLandingPage 
+            serviceId="ceramic"
+            siteConfig={siteConfig}
+            setSiteConfig={setSiteConfig}
+            services={services}
+            t={t}
+            language={language}
+            setLanguage={setLanguage}
+            theme={theme}
+            setTheme={setTheme}
+            isEditMode={isEditMode}
+            isDesignAuthenticated={isDesignAuthenticated}
+            isBookingModalOpen={isBookingModalOpen}
+            setIsBookingModalOpen={setIsBookingModalOpen}
+            onAddNotification={addNotification}
+            handlePayment={handlePayment}
+            scrollToSection={scrollToSection}
+          />
+        )}
       </main>
 
       {/* Footer */}
@@ -16562,6 +16587,17 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage {...homeProps} />} />
         <Route path="/services/:id" element={<HomePage {...homeProps} />} />
         <Route path="/news/:id" element={<HomePage {...homeProps} />} />
+        
+        {/* Local SEO Landing Pages */}
+        <Route path="/phu-ceramic-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/dan-ppf-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/danh-bong-xe-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/rua-xe-detailing-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/dan-phim-cach-nhiet-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/ve-sinh-noi-that-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/hieu-chinh-son-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/khu-mui-noi-that-ha-noi" element={<HomePage {...homeProps} />} />
+
         <Route path="/portal" element={<React.Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-slate-950"><div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>}><CustomerPortalComponent customerRecords={customerRecords} certificates={eCertificates} inspections={inspections} loyaltyConfig={siteConfig.loyaltyConfig || DEFAULT_SITE_CONFIG.loyaltyConfig!} siteConfig={siteConfig} setSiteConfig={setSiteConfig} handlePayment={handlePayment} scrollToSection={scrollToSection} t={t} /></React.Suspense>} />
         <Route path="*" element={<HomePage {...homeProps} />} />
       </Routes>
