@@ -9,6 +9,7 @@ import http from "http";
 import Stripe from "stripe";
 import OpenAI from "openai";
 import Anthropic from "@anthropic-ai/sdk";
+import compression from "compression";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +22,7 @@ async function startServer() {
   const server = http.createServer(app);
   const wss = new WebSocketServer({ server });
 
+  app.use(compression());
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
@@ -359,8 +361,13 @@ async function startServer() {
     }
   });
 
-  // Serve uploads folder statically in all environments
-  app.use("/uploads", express.static(path.join(process.cwd(), "public", "uploads")));
+  // Serve uploads folder statically in all environments with caching (30 days)
+  app.use("/uploads", express.static(path.join(process.cwd(), "public", "uploads"), {
+    maxAge: "30d",
+    setHeaders: (res) => {
+      res.setHeader("Cache-Control", "public, max-age=2592000");
+    }
+  }));
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
@@ -371,9 +378,20 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    // In production, serve the dist folder
-    app.use(express.static(path.join(process.cwd(), "dist")));
+    // In production, serve the dist folder with aggressive caching for static files, but no-cache for index.html
+    app.use(express.static(path.join(process.cwd(), "dist"), {
+      maxAge: "1y",
+      etag: true,
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".html")) {
+          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+        } else {
+          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        }
+      }
+    }));
     app.get("*all", (req, res) => {
+      res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
       res.sendFile(path.join(process.cwd(), "dist", "index.html"));
     });
   }

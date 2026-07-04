@@ -20,7 +20,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation, u
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car,  Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ChevronLeft, ArrowUp, ArrowDown, Play, Pause, Volume2, VolumeX,  Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera as CameraIcon, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud as CloudIcon, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SearchSettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon2, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper, Bot, Boxes, Gift, BarChart3, FileCheck, AlertTriangle, ClipboardCheck, Printer, Loader2, Diamond, Armchair, Disc, Waves, Split, ImagePlus, Brush, Camera, Crown
+  MapPin, Phone, Clock, ExternalLink, Copy, ChevronRight, ChevronDown, Star, Shield, Zap, Award, CheckCircle2, Info, MessageSquare, Send, User, Calendar, Car,  Tag, Plus, Trash2, Edit2, Save, X, Settings, LogOut, Menu, Search, Filter, ArrowRight, ArrowLeft, ChevronLeft, ArrowUp, ArrowDown, Play, Pause, Volume2, VolumeX,  Maximize2, Minimize2, Download, Share2, Heart, Eye, Clock3, Check, AlertCircle, HelpCircle, MoreVertical, MoreHorizontal, Grid, List, Layout, Image as ImageIcon, Video as VideoIcon, FileText, Settings2, Bell, UserCircle, LogIn, UserPlus, Mail, Lock, Smartphone, Globe, Facebook, Youtube, Instagram, Twitter, Linkedin, Github, Chrome, Compass, Map, Navigation, Layers, MousePointer2, Hand, ZoomIn, ZoomOut, RotateCcw, RotateCw, Trash, RefreshCw, CheckCircle, XCircle, Minus, Move, Square, Circle, Triangle, Type, PenTool, Eraser, Palette, Scissors, Copy as CopyIcon, Clipboard, Share, Upload, Camera as CameraIcon, Mic, Music, Headphones, Monitor, Laptop, Tablet, Watch, Battery, Wifi, Bluetooth, Cloud as CloudIcon, Sun, Moon, CloudRain, CloudLightning, Wind, Snowflake, Thermometer, Droplets, Flame, Zap as ZapIcon, Activity, Heart as HeartIcon, Target, Flag, Trophy, Medal, Briefcase, ShoppingBag, ShoppingCart, CreditCard, Wallet, Banknote, Coins, PieChart, BarChart, LineChart, TrendingUp, TrendingDown, Presentation, Book, Bookmark, BookOpen, GraduationCap, School, Building, Home, Warehouse, Factory, Truck, Bike, Plane, Ship, Anchor, LifeBuoy, MapPin as MapPinIcon, Map as MapIcon, Navigation2, Compass as CompassIcon, Locate, LocateFixed, Pin, MapPinOff, Phone as PhoneIcon, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneMissed, PhoneOff, PhoneOutgoing, Video, VideoOff, MicOff, Speaker, Volume, Volume1, Mail as MailIcon, Inbox, Archive, Send as SendIcon, Paperclip, Link as LinkIcon, Link2, ExternalLink as ExternalLinkIcon, Share2 as Share2Icon, MessageCircle, MessageSquare as MessageSquareIcon, Hash, AtSign, User as UserIcon, Users, UserPlus as UserPlusIcon, UserMinus, UserCheck, UserX, Fingerprint, Key, Shield as ShieldIcon, ShieldCheck, ShieldAlert, ShieldOff, Lock as LockIcon, Unlock, Eye as EyeIcon, EyeOff, Search as SearchIcon, ZoomIn as ZoomInIcon, ZoomOut as ZoomOutIcon, Settings as SearchSettingsIcon, Sliders, Bell as BellIcon, BellOff, Calendar as CalendarIcon, Clock as ClockIcon, History, Timer, Hourglass, AlarmClock, Watch as WatchIcon, Sun as SunIcon, Moon as MoonIcon, Cloud as CloudIcon2, CloudRain as CloudRainIcon, CloudLightning as CloudLightningIcon, Wind as WindIcon, Snowflake as SnowflakeIcon, Thermometer as ThermometerIcon, Droplets as DropletsIcon, Flame as FlameIcon, Zap as ZapIcon2, Activity as ActivityIcon, Heart as HeartIcon2, Target as TargetIcon, Flag as FlagIcon, Trophy as TrophyIcon, Medal as MedalIcon, Briefcase as BriefcaseIcon, ShoppingBag as ShoppingBagIcon, ShoppingCart as ShoppingCartIcon, CreditCard as CreditCardIcon, Wallet as WalletIcon, Banknote as BanknoteIcon, Coins as CoinsIcon, PieChart as PieChartIcon, BarChart as BarChartIcon, LineChart as LineChartIcon, TrendingUp as TrendingUpIcon, TrendingDown as TrendingDownIcon, Presentation as PresentationIcon, Book as BookIcon, Bookmark as BookmarkIcon, BookOpen as BookOpenIcon, GraduationCap as GraduationCapIcon, School as SchoolIcon, Building as BuildingIcon, Home as HomeIcon, Warehouse as WarehouseIcon, Factory as FactoryIcon, Truck as TruckIcon, Bike as BikeIcon, Plane as PlaneIcon, Ship as ShipIcon, Anchor as AnchorIcon, LifeBuoy as LifeBuoyIcon, Sparkles, Package, Cpu, Wrench, Receipt, Newspaper, Bot, Boxes, Gift, BarChart3, FileCheck, AlertTriangle, ClipboardCheck, Printer, Loader2, Diamond, Armchair, Disc, Waves, Split, ImagePlus, Brush, Camera, Crown
 } from 'lucide-react';
 import { SERVICES as INITIAL_SERVICES, DEFAULT_GALLERY, DEFAULT_SITE_CONFIG, DEFAULT_CUSTOMER_RECORDS, DEFAULT_PREMIUM_SOLUTIONS, DEFAULT_NEWS, DEFAULT_INVENTORY, DEFAULT_E_CERTIFICATES, DEFAULT_EXPENSES } from './constants.tsx';
 import { Service, Message, GalleryImage, SiteConfig, CustomerRecord, BookingData, PremiumSolution, Promotion, AiVideoRecord, Appointment, DetailingPackage, NewsArticle, AppNotification, InventoryItem, ECertificate, LoyaltyConfig, Expense, Staff, MaintenanceReminder, CarInspection, InspectionPoint, SubscriptionPackage, Expert, BeforeAfterImage, AutomationSettings, ServiceProposal, VIPProgram } from './types.ts';
@@ -93,6 +93,7 @@ declare global {
 import LazyImage from './components/LazyImage';
 import { GenericContentModal } from './components/GenericContentModal.tsx';
 import LocalSeoLandingPage from './components/LocalSeoLandingPage';
+import BlogPage from './components/BlogPage';
 
 // --- Security Utilities ---
 
@@ -674,7 +675,7 @@ const EditableImage: React.FC<{
         src={src} 
         alt={alt} 
         className="w-full h-full object-cover" 
-        loading={isHero ? "eager" : "lazy"} 
+        priority={isHero}
       />
       {canEdit && (
         <div className="absolute inset-0 bg-blue-600/30 backdrop-blur-[2px] opacity-0 group-hover/img:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
@@ -11113,7 +11114,8 @@ const SidebarMenu: React.FC<{
                           { id: 'services', label: 'Dịch Vụ Tiêu Chuẩn' },
                           { id: 'packages', label: 'Gói Chăm Sóc Xe' },
                           { id: 'premium', label: 'Giải Pháp Luxury' },
-                          { id: 'tracking', label: 'Tracking Xe Online' }
+                          { id: 'tracking', label: 'Tracking Xe Online' },
+                          { id: 'blog', label: 'Cẩm Nang Blog' }
                         ].filter(() => !(isEditMode && currentUserRole === 'staff')).map((item, idx) => (
                           <motion.button
                             key={item.id}
@@ -11128,6 +11130,33 @@ const SidebarMenu: React.FC<{
                               {item.label}
                             </span>
                           </motion.button>
+                        ))}
+                      </nav>
+                    </div>
+
+                    {/* Dịch vụ Hà Nội Section */}
+                    <div className="space-y-4 pt-6 border-t border-white/5">
+                      <p className="text-[10px] font-black text-blue-500 uppercase tracking-[0.4em] mb-4">Dịch vụ Hà Nội</p>
+                      <nav className="flex flex-col gap-2">
+                        {[
+                          { path: '/phu-ceramic-ha-noi', label: 'Phủ Ceramic Hà Nội' },
+                          { path: '/dan-ppf-ha-noi', label: 'Dán PPF Hà Nội' },
+                          { path: '/danh-bong-xe-ha-noi', label: 'Đánh Bóng Xe Hà Nội' },
+                          { path: '/dan-phim-cach-nhiet-ha-noi', label: 'Dán Phim Cách Nhiệt' },
+                          { path: '/rua-xe-detailing-ha-noi', label: 'Rửa Xe Detailing Hà Nội' },
+                          { path: '/ve-sinh-noi-that-o-to-ha-noi', label: 'Vệ Sinh Nội Thất Ô Tô' }
+                        ].map((subItem, idx) => (
+                          <Link
+                            key={subItem.path}
+                            to={subItem.path}
+                            onClick={onClose}
+                            className="text-left group flex items-center gap-4 py-2 hover:text-blue-400 transition-colors"
+                          >
+                            <span className="text-slate-600 text-xs font-semibold">0{idx + 1}</span>
+                            <span className="text-xs font-black text-slate-300 group-hover:text-blue-400 transition-all group-hover:translate-x-1 uppercase tracking-widest">
+                              {subItem.label}
+                            </span>
+                          </Link>
                         ))}
                       </nav>
                     </div>
@@ -12426,6 +12455,7 @@ const HomePage: React.FC<any> = ({
       case 'window-tinting': setIsWindowTintingModalOpen(true); break;
       case 'wrap-ppf': setIsWrapPpfModalOpen(true); break;
       case 'tuning': setIsTuningModalOpen(true); break;
+      case 'blog': navigate('/blog'); break;
       default: scrollToSection(id);
     }
   };
@@ -12712,16 +12742,50 @@ const HomePage: React.FC<any> = ({
                   { id: 'weather-care', label: 'Bảo Vệ AI' },
                   { id: 'premium', label: 'Giải Pháp Premium' },
                   { id: 'ai-advisor', label: t('ai_advisor') },
+                  { id: 'blog', label: 'Cẩm Nang' }
                 ].map((item) => (
                   <button 
                     key={item.id}
-                    onClick={() => scrollToSection(item.id)} 
+                    onClick={() => {
+                      if (item.id === 'blog') {
+                        navigate('/blog');
+                      } else {
+                        scrollToSection(item.id);
+                      }
+                    }} 
                     className="hover:text-white transition-colors relative group"
                   >
                     {item.label}
                     <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
                   </button>
                 ))}
+
+                {/* Dropdown Dịch Vụ Hà Nội */}
+                <div className="relative group/dropdown">
+                  <button className="hover:text-white transition-colors relative flex items-center gap-1 cursor-pointer">
+                    <span>Dịch Vụ Hà Nội</span>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
+                    <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover/dropdown:w-full"></span>
+                  </button>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-slate-900/95 border border-white/10 rounded-2xl p-3 shadow-2xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 z-50 backdrop-blur-xl space-y-1">
+                    {[
+                      { path: '/phu-ceramic-ha-noi', label: 'Phủ Ceramic Hà Nội' },
+                      { path: '/dan-ppf-ha-noi', label: 'Dán PPF Hà Nội' },
+                      { path: '/danh-bong-xe-ha-noi', label: 'Đánh Bóng Xe Hà Nội' },
+                      { path: '/dan-phim-cach-nhiet-ha-noi', label: 'Dán Phim Cách Nhiệt' },
+                      { path: '/rua-xe-detailing-ha-noi', label: 'Rửa Xe Detailing Hà Nội' },
+                      { path: '/ve-sinh-noi-that-o-to-ha-noi', label: 'Vệ Sinh Nội Thất Ô Tô' }
+                    ].map((subItem) => (
+                      <Link
+                        key={subItem.path}
+                        to={subItem.path}
+                        className="block px-4 py-2 hover:bg-white/5 hover:text-blue-400 text-[10px] text-slate-300 font-extrabold uppercase tracking-widest transition-colors text-left"
+                      >
+                        {subItem.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -12835,7 +12899,7 @@ const HomePage: React.FC<any> = ({
       />
 
       <main className="flex-grow pt-24 sm:pt-32">
-        {!['/phu-ceramic-ha-noi', '/dan-ppf-ha-noi', '/danh-bong-xe-ha-noi', '/rua-xe-detailing-ha-noi', '/dan-phim-cach-nhiet-ha-noi', '/ve-sinh-noi-that-ha-noi', '/hieu-chinh-son-ha-noi', '/khu-mui-noi-that-ha-noi'].includes(location.pathname) ? (
+        {!['/phu-ceramic-ha-noi', '/dan-ppf-ha-noi', '/danh-bong-xe-ha-noi', '/rua-xe-detailing-ha-noi', '/dan-phim-cach-nhiet-ha-noi', '/ve-sinh-noi-that-ha-noi', '/ve-sinh-noi-that-o-to-ha-noi', '/hieu-chinh-son-ha-noi', '/khu-mui-noi-that-ha-noi'].includes(location.pathname) && !location.pathname.startsWith('/cham-soc-xe-') && !location.pathname.startsWith('/blog') ? (
           <>
             {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 group/hero-section">
@@ -14947,6 +15011,12 @@ const HomePage: React.FC<any> = ({
           setSiteConfig={setSiteConfig}
         />
           </>
+        ) : location.pathname.startsWith('/blog') ? (
+          <BlogPage 
+            t={t}
+            language={language}
+            scrollToSection={scrollToSection}
+          />
         ) : (
           <LocalSeoLandingPage 
             serviceId="ceramic"
@@ -16587,6 +16657,8 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage {...homeProps} />} />
         <Route path="/services/:id" element={<HomePage {...homeProps} />} />
         <Route path="/news/:id" element={<HomePage {...homeProps} />} />
+        <Route path="/blog" element={<HomePage {...homeProps} />} />
+        <Route path="/blog/:id" element={<HomePage {...homeProps} />} />
         
         {/* Local SEO Landing Pages */}
         <Route path="/phu-ceramic-ha-noi" element={<HomePage {...homeProps} />} />
@@ -16595,6 +16667,7 @@ const App: React.FC = () => {
         <Route path="/rua-xe-detailing-ha-noi" element={<HomePage {...homeProps} />} />
         <Route path="/dan-phim-cach-nhiet-ha-noi" element={<HomePage {...homeProps} />} />
         <Route path="/ve-sinh-noi-that-ha-noi" element={<HomePage {...homeProps} />} />
+        <Route path="/ve-sinh-noi-that-o-to-ha-noi" element={<HomePage {...homeProps} />} />
         <Route path="/hieu-chinh-son-ha-noi" element={<HomePage {...homeProps} />} />
         <Route path="/khu-mui-noi-that-ha-noi" element={<HomePage {...homeProps} />} />
 

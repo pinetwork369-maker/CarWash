@@ -7,6 +7,7 @@ import {
 import { SiteConfig, AppNotification, Appointment } from '../types';
 import { toast } from 'react-hot-toast';
 import SEO from './SEO';
+import { DISTRICTS_DATA } from './DistrictData';
 
 interface LocalSeoLandingPageProps {
   serviceId: string;
@@ -424,9 +425,63 @@ const LocalSeoLandingPage: React.FC<LocalSeoLandingPageProps> = ({
 }) => {
   const location = useLocation();
   const pathKey = location.pathname.replace('/', '');
+  const resolvedKey = pathKey === 've-sinh-noi-that-o-to-ha-noi' ? 've-sinh-noi-that-ha-noi' : pathKey;
   
-  // Resolve correct data config
-  const config = SEO_PAGES_DATA[pathKey] || SEO_PAGES_DATA['phu-ceramic-ha-noi'];
+  // Try resolving district info
+  const districtSlug = resolvedKey.startsWith('cham-soc-xe-') ? resolvedKey.replace('cham-soc-xe-', '') : resolvedKey;
+  const districtInfo = DISTRICTS_DATA[districtSlug];
+
+  let config: SeoPageData = SEO_PAGES_DATA[resolvedKey];
+
+  if (districtInfo) {
+    config = {
+      title: `Chăm Sóc Xe Ô Tô Detailing Quận ${districtInfo.name} Chuyên Nghiệp`,
+      tagline: `Hệ thống chăm sóc bảo vệ xe hơi công nghệ cao XE ĐẸP PRO tại khu vực ${districtInfo.name}`,
+      metaTitle: districtInfo.metaTitle,
+      metaDesc: districtInfo.metaDesc,
+      keywords: districtInfo.keywords,
+      introText: districtInfo.intro,
+      importanceDetail: `XE ĐẸP PRO tự hào là điểm đến tin cậy của đông đảo quý khách hàng tại ${districtInfo.name}. ${districtInfo.parkingCondition} Hiểu rõ được những thách thức đó, chúng tôi mang tới quy trình Detailing 4.0 chuẩn Đức, sử dụng 100% hóa chất sinh học thân thiện với sơn xe và sức khỏe người dùng. Với dịch vụ giao nhận xe tận nhà miễn phí vô cùng tiện lợi cho khách hàng tại các tuyến đường như ${districtInfo.streets.join(', ')}, bạn hoàn toàn không cần mất thời gian di chuyển mà vẫn sở hữu chiếc xe bóng loáng hoàn mỹ.`,
+      benefits: [
+        { name: 'Phủ Ceramic Diamond 9H Kháng Ăn Mòn', detail: `Tạo lớp màng tinh thể cứng cáp bảo vệ sơn xe khỏi các axit từ nhựa cây cổ thụ và khói bụi đô thị đặc thù tại ${districtInfo.name}.`, science: districtInfo.recommendation },
+        { name: 'Dán PPF TPU Tự Phục Hồi Xước Sườn', detail: `Lá chắn dẻo siêu dai bảo vệ hông xe tuyệt đối khỏi các vết trầy xước từ xe máy va quẹt trong kẽ ngõ chật hẹp.`, science: 'Màng polyurethane dẻo dai hấp thụ lực nén cơ học đàn hồi tự phục hồi vết xước liti khi có nhiệt độ ấm.' },
+        { name: 'Dọn Nội Thất Diệt Khuẩn Hơi Nước Khô 140°C', detail: `Tiêu diệt hoàn toàn vi khuẩn, nấm mốc ẩn náu trong nệm ghế, kẽ cửa do thời tiết nồm ẩm Hà Nội gây mùi hôi chua khó chịu.`, science: 'Hơi nước siêu nhiệt độ sấy khô sâu bốc hơi nhanh chóng, thanh lọc không khí cabin trong lành cho trẻ em.' },
+        { name: 'Dán Phim Cách Nhiệt 3M Crystalline Cản Nhiệt 99%', detail: 'Giải pháp cản bức xạ nhiệt mặt trời vượt trội, giúp cabin mát mẻ nhanh chóng dưới nắng gắt Hà Nội.', science: 'Cấu tạo quang học 200 lớp phi kim loại độc quyền lọc chọn lọc tia hồng ngoại và cực tím.' }
+      ],
+      indicators: [
+        `Xe thường xuyên đỗ ngoài trời hoặc dưới bóng râm hàng cây cổ thụ tại ${districtInfo.name} dễ bám nhựa cây, phân chim ăn mòn sơn.`,
+        `Nước sơn bị xước quầng mạng nhện xoáy mờ đục xỉn màu do rửa xe sai cách ngoài tiệm cỏ vỉa hè.`,
+        `Khoang cabin xuất hiện mùi ẩm mốc, điều hòa thổi ra hơi chua do nồm ẩm đặc thù bám sàn nỉ.`
+      ],
+      steps: [
+        { name: 'Rửa xe Detailing 3 bước sạch sâu', detail: 'Sử dụng găng tay lông cừu mềm mại và công nghệ rửa 2 xô có vỉ lọc cát loại bỏ bùn đất cát mịn.', time: '60 Phút' },
+        { name: 'Tẩy bụi sắt, nhựa đường, ố canxi', detail: `Rà đất sét mịn chuyên dụng loại bỏ hoàn toàn các mạt sắt, xi măng lơ lửng tại các công trình quận ${districtInfo.name}.`, time: '45 Phút' },
+        { name: 'Hiệu chỉnh đánh bóng phục hồi sơn gương', detail: 'Đánh bóng 3 giai đoạn bằng máy Rupes DA loại bỏ 95% vết xước xoáy quầng lông mèo phục hồi sơn trong vắt.', time: '180 Phút' },
+        { name: 'Thi công Phủ Ceramic hoặc Dán phim bảo vệ', detail: 'Tiến hành phủ dung dịch Ceramic Diamond 9H hoặc dán màng bảo vệ PPF TPU trong phòng khép kín vô trùng.', time: '240 Phút' },
+        { name: 'Khử trùng Ozone sấy hơi nước nội thất', detail: 'Sấy hơi nước nóng 140°C khử mốc, sục Ozone thanh lọc cabin tỏa hương sả chanh tự nhiên.', time: '60 Phút' }
+      ],
+      equipments: [
+        { name: 'Máy sấy hơi nước khô áp lực cao Optima', brand: 'Optima Steamer (Hàn Quốc)', tech: 'Sấy nhiệt độ cao 140°C diệt nấm mốc bám sâu trong nệm nỉ mà không làm sũng ướt các jack cắm điện tử.' },
+        { name: 'Thiết bị đo độ dày màng sơn siêu âm', brand: 'Rupes (Ý)', tech: 'Kiểm soát nghiêm ngặt độ dày lớp bóng clear coat trước khi mài đánh bóng bảo tồn sơn gốc.' }
+      ],
+      chemicals: [
+        { name: 'Xi hiệu chỉnh sơn cao cấp CutMax', brand: 'Sonax (Đức)', ph: '7.8', purpose: 'Cắt xước quầng thô phẳng mịn không bụi an toàn màng sơn bóng.' },
+        { name: 'Dung dịch rửa bọt tuyết trung tính Gentle Foam', brand: 'Koch Chemie (Đức)', ph: '7.0', purpose: 'Tạo bọt tuyết bôi trơn tối đa ngăn ma sát xước sơn.' }
+      ],
+      timingAnalysis: `Thời gian thi công trọn gói dịch vụ chăm sóc xe Detailing quận ${districtInfo.name} dao động từ 4 đến 12 tiếng làm việc tùy thuộc vào gói dịch vụ lựa chọn và hiện trạng thực tế của xe. Để tiết kiệm thời gian quý báu của quý khách, XE ĐẸP PRO cung cấp xe tháp cứu hộ chuyên chở giao nhận xe an toàn tận nhà miễn phí 2 chiều tại ${districtInfo.name}.`,
+      pricing: [
+        { tier: 'Combo Rửa xe Detailing + Dọn vệ sinh nội thất khử mốc', cost: '1.200.000 VNĐ', benefits: [`Rửa xe 3 bước găng lông cừu siêu sạch`, `Hút bụi kẽ ghế dọn sàn thảm cốp`, `Sấy hơi nước nóng diệt khuẩn khử mùi nồm mốc`, `Tặng xông tinh dầu sả chanh diệt trùng`] },
+        { tier: 'Gói Đánh bóng phục hồi sơn gương + Phủ Ceramic Diamond 9H', cost: '3.500.000 VNĐ', benefits: [`Hiệu chỉnh xóa sạch 90% xước quầng xoáy mạng nhện`, `Phủ 2 lớp Ceramic Diamond bảo vệ bóng cứng 9H`, `Tẩy mốc canxi mặt kính sườn lái kính lái hông`, `Bảo hành điện tử 3 năm bong tróc sần sùi`] },
+        { tier: 'Gói Dán màng bảo vệ PPF TPU tối cao bảo vệ sườn xe', cost: '12.000.000 VNĐ', benefits: [`Dán màng PPF TPU dày dặn sườn hông nắp capo cản`, `Chống trầy xước va quẹt đá văng xát xườn ngõ hẹp`, `Tự phục hồi vết xước nhỏ bằng hơi nóng ấm`, `Bảo hành chính hãng 5 năm không ố vàng bong tróc`] }
+      ],
+      faq: [
+        { q: `Địa chỉ XE ĐẸP PRO ở đâu? Có nhận xe tại quận ${districtInfo.name} không?`, a: `Trụ sở chính của XE ĐẸP PRO tọa lạc tại E28 Khu Đồng Dưa, Hà Cầu, Hà Đông, Hà Nội. Để phục vụ tốt nhất cho các chủ xe tại quận ${districtInfo.name}, chúng tôi có dịch vụ tài xế chuyên nghiệp hoặc xe thớt chuyên dụng nhận xe tận nhà hoàn toàn miễn phí 2 chiều, đảm bảo an toàn tuyệt đối.` },
+        { q: `Rửa xe và chăm sóc xe tại XE ĐẸP PRO có bảo hành điện tử không?`, a: `Tất cả các dịch vụ phủ Ceramic, dán PPF và dán phim cách nhiệt tại XE ĐẸP PRO đều được cấp mã bảo hành điện tử e-Certificate tra cứu trực tiếp trên website của chúng tôi, thời gian bảo hành từ 3 đến 10 năm.` }
+      ]
+    };
+  } else if (!config) {
+    config = SEO_PAGES_DATA['phu-ceramic-ha-noi'];
+  }
 
   // Form State for Booking
   const [customerName, setCustomerName] = useState('');
@@ -1006,6 +1061,50 @@ const LocalSeoLandingPage: React.FC<LocalSeoLandingPageProps> = ({
               </div>
             </div>
 
+          </div>
+        </section>
+
+        {/* District SEO Navigation Section to prevent Orphan Pages */}
+        <section className="py-20 border-t border-white/5 bg-slate-900/10">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <span className="text-[10px] font-black uppercase text-blue-500 tracking-widest bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">KHU VỰC PHỤC VỤ HÀ NỘI</span>
+              <h3 className="text-3xl sm:text-4xl font-black text-white mt-6 uppercase tracking-tight">Dịch vụ chăm sóc xe hơi giao nhận tận nơi</h3>
+              <p className="text-slate-500 text-sm mt-4">XE ĐẸP PRO cung cấp dịch vụ giao nhận xe bằng xe thớt cứu hộ chuyên nghiệp tận nhà miễn phí 2 chiều tại toàn bộ các quận huyện Hà Nội.</p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {Object.values(DISTRICTS_DATA).map((dist) => (
+                <Link
+                  key={dist.id}
+                  to={`/${dist.slug}`}
+                  className="bg-slate-950/40 hover:bg-slate-900/60 border border-white/5 hover:border-blue-500/30 p-5 rounded-2xl transition-all group flex flex-col justify-between"
+                >
+                  <div>
+                    <h4 className="text-white font-bold text-sm group-hover:text-blue-500 transition-colors uppercase">Chăm Sóc Xe {dist.name}</h4>
+                    <p className="text-[10px] text-slate-500 mt-2 line-clamp-2">{dist.landmark}</p>
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] font-black text-slate-400 group-hover:text-blue-500 transition-colors uppercase tracking-widest mt-4">
+                    Xem chi tiết <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Related Services Links to prevent Orphans and build cross-links */}
+            <div className="mt-12 p-6 rounded-3xl bg-slate-950/20 border border-white/5">
+              <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Các dịch vụ Detailing chuyên sâu khác tại Hà Nội:</h4>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/phu-ceramic-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Phủ Ceramic 9H</Link>
+                <Link to="/dan-ppf-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Dán PPF Bảo Vệ Sơn</Link>
+                <Link to="/danh-bong-xe-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Đánh Bóng Phục Hồi</Link>
+                <Link to="/rua-xe-detailing-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Rửa Xe Detailing 3 Bước</Link>
+                <Link to="/dan-phim-cach-nhiet-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Dán Phim Cách Nhiệt 3M</Link>
+                <Link to="/ve-sinh-noi-that-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Vệ Sĩ Nội Thất Ô Tô</Link>
+                <Link to="/hieu-chinh-son-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Hiệu Chỉnh Sơn Chuyên Sâu</Link>
+                <Link to="/khu-mui-noi-that-ha-noi" className="px-3.5 py-1.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs text-slate-400 hover:text-blue-500 hover:border-blue-500/30 transition-all font-semibold">Khử Mùi Nội Thất Sinh Học</Link>
+              </div>
+            </div>
           </div>
         </section>
       </main>

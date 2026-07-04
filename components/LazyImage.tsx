@@ -5,6 +5,7 @@ import { ImageIcon } from 'lucide-react';
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   wrapperClassName?: string;
   fallbackColor?: string;
+  priority?: boolean;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({ 
@@ -13,23 +14,24 @@ const LazyImage: React.FC<LazyImageProps> = ({
   className, 
   wrapperClassName = "", 
   fallbackColor = "bg-slate-900",
+  priority = false,
   ...props 
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(priority);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (!src) return;
+    if (!src || priority) return;
     const img = new Image();
     img.src = src;
     img.onload = () => setIsLoaded(true);
     img.onerror = () => setError(true);
-  }, [src]);
+  }, [src, priority]);
 
   return (
     <div className={`relative overflow-hidden ${wrapperClassName}`}>
       <AnimatePresence>
-        {!isLoaded && !error && (
+        {!isLoaded && !error && !priority && (
           <motion.div 
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -54,8 +56,10 @@ const LazyImage: React.FC<LazyImageProps> = ({
         <img
           src={src}
           alt={alt}
-          className={`transition-all duration-700 ease-out ${isLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-lg'} ${className}`}
-          loading="lazy"
+          className={`transition-all duration-700 ease-out ${priority ? 'opacity-100 blur-0 scale-100' : isLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-lg'} ${className}`}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
           referrerPolicy="no-referrer"
           onLoad={() => setIsLoaded(true)}
           {...props}
