@@ -424,8 +424,8 @@ const LocalSeoLandingPage: React.FC<LocalSeoLandingPageProps> = ({
   onAddNotification
 }) => {
   const location = useLocation();
-  const pathKey = location.pathname.replace('/', '');
-  const resolvedKey = pathKey === 've-sinh-noi-that-o-to-ha-noi' ? 've-sinh-noi-that-ha-noi' : pathKey;
+  const pathKey = location.pathname.replace(/^\//, '');
+  const resolvedKey = pathKey === 'services/wash' ? 'rua-xe-detailing-ha-noi' : (pathKey === 've-sinh-noi-that-o-to-ha-noi' ? 've-sinh-noi-that-ha-noi' : pathKey);
   
   // Try resolving district info
   const districtSlug = resolvedKey.startsWith('cham-soc-xe-') ? resolvedKey.replace('cham-soc-xe-', '') : resolvedKey;

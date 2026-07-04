@@ -12899,7 +12899,7 @@ const HomePage: React.FC<any> = ({
       />
 
       <main className="flex-grow pt-24 sm:pt-32">
-        {!['/phu-ceramic-ha-noi', '/dan-ppf-ha-noi', '/danh-bong-xe-ha-noi', '/rua-xe-detailing-ha-noi', '/dan-phim-cach-nhiet-ha-noi', '/ve-sinh-noi-that-ha-noi', '/ve-sinh-noi-that-o-to-ha-noi', '/hieu-chinh-son-ha-noi', '/khu-mui-noi-that-ha-noi'].includes(location.pathname) && !location.pathname.startsWith('/cham-soc-xe-') && !location.pathname.startsWith('/blog') ? (
+        {!['/phu-ceramic-ha-noi', '/dan-ppf-ha-noi', '/danh-bong-xe-ha-noi', '/rua-xe-detailing-ha-noi', '/dan-phim-cach-nhiet-ha-noi', '/ve-sinh-noi-that-ha-noi', '/ve-sinh-noi-that-o-to-ha-noi', '/hieu-chinh-son-ha-noi', '/khu-mui-noi-that-ha-noi', '/services/wash'].includes(location.pathname) && !location.pathname.startsWith('/cham-soc-xe-') && !location.pathname.startsWith('/blog') ? (
           <>
             {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 group/hero-section">
@@ -16655,6 +16655,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage {...homeProps} />} />
+        <Route path="/services/wash" element={<HomePage {...homeProps} />} />
         <Route path="/services/:id" element={<HomePage {...homeProps} />} />
         <Route path="/news/:id" element={<HomePage {...homeProps} />} />
         <Route path="/blog" element={<HomePage {...homeProps} />} />
